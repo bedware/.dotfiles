@@ -1,5 +1,8 @@
-# Installation
+# Requirements
+- Git 2.14.6+
+- VIM 8.2+
 
+# Installation
 In ~ (HOME) directory run sequentially:
 ```
 git init
