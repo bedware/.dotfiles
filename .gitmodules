@@ -1,0 +1,6 @@
+[submodule ".ssh"]
+	path = .ssh
+	url = https://github.com/bedware/.ssh.git
+[submodule ".vim"]
+	path = .vim
+	url = https://github.com/bedware/.vim.git

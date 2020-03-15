@@ -1,0 +1,18 @@
+# Ignore all
+*
+
+# Except these folders:
+!.vim/
+!.vim/*
+
+!.ssh/
+!.ssh/*
+
+!.oh-my-zsh/oh-my-zsh.sh
+
+# and files:
+!.gitignore
+!/.gitmodules
+!/.zshrc
+!/.vimrc
+
