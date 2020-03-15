@@ -11,6 +11,7 @@
 !.oh-my-zsh/oh-my-zsh.sh
 
 # and files:
+!README.md
 !.gitignore
 !/.gitmodules
 !/.zshrc

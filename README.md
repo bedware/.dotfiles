@@ -1,0 +1,10 @@
+# Installation
+
+In ~ (HOME) directory run sequentially:
+```
+git init
+git remote add origin https://github.com/bedware/dotfiles.git
+git pull origin master
+git submodule update --init --recursive
+chmod 0600 .ssh/id_*
+```
