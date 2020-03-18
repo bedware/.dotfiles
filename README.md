@@ -1,4 +1,5 @@
 # Requirements
+- curl
 - Git 2.14.6+
 - VIM 8.2+
 
