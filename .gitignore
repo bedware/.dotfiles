@@ -16,4 +16,6 @@
 !/.gitmodules
 !/.zshrc
 !/.vimrc
+!/.tmux.conf
+!/.inputrc
 
