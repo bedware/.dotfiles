@@ -8,7 +8,8 @@ export ZSH="/Users/bedware/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+# ZSH_THEME="robbyrussell"
+ZSH_THEME="agnoster"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -68,8 +69,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
-
+plugins=(git vi-mode tmux docker mvn node npm nvm github postgres pip python pyenv)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -98,9 +98,21 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
-# My configurations
-bindkey -v
-bindkey -M viins 'jk' vi-cmd-mode
-bindkey '^R' history-incremental-search-backward
-
+# Enable fuzzy search functionality and hotkeys
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# My configurations
+
+# Vi-mode command indicator
+MODE_INDICATOR="%{%F{yellow}%}⚡CMD"
+
+# My hotkeys
+bindkey -M viins 'jk' vi-cmd-mode
+
+# Show only username in console
+prompt_context() {
+  if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
+    prompt_segment black default "%(!.%{%F{yellow}%}.)$USER"
+  fi
+}
+
