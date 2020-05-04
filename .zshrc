@@ -1,5 +1,6 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH="/usr/local/opt/openjdk/bin:$PATH"
 
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/bedware/.oh-my-zsh"
@@ -101,13 +102,14 @@ source $ZSH/oh-my-zsh.sh
 # Enable fuzzy search functionality and hotkeys
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# My configurations
+# For Java environment
+export JAVA_HOME="/usr/local/opt/openjdk/"
 
 # Vi-mode command indicator
 MODE_INDICATOR="%{%F{yellow}%}⚡CMD"
 
 # My hotkeys
-bindkey -M viins 'jk' vi-cmd-mode
+# bindkey -M viins 'jk' vi-cmd-mode
 
 # Show only username in console
 prompt_context() {
