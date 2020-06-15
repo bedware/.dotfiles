@@ -21,8 +21,10 @@ set commentary
 nmap <S-CR> O<Esc>
 nmap <CR> o<Esc>
 " Swapping lines [Normal mode]
-nnoremap <C-j> :m +1<CR>
-nnoremap <C-k> :m -2<CR>
+" nnoremap <C-j> :m +1<CR>
+" nnoremap <C-k> :m -2<CR>
+nnoremap <C-j> :action MoveStatementUp<CR>
+nnoremap <C-k> :action MoveStatementDown<CR>
 " Swapping lines [Insert mode]
 inoremap <C-j> <Esc>:m +1<CR>gi
 inoremap <C-k> <Esc>:m -2<CR>gi
@@ -43,14 +45,15 @@ nmap <leader>P "+P
 vmap <leader>p "+p
 vmap <leader>P "+P
 " Insert space before/after in normal mode
-nnoremap <leader>[ i<space><esc>l
-nnoremap <leader>] a<space><esc>h
+"nnoremap <leader>[ i<space><esc>l
+"nnoremap <leader>] a<space><esc>h
 " Miscellaneous
 nmap <leader>r :action $Redo<CR>
 nmap <leader>k :action Vcs.QuickListPopupAction<CR>
 nmap <leader>u :action GotoSuperMethod<CR>
 nmap <leader>f :action ReformatCode<CR>
 nmap <leader>a :action GotoAction<CR>
+nmap <leader>b :action Back<CR>
 " Close
 nmap <leader>cc :action CloseEditor<CR>
 nmap <leader>ca :action CloseAllEditors<CR>
@@ -62,4 +65,8 @@ nmap <leader>sh :action TypeHierarchy<CR>
 nmap <leader>sf :action ShowReformatFileDialog<CR>
 " Hide
 nmap <leader>hw :action HideAllWindows<CR>
-"
+" Split
+nmap <leader>sd :action SplitHorizontally<CR>
+nmap <leader>sr :action SplitVertically<CR>
+nmap <leader>] :action NextSplitter<CR>
+nmap <leader>[ :action PrevSplitter<CR>
