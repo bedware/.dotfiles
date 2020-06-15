@@ -2,8 +2,8 @@
 *
 
 # Except these folders:
-!.vim/*
-!.ssh/*
+!.oh-my-zsh/
+!.oh-my-zsh/custom/
 !.oh-my-zsh/custom/*
 
 # and files:

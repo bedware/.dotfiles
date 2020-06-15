@@ -62,3 +62,4 @@ nmap <leader>sh :action TypeHierarchy<CR>
 nmap <leader>sf :action ShowReformatFileDialog<CR>
 " Hide
 nmap <leader>hw :action HideAllWindows<CR>
+"

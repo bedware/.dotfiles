@@ -6,3 +6,5 @@ alias ls='exa'
 alias l='exa -lah'
 alias lg='exa -lah --git'
 
+# Other
+alias grep='grep'
