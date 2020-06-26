@@ -8,4 +8,4 @@ alias lg='exa -lah --git'
 
 # Other
 alias grep='grep'
-alias uao='function _blah(){ unzip $1 && idea $(basename "demo.zip" .zip); };_blah'
+alias uao='function _uao(){ unzip $1 && idea $(basename $1 .zip); };_uao'
