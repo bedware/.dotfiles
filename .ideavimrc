@@ -1,41 +1,62 @@
+""""""""""""
 " Settings
+""""""""""""
 set idearefactormode=keep
 set ideajoin
 set relativenumber
 
+""""""""""""
 " Remap leader
+""""""""""""
 let mapleader = " "
 
+""""""""""""
 " Plugins
+""""""""""""
 set easymotion
 set surround
 set multiple-cursors
 set commentary
-" Alias for exiting
-" vnoremap jk <ESC>
-" inoremap jk <ESC>
 
+""""""""""""
 " Shortcuts
+""""""""""""
+
+" Alias for exiting
 " noremap <Esc> <nop>
+" vnoremap jk <ESC>
+inoremap jk <ESC>
+
 " New line on Enter/Shift-Enter
 nmap <S-CR> O<Esc>
 nmap <CR> o<Esc>
+
 " Swapping lines [Normal mode]
 " nnoremap <C-j> :m +1<CR>
 " nnoremap <C-k> :m -2<CR>
-nnoremap <C-j> :action MoveStatementUp<CR>
-nnoremap <C-k> :action MoveStatementDown<CR>
+nnoremap <C-k> :action MoveStatementUp<CR>
+nnoremap <C-j> :action MoveStatementDown<CR>
+
 " Swapping lines [Insert mode]
 inoremap <C-j> <Esc>:m +1<CR>gi
 inoremap <C-k> <Esc>:m -2<CR>gi
+
 " Navigation with tabs
-nmap <C-h> :action PreviousTab<CR>
-nmap <C-l> :action NextTab<CR>
+nmap <S-j> :action PreviousTab<CR>
+nmap <S-k> :action NextTab<CR>
+
+" History & Control(Browser-like)
+nmap <C-h> :action RecentFiles<CR>
 nmap <leader><leader> :action Switcher<CR>
-" Previous method.
+
+" Navigation (Browser-like)
+nmap <S-h> :action Back<CR>
+nmap <S-l> :action Forward<CR>
+
+" Previous/Next method
 nnoremap [m :action MethodUp<cr>
-" Next method.
 nnoremap ]m :action MethodDown<cr>
+
 " System clipboard
 vmap <leader>y "+y
 vmap <leader>d "+d
@@ -44,9 +65,11 @@ nmap <leader>p "+p
 nmap <leader>P "+P
 vmap <leader>p "+p
 vmap <leader>P "+P
+
 " Insert space before/after in normal mode
 "nnoremap <leader>[ i<space><esc>l
 "nnoremap <leader>] a<space><esc>h
+
 " Miscellaneous
 nmap <leader>r :action $Redo<CR>
 nmap <leader>k :action Vcs.QuickListPopupAction<CR>
@@ -54,17 +77,21 @@ nmap <leader>u :action GotoSuperMethod<CR>
 nmap <leader>f :action ReformatCode<CR>
 nmap <leader>a :action GotoAction<CR>
 nmap <leader>b :action Back<CR>
+
 " Close
-nmap <leader>cc :action CloseEditor<CR>
+nmap <leader>x :action CloseEditor<CR>
 nmap <leader>ca :action CloseAllEditors<CR>
 nmap <leader>co :action CloseAllEditorsButActive<CR>
 nmap <leader>cl :action CloseAllToTheLeft<CR>
 nmap <leader>cr :action CloseAllToTheRight<CR>
+
 " Show
 nmap <leader>sh :action TypeHierarchy<CR>
 nmap <leader>sf :action ShowReformatFileDialog<CR>
+
 " Hide
 nmap <leader>hw :action HideAllWindows<CR>
+
 " Split
 nmap <leader>sd :action SplitHorizontally<CR>
 nmap <leader>sr :action SplitVertically<CR>
