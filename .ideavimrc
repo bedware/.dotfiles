@@ -50,8 +50,10 @@ nmap <C-h> :action RecentFiles<CR>
 nmap <leader><leader> :action Switcher<CR>
 
 " Navigation (Browser-like)
+nnoremap f :action AceAction<cr>
 nmap <S-h> :action Back<CR>
 nmap <S-l> :action Forward<CR>
+nmap <C-l> :action GotoImplementation<CR>
 
 " Previous/Next method
 nnoremap [m :action MethodUp<cr>
