@@ -81,7 +81,7 @@ nmap <leader>a :action GotoAction<CR>
 nmap <leader>b :action Back<CR>
 
 " Close
-nmap <leader>x :action CloseEditor<CR>
+nmap <leader>x :action CloseContent<CR>
 nmap <leader>ca :action CloseAllEditors<CR>
 nmap <leader>co :action CloseAllEditorsButActive<CR>
 nmap <leader>cl :action CloseAllToTheLeft<CR>
