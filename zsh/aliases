@@ -1,0 +1,16 @@
+# Editor
+alias vi='nvim'
+
+# Directory stack
+alias d='dirs -v'
+for index ({1..9}) alias "$index"="cd +${index}"; unset index
+
+# Listing
+alias l='ls -lah'
+alias ll='ls -lah'
+
+# Git
+alias ga='git add'
+alias gc='git commit'
+alias gp='git push'
+
