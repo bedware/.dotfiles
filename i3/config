@@ -13,7 +13,8 @@ set $mod Mod4
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 #font pango:monospace 8
-font pango:Source Code Pro 10
+#font pango:Source Code Pro 10
+font pango:SauceCodePro Nerd Font 10
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -29,6 +30,9 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
+
+# Dunst
+exec --no-startup-id dunst
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -81,7 +85,7 @@ bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+bindsym $mod+SHIFT+f floating toggle
 
 # enabling floating for pop-ups and dialogs
 for_window [window_role="pop-up"] floating enable
@@ -89,13 +93,13 @@ for_window [window_role="task_dialog"] floating enable
 for_window [class="Arandr"] floating enable
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+bindsym $mod+CTRL+f focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
 
 # focus the child container
-#bindsym $mod+d focus child
+bindsym $mod+Shift+a focus child
 
 # back and forth
 workspace_auto_back_and_forth yes
@@ -145,7 +149,7 @@ assign [class="firefox" instance="Navigator"] $ws2
 focus_follows_mouse no
 
 # Lockscreen
-bindsym $mod+CTRL+SHIFT+l exec --no-startup-id $i3lockwall
+# bindsym $mod+CTRL+l exec --no-startup-id $i3lockwall
 # set $i3lockwall i3lock -i $HOME/Downloads/samurai-sword-girl-cyberpunk-2077-s9-1920x1080.png
 set $i3lockwall sh $HOME/.config/i3/scripts/lock.sh
 
@@ -173,7 +177,7 @@ mode "$mode_system" {
 	bindsym Escape mode "default"
 }
 
-bindsym $mod+BackSpace mode "$mode_system"
+bindsym $mod+q mode "$mode_system"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -262,7 +266,7 @@ bar {
     # Disable all tray icons
     tray_output none
 
-    font pango:Source Code Pro 10
+    # font pango:Source Code Pro 10
     # tray_output primary
     colors {
         background $background

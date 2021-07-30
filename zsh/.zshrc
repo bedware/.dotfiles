@@ -34,6 +34,17 @@ bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 
+# Keys
+# localectl set-x11-keymap --no-convert us,ru pc105 "" "grp:win_space_toggle,caps:ctrl_modifier"
+
+typeset -g -A key
+key[Home]="${terminfo[khome]}"
+key[End]="${terminfo[kend]}"
+bindkey -- "${key[Home]}"       beginning-of-line
+bindkey -M vicmd "${key[Home]}"       beginning-of-line
+bindkey -- "${key[End]}"        end-of-line
+bindkey -M vicmd "${key[End]}"        end-of-line
+
 # Vim edit command
 autoload -Uz edit-command-line
 zle -N edit-command-line
@@ -50,6 +61,7 @@ if [ $(command -v "fzf") ]; then
     source /usr/share/fzf/completion.zsh
     source /usr/share/fzf/key-bindings.zsh
     bindkey '\ed' fzf-cd-widget
+    bindkey '^F' fzf-file-widget
 fi
 
 # Run X11
