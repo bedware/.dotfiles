@@ -42,7 +42,9 @@ set shiftwidth=4
 set hidden
 
 " Mappings
-nnoremap <space> <nop>
+nnoremap <Space> <nop>
+nnoremap <Enter> o<esc>
+" Not working, find out. nnoremap <S-Enter> O<esc>
 let mapleader = "\<space>"
 
 " Buffers

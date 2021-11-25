@@ -70,6 +70,10 @@ bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
+# move focused workspace between monitors
+bindsym $mod+Ctrl+less move workspace to primary
+bindsym $mod+Ctrl+greater move workspace to HDMI-A-0
+
 # split in horizontal orientation
 bindsym $mod+CTRL+h split h
 
@@ -93,7 +97,7 @@ for_window [window_role="task_dialog"] floating enable
 for_window [class="Arandr"] floating enable
 
 # change focus between tiling / floating windows
-bindsym $mod+CTRL+f focus mode_toggle
+bindsym $mod+TAB focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
@@ -108,14 +112,12 @@ workspace_auto_back_and_forth yes
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 "1: Focus"
 set $ws2 "2: Web"
-set $ws3 "3: Other"
-set $ws4 "4"
-set $ws5 "5"
+set $ws3 "3: IDE"
+set $ws4 "4: Chats"
+set $ws5 "5: Others"
 set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
-set $ws9 "9"
-set $ws10 "10"
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -126,8 +128,6 @@ bindsym $mod+5 workspace number $ws5
 bindsym $mod+6 workspace number $ws6
 bindsym $mod+7 workspace number $ws7
 bindsym $mod+8 workspace number $ws8
-bindsym $mod+9 workspace number $ws9
-bindsym $mod+0 workspace number $ws10
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1
@@ -138,8 +138,6 @@ bindsym $mod+Shift+5 move container to workspace number $ws5
 bindsym $mod+Shift+6 move container to workspace number $ws6
 bindsym $mod+Shift+7 move container to workspace number $ws7
 bindsym $mod+Shift+8 move container to workspace number $ws8
-bindsym $mod+Shift+9 move container to workspace number $ws9
-bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # focus groups
 # to find class and instance use: xprop | grep WM_CLASS
