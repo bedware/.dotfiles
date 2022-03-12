@@ -36,8 +36,8 @@ exec --no-startup-id dunst
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl -q s +10% && $refresh_i3status
-bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl -q s 10%- && $refresh_i3status
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl -q s +5% && $refresh_i3status
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl -q s 5%- && $refresh_i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
@@ -48,6 +48,9 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec urxvtc
+
+# start a flameshot
+bindsym $mod+Shift+s exec flameshot gui
 
 # kill focused window
 bindsym $mod+x kill
@@ -97,6 +100,8 @@ bindsym $mod+SHIFT+f floating toggle
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
 for_window [class="Arandr"] floating enable
+for_window [class="jetbrains-idea" title="^Commit:"] floating enable, move position center
+for_window [class="jetbrains-idea" title="^Repository Diff:"] floating enable, move position center
 
 # change focus between tiling / floating windows
 bindsym $mod+TAB focus mode_toggle
@@ -112,14 +117,14 @@ workspace_auto_back_and_forth yes
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1: Focus"
-set $ws2 "2: Web"
+set $ws1 "1: Personal"
+set $ws2 "2: Work"
 set $ws3 "3: IDE"
 set $ws4 "4: Chats"
-set $ws5 "5: Others"
-set $ws6 "6"
-set $ws7 "7"
-set $ws8 "8"
+set $ws5 "5: Zoom"
+set $ws6 "6: Terminal"
+set $ws7 "7: Others"
+set $ws8 "8: VPN"
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -144,6 +149,13 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 # focus groups
 # to find class and instance use: xprop | grep WM_CLASS
 # assign [class="firefox" instance="Navigator"] $ws2
+assign [class="postman"] $ws1
+assign [class="jetbrains-idea"] $ws3
+assign [class="chromium"] $ws2
+assign [class="slack"] $ws4
+assign [class="telegram"] $ws4
+assign [class="zoom"] $ws5
+
 
 # Mouse focus
 focus_follows_mouse no
