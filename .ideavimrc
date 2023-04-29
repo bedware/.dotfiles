@@ -1,0 +1,233 @@
+" IDEA Settings
+set idearefactormode=keep
+set ideajoin
+set number
+set relativenumber
+set ignorecase
+set smartcase
+
+" IDEA Set Handlers
+sethandler a:vim
+sethandler <S-Enter> a:ide
+sethandler <C-C> a:ide
+sethandler <C-S> n:ide
+sethandler <C-E> a:ide
+sethandler <C-P> a:ide
+sethandler <C-Q> n-v:ide i:vim
+sethandler <C-N> n-v:ide
+sethandler <C-M> a:ide
+sethandler <A-W> a:vim
+sethandler <A-D> a:ide
+
+" Recommend to set Forward/Back hotkeys for these
+sethandler <C-I> a:ide
+sethandler <C-O> a:ide
+
+" Remap leader
+let mapleader = " "
+
+" IDEA Plugins
+set easymotion
+set surround
+set multiple-cursors
+set commentary
+
+" Disabling things
+noremap <Up> <nop>
+noremap <Down> <nop>
+noremap <Left> <nop>
+noremap <Right> <nop>
+noremap <Space> <nop>
+
+" New line on Enter/Shift-Enter
+nnoremap <S-CR> O<Esc>
+nnoremap <CR> o<Esc>
+
+" Navigation (Methods)
+nnoremap <A-j> :action MethodDown<CR>
+nnoremap <A-k> :action MethodUp<CR>
+
+" Navigation (Changes)
+nnoremap g; :action VcsShowNextChangeMarker<CR>
+" nnoremap g; :action NextDiff<CR>
+nnoremap g, :action VcsShowPrevChangeMarker<CR>
+" nnoremap g, :action PreviousDiff<CR>
+
+" Navigation (GO TO ...)
+nnoremap gd :action GotoDeclaration<CR>
+" nnoremap ge `.<CR>
+nnoremap ge :action JumpToLastChange<CR>
+nnoremap gi :action GotoImplementation<CR>
+nnoremap gs :action GotoSuperMethod<CR>
+nnoremap gt :action GotoTest<CR>
+nnoremap gr :action GotoTypeDeclaration<CR>
+nnoremap gu :action FindUsages<CR>
+nnoremap gf :action MethodDown<CR>:action MethodUp<CR>
+nnoremap gh :1<CR>:action MethodDown<CR>
+
+
+" Run & Debug
+nnoremap ,v :action ChooseRunConfiguration<CR>
+nnoremap ,r :action ContextRun<CR>
+nnoremap ,d :action ContextDebug<CR>
+nnoremap ,a :action Rerun<CR>
+nnoremap ,f :action RerunFailedTests<CR>
+nnoremap ,b :action ToggleLineBreakpoint<CR>
+nnoremap ,h :action ForceRunToCursor<CR>
+nnoremap ,m :action XDebugger.MuteBreakpoints<CR>
+nnoremap ,, :action StepOver<CR>
+nnoremap ,i :action StepInto<CR>
+nnoremap ,o :action StepOut<CR>
+nnoremap ,c :action Resume<CR>
+nnoremap ,e :action EvaluateExpression<CR>
+vnoremap ,e :action EvaluateExpression<CR>
+nnoremap ,q :action QuickEvaluateExpression<CR>
+vnoremap ,q :action QuickEvaluateExpression<CR>
+nnoremap ,s :action Stop<CR>
+nnoremap ,l :action ViewBreakpoints<CR>
+
+" VCS
+nnoremap <leader>va :action Annotate<CR>
+nnoremap <leader>vo :action Vcs.QuickListPopupAction<CR>
+nnoremap <leader>vu :action Vcs.UpdateProject<CR>
+nnoremap <leader>vs :action Vcs.ShowHistoryForBlock<CR>
+vnoremap <leader>vs :action Vcs.ShowHistoryForBlock<CR>
+nnoremap <leader>vcb :action Git.CompareWithBranch<CR>
+nnoremap <leader>vcc :action Majera.CodeReview.GitLab.LeaveCommentForLineAction<CR>
+nnoremap <leader>vcs :action Compare.Selected<CR>
+nnoremap <leader>vcr :action Show.Current.Revision<CR>
+nnoremap <leader>vv :action Git.Branches<CR>
+nnoremap <leader>vr :action Vcs.RollbackChangedLines<CR>
+nnoremap <leader>vf :action Git.Fetch<CR>
+nnoremap <leader>vp :action Vcs.Push<CR>
+
+" Code
+nnoremap <leader>f :action ReformatCode<CR>
+nnoremap <leader>o :action OptimizeImports<CR>
+nnoremap <leader>h :action HighlightUsagesInFile<CR>
+vnoremap <leader>h :action HighlightUsagesInFile<CR>
+nnoremap <leader>/ :action Find<CR>
+nnoremap <leader>? :action Replace<CR>
+vnoremap <leader>? :action Replace<CR>
+" nnoremap / :action Find<CR>
+" vnoremap / :action Find<CR>
+nnoremap <leader>[ i <ESC>l
+nnoremap <leader>] a <ESC>h
+vnoremap <A-S-D> :action SelectAllOccurrences<CR>
+
+" Refactoring & Introduce
+nnoremap <leader>ru :action Unwrap<CR>
+vnoremap <leader>ru :action Unwrap<CR>
+nnoremap <leader>rr :action Refactorings.QuickListPopupAction<CR>
+vnoremap <leader>rr :action Refactorings.QuickListPopupAction<CR>
+nnoremap <leader>re :action RenameElement<CR>
+nnoremap <leader>rs :action SurroundWith<CR>
+vnoremap <leader>rs :action SurroundWith<CR>
+nnoremap <leader>rg :action Generate<CR>
+nnoremap <leader>rcc :action CopyElement<CR>
+nnoremap <leader>ri :action Inline<CR>
+nnoremap <leader>rt :action InsertLiveTemplate<CR>
+
+nnoremap <leader>iv :action IntroduceVariable<CR>
+vnoremap <leader>iv :action IntroduceVariable<CR>
+nnoremap <leader>ic :action IntroduceConstant<CR>
+nnoremap <leader>if :action IntroduceField<CR>
+nnoremap <leader>ip :action IntroduceParameter<CR>
+nnoremap <leader>il :action IntroduceFunctionalParameter<CR>
+nnoremap <leader>im :action ExtractMethod<CR>
+vnoremap <leader>im :action ExtractMethod<CR>
+
+" External
+nnoremap <leader>ev :action VimActions<CR>
+" Building tools
+nnoremap <leader>edu :action ExternalSystem.ProjectRefreshAction<CR>
+
+" Books
+nnoremap <leader>bb :action ToggleBookmark<CR>
+nnoremap <leader>bl :action ShowBookmarks<CR>
+
+" Compile
+nnoremap <leader>cf :action CompileFile<CR>
+
+" Task
+nnoremap <leader>tn :action tasks.goto<CR>
+nnoremap <leader>ts :action tasks.switch<CR>
+nnoremap <leader>tc :action tasks.close<CR>
+nnoremap <leader>te :action tasks.edit<CR>
+nnoremap <leader>tl :action tasks.create.changelist<CR>
+nnoremap <leader>td :action tasks.show.task.description<CR>
+nnoremap <leader>tb :action tasks.open.in.browser<CR>
+
+" Show
+"nnoremap <leader>q :action QuickImplementations<CR>
+nnoremap <leader>a :action GotoAction<CR>
+nnoremap <leader>sa :action GotoAction<CR>
+vnoremap <leader>sa :action GotoAction<CR>
+"nnoremap <leader>sc :action EditorContextInfo<CR>
+nnoremap <leader>sbj :action ByteCodeViewer<CR>
+nnoremap <leader>sbk :action ActivateKotlinBytecodeToolWindow<CR>
+nnoremap <leader>sil :action SelectIn<CR>
+nnoremap <leader>sip :action SelectInProjectView<CR>
+" nnoremap <leader>sit :action Terminal.OpenInTerminal<CR>
+nnoremap <leader>sid :action sql.SelectInDatabaseView<CR>
+nnoremap <leader>siw :action Vcs.Diff.ShowDiffInNewWindow<CR>
+nnoremap <leader>sit :action Vcs.Diff.ShowDiffInEditorTab<CR>
+nnoremap <leader>sd :action ToggleRenderedDocPresentationForAll<CR>
+nnoremap <leader>sh :action TypeHierarchy<CR>
+nnoremap <leader>ss :action FileStructurePopup<CR>
+
+" Window
+nnoremap <Tab> :action JumpToLastWindow<CR>
+nnoremap <S-Tab> :action HideActiveWindow<CR>
+nnoremap <A-p> :action PinActiveEditorTab<CR>
+nnoremap <leader>wj :action MoveTabDown<CR>
+nnoremap <leader>wl :action MoveTabRight<CR>
+nnoremap <leader>wsj :action SplitHorizontally<CR>
+nnoremap <leader>wsl :action SplitVertically<CR>
+nnoremap <leader>wsc :action ChangeSplitOrientation<CR>
+nnoremap <leader>wo :action MoveEditorToOppositeTabGroup<CR>
+nnoremap <leader>wh :action HideAllWindows<CR>
+nnoremap <leader>wd :action RestoreDefaultLayout<CR>
+" Tabs Close
+" nnoremap <leader>x :action CloseContent<CR>
+nnoremap <leader>X :action ReopenClosedTab<CR>
+nnoremap <leader>wca :action CloseAllEditors<CR>
+nnoremap <leader>wco :action CloseAllEditorsButActive<CR>
+nnoremap <leader>wcl :action CloseAllToTheLeft<CR>
+nnoremap <leader>wcr :action CloseAllToTheRight<CR>
+" Tabs
+" nnoremap <S-j> :action PreviousTab<CR>
+" nnoremap <S-k> :action NextTab<CR>
+" Window Go
+nnoremap <leader><leader><leader> :action Switcher<CR>
+nnoremap <leader><leader>p :action ActivateProjectToolWindow<CR>
+nnoremap <leader><leader>2 :action ActivateProblemsViewToolWindow<CR>
+nnoremap <leader><leader>c :action ActivateCommitToolWindow<CR>
+nnoremap <leader><leader>C :action ActivateVcsChangesToolWindow<CR>
+nnoremap <leader><leader>v :action ActivateVersionControlToolWindow<CR>
+nnoremap <leader><leader>, :action ActivateDebugToolWindow<CR>
+nnoremap <leader><leader>r :action ActivateRunToolWindow<CR>
+nnoremap <leader><leader>d :action ActivateDatabaseToolWindow<CR>
+nnoremap <leader><leader>D :action ActivateDependenciesToolWindow<CR>
+nnoremap <leader><leader>s :action ActivateServicesToolWindow<CR>
+nnoremap <leader><leader>t :action ActivateTerminalToolWindow<CR>
+nnoremap <leader><leader>P :action ActivateProfilerToolWindow<CR>
+nnoremap <leader><leader>f :action ActivateFindToolWindow<CR>
+nnoremap <leader><leader>y :action ActivateYouTrackToolWindow<CR>
+nnoremap <leader><leader>n :action ActivateNotificationsToolWindow<CR>
+
+" Swapping lines [Insert mode]
+inoremap <C-j> <Esc>:m +1<CR>gi
+inoremap <C-k> <Esc>:m -2<CR>gi
+
+" Swapping statements [Normal mode]
+nnoremap <C-j> :action MoveStatementDown<CR>
+nnoremap <C-k> :action MoveStatementUp<CR>
+
+" System clipboard
+vnoremap <leader>y "+y
+vnoremap <leader>d "+d
+nnoremap <leader>y "+y
+nnoremap <leader>p "+p
+nnoremap <leader>P "+P
+

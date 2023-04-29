@@ -1,0 +1,2 @@
+ls -Force
+echo "$args"
