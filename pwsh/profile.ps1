@@ -17,12 +17,14 @@ Set-PsFzfOption `
 $env:EDITOR = 'nvim'
 $env:DOTFILES = "$env:USERPROFILE\.dotfiles"
 $env:ChocolateyToolsLocation = "$env:LOCALAPPDATA\tools"
-$env:FZF_CTRL_T_COMMAND = 'fd --type f --path-separator / --hidden'
-$env:FZF_ALT_C_COMMAND = 'fd --type d --path-separator / --hidden'
+$fzfParam = "--path-separator / --hidden --exclude 'AppData'"
+$env:FZF_CTRL_T_COMMAND = "fd --type f $fzfParam"
+$env:FZF_ALT_C_COMMAND = "fd --type d $fzfParam"
 
 Set-Alias -Name vi -Value nvim
 Set-Alias -Name .f -Value dotfiles
 Set-Alias -Name .fe -Value dotfilesEdit
+Set-Alias -Name l -Value lslah
 
 function dotfiles {
     Set-Location $env:DOTFILES
@@ -30,4 +32,9 @@ function dotfiles {
 function dotfilesEdit {
     Set-Location $env:DOTFILES ; nvim .
 }
-
+function scan {
+    & "$env:USERPROFILE\OneDrive\Soft\SpaceSniffer.exe" scan "$pwd"
+}
+function lslah {
+    Get-ChildItem -Force $args
+}

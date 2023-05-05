@@ -28,6 +28,7 @@ New-Item -ItemType SymbolicLink -Force `
 -Path "$env:USERPROFILE\wincmd.ini" `
 -Target "$env:USERPROFILE\.dotfiles\wincmd.ini"
 
+
 # CREATE AUTOSTARTUP TASKS
 
 .\pwsh\Scripts\autostart_ahk_admin_rights.ps1
