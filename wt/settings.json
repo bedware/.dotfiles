@@ -1,40 +1,151 @@
 {
     "$help": "https://aka.ms/terminal-documentation",
     "$schema": "https://aka.ms/terminal-profiles-schema",
-    // Hotkeys
     "actions": 
     [
-        // Panes
-        { "command": { "action": "splitPane", "split": "auto", "splitMode": "duplicate"}, "keys": "alt+d"},
-        { "command": { "action": "splitPane", "split": "right" }, "keys": "alt+\\" },
-        { "command": { "action": "splitPane", "split": "down" }, "keys": "alt+-" },
-        { "command": { "action": "moveFocus", "direction": "down" }, "keys": "alt+j" },
-        { "command": { "action": "moveFocus", "direction": "left" }, "keys": "alt+h" },
-        { "command": { "action": "moveFocus", "direction": "right" }, "keys": "alt+l" },
-        { "command": { "action": "moveFocus", "direction": "up" }, "keys": "alt+k" },
-        { "command": "closeOtherPanes", "keys": "alt+o" },
-        { "command": "closePane", "keys": "alt+w" },
-
-        // Tabs
-        {"command": {"action": "closeTab"}, "keys": "ctrl+f4"},
-        {"command": "openTabRenamer", "keys": "alt+r"},
-        {"command": "toggleFocusMode", "keys": "alt+f"},
-
-        // Others
-        {"command": "unbound", "keys": "f11"},
-        {"command": "openNewTabDropdown", "keys": "menu"},
-
-        {"command": "find", "keys": "ctrl+shift+f"},
-        {"command": {"action": "sendInput", "input": "cd ..\r"}, "keys": "ctrl+up"}
-        // {"command": {"action": "sendInput", "input": "clear\r"}, "keys": "alt+k", "name": "clear terminal"}
+        {
+            "command": 
+            {
+                "action": "splitPane",
+                "split": "auto",
+                "splitMode": "duplicate"
+            },
+            "keys": "alt+d"
+        },
+        {
+            "command": "unbound",
+            "keys": "f11"
+        },
+        {
+            "command": "unbound",
+            "keys": "ctrl+shift+f"
+        },
+        {
+            "command": 
+            {
+                "action": "moveFocus",
+                "direction": "down"
+            },
+            "keys": "alt+j"
+        },
+        {
+            "command": 
+            {
+                "action": "splitPane",
+                "split": "right"
+            },
+            "keys": "alt+\\"
+        },
+        {
+            "command": 
+            {
+                "action": "splitPane",
+                "split": "down"
+            },
+            "keys": "alt+minus"
+        },
+        {
+            "command": 
+            {
+                "action": "resizePane",
+                "direction": "left"
+            },
+            "keys": "alt+shift+h"
+        },
+        {
+            "command": "find",
+            "keys": "ctrl+/"
+        },
+        {
+            "command": 
+            {
+                "action": "resizePane",
+                "direction": "down"
+            },
+            "keys": "alt+shift+j"
+        },
+        {
+            "command": "openTabRenamer",
+            "keys": "alt+r"
+        },
+        {
+            "command": 
+            {
+                "action": "resizePane",
+                "direction": "right"
+            },
+            "keys": "alt+shift+l"
+        },
+        {
+            "command": 
+            {
+                "action": "resizePane",
+                "direction": "up"
+            },
+            "keys": "alt+shift+k"
+        },
+        {
+            "command": 
+            {
+                "action": "moveFocus",
+                "direction": "left"
+            },
+            "keys": "alt+h"
+        },
+        {
+            "command": 
+            {
+                "action": "closeTab"
+            },
+            "keys": "ctrl+f4"
+        },
+        {
+            "command": 
+            {
+                "action": "moveFocus",
+                "direction": "right"
+            },
+            "keys": "alt+l"
+        },
+        {
+            "command": 
+            {
+                "action": "moveFocus",
+                "direction": "up"
+            },
+            "keys": "alt+k"
+        },
+        {
+            "command": "closeOtherPanes",
+            "keys": "alt+o"
+        },
+        {
+            "command": "closePane",
+            "keys": "alt+w"
+        },
+        {
+            "command": "toggleFocusMode",
+            "keys": "alt+f"
+        },
+        {
+            "command": "openNewTabDropdown",
+            "keys": "menu"
+        },
+        {
+            "command": 
+            {
+                "action": "sendInput",
+                "input": "cd ..\r"
+            },
+            "keys": "ctrl+up"
+        }
     ],
     "alwaysShowTabs": true,
     "copyFormatting": "none",
     "copyOnSelect": false,
     "defaultProfile": "{137409cc-2f7a-47ca-b351-2a4c457addbc}",
     "initialCols": 131,
-    "initialRows": 41,
-    // Profiles
+    "initialRows": 42,
     "profiles": 
     {
         "defaults": 
@@ -43,10 +154,12 @@
             "cursorShape": "filledBox",
             "font": 
             {
-                "size": 10.0
+                "face": "CaskaydiaCove NFM",
+                "size": 11.0
             },
             "padding": "0",
-            "scrollbarState": "hidden"
+            "scrollbarState": "hidden",
+            "useAtlasEngine": false
         },
         "list": 
         [

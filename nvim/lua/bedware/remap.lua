@@ -5,8 +5,8 @@ vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 -- Command mode by arrows
-vim.keymap.set('c', '<Up>', '<C-p>')
-vim.keymap.set('c', '<Down>', '<C-n>')
+vim.keymap.set("c", "<Up>", "<C-p>")
+vim.keymap.set("c", "<Down>", "<C-n>")
 
 -- Moving lines around
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
@@ -25,5 +25,5 @@ vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 
 -- Others
-vim.keymap.set("i", "<C-BS>", "<C-w")
-
+vim.keymap.set({"n", "i", "c", "x", "s", "o", "t", "l"}, "<C-BS>", "<C-w>")
+vim.keymap.set({"n", "i", "c", "x", "s", "o", "t", "l"}, "<C-h>", "<C-w>")

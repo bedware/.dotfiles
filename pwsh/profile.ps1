@@ -1,8 +1,14 @@
-$OutputEncoding = [Console]::InputEncoding = [Console]::OutputEncoding = [System.Text.UTF8Encoding]::new()
+[Console]::InputEncoding = [Console]::OutputEncoding = [System.Text.UTF8Encoding]::new()
 
-Import-Module 'C:\tools\poshgit\dahlbyk-posh-git-9bda399\src\posh-git.psd1'
+$ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
+if (Test-Path($ChocolateyProfile)) {
+    Import-Module "$ChocolateyProfile"
+}
+ 
+Import-Module "$env:LOCALAPPDATA\tools\poshgit\dahlbyk-posh-git-9bda399\src\posh-git.psd1"
 
-# replace 'Ctrl+t' and 'Ctrl+r' with your preferred bindings:
+oh-my-posh init pwsh --config "$env:LOCALAPPDATA\Programs\oh-my-posh\themes\bedware.omp.json"| Invoke-Expression
+
 Set-PsFzfOption `
     -PSReadlineChordProvider 'Ctrl+f' `
     -PSReadlineChordReverseHistory 'Ctrl+r' `
@@ -10,8 +16,9 @@ Set-PsFzfOption `
 
 $env:EDITOR = 'nvim'
 $env:DOTFILES = "$env:USERPROFILE\.dotfiles"
+$env:ChocolateyToolsLocation = "$env:LOCALAPPDATA\tools"
 $env:FZF_CTRL_T_COMMAND = 'fd --type f --path-separator / --hidden'
-$env:FZF_ALT_C_COMMAND = 'fd --type d --path-separator /'
+$env:FZF_ALT_C_COMMAND = 'fd --type d --path-separator / --hidden'
 
 Set-Alias -Name vi -Value nvim
 Set-Alias -Name .f -Value dotfiles
@@ -21,5 +28,6 @@ function dotfiles {
     Set-Location $env:DOTFILES
 }
 function dotfilesEdit {
-    Set-Location $env:DOTFILES && nvim .
+    Set-Location $env:DOTFILES ; nvim .
 }
+

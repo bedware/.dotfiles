@@ -27,6 +27,7 @@ ToggleCaps(){
 }
 
 ; Disable keys
+*~LButton::return ; To make mouse hook work
 RCtrl::return
 RAlt::return
 Home::F13
@@ -41,7 +42,7 @@ RShift & Capslock::Send +{Esc}
     Send {LShift DownR}
     KeyWait, LShift
     Send {LShift Up}
-    if (A_PriorKey = "LShift") {
+    if (A_ThisHotkey = "~*LShift" and A_PriorKey = "LShift") {
         runAlfred()
     }
 return 

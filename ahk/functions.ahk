@@ -14,7 +14,7 @@ RunIfNotExist(selector, executablePath) {
         WinActivate
     else {
         Run, %executablePath%
-        WinWait, %selector%,, 3
+        WinWait, %selector%,, 20
         if ErrorLevel
         {
             PlayErrorSound()

@@ -2,21 +2,15 @@
 
 ; Alfred
 
-initAlfred() {
-    global UserHome
+ShowAlfred() {
     ; TaskBar overload
-    pic := UserHome "\.dotfiles\ahk\loading.gif"
     Gui, -Caption -Border -Toolwindow +AlwaysOnTop +DPIScale
     Gui, Margin, 0, 0
-    Gui, Add, ActiveX, w2000 h60, % "mshtml:<div style='background: rgb(0, 29, 48); width: 100%; height: 100%; margin: -10px 0 0 -10px;'><img src='" pic "' style='margin: -202px -70px; padding-left: 1475px'/></div>"
+    Gui, Add, ActiveX, w2000 h60, % "mshtml:<div style='border-bottom: 120px solid rgb(255, 222, 93); height: 0; margin: -10px 0 0 -10px;'></div>"
+    ;global UserHome
+    ;pic := UserHome "\.dotfiles\ahk\loading.gif"
+    ;Gui, Add, ActiveX, w2000 h60, % "mshtml:<div style='background: rgb(0, 29, 48); width: 100%; height: 100%; margin: -10px 0 0 -10px;'><img src='" pic "' style='margin: -202px -70px; padding-left: 1475px'/></div>"
     Gui, Show, xCenter y2076 NoActivate
-    Gui, Hide
-    OutputDebug % "Alfred inititalized!"
-}
-initAlfred()
-
-ShowAlfred() {
-    Gui, Show
 }
 
 HideAlfred() {
