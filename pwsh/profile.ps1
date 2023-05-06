@@ -17,14 +17,21 @@ Set-PsFzfOption `
 $env:EDITOR = 'nvim'
 $env:DOTFILES = "$env:USERPROFILE\.dotfiles"
 $env:ChocolateyToolsLocation = "$env:LOCALAPPDATA\tools"
-$fzfParam = "--path-separator / --hidden --exclude 'AppData'"
+$fzfParam = "--path-separator / --hidden " + `
+"--exclude 'AppData' " + `
+"--exclude '.m2' " + `
+"--exclude '.git' " + `
+"--exclude '.jdks' " + `
+"--exclude '.gradle' "
 $env:FZF_CTRL_T_COMMAND = "fd --type f $fzfParam"
 $env:FZF_ALT_C_COMMAND = "fd --type d $fzfParam"
 
-Set-Alias -Name vi -Value nvim
+. "$env:DOTFILES\pwsh\Scripts\autocomplete.ps1"
 Set-Alias -Name .f -Value dotfiles
 Set-Alias -Name .fe -Value dotfilesEdit
-Set-Alias -Name l -Value lslah
+Add-IgnoredAlias -Name vi -Value nvim
+Add-IgnoredAlias -Name l -Value lslah
+Add-BlankAlias -Name e -Value `$env:
 
 function dotfiles {
     Set-Location $env:DOTFILES
