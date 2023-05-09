@@ -1,31 +1,3 @@
-; Modifiers handling
-SendWithCorrectModifiers(key) {
-    if (GetKeyState("Shift") and GetKeyState("Ctrl") and GetKeyState("Alt"))
-        Send !+^{%key%}
-    else if (GetKeyState("Shift") and GetKeyState("Ctrl"))
-        Send +^{%key%}
-    else if (GetKeyState("Alt") and GetKeyState("Ctrl"))
-        Send !^{%key%}
-    else if (GetKeyState("Alt") and GetKeyState("Shift"))
-        Send !+{%key%}
-    else if (GetKeyState("Shift"))
-        Send +{%key%}
-    else if (GetKeyState("Ctrl"))
-        Send ^{%key%}
-    else if (GetKeyState("Alt"))
-        Send !{%key%}
-    else
-        Send {%key%}
-}
-
-; Shifts
-ToggleCaps(){
-    SetStoreCapsLockMode, Off
-    Send {CapsLock}
-    SetStoreCapsLockMode, On
-    return
-}
-
 ; Disable keys
 *~LButton::return ; To make mouse hook work
 RCtrl::return
@@ -74,53 +46,51 @@ RShift & LShift::ToggleCaps()
 ;Close window
 #Backspace::Send !{F4}
 
-;Close tab
-Tab & Backspace::
-    if WinActive("ahk_exe idea64.exe") or WinActive("ahk_exe sublime_text.exe")
-        Send ^{F4}
-    else ; Default
-        Send ^w
-return
-
-; Layout set up
-Tab & LWin::#z
-
 ; Tab-hotkeys
 *Tab::Tab
-Tab & j::
-    if WinActive("ahk_exe idea64.exe")
-        Send {Alt Down}{Left}{Alt Up}
-    else ; Default
-        Send ^+{Tab}
-return
-Tab & k::
-    if WinActive("ahk_exe idea64.exe")
-        Send {Alt Down}{Right}{Alt Up}
-    else ; Default
-        Send ^{Tab}
-return
-Tab & i:: ; Navigation history backward
-    if WinActive("ahk_exe idea64.exe")
-        Send {Ctrl Down}{Alt Down}{Left}{Alt Up}{Ctrl Up}
-    else ; Default
-        Send {Alt Down}{Right}{Alt Up}
-return
-Tab & o:: ; Navigation history forward
-    if WinActive("ahk_exe idea64.exe")
-        Send {Ctrl Down}{Alt Down}{Right}{Alt Up}{Ctrl Up}
-    else ; Default
-        Send {Alt Down}{Left}{Alt Up}
-return
+#if GetKeyState("Tab", "P")
+    ; Layout set up
+    LWin::#z
+    ;Close tab
+    Backspace::
+        if WinActive("ahk_exe idea64.exe") or WinActive("ahk_exe sublime_text.exe")
+            Send ^{F4}
+        else ; Default
+            Send ^w
+    return
+    j::
+        if WinActive("ahk_exe idea64.exe")
+            Send {Alt Down}{Left}{Alt Up}
+        else ; Default
+            Send ^+{Tab}
+    return
+    k::
+        if WinActive("ahk_exe idea64.exe")
+            Send {Alt Down}{Right}{Alt Up}
+        else ; Default
+            Send ^{Tab}
+    return
+    i:: ; Navigation history backward
+        if WinActive("ahk_exe idea64.exe")
+            Send {Ctrl Down}{Alt Down}{Left}{Alt Up}{Ctrl Up}
+        else ; Default
+            Send {Alt Down}{Right}{Alt Up}
+    return
+    o:: ; Navigation history forward
+        if WinActive("ahk_exe idea64.exe")
+            Send {Ctrl Down}{Alt Down}{Right}{Alt Up}{Ctrl Up}
+        else ; Default
+            Send {Alt Down}{Left}{Alt Up}
+    return
 
-; Non-disappearing AltTab + Win
-Tab & LAlt::Send ^!{Tab}
+    ; Non-disappearing AltTab + Win
+    LAlt::Send ^!{Tab}
+#if
 
 ; Translate
 LCtrl::Send {Ctrl Down}cc{Ctrl Up}
 
 *CapsLock::
-if (A_PriorHotkey <> "~*CapsLock" or A_TimeSincePriorHotkey > 300)
-{
     Send {Ctrl DownR}
     KeyWait, Capslock
     Send {Ctrl Up}
@@ -131,92 +101,98 @@ if (A_PriorHotkey <> "~*CapsLock" or A_TimeSincePriorHotkey > 300)
         }
         Send {Esc}
     }
-}
-;runAlfred() ; double tap goes here
 return
 
 ; Space
-*Space::Space
+*Space::
+    KeyWait, Space
+    if (A_ThisHotkey = "*Space" and A_PriorKey = "Space") {
+        SendEvent {Blind}{Space Down}
+    }
+return
+#if GetKeyState("Space", "P")
+    ; Copy & Paste
+    y::Send ^{Insert}
+    p::Send +{Insert}
+    d::Send +{Del}
 
+    ; Left hand
+    ; qw
+    q::^q
+    w::^w
+    ; as
+    a::^a
+    ; zx
+    z::^z
+    x::^x
+    v::^+m
+    ;v::SendInput {U+2705}
+
+    ; Undo, Redo, Chrome hotkeys
+    i:: ; Undo
+        if WinActive("ahk_exe chrome.exe")
+            Send ^l@history{Space}
+        else
+            Send ^{z}
+    return
+    o:: ; Redo
+        if WinActive("ahk_exe chrome.exe")
+            Send ^l@tabs{Space}
+        if WinActive("ahk_exe idea64.exe")
+            Send ^+{z}
+        else
+            Send ^{y}
+    return
+    b:: ; bookmarks 
+        if WinActive("ahk_exe chrome.exe")
+            Send ^l@bookmarks{Space}
+        else
+            Send ^{b}
+    return
+
+    ; Run
+    r::
+    if GetKeyState("Shift")
+        Send ^{F2}
+    else
+        Send ^+{F10}
+    return
+
+    ; Right hand
+    Enter::Insert
+    Backspace::Delete
+    /::Reload
+
+    ; Context menu
+    m::Send {AppsKey}
+    ; Other
+    `;::NumpadMult
+
+    ; F-keys
+    1::SendWithCorrectModifiers("F1")
+    2::SendWithCorrectModifiers("F2")
+    3::SendWithCorrectModifiers("F3")
+    4::SendWithCorrectModifiers("F4")
+    5::SendWithCorrectModifiers("F5")
+    6::SendWithCorrectModifiers("F6")
+    7::SendWithCorrectModifiers("F7")
+    8::SendWithCorrectModifiers("F8")
+    9::SendWithCorrectModifiers("F9")
+    0::SendWithCorrectModifiers("F10")
+    -::SendWithCorrectModifiers("F11")
+    =::SendWithCorrectModifiers("F12")
+    ; Navigation
+    h::SendWithCorrectModifiers("Left")
+    j::SendWithCorrectModifiers("Down")
+    k::SendWithCorrectModifiers("Up")
+    l::SendWithCorrectModifiers("Right")
+    [::SendWithCorrectModifiers("PgUp")
+    ]::SendWithCorrectModifiers("PgDn")
+    ,::SendWithCorrectModifiers("Home")
+    .::SendWithCorrectModifiers("End")
+#if
 ; Copy & Paste
-Space & y::Send ^{Insert}
-Space & p::Send +{Insert}
-Space & d::Send +{Del}
 
-; Left hand
-; qw
-Space & q::^q
-Space & w::^w
-; as
-Space & a::^a
-; zx
-Space & z::^z
-Space & x::^x
-Space & v::^+m
-;Space & v::SendInput {U+2705}
-
-; Undo, Redo, Chrome hotkeys
-Space & i:: ; Undo
-    if WinActive("ahk_exe chrome.exe")
-        Send ^l@history{Space}
-    else
-        Send ^{z}
-return
-Space & o:: ; Redo
-    if WinActive("ahk_exe chrome.exe")
-        Send ^l@tabs{Space}
-    if WinActive("ahk_exe idea64.exe")
-        Send ^+{z}
-    else
-        Send ^{y}
-return
-Space & b:: ; bookmarks 
-    if WinActive("ahk_exe chrome.exe")
-        Send ^l@bookmarks{Space}
-    else
-        Send ^{b}
-return
-
-; Run
-Space & r::
-if GetKeyState("Shift")
-    Send ^{F2}
-else
-    Send ^+{F10}
-return
-
-; Right hand
-Space & Enter::Insert
-Space & Backspace::Delete
-Space & /::Reload
-
-; Context menu
-Space & m::Send {AppsKey}
-; Other
-Space & `;::NumpadMult
-
-; F-keys
-Space & 1::SendWithCorrectModifiers("F1")
-Space & 2::SendWithCorrectModifiers("F2")
-Space & 3::SendWithCorrectModifiers("F3")
-Space & 4::SendWithCorrectModifiers("F4")
-Space & 5::SendWithCorrectModifiers("F5")
-Space & 6::SendWithCorrectModifiers("F6")
-Space & 7::SendWithCorrectModifiers("F7")
-Space & 8::SendWithCorrectModifiers("F8")
-Space & 9::SendWithCorrectModifiers("F9")
-Space & 0::SendWithCorrectModifiers("F10")
-Space & -::SendWithCorrectModifiers("F11")
-Space & =::SendWithCorrectModifiers("F12")
-; Navigation
-Space & h::SendWithCorrectModifiers("Left")
-Space & j::SendWithCorrectModifiers("Down")
-Space & k::SendWithCorrectModifiers("Up")
-Space & l::SendWithCorrectModifiers("Right")
-Space & [::SendWithCorrectModifiers("PgUp")
-Space & ]::SendWithCorrectModifiers("PgDn")
-Space & ,::SendWithCorrectModifiers("Home")
-Space & .::SendWithCorrectModifiers("End")
 
 ; Virtual desktops management
 #1::MoveOrGotoDesktopNumberWithIcon(0)

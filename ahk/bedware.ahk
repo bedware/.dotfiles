@@ -98,6 +98,13 @@ focusOrRunPersonalChromeProfile() {
     RunIfNotExistChromeProfile("Power", """C:\Program Files\Google\Chrome\Application\chrome.exe"" --profile-directory=""Profile 4""")
 }
 
-; Hotkey remappings
+; Use InputLevel so that the script's own hotkeys can be triggered.
+#InputLevel 1
+; Key remaps
 #Include %A_ScriptDir%/remap.ahk
+
+; Set InputLevel 0 to make hotstrings can be triggered by script events
+#InputLevel 0
+; Hotstrings
+#Include %A_ScriptDir%/hotstrings.ahk
 

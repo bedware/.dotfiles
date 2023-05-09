@@ -30,9 +30,9 @@ oh-my-posh init pwsh --config "$env:LOCALAPPDATA\Programs\oh-my-posh\themes\bedw
 . "$env:DOTFILES\pwsh\Scripts\alias_autocomplete.ps1"
 Set-Alias -Name .f -Value dotfiles
 Set-Alias -Name .fe -Value dotfilesEdit
-Set-Alias -Name gst -Value "git status"
-Remove-Alias -Force -ErrorAction SilentlyContinue -Name gc
-Set-Alias -Name gc -Value "git commit"
+#Set-Alias -Name gst -Value "git status"
+# Remove-Alias -Force -ErrorAction SilentlyContinue -Name gc
+# Set-Alias -Name gc -Value "git commit"
 Add-IgnoredAlias -Name vi -Value nvim
 Add-IgnoredAlias -Name l -Value lslah
 Add-BlankAlias -Name e -Value "`$env:"

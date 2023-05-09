@@ -40,6 +40,35 @@ GetSystemTheme() {
     return theme ; 0-Black, 1-White
 }
 
+; Modifiers handling
+SendWithCorrectModifiers(key) {
+    if (GetKeyState("Shift") and GetKeyState("Ctrl") and GetKeyState("Alt"))
+        Send !+^{%key%}
+    else if (GetKeyState("Shift") and GetKeyState("Ctrl"))
+        Send +^{%key%}
+    else if (GetKeyState("Alt") and GetKeyState("Ctrl"))
+        Send !^{%key%}
+    else if (GetKeyState("Alt") and GetKeyState("Shift"))
+        Send !+{%key%}
+    else if (GetKeyState("Shift"))
+        Send +{%key%}
+    else if (GetKeyState("Ctrl"))
+        Send ^{%key%}
+    else if (GetKeyState("Alt"))
+        Send !{%key%}
+    else
+        Send {%key%}
+}
+
+; Shifts
+ToggleCaps(){
+    SetStoreCapsLockMode, Off
+    Send {CapsLock}
+    SetStoreCapsLockMode, On
+    return
+}
+
+
 ; Icon
 ChangeTrayIcon(pathToIcon) {
     Menu, Tray, Icon, %pathToIcon%
