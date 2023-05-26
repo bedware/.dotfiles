@@ -11,11 +11,13 @@ PgDn::F16
 RShift & Capslock::Send +{Esc}
 
 ~*LShift::
+    global apps
+
     Send {LShift DownR}
     KeyWait, LShift
     Send {LShift Up}
     if (A_ThisHotkey = "~*LShift" and A_PriorKey = "LShift") {
-        runAlfred()
+        RunAlfred(apps)
     }
 return 
 
@@ -47,7 +49,17 @@ RShift & LShift::ToggleCaps()
 #Backspace::Send !{F4}
 
 ; Tab-hotkeys
-*Tab::Tab
+*Tab::
+    if (A_PriorKey = "LAlt") {
+        SendEvent {Blind}{Tab}
+        KeyWait, Tab
+    } else {
+        KeyWait, Tab
+        if (A_ThisHotkey = "*Tab" and A_PriorKey = "Tab") {
+            SendEvent {Blind}{Tab}
+        }
+    }
+return
 #if GetKeyState("Tab", "P")
     ; Layout set up
     LWin::#z
@@ -88,14 +100,24 @@ RShift & LShift::ToggleCaps()
 #if
 
 ; Translate
-LCtrl::Send {Ctrl Down}cc{Ctrl Up}
+LCtrl::
+    global UserHome
+
+    Send {Ctrl Down}cc{Ctrl Up}
+
+    translationFile := UserHome . "\translations"
+    clipboardPlusSeparator := clipboard . "`n---`n"
+    OutputDebug % "Translation file:" translationFile " ClipboardPlusSeparator:" clipboardPlusSeparator
+
+    FileAppend, %clipboardPlusSeparator%, %translationFile%
+return
 
 *CapsLock::
     Send {Ctrl DownR}
     KeyWait, Capslock
     Send {Ctrl Up}
     if (A_PriorKey = "Capslock") {
-        if WinActive("ahk_exe DeepL.exe") or WinActive("ahk_exe Lingvo.exe") {
+        if WinExist("ahk_exe DeepL.exe") and WinExist("ahk_exe Lingvo.exe") {
             WinClose, ahk_exe Lingvo.exe
             WinClose, ahk_exe DeepL.exe
         }
@@ -107,10 +129,15 @@ return
 *Space::
     KeyWait, Space
     if (A_ThisHotkey = "*Space" and A_PriorKey = "Space") {
-        SendEvent {Blind}{Space Down}
+        SendEvent {Blind}{Space}
     }
 return
 #if GetKeyState("Space", "P")
+    *Tab::
+        Send {LAlt DownR}
+        KeyWait, Tab
+        Send {LAlt Up}
+    return
     ; Copy & Paste
     y::Send ^{Insert}
     p::Send +{Insert}
@@ -168,6 +195,9 @@ return
     ; Other
     `;::NumpadMult
 
+    ; To work as modifiers when Space pressed
+    *LShift::LShift
+    *LAlt::LAlt
     ; F-keys
     1::SendWithCorrectModifiers("F1")
     2::SendWithCorrectModifiers("F2")
@@ -191,8 +221,6 @@ return
     ,::SendWithCorrectModifiers("Home")
     .::SendWithCorrectModifiers("End")
 #if
-; Copy & Paste
-
 
 ; Virtual desktops management
 #1::MoveOrGotoDesktopNumberWithIcon(0)
@@ -200,10 +228,16 @@ return
 #3::MoveOrGotoDesktopNumberWithIcon(2)
 #4::MoveOrGotoDesktopNumberWithIcon(3)
 #5::MoveOrGotoDesktopNumberWithIcon(4)
+#6::MoveOrGotoDesktopNumberWithIcon(5)
+#7::MoveOrGotoDesktopNumberWithIcon(6)
+#8::MoveOrGotoDesktopNumberWithIcon(7)
 
 #+1::MoveCurrentWindowToDesktopWithIcon(0)
 #+2::MoveCurrentWindowToDesktopWithIcon(1)
 #+3::MoveCurrentWindowToDesktopWithIcon(2)
 #+4::MoveCurrentWindowToDesktopWithIcon(3)
 #+5::MoveCurrentWindowToDesktopWithIcon(4)
+#+6::MoveCurrentWindowToDesktopWithIcon(5)
+#+7::MoveCurrentWindowToDesktopWithIcon(6)
+#+8::MoveCurrentWindowToDesktopWithIcon(7)
 

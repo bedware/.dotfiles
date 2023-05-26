@@ -27,3 +27,4 @@ vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 -- Others
 vim.keymap.set({"n", "i", "c", "x", "s", "o", "t", "l"}, "<C-BS>", "<C-w>")
 vim.keymap.set({"n", "i", "c", "x", "s", "o", "t", "l"}, "<C-h>", "<C-w>")
+

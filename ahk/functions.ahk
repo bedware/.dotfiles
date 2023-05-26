@@ -42,6 +42,7 @@ GetSystemTheme() {
 
 ; Modifiers handling
 SendWithCorrectModifiers(key) {
+    OutputDebug % "Shift:" GetKeyState("Shift") ",Ctrl:" GetKeyState("Ctrl") ",Alt:" GetKeyState("Alt")  
     if (GetKeyState("Shift") and GetKeyState("Ctrl") and GetKeyState("Alt"))
         Send !+^{%key%}
     else if (GetKeyState("Shift") and GetKeyState("Ctrl"))

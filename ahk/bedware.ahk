@@ -19,7 +19,7 @@ IconsFolder := "icons"
 IconsBlackTheme := "white-on-black"
 IconsWhiteTheme := "black-on-white"
 
-desktops := ["Work", "Personal", "Terminal", "Planner", "Chats"]
+desktops := ["Work", "Personal", "Terminal", "Planner", "Chats", "6", "7", "Cmd"]
 
 ; For Alfred (My window manager)
 apps := {}
@@ -31,14 +31,14 @@ apps["adbg"] := { desktop: "Personal", selector: "ahk_exe dbgview64.exe", execut
 apps["ahelp"] := { desktop: "Personal", selector: "AutoHotkey Help", executablePath: A_AhkFolder . "\AutoHotkey.chm" }
 apps["aspy"] := { selector: "Window Spy", executablePath: A_AhkFolder . "\WindowSpy.ahk" }
 apps["cl"] := { funcName: "rearrangeWindows" }
-apps["cmd"] := { desktop: "Personal", selector: "ahk_exe TOTALCMD64.EXE", executablePath: "C:\Program Files\totalcmd\TOTALCMD64.EXE" }
+apps["cmd"] := { desktop: "Cmd", selector: "ahk_exe TOTALCMD64.EXE", executablePath: "C:\Program Files\totalcmd\TOTALCMD64.EXE" }
 apps["day"] := { desktop: "Planner", selector: "DayCaptain ahk_exe msedge.exe", executablePath: UserHome . "\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\DayCaptain.lnk" }
 apps["rize"] := { desktop: "Planner", selector: "ahk_exe Rize.exe", executablePath: UserHome . "\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Rize.lnk" }
 apps["depl"] := { desktop: "Work", selector: "ahk_exe DeepL.exe", executablePath: UserHome . "\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\DeepL.lnk" }
 apps["fi"] := { desktop: "Work", selector: "ahk_exe Figma.exe", executablePath: UserHome . "\AppData\Local\Figma\app-116.5.18\Figma.exe" }
 apps["g"] := { desktop: "Work", selector: "ahk_exe ChatGPT.exe", executablePath: "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\ChatGPT\ChatGPT.lnk" }
 apps["h"] := { funcName: "focusOrRunPersonalChromeProfile" }
-apps["i"] := { desktop: "Work", selector: "ahk_exe idea64.exe", executablePath: UserHome . "\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\JetBrains Toolbox\IntelliJ IDEA Ultimate.lnk" }
+apps["i"] := { desktop: "Personal", selector: "ahk_exe idea64.exe", executablePath: UserHome . "\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\JetBrains Toolbox\IntelliJ IDEA Ultimate.lnk" }
 apps["l"] := { funcName: "focusOrRunWorkChromeProfile" }
 apps["miro"] := { desktop: "Work", selector: "ahk_exe Miro.exe", executablePath: UserHome . "\AppData\Local\RealtimeBoard\Miro.exe" }
 apps["note"] := { desktop: "Planner", selector: "ahk_exe Notion.exe", executablePath: UserHome . "\AppData\Local\Programs\Notion\Notion.exe" }
@@ -46,7 +46,9 @@ apps["obs"] := { desktop: "Work", selector: "ahk_exe obs64.exe", executablePath:
 apps["post"] := { desktop: "Work", selector: "ahk_exe Postman.exe", executablePath: UserHome . "\AppData\Local\Postman\Postman.exe" }
 apps["slack"] := { desktop: "Work", selector: "ahk_exe slack.exe", executablePath: UserHome . "\AppData\Local\slack\slack.exe" }
 apps["steam"] := { desktop: "Work", selector: "ahk_exe Steam.exe", executablePath: "C:\Program Files (x86)\Steam\Steam.exe" }
+apps["space"] := { desktop: "Work", selector: "ahk_exe spacedeskConsole.exe", executablePath: "C:\Windows\System32\spacedeskConsole.exe" }
 apps["subl"] := { desktop: "Work", selector: "ahk_exe sublime_text.exe", executablePath: "C:\Program Files\Sublime Text\sublime_text.exe" }
+apps["rize"] := { desktop: "Work", selector: "ahk_exe Rize.exe", executablePath: "C:\Users\dmitr\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Rize.lnk" }
 apps["term"] := { desktop: "Terminal", selector: "ahk_exe WindowsTerminal.exe", executablePath: "wt.exe" }
 apps["tf"] := { desktop: "Work", selector: "ahk_exe Teamflow.exe", executablePath: UserHome . "\AppData\Local\Programs\huddle\Teamflow.exe" }
 apps["tg"] := { desktop: "Chats", selector: "ahk_exe Telegram.exe", executablePath: UserHome . "\AppData\Roaming\Telegram Desktop\Telegram.exe" }
@@ -58,8 +60,7 @@ apps["tr"] := { desktop: "Work", executablePath: "C:\Program Files (x86)\ABBYY L
 #Include %A_ScriptDir%/functions.ahk
 
 ; Init Personal
-Init() {
-    global desktops
+Init(desktops) {
     RemoveAllDesktops()
     for i, v in desktops {
         CreateDesktopByName(v)
@@ -71,7 +72,7 @@ Init() {
 
     OutputDebug % "Loaded. Admin mode: " A_IsAdmin
 }
-Init() ; Must be run before hotkeys & hotstrings
+Init(desktops) ; Must be run before hotkeys & hotstrings
 
 ; User functions
 rearrangeWindows() {
