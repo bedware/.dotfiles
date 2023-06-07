@@ -73,12 +73,16 @@ return
     j::
         if WinActive("ahk_exe idea64.exe")
             Send {Alt Down}{Left}{Alt Up}
+        else if GetKeyState("Space", "P")
+            SendWithCorrectModifiers("Down")
         else ; Default
             Send ^+{Tab}
     return
     k::
         if WinActive("ahk_exe idea64.exe")
             Send {Alt Down}{Right}{Alt Up}
+        else if GetKeyState("Space", "P")
+            SendWithCorrectModifiers("Up")
         else ; Default
             Send ^{Tab}
     return
@@ -104,10 +108,10 @@ LCtrl::
     global UserHome
 
     Send {Ctrl Down}cc{Ctrl Up}
+    KeyWait, LCtrl
 
     translationFile := UserHome . "\translations"
     clipboardPlusSeparator := clipboard . "`n---`n"
-    OutputDebug % "Translation file:" translationFile " ClipboardPlusSeparator:" clipboardPlusSeparator
 
     FileAppend, %clipboardPlusSeparator%, %translationFile%
 return
