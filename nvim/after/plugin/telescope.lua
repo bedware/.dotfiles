@@ -2,7 +2,8 @@ require('telescope').setup{
   defaults = {
     mappings = {
       i = {
-        ["<C-h>"] = function() vim.cmd ":norm! db" end
+        -- ["<C-h>"] = function() vim.cmd ":norm! db" end
+        ["<C-h>"] = "which_key"
       }
     }
   }

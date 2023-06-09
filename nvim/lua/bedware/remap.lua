@@ -1,8 +1,7 @@
 vim.g.mapleader = " "
 
+-- Navigation
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
-vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 -- Command mode by arrows
 vim.keymap.set("c", "<Up>", "<C-p>")
@@ -25,6 +24,11 @@ vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 
 -- Others
+vim.keymap.set("n", "<C-f>", ":silent !tmux new-window ~/.dotfiles/tmux-sessionizer<CR>")
+vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
+vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set("n", "<leader>x", ":!chmod +x %<CR>")
+
 vim.keymap.set({"n", "i", "c", "x", "s", "o", "t", "l"}, "<C-BS>", "<C-w>")
 vim.keymap.set({"n", "i", "c", "x", "s", "o", "t", "l"}, "<C-h>", "<C-w>")
 
