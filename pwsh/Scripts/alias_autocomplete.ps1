@@ -49,7 +49,6 @@ function Add-IgnoredAlias
     $global:IgnoredAliases += $Name
 }
 
-
 function AliasExtention
 {
     param($SpaceMode = $false)
@@ -94,12 +93,9 @@ function AliasExtention
     }
 }
 
-
-$aliasSet = New-Object System.Collections.Generic.HashSet[string]
-Get-Alias | ForEach-Object { $aliasSet.Add($_.Name) | Out-Null }
 function GetAliasByWord($wordBeforeCursor)
 {
-    if (-not [string]::IsNullOrEmpty($wordBeforeCursor) -and $aliasSet.Contains($wordBeforeCursor))
+    if (-not [string]::IsNullOrEmpty($wordBeforeCursor) -and (Get-Alias).Name -Contains $wordBeforeCursor)
     {
         return Get-Alias -Name $wordBeforeCursor
     }

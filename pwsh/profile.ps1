@@ -19,17 +19,8 @@ $env:FZF_ALT_C_COMMAND = "fd --type d $fzfParam"
 function Set-EnvVar {
     $env:SHELLEDITMODE=(Get-PSReadLineOption).EditMode
 }
-function dotfiles {
-    Set-Location $env:DOTFILES
-}
-function dotfilesEdit {
-    Set-Location $env:DOTFILES && nvim .
-}
 function scan {
     & "$env:USERPROFILE\OneDrive\Soft\SpaceSniffer.exe" scan "$pwd"
-}
-function lslah {
-    Get-ChildItem -Force $args
 }
 function OnViModeChange {
     if ($args[0] -eq 'Command') {
@@ -53,18 +44,6 @@ Import-Module "$env:LOCALAPPDATA\tools\poshgit\dahlbyk-posh-git-9bda399\src\posh
 New-Alias -Name 'Set-PoshContext' -Value 'Set-EnvVar' -Scope Global -Force
 oh-my-posh init pwsh --config "$env:LOCALAPPDATA\Programs\oh-my-posh\themes\bedware.omp.json" | Invoke-Expression
 
-# Aliases
-
-. "$env:DOTFILES\pwsh\Scripts\alias_autocomplete.ps1"
-Set-Alias -Name .f -Value dotfiles
-Set-Alias -Name .fe -Value dotfilesEdit
-#Set-Alias -Name gst -Value "git status"
-# Remove-Alias -Force -ErrorAction SilentlyContinue -Name gc
-# Set-Alias -Name gc -Value "git commit"
-Add-IgnoredAlias -Name vi -Value nvim
-Add-IgnoredAlias -Name l -Value lslah
-Add-BlankAlias -Name e -Value "`$env:"
-
 # Configuring
 
 Write-Host -NoNewLine "`e[6 q" # Set the cursor to a non blinking line.
@@ -75,4 +54,15 @@ Set-PsFzfOption `
     -PSReadlineChordReverseHistory 'Ctrl+r' `
     -PSReadlineChordSetLocation 'Ctrl+g'
 
+# Aliases
+
+. "$env:DOTFILES\pwsh\Scripts\alias_autocomplete.ps1"
+New-Alias -Name .f -Value 'Set-Location $env:DOTFILES'
+New-Alias -Name .fe -Value 'Set-Location $env:DOTFILES && nvim .'
+#Set-Alias -Name gst -Value "git status"
+# Remove-Alias -Force -ErrorAction SilentlyContinue -Name gc
+# Set-Alias -Name gc -Value "git commit"
+Add-IgnoredAlias -Name vi -Value nvim
+New-Alias -Name l -Value "Get-ChildItem -Force"
+Add-BlankAlias -Name e -Value "`$env:"
 
