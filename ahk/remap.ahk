@@ -44,6 +44,8 @@ RShift & LShift::ToggleCaps()
 #m::Send {Ctrl Down}{Shift Down}{Esc}{Shift Up}{Ctrl Up} ; Task manager
 #,::#^Left
 #.::#^Right
+#q::toggleTaskbar(-1)
+
 
 ;Close window
 #Backspace::Send !{F4}
@@ -105,12 +107,12 @@ return
 
 ; Translate
 LCtrl::
-    global UserHome
+    global HOME
 
     Send {Ctrl Down}cc{Ctrl Up}
     KeyWait, LCtrl
 
-    translationFile := UserHome . "\translations"
+    translationFile := HOME . "\translations"
     clipboardPlusSeparator := clipboard . "`n---`n"
 
     FileAppend, %clipboardPlusSeparator%, %translationFile%

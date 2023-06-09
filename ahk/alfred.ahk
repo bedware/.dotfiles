@@ -2,63 +2,70 @@
 
 ; Alfred
 
-ShowAlfred() {
-    ; TaskBar overload
-    Gui, -Caption -Border -Toolwindow +AlwaysOnTop +DPIScale
-    Gui, Margin, 0, 0
-    Gui, Add, ActiveX, w2000 h60, % "mshtml:<div style='border-bottom: 120px solid rgb(255, 222, 93); height: 0; margin: -10px 0 0 -10px;'></div>"
-    Gui, Show, xCenter y2076 NoActivate
-}
-
-HideAlfred() {
-    Gui, Hide
-}
-
 RunAlfred(apps) {
-    shortcutsList := ""
-    for index, app in apps {
-        shortcutsList := shortcutsList . index . ","
-    }
-    shortcutsList := SubStr(shortcutsList, 1, -1)
+    showAlfred()
 
-    ShowAlfred()
-
-    Input, userInput, T8 L5, {LShift}, %shortcutsList%
+    ; Wait for user input
+    Input, userInput, T8 L5, {LShift}, % getShortuctsByComa(apps)
     if (ErrorLevel = "Max")
     {
         PlayErrorSound()
-        HideAlfred()
+        hideAlfred()
         MsgBox, You entered "%userInput%", which is the maximum length of text.
         return
     }
     if (ErrorLevel = "Timeout")
     {
         PlayErrorSound()
-        HideAlfred()
+        hideAlfred()
         return
     }
     if (ErrorLevel = "NewInput") {
-        HideAlfred()
+        hideAlfred()
         return
     }
     If InStr(ErrorLevel, "EndKey:")
     {
         PlayErrorSound()
-        HideAlfred()
+        hideAlfred()
         return
     }
 
-    ; Otherwise, a match was found.
-    if (IsObject(apps[(userInput)])) {
+    executeInput(apps, userInput)
+
+    hideAlfred()
+}
+
+showAlfred() {
+    ; TaskBar overlap
+    Gui, -Caption -Border -Toolwindow +AlwaysOnTop +DPIScale
+    Gui, Margin, 0, 0
+    Gui, Add, ActiveX, w2000 h60, % "mshtml:<div style='border-bottom: 120px solid rgb(255, 222, 93); height: 0; margin: -10px 0 0 -10px;'></div>"
+    Gui, Show, xCenter y2076 NoActivate
+}
+
+hideAlfred() {
+    Gui, Hide
+}
+
+getShortuctsByComa(apps) {
+    ; e.g. "term,slack,tg"
+    shortcutsByComa := ""
+    for index, app in apps {
+        shortcutsByComa := shortcutsByComa . index . ","
+    }
+    return SubStr(shortcutsByComa, 1, -1)
+}
+
+executeInput(apps, userInput) {
+    if (IsObject(apps[(userInput)])) { ; Otherwise, a match was found.
         app := apps[(userInput)]
         if (app.funcName != "") {
             Func(app.funcName).Call()
         } else if (app.selector != "") {
-            RunIfNotExist(app.selector, app.executablePath)
+            RunIfNotExist(app.selector, app.path)
         } else {
-            Run % app.executablePath
+            Run % app.path
         }
     }
-    HideAlfred()
 }
-

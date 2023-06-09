@@ -1,4 +1,60 @@
-; By Dmitry Surin aka bedware
+Init(desktops) {
+    OutputDebug % "Loaded. Admin mode: " A_IsAdmin
+    ; RemoveAllDesktops()
+    desktopCount := GetDesktopCount()
+    counter := 0
+    for i, v in desktops {
+        currentDesktop := i - 1
+        ; before := GetDesktopName(currentDesktop)
+        ; Check if desktop doesn't exist
+        if (i > desktopCount) {
+            CreateDesktopByName(v)
+        } else
+        ; Check if desktop exists with exact name
+        if (GetDesktopName(currentDesktop) != v) {
+            SetDesktopName(currentDesktop, v)
+        }
+        ;OutputDebug % before " => " GetDesktopName(currentDesktop) " currentDesktop: " currentDesktop " counter: " counter
+        counter++
+    }
+    ; Remove all extra desktops
+    while (counter < desktopCount) {
+        RemoveDesktop(counter, 1)
+        ; OutputDebug % "counter: " counter " => Removed"
+        counter++
+    }
+    ; OutputDebug % "desktopCount: " GetDesktopCount() " counter: " counter
+
+    ; Icon
+    defaultIcon := % ResolveIconPathDependingOnTheme(GetSystemTheme()) "\+.ico"  
+    ChangeTrayIcon(defaultIcon)
+    RearrangeWindows()
+}
+
+; User functions
+RearrangeWindows() {
+    global apps
+    global desktops
+    for i, v in apps {
+        if (v.desktop != "" && v.selector != "") {
+            while (WinExist(v.selector)) {
+                WinActivate 
+                desktopNum := IndexOf(v.desktop, desktops)
+                if (IndexOf(v.desktop, desktops) != -1) {
+                    MoveCurrentWindowToDesktop(desktopNum)
+                }
+            }
+        }
+    } 
+}
+
+FocusOrRunWorkChromeProfile() {
+    RunIfNotExistChromeProfile("Will", """C:\Program Files\Google\Chrome\Application\chrome.exe"" --profile-directory=""Default""")
+}
+
+FocusOrRunPersonalChromeProfile() {
+    RunIfNotExistChromeProfile("Power", """C:\Program Files\Google\Chrome\Application\chrome.exe"" --profile-directory=""Profile 4""")
+}
 
 IndexOf(needle, haystack) {
     for j, k in haystack {
@@ -71,14 +127,16 @@ ToggleCaps(){
 
 
 ; Icon
-ChangeTrayIcon(pathToIcon) {
-    Menu, Tray, Icon, %pathToIcon%
+IconByThemeAndDesktopNumber(theme, num) {
+    theme := GetSystemTheme()
+    pathToIcon := ResolveIconPathDependingOnTheme(theme)
+    pathToIcon := % pathToIcon "\" num ".ico"
+    return ChangeTrayIcon(pathToIcon)
 }
-
 ResolveIconPathDependingOnTheme(theme) {
-    global IconsFolder
-    global IconsBlackTheme
-    global IconsWhiteTheme
+    IconsFolder := "icons"
+    IconsBlackTheme := "white-on-black"
+    IconsWhiteTheme := "black-on-white"
     pathToIcon := % A_ScriptDir "\" IconsFolder 
     if (theme == 1) { ; 0 is default, but I like inverted style because it stands out more
         pathToIcon := % pathToIcon "\" IconsBlackTheme 
@@ -87,12 +145,8 @@ ResolveIconPathDependingOnTheme(theme) {
     }
     return pathToIcon
 }
-
-IconByThemeAndDesktopNumber(theme, num) {
-    theme := GetSystemTheme()
-    pathToIcon := ResolveIconPathDependingOnTheme(theme)
-    pathToIcon := % pathToIcon "\" num ".ico"
-    return ChangeTrayIcon(pathToIcon)
+ChangeTrayIcon(pathToIcon) {
+    Menu, Tray, Icon, %pathToIcon%
 }
 
 ; Extending virutal displays functionality

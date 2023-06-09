@@ -14,6 +14,33 @@ $fzfParam = "--path-separator / --hidden " + `
 $env:FZF_CTRL_T_COMMAND = "fd --type f $fzfParam"
 $env:FZF_ALT_C_COMMAND = "fd --type d $fzfParam"
 
+# Functions
+
+function Set-EnvVar {
+    $env:SHELLEDITMODE=(Get-PSReadLineOption).EditMode
+}
+function dotfiles {
+    Set-Location $env:DOTFILES
+}
+function dotfilesEdit {
+    Set-Location $env:DOTFILES && nvim .
+}
+function scan {
+    & "$env:USERPROFILE\OneDrive\Soft\SpaceSniffer.exe" scan "$pwd"
+}
+function lslah {
+    Get-ChildItem -Force $args
+}
+function OnViModeChange {
+    if ($args[0] -eq 'Command') {
+        # Set the cursor to a non blinking block.
+        Write-Host -NoNewLine "`e[2 q"
+    } else {
+        # Set the cursor to a non blinking line.
+        Write-Host -NoNewLine "`e[6 q"
+    }
+}
+
 # Imports
 
 Import-Module PSProfiler
@@ -23,6 +50,7 @@ if (Test-Path($ChocolateyProfile)) {
 }
  
 Import-Module "$env:LOCALAPPDATA\tools\poshgit\dahlbyk-posh-git-9bda399\src\posh-git.psd1"
+New-Alias -Name 'Set-PoshContext' -Value 'Set-EnvVar' -Scope Global -Force
 oh-my-posh init pwsh --config "$env:LOCALAPPDATA\Programs\oh-my-posh\themes\bedware.omp.json" | Invoke-Expression
 
 # Aliases
@@ -39,22 +67,12 @@ Add-BlankAlias -Name e -Value "`$env:"
 
 # Configuring
 
+Write-Host -NoNewLine "`e[6 q" # Set the cursor to a non blinking line.
+Set-PSReadLineOption -EditMode Vi -ViModeIndicator Script -ViModeChangeHandler $Function:OnViModeChange
+
 Set-PsFzfOption `
     -PSReadlineChordProvider 'Ctrl+f' `
     -PSReadlineChordReverseHistory 'Ctrl+r' `
     -PSReadlineChordSetLocation 'Ctrl+g'
 
-# Functions
 
-function dotfiles {
-    Set-Location $env:DOTFILES
-}
-function dotfilesEdit {
-    Set-Location $env:DOTFILES && nvim .
-}
-function scan {
-    & "$env:USERPROFILE\OneDrive\Soft\SpaceSniffer.exe" scan "$pwd"
-}
-function lslah {
-    Get-ChildItem -Force $args
-}

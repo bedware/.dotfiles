@@ -3,7 +3,7 @@
 ; Get hwnd of AutoHotkey window, for listener
 
 ; Path to the DLL, relative to the script
-VDA_PATH := A_ScriptDir . "./VirtualDesktopAccessor.dll"
+VDA_PATH := A_ScriptDir . "./dependencies/VirtualDesktopAccessor.dll"
 hVirtualDesktopAccessor := DllCall("LoadLibrary", "Str", VDA_PATH, "Ptr")
 
 GetDesktopCountProc := DllCall("GetProcAddress", "Ptr", hVirtualDesktopAccessor, "AStr", "GetDesktopCount", "Ptr")
@@ -27,20 +27,17 @@ GetDesktopCount() {
     count := DllCall(GetDesktopCountProc, "Int")
     return count
 }
-
 MoveCurrentWindowToDesktop(desktopNumber) {
     global MoveWindowToDesktopNumberProc, GoToDesktopNumberProc
     WinGet, activeHwnd, ID, A
     DllCall(MoveWindowToDesktopNumberProc, "Ptr", activeHwnd, "Int", desktopNumber, "Int")
 }
-
 MoveCurrentWindowToDesktopAndGoTo(desktopNumber) {
     global MoveWindowToDesktopNumberProc, GoToDesktopNumberProc
     WinGet, activeHwnd, ID, A
     DllCall(MoveWindowToDesktopNumberProc, "Ptr", activeHwnd, "Int", desktopNumber, "Int")
     DllCall(GoToDesktopNumberProc, "Int", desktopNumber)
 }
-
 GoToPrevDesktop() {
     global GetCurrentDesktopNumberProc, GoToDesktopNumberProc
     current := DllCall(GetCurrentDesktopNumberProc, "Int")
@@ -53,7 +50,6 @@ GoToPrevDesktop() {
     }
     return
 }
-
 GoToNextDesktop() {
     global GetCurrentDesktopNumberProc
     current := DllCall(GetCurrentDesktopNumberProc, "Int")
@@ -66,7 +62,6 @@ GoToNextDesktop() {
     }
     return
 }
-
 GoToDesktopNumber(num) {
     global GoToDesktopNumberProc
     ; https://www.reddit.com/r/AutoHotkey/comments/qvkjhh/window_does_not_autofocus_to_foreground_upon/
@@ -105,21 +100,6 @@ CreateDesktop() {
     ran := DllCall(CreateDesktopProc)
     return ran
 }
-RemoveDesktop(remove_desktop_number, fallback_desktop_number) {
-    global RemoveDesktopProc
-    ran := DllCall(RemoveDesktopProc, "Int", remove_desktop_number, "Int", fallback_desktop_number, "Int")
-    return ran
-}
-
-RemoveAllDesktops() {
-    desktopsCount := GetDesktopCount() 
-    Loop %desktopsCount% {
-        RemoveDesktop(0, 1)
-    }
-    SetDesktopName(0, "") ; Reset first (unremovable) desktop
-    OutputDebug % "Desktops removed"
-}
-
 CreateDesktopByName(desktopName) {
     desktopsCount := GetDesktopCount() 
     if (desktopsCount == 1 && GetDesktopName(0) == "") {
@@ -129,6 +109,19 @@ CreateDesktopByName(desktopName) {
         SetDesktopName(desktopsCount, desktopName)
     }
     OutputDebug % "Desktop added: " desktopName
+}
+RemoveDesktop(remove_desktop_number, fallback_desktop_number) {
+    global RemoveDesktopProc
+    ran := DllCall(RemoveDesktopProc, "Int", remove_desktop_number, "Int", fallback_desktop_number, "Int")
+    return ran
+}
+RemoveAllDesktops() {
+    desktopsCount := GetDesktopCount() 
+    Loop %desktopsCount% {
+        RemoveDesktop(0, 1)
+    }
+    SetDesktopName(0, "") ; Reset first (unremovable) desktop
+    OutputDebug % "Desktops removed"
 }
 
 ; SetDesktopName(0, "It works! 🐱")
