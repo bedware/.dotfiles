@@ -77,12 +77,12 @@ function AliasExtention
         if (-not [string]::IsNullOrEmpty($wordBeforeCursor) -and $wordBeforeCursor.Chars(0) -eq ",")
         {
             if ($wordBeforeCursor -eq ",s") {
-                [Microsoft.PowerShell.PSConsoleReadLine]::Replace($wordBeforeCursorStartIndex, $wordBeforeCursor.Length, "sgpt `"`"")
+                [Microsoft.PowerShell.PSConsoleReadLine]::Replace($wordBeforeCursorStartIndex, $wordBeforeCursor.Length, "sgpt `'`'")
                 [Microsoft.PowerShell.PSConsoleReadLine]::BackwardChar()
                 return 
             }
             if ($wordBeforeCursor -eq ",sm") {
-                [Microsoft.PowerShell.PSConsoleReadLine]::Replace($wordBeforeCursorStartIndex, $wordBeforeCursor.Length, "sgpt @`"`n")
+                [Microsoft.PowerShell.PSConsoleReadLine]::Replace($wordBeforeCursorStartIndex, $wordBeforeCursor.Length, "sgpt @`'`n")
                 return 
             }
             [Microsoft.PowerShell.PSConsoleReadLine]::Replace($wordBeforeCursorStartIndex, $wordBeforeCursor.Length, $wordBeforeCursor.Substring(1, $wordBeforeCursor.Length - 1))
