@@ -4,7 +4,7 @@
 
 $env:ChocolateyToolsLocation = "$env:LOCALAPPDATA\tools"
 $env:EDITOR = 'nvim'
-$env:DOTFILES = "$env:USERPROFILE\.dotfiles"
+$env:DOTFILES = "$env:HOME\.dotfiles"
 $fzfParam = "--path-separator / --hidden " + `
 "--exclude 'AppData' " + `
 "--exclude '.m2' " + `
@@ -20,7 +20,7 @@ function Set-EnvVar {
     $env:SHELLEDITMODE=(Get-PSReadLineOption).EditMode
 }
 function scan {
-    & "$env:USERPROFILE\OneDrive\Soft\SpaceSniffer.exe" scan "$pwd"
+    & "$env:HOME\OneDrive\Soft\SpaceSniffer.exe" scan "$pwd"
 }
 function OnViModeChange {
     if ($args[0] -eq 'Command') {

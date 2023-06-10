@@ -2,6 +2,7 @@ $global:BlankAliases = @()
 $global:IgnoredAliases = @()
 $global:IgnoredAliases += "*"
 $global:IgnoredAliases += "?"
+$global:IgnoredAliases += "r"
 $global:IgnoredAliases += "diff"
 $global:IgnoredAliases += "cat"
 $global:IgnoredAliases += "clear"

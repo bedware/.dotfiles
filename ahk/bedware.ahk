@@ -37,6 +37,11 @@ apps[".v"] := { desktop: "Personal", selector: "Neovim Settings ahk_exe WindowsT
 apps["i"] := { desktop: "Personal", selector: "ahk_exe idea64.exe", path: HOME . "\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\JetBrains Toolbox\IntelliJ IDEA Ultimate.lnk" }
 ; Terminal
 apps["term"] := { desktop: "Terminal", selector: "ahk_exe WindowsTerminal.exe", path: "wt.exe" }
+apps["turm"] := { funcName: "runWSL"}
+runWSL() {
+    Run, wt -p "Ubuntu"
+}
+
 ; Planner
 apps["day"] := { desktop: "Planner", selector: "DayCaptain ahk_exe msedge.exe", path: HOME . "\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\DayCaptain.lnk" }
 apps["note"] := { desktop: "Planner", selector: "ahk_exe Notion.exe", path: HOME . "\AppData\Local\Programs\Notion\Notion.exe" }
