@@ -45,10 +45,6 @@
             "keys": "alt+minus"
         },
         {
-            "command": "find",
-            "keys": "ctrl+/"
-        },
-        {
             "command": 
             {
                 "action": "resizePane",
@@ -57,8 +53,8 @@
             "keys": "alt+shift+h"
         },
         {
-            "command": "openTabRenamer",
-            "keys": "alt+r"
+            "command": "find",
+            "keys": "ctrl+/"
         },
         {
             "command": 
@@ -67,6 +63,10 @@
                 "direction": "down"
             },
             "keys": "alt+shift+j"
+        },
+        {
+            "command": "openTabRenamer",
+            "keys": "alt+r"
         },
         {
             "command": 
@@ -146,17 +146,21 @@
     "defaultProfile": "{137409cc-2f7a-47ca-b351-2a4c457addbc}",
     "initialCols": 131,
     "initialRows": 42,
+    "launchMode": "fullscreen",
     "profiles": 
     {
         "defaults": 
         {
+            "backgroundImage": null,
+            "backgroundImageOpacity": 1.0,
             "colorScheme": "Campbell",
             "cursorShape": "filledBox",
             "font": 
             {
                 "face": "CaskaydiaCove NFM",
-                "size": 11.0
+                "size": 16.0
             },
+            "opacity": 95,
             "padding": "0",
             "scrollbarState": "hidden",
             "useAtlasEngine": false
@@ -249,6 +253,29 @@
             "selectionBackground": "#FFFFFF",
             "white": "#CCCCCC",
             "yellow": "#C19C00"
+        },
+        {
+            "background": "#282A36",
+            "black": "#21222C",
+            "blue": "#BD93F9",
+            "brightBlack": "#6272A4",
+            "brightBlue": "#D6ACFF",
+            "brightCyan": "#A4FFFF",
+            "brightGreen": "#69FF94",
+            "brightPurple": "#FF92DF",
+            "brightRed": "#FF6E6E",
+            "brightWhite": "#FFFFFF",
+            "brightYellow": "#FFFFA5",
+            "cursorColor": "#F8F8F2",
+            "cyan": "#8BE9FD",
+            "foreground": "#F8F8F2",
+            "green": "#50FA7B",
+            "name": "Dracula",
+            "purple": "#FF79C6",
+            "red": "#FF5555",
+            "selectionBackground": "#44475A",
+            "white": "#F8F8F2",
+            "yellow": "#F1FA8C"
         },
         {
             "background": "#282C34",
@@ -479,29 +506,6 @@
             "selectionBackground": "#FFFFFF",
             "white": "#C0C0C0",
             "yellow": "#808000"
-        },
-        {
-            "name": "Dracula",
-            "cursorColor": "#F8F8F2",
-            "selectionBackground": "#44475A",
-            "background": "#282A36",
-            "foreground": "#F8F8F2",
-            "black": "#21222C",
-            "blue": "#BD93F9",
-            "cyan": "#8BE9FD",
-            "green": "#50FA7B",
-            "purple": "#FF79C6",
-            "red": "#FF5555",
-            "white": "#F8F8F2",
-            "yellow": "#F1FA8C",
-            "brightBlack": "#6272A4",
-            "brightBlue": "#D6ACFF",
-            "brightCyan": "#A4FFFF",
-            "brightGreen": "#69FF94",
-            "brightPurple": "#FF92DF",
-            "brightRed": "#FF6E6E",
-            "brightWhite": "#FFFFFF",
-            "brightYellow": "#FFFFA5"
         },
         {
             "background": "#191724",

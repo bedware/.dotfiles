@@ -20,7 +20,7 @@ function Set-EnvVar {
     $env:SHELLEDITMODE=(Get-PSReadLineOption).EditMode
 }
 function scan {
-    & "$env:USERPROFILE\OneDrive\Soft\SpaceSniffer.exe" scan "$pwd"
+    & "$env:HOME\OneDrive\Soft\SpaceSniffer.exe" scan "$pwd"
 }
 function OnViModeChange {
     if ($args[0] -eq 'Command') {
