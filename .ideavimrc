@@ -189,7 +189,7 @@ nnoremap <leader>wo :action MoveEditorToOppositeTabGroup<CR>
 nnoremap <leader>wh :action HideAllWindows<CR>
 nnoremap <leader>wd :action RestoreDefaultLayout<CR>
 " Tabs Close
-" nnoremap <leader>x :action CloseContent<CR>
+nnoremap <A-w> :action CloseContent<CR>
 nnoremap <leader>X :action ReopenClosedTab<CR>
 nnoremap <leader>wca :action CloseAllEditors<CR>
 nnoremap <leader>wco :action CloseAllEditorsButActive<CR>

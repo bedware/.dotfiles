@@ -61,7 +61,7 @@ apps["cl"] := { funcName: "RearrangeWindows" }
 apps["h"] := { funcName: "FocusOrRunPersonalChromeProfile" }
 apps["l"] := { funcName: "FocusOrRunWorkChromeProfile" }
 
-desktops := ["Work", "Personal", "Terminal", "Planner", "Chats", "6", "7", "Files"]
+desktops := ["Work", "Personal", "Terminal", "Planner", "Chats", "6", "7", "Files", "9"]
 
 ; Dependencies
 #Include %A_ScriptDir%/alfred.ahk

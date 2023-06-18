@@ -1,5 +1,8 @@
 ; Disable keys
 *~LButton::return ; To make mouse hook work
+*~RButton::return ; To make mouse hook work
+*~WheelDown::return ; To make mouse hook work
+*~WheelUp::return ; To make mouse hook work
 RCtrl::return
 RAlt::return
 Home::F13
@@ -161,23 +164,27 @@ return
     v::^+m
     ;v::SendInput {U+2705}
 
+    s:: ; Search
+        if WinActive("ahk_exe chrome.exe") or WinActive("ahk_exe msedge.exe")
+            Send ^+{a}
+        else
+            Send {s}
+    return
     ; Undo, Redo, Chrome hotkeys
     i:: ; Undo
-        if WinActive("ahk_exe chrome.exe")
+        if WinActive("ahk_exe chrome.exe") or WinActive("ahk_exe msedge.exe")
             Send ^l@history{Space}
         else
             Send ^{z}
     return
     o:: ; Redo
-        if WinActive("ahk_exe chrome.exe")
-            Send ^l@tabs{Space}
         if WinActive("ahk_exe idea64.exe")
             Send ^+{z}
         else
             Send ^{y}
     return
-    b:: ; bookmarks 
-        if WinActive("ahk_exe chrome.exe")
+    b:: ; Bookmarks 
+        if WinActive("ahk_exe chrome.exe") or WinActive("ahk_exe msedge.exe")
             Send ^l@bookmarks{Space}
         else
             Send ^{b}
@@ -205,27 +212,36 @@ return
     *LShift::LShift
     *LAlt::LAlt
     ; F-keys
-    1::SendWithCorrectModifiers("F1")
-    2::SendWithCorrectModifiers("F2")
-    3::SendWithCorrectModifiers("F3")
-    4::SendWithCorrectModifiers("F4")
-    5::SendWithCorrectModifiers("F5")
-    6::SendWithCorrectModifiers("F6")
-    7::SendWithCorrectModifiers("F7")
-    8::SendWithCorrectModifiers("F8")
-    9::SendWithCorrectModifiers("F9")
-    0::SendWithCorrectModifiers("F10")
-    -::SendWithCorrectModifiers("F11")
-    =::SendWithCorrectModifiers("F12")
+    ;1::SendWithCorrectModifiers("F1")
+    *1::F1
+    *2::F2
+    *3::F3
+    *4::F4
+    *5::F5
+    *6::F6
+    *7::F7
+    *8::F8
+    *9::F9
+    *0::F10
+    *-::F11
+    *=::F12
     ; Navigation
-    h::SendWithCorrectModifiers("Left")
-    j::SendWithCorrectModifiers("Down")
-    k::SendWithCorrectModifiers("Up")
-    l::SendWithCorrectModifiers("Right")
-    [::SendWithCorrectModifiers("PgUp")
-    ]::SendWithCorrectModifiers("PgDn")
-    ,::SendWithCorrectModifiers("Home")
-    .::SendWithCorrectModifiers("End")
+    ;h::SendWithCorrectModifiers("Left")
+    ;j::SendWithCorrectModifiers("Down")
+    ;k::SendWithCorrectModifiers("Up")
+    ;l::SendWithCorrectModifiers("Right")
+    *h::Left
+    *j::Down
+    *k::Up
+    *l::Right
+    ;[::SendWithCorrectModifiers("PgUp")
+    ;]::SendWithCorrectModifiers("PgDn")
+    ;,::SendWithCorrectModifiers("Home")
+    ;.::SendWithCorrectModifiers("End")
+    *[::PgUp
+    *]::PgDn
+    *,::Home
+    *.::End
 #if
 
 ; Virtual desktops management
@@ -237,6 +253,7 @@ return
 #6::MoveOrGotoDesktopNumberWithIcon(5)
 #7::MoveOrGotoDesktopNumberWithIcon(6)
 #8::MoveOrGotoDesktopNumberWithIcon(7)
+#9::MoveOrGotoDesktopNumberWithIcon(8)
 
 #+1::MoveCurrentWindowToDesktopWithIcon(0)
 #+2::MoveCurrentWindowToDesktopWithIcon(1)
@@ -246,4 +263,5 @@ return
 #+6::MoveCurrentWindowToDesktopWithIcon(5)
 #+7::MoveCurrentWindowToDesktopWithIcon(6)
 #+8::MoveCurrentWindowToDesktopWithIcon(7)
+#+9::MoveCurrentWindowToDesktopWithIcon(8)
 
