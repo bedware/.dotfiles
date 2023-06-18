@@ -1,10 +1,10 @@
 [Console]::InputEncoding = [Console]::OutputEncoding = [System.Text.UTF8Encoding]::new()
 
 # Environment variables
-
 $env:ChocolateyToolsLocation = "$env:LOCALAPPDATA\tools"
 $env:EDITOR = 'nvim'
 $env:DOTFILES = "$env:HOME\.dotfiles"
+$env:XDG_CONFIG_HOME = "$env:HOME\.config"
 $fzfParam = "--path-separator / --hidden " + `
 "--exclude 'AppData' " + `
 "--exclude '.m2' " + `
