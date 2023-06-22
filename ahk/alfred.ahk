@@ -40,7 +40,7 @@ showAlfred() {
     ; TaskBar overlap
     Gui, -Caption -Border -Toolwindow +AlwaysOnTop +DPIScale
     Gui, Margin, 0, 0
-    Gui, Add, ActiveX, w2000 h60, % "mshtml:<div style='border-bottom: 120px solid rgb(255, 222, 93); height: 0; margin: -10px 0 0 -10px;'></div>"
+    Gui, Add, ActiveX, w2000 h48, % "mshtml:<div style='border-bottom: 120px solid rgb(255, 222, 93); height: 0; margin: -10px 0 0 -10px;'></div>"
     Gui, Show, xCenter y2076 NoActivate
 }
 

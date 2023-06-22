@@ -1,10 +1,22 @@
 ; Disable keys
 *~LButton::return ; To make mouse hook work
 *~RButton::return ; To make mouse hook work
+*~MButton::
+    WinGet, List, List
+    lvo := ""
+    Loop % List {
+        WinGet, res, ProcessName, % "ahk_id" . List%A_Index%
+        lvo := lvo . res . "`n"
+
+        ; if (res = 1)
+        ;     WinMove, % "ahk_id" . List%A_Index%,, 0, 0, A_ScreenWidth, A_ScreenHeight - !b * H
+
+    }
+    MsgBox % lvo
+return ; To make mouse hook work
 *~WheelDown::return ; To make mouse hook work
 *~WheelUp::return ; To make mouse hook work
-RCtrl::return
-RAlt::return
+LCtrl::return
 Home::F13
 End::F14
 PgUp::F15
@@ -38,21 +50,6 @@ return
 LShift & RShift::ToggleCaps()
 RShift & LShift::ToggleCaps()
 
-; Win-hotkeys
-#h::#Left
-#j::#Down
-#k::#Up
-#l::#Right
-;#t::#t ; Powertoys pin window on-top
-#m::Send {Ctrl Down}{Shift Down}{Esc}{Shift Up}{Ctrl Up} ; Task manager
-#,::#^Left
-#.::#^Right
-#q::toggleTaskbar(-1)
-
-
-;Close window
-#Backspace::Send !{F4}
-
 ; Tab-hotkeys
 *Tab::
     if (A_PriorKey = "LAlt") {
@@ -68,13 +65,6 @@ return
 #if GetKeyState("Tab", "P")
     ; Layout set up
     LWin::#z
-    ;Close tab
-    Backspace::
-        if WinActive("ahk_exe idea64.exe") or WinActive("ahk_exe sublime_text.exe")
-            Send ^{F4}
-        else ; Default
-            Send ^w
-    return
     j::
         if WinActive("ahk_exe idea64.exe")
             Send {Alt Down}{Left}{Alt Up}
@@ -109,7 +99,7 @@ return
 #if
 
 ; Translate
-LCtrl::
+Escape::
     global HOME
 
     Send {Ctrl Down}cc{Ctrl Up}
@@ -122,16 +112,21 @@ LCtrl::
 return
 
 *CapsLock::
-    Send {Ctrl DownR}
+    SendEvent {Ctrl DownR}
     KeyWait, Capslock
-    Send {Ctrl Up}
+    SendEvent {Ctrl Up}
     if (A_PriorKey = "Capslock") {
-        if WinExist("ahk_exe DeepL.exe") and WinExist("ahk_exe Lingvo.exe") {
+        if WinExist("ahk_exe DeepL.exe") and WinExist("ahk_exe Lingvo.exe") or WinExist("ahk_exe DeepL.exe") {
             WinClose, ahk_exe Lingvo.exe
             WinClose, ahk_exe DeepL.exe
         }
         Send {Esc}
     }
+return
+
+*Backspace::
+    KeyWait, Backspace
+    Send {Backspace}
 return
 
 ; Space
@@ -141,7 +136,7 @@ return
         SendEvent {Blind}{Space}
     }
 return
-#if GetKeyState("Space", "P")
+#if GetKeyState("Space", "P") or GetKeyState("Backspace", "P")
     *Tab::
         Send {LAlt DownR}
         KeyWait, Tab
@@ -158,49 +153,15 @@ return
     w::^w
     ; as
     a::^a
-    ; zx
+    ; zxcv
     z::^z
     x::^x
-    v::^+m
+    c::^c
+    v::^+m ; Select mode (vi-mode) in wt
     ;v::SendInput {U+2705}
-
-    s:: ; Search
-        if WinActive("ahk_exe chrome.exe") or WinActive("ahk_exe msedge.exe")
-            Send ^+{a}
-        else
-            Send {s}
-    return
-    ; Undo, Redo, Chrome hotkeys
-    i:: ; Undo
-        if WinActive("ahk_exe chrome.exe") or WinActive("ahk_exe msedge.exe")
-            Send ^l@history{Space}
-        else
-            Send ^{z}
-    return
-    o:: ; Redo
-        if WinActive("ahk_exe idea64.exe")
-            Send ^+{z}
-        else
-            Send ^{y}
-    return
-    b:: ; Bookmarks 
-        if WinActive("ahk_exe chrome.exe") or WinActive("ahk_exe msedge.exe")
-            Send ^l@bookmarks{Space}
-        else
-            Send ^{b}
-    return
-
-    ; Run
-    r::
-    if GetKeyState("Shift")
-        Send ^{F2}
-    else
-        Send ^+{F10}
-    return
 
     ; Right hand
     Enter::Insert
-    Backspace::Delete
     /::Reload
 
     ; Context menu
@@ -211,8 +172,8 @@ return
     ; To work as modifiers when Space pressed
     *LShift::LShift
     *LAlt::LAlt
+
     ; F-keys
-    ;1::SendWithCorrectModifiers("F1")
     *1::F1
     *2::F2
     *3::F3
@@ -225,43 +186,57 @@ return
     *0::F10
     *-::F11
     *=::F12
+
     ; Navigation
-    ;h::SendWithCorrectModifiers("Left")
-    ;j::SendWithCorrectModifiers("Down")
-    ;k::SendWithCorrectModifiers("Up")
-    ;l::SendWithCorrectModifiers("Right")
     *h::Left
     *j::Down
     *k::Up
     *l::Right
-    ;[::SendWithCorrectModifiers("PgUp")
-    ;]::SendWithCorrectModifiers("PgDn")
-    ;,::SendWithCorrectModifiers("Home")
-    ;.::SendWithCorrectModifiers("End")
     *[::PgUp
     *]::PgDn
     *,::Home
     *.::End
 #if
 
-; Virtual desktops management
-#1::MoveOrGotoDesktopNumberWithIcon(0)
-#2::MoveOrGotoDesktopNumberWithIcon(1)
-#3::MoveOrGotoDesktopNumberWithIcon(2)
-#4::MoveOrGotoDesktopNumberWithIcon(3)
-#5::MoveOrGotoDesktopNumberWithIcon(4)
-#6::MoveOrGotoDesktopNumberWithIcon(5)
-#7::MoveOrGotoDesktopNumberWithIcon(6)
-#8::MoveOrGotoDesktopNumberWithIcon(7)
-#9::MoveOrGotoDesktopNumberWithIcon(8)
+#if WinActive("ahk_exe chrome.exe") or WinActive("ahk_exe msedge.exe")
+    !g::Send ^+{a} ; Search in tabs popup
+    !t::Send ^l@tabs{Space} ; Search in tabs
+    !h::Send ^l@history{Space} ; Search in history
+    !b::Send ^l@bookmarks{Space} ; Search in Bookmarks 
+#if
 
-#+1::MoveCurrentWindowToDesktopWithIcon(0)
-#+2::MoveCurrentWindowToDesktopWithIcon(1)
-#+3::MoveCurrentWindowToDesktopWithIcon(2)
-#+4::MoveCurrentWindowToDesktopWithIcon(3)
-#+5::MoveCurrentWindowToDesktopWithIcon(4)
-#+6::MoveCurrentWindowToDesktopWithIcon(5)
-#+7::MoveCurrentWindowToDesktopWithIcon(6)
-#+8::MoveCurrentWindowToDesktopWithIcon(7)
-#+9::MoveCurrentWindowToDesktopWithIcon(8)
+#InputLevel 0
+; Win-hotkeys
+#h::#Left
+#j::#Down
+#k::#Up
+#l::#Right
+;#t::#t ; Powertoys pin window on-top
+#m::Send ^+{Esc} ; Task manager
+#,::#^Left
+#.::#^Right
+#^t::toggleTaskbar(-1)
+;Close window
+#q::Send !{F4}
+
+; Virtual desktops management
+#1::GoToVD(1)
+#2::GoToVD(2)
+#3::GoToVD(3)
+#4::GoToVD(4)
+#5::GoToVD(5)
+#6::GoToVD(6)
+#7::GoToVD(7)
+#8::GoToVD(8)
+#9::GoToVD(9)
+
+#+1::MoveActiveWinAndGoToVD(1)
+#+2::MoveActiveWinAndGoToVD(2)
+#+3::MoveActiveWinAndGoToVD(3)
+#+4::MoveActiveWinAndGoToVD(4)
+#+5::MoveActiveWinAndGoToVD(5)
+#+6::MoveActiveWinAndGoToVD(6)
+#+7::MoveActiveWinAndGoToVD(7)
+#+8::MoveActiveWinAndGoToVD(8)
+#+9::MoveActiveWinAndGoToVD(9)
 

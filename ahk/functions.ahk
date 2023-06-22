@@ -1,26 +1,28 @@
 Init(desktops) {
+    ; OutputDebug % "-------------"
     OutputDebug % "Loaded. Admin mode: " A_IsAdmin
     ; RemoveAllDesktops()
     desktopCount := GetDesktopCount()
-    counter := 0
+    ; OutputDebug % "desktopCount: " desktopCount
+    counter := 1
     for i, v in desktops {
-        currentDesktop := i - 1
-        ; before := GetDesktopName(currentDesktop)
+        ; currentDesktop := i
+        before := GetDesktopName(i - 1)
         ; Check if desktop doesn't exist
         if (i > desktopCount) {
             CreateDesktopByName(v)
         } else
         ; Check if desktop exists with exact name
-        if (GetDesktopName(currentDesktop) != v) {
-            SetDesktopName(currentDesktop, v)
+        if (GetDesktopName(i - 1) != v) {
+            SetDesktopName(i - 1, v)
         }
-        ;OutputDebug % before " => " GetDesktopName(currentDesktop) " currentDesktop: " currentDesktop " counter: " counter
+        ; OutputDebug % before " => " GetDesktopName(i - 1) " currentDesktop: " currentDesktop " counter: " counter
         counter++
     }
     ; Remove all extra desktops
-    while (counter < desktopCount) {
-        RemoveDesktop(counter, 1)
-        ; OutputDebug % "counter: " counter " => Removed"
+    while (desktopCount > counter - 1) {
+        RemoveDesktop(counter - 1, 1)
+        OutputDebug % "counter: " counter " => Removed"
         counter++
     }
     ; OutputDebug % "desktopCount: " GetDesktopCount() " counter: " counter
@@ -37,11 +39,13 @@ RearrangeWindows() {
     global desktops
     for i, v in apps {
         if (v.desktop != "" && v.selector != "") {
-            while (WinExist(v.selector)) {
+            moved := false
+            while (WinExist(v.selector) and !moved) {
                 WinActivate 
                 desktopNum := IndexOf(v.desktop, desktops)
                 if (IndexOf(v.desktop, desktops) != -1) {
-                    MoveCurrentWindowToDesktop(desktopNum)
+                    MoveCurrentWindowToDesktop(desktopNum - 1)
+                    moved = true
                 }
             }
         }
@@ -57,14 +61,27 @@ FocusOrRunPersonalChromeProfile() {
 }
 
 IndexOf(needle, haystack) {
-    for j, k in haystack {
+    OutputDebug % "IndexOf:needle " needle
+    for i, k in haystack {
+        OutputDebug % "i:" i ", k:" k
         if (k == needle) {
-            return j - 1
+            return i
         }
     }
     return -1
 }
 
+ProcessExist(exeName) {
+    Process, Exist, %exeName%
+    return ErrorLevel
+}
+RunIfProcessNotExist(exeName, path) {
+    if (!ProcessExist(exeName)) {
+        Run % path
+        return ProcessExist(exeName) 
+    }
+    return 0
+}
 RunIfNotExist(selector, executablePath) {
     if WinExist(selector)
         WinActivate
@@ -149,15 +166,41 @@ ChangeTrayIcon(pathToIcon) {
     Menu, Tray, Icon, %pathToIcon%
 }
 
-; Extending virutal displays functionality
-MoveOrGotoDesktopNumberWithIcon(num) {
-    MoveOrGotoDesktopNumber(num)
-    IconByThemeAndDesktopNumber(GetSystemTheme(), num + 1)
+;            alternate
+;   prevSel  |
+;         |  |
+altVD := [1, 1]
+; Extending virtutal display functionality
+GoToVD(num) {
+    global altVD
+    ; OutputDebug % "-------------"
+    ; OutputDebug % "Before num:" num " VD[1]:" altVD[1] " VD[2]:" altVD[2]
+ 
+    selected := -1
+
+    ; OutputDebug % "IndexOf(num, altVD):" IndexOf(num, altVD)
+    ; target consist in buffer
+    if (IndexOf(num, altVD) != -1) {
+        selected := altVD[2]
+        altVD[2] := altVD[1]
+        altVD[1] := selected
+        ; OutputDebug % IndexOf(1, altVD) "" IndexOf(2, altVD) "" IndexOf(3, altVD)
+    } else 
+    ; target not consist in buffer
+    {
+        selected := num
+        altVD[2] := altVD[1]
+        altVD[1] := selected
+    }
+    ; OutputDebug % "After selected:" selected " num:" num " VD[1]:" altVD[1] " VD[2]:" altVD[2]
+
+    MoveOrGotoDesktopNumber(selected - 1)
+    IconByThemeAndDesktopNumber(GetSystemTheme(), selected)
 }
 
-MoveCurrentWindowToDesktopWithIcon(num) {
-    MoveCurrentWindowToDesktopAndGoTo(num)
-    IconByThemeAndDesktopNumber(GetSystemTheme(), num + 1)
+MoveActiveWinAndGoToVD(num) {
+    MoveCurrentWindowToDesktopAndGoTo(num - 1)
+    IconByThemeAndDesktopNumber(GetSystemTheme(), num)
 }
 
 ; Chrome Profile
