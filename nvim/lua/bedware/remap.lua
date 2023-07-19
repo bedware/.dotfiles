@@ -7,6 +7,10 @@ vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 vim.keymap.set("c", "<Up>", "<C-p>")
 vim.keymap.set("c", "<Down>", "<C-n>")
 
+-- Put space not leaving Comand mode
+vim.keymap.set("n", "<leader>[", "i <Esc>")
+vim.keymap.set("n", "<leader>]", "a <Esc>")
+
 -- Moving lines around
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")

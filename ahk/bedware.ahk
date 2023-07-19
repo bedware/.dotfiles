@@ -61,11 +61,11 @@ apps["obs"] := { selector: "ahk_exe obs64.exe", path: "C:\ProgramData\Microsoft\
 apps["cl"] := { funcName: "RearrangeWindows" }
 apps["h"] := { funcName: "FocusOrRunPersonalChromeProfile" }
 apps["l"] := { funcName: "FocusOrRunWorkChromeProfile" }
-apps["init"] := { funcName: "initRecordingProfile" }
+apps["psc"] := { funcName: "screencastProfile" }
 
 desktops := ["Work", "Personal", "Terminal", "Planner", "Chats", "6", "7", "Files", "9"]
 
-initRecordingProfile() {
+screencastProfile() {
     init := {}
     init["Screen share"] := { exe: "duet.exe", path: "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\duet.lnk" }
     init["Camera"] := { exe: "iVCam.exe", path: "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\e2eSoft iVCam\iVCam.lnk" }
@@ -84,15 +84,18 @@ initRecordingProfile() {
             if WinExist(selector) {
                 WinActivate
                 if (app.moveTo == 2) {
-                    WinMove, 1000, 2800
+                    WinRestore
+                    WinMove,,, 1000, 3000, 500, 500
+                    ; Sleep 50
+                }
+                if (app.maximize) {
+                    WinMinimize
+                    ; Sleep 150
+                    WinMaximize
                 }
                 if (app.showOnAllDesktops) {
                     WinGet, activeHwnd, ID, A
                     PinWindow(activeHwnd)
-                }
-                if (app.maximize) {
-                    WinMinimize
-                    WinMaximize
                 }
             }
         }

@@ -28,6 +28,8 @@ RunAlfred(apps) {
     {
         PlayErrorSound()
         hideAlfred()
+        ; MsgBox, Endkey pressed!
+        Sleep 100
         return
     }
 

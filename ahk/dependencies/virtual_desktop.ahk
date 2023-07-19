@@ -77,7 +77,7 @@ GoToDesktopNumber(num) {
 MoveOrGotoDesktopNumber(num) {
     ; If user is holding down Mouse left button, move the current window also
     if (GetKeyState("LButton")) {
-        MoveCurrentWindowToDesktop(num)
+        MoveCurrentWindowToDesktopAndGoTo(num)
     } else {
         GoToDesktopNumber(num)
     }

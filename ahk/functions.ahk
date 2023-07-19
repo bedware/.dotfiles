@@ -171,7 +171,8 @@ ChangeTrayIcon(pathToIcon) {
 ;         |  |
 altVD := [1, 1]
 ; Extending virtutal display functionality
-GoToVD(num) {
+
+proceedAlternateVD(num) {
     global altVD
     ; OutputDebug % "-------------"
     ; OutputDebug % "Before num:" num " VD[1]:" altVD[1] " VD[2]:" altVD[2]
@@ -193,14 +194,18 @@ GoToVD(num) {
         altVD[1] := selected
     }
     ; OutputDebug % "After selected:" selected " num:" num " VD[1]:" altVD[1] " VD[2]:" altVD[2]
-
-    MoveOrGotoDesktopNumber(selected - 1)
+    return selected
+}
+GoToVD(num) {
+    selected := proceedAlternateVD(num)
+    MoveOrGotoDesktopNumber(selected - 1) ; indexes in this function start with 0
     IconByThemeAndDesktopNumber(GetSystemTheme(), selected)
 }
 
 MoveActiveWinAndGoToVD(num) {
-    MoveCurrentWindowToDesktopAndGoTo(num - 1)
-    IconByThemeAndDesktopNumber(GetSystemTheme(), num)
+    selected := proceedAlternateVD(num)
+    MoveCurrentWindowToDesktopAndGoTo(selected - 1)
+    IconByThemeAndDesktopNumber(GetSystemTheme(), selected)
 }
 
 ; Chrome Profile

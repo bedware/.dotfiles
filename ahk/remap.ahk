@@ -2,17 +2,17 @@
 *~LButton::return ; To make mouse hook work
 *~RButton::return ; To make mouse hook work
 *~MButton::
-    WinGet, List, List
-    lvo := ""
-    Loop % List {
-        WinGet, res, ProcessName, % "ahk_id" . List%A_Index%
-        lvo := lvo . res . "`n"
-
-        ; if (res = 1)
-        ;     WinMove, % "ahk_id" . List%A_Index%,, 0, 0, A_ScreenWidth, A_ScreenHeight - !b * H
-
-    }
-    MsgBox % lvo
+; DetectHiddenWindows, Off
+; WinGet, id, List,,, Program Manager
+; Loop, %id%
+; {
+;     this_id := id%A_Index%
+;     WinActivate, ahk_id %this_id%
+;     WinGetClass, this_class, ahk_id %this_id%
+;     WinGetTitle, this_title, ahk_id %this_id%
+;     MsgBox, 4, , Visiting All Windows`n%A_Index% of %id%`nahk_id %this_id%`nahk_class %this_class%`n%this_title%`n`nContinue?
+;     IfMsgBox, NO, break
+; }
 return ; To make mouse hook work
 *~WheelDown::return ; To make mouse hook work
 *~WheelUp::return ; To make mouse hook work
@@ -21,20 +21,47 @@ Home::F13
 End::F14
 PgUp::F15
 PgDn::F16
+; Translate
+F20::
+    global HOME
+
+    Send {Ctrl Down}cc{Ctrl Up}
+    KeyWait, LCtrl
+
+    translationFile := HOME . "\translations"
+    clipboardPlusSeparator := clipboard . "`n---`n"
+
+    FileAppend, %clipboardPlusSeparator%, %translationFile%
+return
+
 
 ; Shift
 RShift & Capslock::Send +{Esc}
 
-~*LShift::
+#if GetKeyState("LShift", "P")
+LShift up::
     global apps
-
-    Send {LShift DownR}
-    KeyWait, LShift
-    Send {LShift Up}
-    if (A_ThisHotkey = "~*LShift" and A_PriorKey = "LShift") {
+    if (A_PriorKey = "LShift") {
         RunAlfred(apps)
     }
 return 
+
+#if
+
+; ~*LShift::
+;     global apps
+;
+;     SendEvent {Blind}{LShift DownR}
+;     KeyWait, LShift
+;     SendEvent {Blind}{LShift Up}
+;     if (A_ThisHotkey = "~*LShift" and A_PriorKey = "LShift") {
+;         RunAlfred(apps)
+;     }
+; return 
+; F20::
+;     global apps
+;     RunAlfred(apps)
+; return 
 
 ; Language switch
 ~*RShift::
@@ -98,19 +125,6 @@ return
     LAlt::Send ^!{Tab}
 #if
 
-; Translate
-Escape::
-    global HOME
-
-    Send {Ctrl Down}cc{Ctrl Up}
-    KeyWait, LCtrl
-
-    translationFile := HOME . "\translations"
-    clipboardPlusSeparator := clipboard . "`n---`n"
-
-    FileAppend, %clipboardPlusSeparator%, %translationFile%
-return
-
 *CapsLock::
     SendEvent {Ctrl DownR}
     KeyWait, Capslock
@@ -124,10 +138,12 @@ return
     }
 return
 
-*Backspace::
-    KeyWait, Backspace
-    Send {Backspace}
-return
+#if GetKeyState("RCtrl", "P")
+    Backspace::
+        MsgBox % "Hit"
+        Send ^{Backspace}
+    return
+#if 
 
 ; Space
 *Space::
@@ -136,7 +152,8 @@ return
         SendEvent {Blind}{Space}
     }
 return
-#if GetKeyState("Space", "P") or GetKeyState("Backspace", "P")
+
+#if GetKeyState("Space", "P")
     *Tab::
         Send {LAlt DownR}
         KeyWait, Tab
@@ -216,7 +233,13 @@ return
 #,::#^Left
 #.::#^Right
 #^t::toggleTaskbar(-1)
-;Close window
+#^d::
+    WinGet, activeHwnd, ID, A
+    PinWindow(activeHwnd)
+return
+; Close
+#w::Send ^{w}
+; Quit
 #q::Send !{F4}
 
 ; Virtual desktops management
