@@ -1,22 +1,9 @@
 ; Disable keys
 *~LButton::return ; To make mouse hook work
 *~RButton::return ; To make mouse hook work
-*~MButton::
-; DetectHiddenWindows, Off
-; WinGet, id, List,,, Program Manager
-; Loop, %id%
-; {
-;     this_id := id%A_Index%
-;     WinActivate, ahk_id %this_id%
-;     WinGetClass, this_class, ahk_id %this_id%
-;     WinGetTitle, this_title, ahk_id %this_id%
-;     MsgBox, 4, , Visiting All Windows`n%A_Index% of %id%`nahk_id %this_id%`nahk_class %this_class%`n%this_title%`n`nContinue?
-;     IfMsgBox, NO, break
-; }
-return ; To make mouse hook work
+*~MButton::return ; To make mouse hook work
 *~WheelDown::return ; To make mouse hook work
 *~WheelUp::return ; To make mouse hook work
-LCtrl::return
 Home::F13
 End::F14
 PgUp::F15
@@ -45,23 +32,7 @@ LShift up::
         RunAlfred(apps)
     }
 return 
-
 #if
-
-; ~*LShift::
-;     global apps
-;
-;     SendEvent {Blind}{LShift DownR}
-;     KeyWait, LShift
-;     SendEvent {Blind}{LShift Up}
-;     if (A_ThisHotkey = "~*LShift" and A_PriorKey = "LShift") {
-;         RunAlfred(apps)
-;     }
-; return 
-; F20::
-;     global apps
-;     RunAlfred(apps)
-; return 
 
 ; Language switch
 ~*RShift::
@@ -89,42 +60,33 @@ RShift & LShift::ToggleCaps()
         }
     }
 return
+
 #if GetKeyState("Tab", "P")
+    ; Non-disappearing AltTab + Win
+    ; LAlt::Send ^!{Tab}
     ; Layout set up
     LWin::#z
     j::
         if WinActive("ahk_exe idea64.exe")
-            Send {Alt Down}{Left}{Alt Up}
-        else if GetKeyState("Space", "P")
-            SendWithCorrectModifiers("Down")
+            Send !{Left}
         else ; Default
             Send ^+{Tab}
     return
     k::
         if WinActive("ahk_exe idea64.exe")
-            Send {Alt Down}{Right}{Alt Up}
-        else if GetKeyState("Space", "P")
-            SendWithCorrectModifiers("Up")
+            Send !{Right}
         else ; Default
             Send ^{Tab}
     return
     i:: ; Navigation history backward
-        if WinActive("ahk_exe idea64.exe")
-            Send {Ctrl Down}{Alt Down}{Left}{Alt Up}{Ctrl Up}
-        else ; Default
-            Send {Alt Down}{Right}{Alt Up}
+        Send ^!{Right}
     return
     o:: ; Navigation history forward
-        if WinActive("ahk_exe idea64.exe")
-            Send {Ctrl Down}{Alt Down}{Right}{Alt Up}{Ctrl Up}
-        else ; Default
-            Send {Alt Down}{Left}{Alt Up}
+        Send ^!{Left}
     return
-
-    ; Non-disappearing AltTab + Win
-    LAlt::Send ^!{Tab}
 #if
 
+LCtrl::LCtrl ; to enable hook
 *CapsLock::
     SendEvent {Ctrl DownR}
     KeyWait, Capslock
@@ -224,18 +186,43 @@ return
 
 #InputLevel 0
 ; Win-hotkeys
-#h::#Left
-#j::#Down
-#k::#Up
-#l::#Right
+; #h::#Left
+; #j::#Down
+#j::NextWindow()
+; #k::#Up
+#k::PrevWindow()
+; #l::#Right
 ;#t::#t ; Powertoys pin window on-top
-#m::Send ^+{Esc} ; Task manager
-#,::#^Left
-#.::#^Right
-#^t::toggleTaskbar(-1)
+; #m::Send ^+{Esc} ; Task manager
+; #,::#^Left
+; #.::#^Right
+#^t::
+    toggleTaskbar(-1)
+    PlayErrorSound()
+return
 #^d::
     WinGet, activeHwnd, ID, A
     PinWindow(activeHwnd)
+    PlayErrorSound()
+return
+
+#/::
+    if WinActive("ChatGPT ahk_exe WindowsTerminal.exe") {
+        Send #{``}
+        return
+    }
+    Send #{``}
+    Sleep 100
+    Send {Esc}ddddi`,s{Space}
+return
++#/::
+    if WinActive("ChatGPT ahk_exe WindowsTerminal.exe") {
+        Send {Enter}'@{Enter}
+        return
+    }
+    Send #{``}
+    Sleep 100
+    Send {Esc}ddddi`,sm{Space}
 return
 ; Close
 #w::Send ^{w}

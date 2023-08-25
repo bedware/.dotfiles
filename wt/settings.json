@@ -45,6 +45,10 @@
             "keys": "alt+minus"
         },
         {
+            "command": "openTabRenamer",
+            "keys": "alt+r"
+        },
+        {
             "command": 
             {
                 "action": "resizePane",
@@ -53,20 +57,16 @@
             "keys": "alt+shift+j"
         },
         {
-            "command": "openTabRenamer",
-            "keys": "alt+r"
-        },
-        {
-            "command": "find",
-            "keys": "ctrl+/"
-        },
-        {
             "command": 
             {
                 "action": "resizePane",
                 "direction": "left"
             },
             "keys": "alt+shift+h"
+        },
+        {
+            "command": "find",
+            "keys": "ctrl+/"
         },
         {
             "command": 
@@ -147,6 +147,12 @@
     "initialCols": 131,
     "initialRows": 42,
     "launchMode": "fullscreen",
+    "newTabMenu": 
+    [
+        {
+            "type": "remainingProfiles"
+        }
+    ],
     "profiles": 
     {
         "defaults": 
@@ -158,7 +164,7 @@
             "font": 
             {
                 "face": "CaskaydiaCove NFM",
-                "size": 14.0
+                "size": 16.0
             },
             "opacity": 95,
             "padding": "0",
@@ -187,10 +193,12 @@
                 "name": "Command Prompt"
             },
             {
+                "antialiasingMode": "grayscale",
                 "guid": "{17bf3de4-5353-5709-bcf9-835bd952a95e}",
                 "hidden": false,
                 "name": "Ubuntu",
-                "source": "Windows.Terminal.Wsl"
+                "source": "Windows.Terminal.Wsl",
+                "useAtlasEngine": false
             },
             {
                 "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
@@ -577,6 +585,50 @@
             "yellow": "#F6C177"
         }
     ],
-    "themes": [],
+    "themes": 
+    [
+        {
+            "name": "legacyDark",
+            "tab": 
+            {
+                "background": null,
+                "showCloseButton": "always",
+                "unfocusedBackground": null
+            },
+            "window": 
+            {
+                "applicationTheme": "dark",
+                "useMica": false
+            }
+        },
+        {
+            "name": "legacyLight",
+            "tab": 
+            {
+                "background": null,
+                "showCloseButton": "always",
+                "unfocusedBackground": null
+            },
+            "window": 
+            {
+                "applicationTheme": "light",
+                "useMica": false
+            }
+        },
+        {
+            "name": "legacySystem",
+            "tab": 
+            {
+                "background": null,
+                "showCloseButton": "always",
+                "unfocusedBackground": null
+            },
+            "window": 
+            {
+                "applicationTheme": "system",
+                "useMica": false
+            }
+        }
+    ],
     "windowingBehavior": "useNew"
 }

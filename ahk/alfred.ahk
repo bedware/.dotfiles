@@ -60,12 +60,24 @@ getShortuctsByComa(apps) {
 }
 
 executeInput(apps, userInput) {
-    if (IsObject(apps[(userInput)])) { ; Otherwise, a match was found.
-        app := apps[(userInput)]
+    global desktops
+    if (IsObject(apps[userInput])) { ; Otherwise, a match was found.
+        app := apps[userInput]
         if (app.funcName != "") {
             Func(app.funcName).Call()
         } else if (app.selector != "") {
             RunIfNotExist(app.selector, app.path)
+            OutputDebug % "executed"
+            if (app.desktop != "") {
+                OutputDebug % "executed inside"
+                num := IndexOf(app.desktop, desktops)
+                current := GetCurrentDesktopNumber()
+                OutputDebug % "app's desktop:" num
+                OutputDebug % "current desktop:" current
+                if (num != current) {
+                    MoveActiveWinAndGoToVD(num)
+                }
+            }
         } else {
             Run % app.path
         }

@@ -28,6 +28,12 @@ GetDesktopCount() {
     count := DllCall(GetDesktopCountProc, "Int")
     return count
 }
+GetCurrentDesktopNumber() {
+    global GetCurrentDesktopNumberProc
+    current := DllCall(GetCurrentDesktopNumberProc, "Int")
+    ; starting from 0, but arrays in ahk start from 1. thats why +1
+    return current + 1
+}
 MoveCurrentWindowToDesktop(desktopNumber) {
     global MoveWindowToDesktopNumberProc, GoToDesktopNumberProc
     WinGet, activeHwnd, ID, A

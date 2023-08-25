@@ -4,7 +4,7 @@
 $env:ChocolateyToolsLocation = "$env:LOCALAPPDATA\tools"
 $env:EDITOR = 'nvim'
 $env:DOTFILES = "$env:HOME\.dotfiles"
-$env:XDG_CONFIG_HOME = "$env:HOME\.config"
+# $env:XDG_CONFIG_HOME = "$env:HOME\.config"
 $fzfParam = "--path-separator / --hidden " + `
 "--exclude 'AppData' " + `
 "--exclude '.m2' " + `
@@ -44,6 +44,7 @@ if (Test-Path($ChocolateyProfile)) {
 Import-Module "$env:LOCALAPPDATA\tools\poshgit\dahlbyk-posh-git-9bda399\src\posh-git.psd1"
 New-Alias -Name 'Set-PoshContext' -Value 'Set-EnvVar' -Scope Global -Force
 oh-my-posh init pwsh --config "$env:LOCALAPPDATA\Programs\oh-my-posh\themes\bedware.omp.json" | Invoke-Expression
+. "$env:DOTFILES\pwsh\Scripts\nvim-switcher.ps1"
 
 # Configuring
 
