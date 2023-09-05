@@ -4,17 +4,17 @@ return require('packer').startup(function(use)
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
     use("folke/zen-mode.nvim")
-    use("github/copilot.vim")
+    -- use("github/copilot.vim")
     use("eandrju/cellular-automaton.nvim")
     use("laytan/cloak.nvim")
     use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
     use("nvim-treesitter/nvim-treesitter-context");
-    use("nvim-treesitter/playground")
+    -- use("nvim-treesitter/playground")
     use('theprimeagen/harpoon')
-    use("theprimeagen/refactoring.nvim")
     use('mbbill/undotree')
     use('tpope/vim-fugitive')
     use('tpope/vim-surround')
+    use('stevearc/vim-arduino')
     use({ 'rose-pine/neovim', as = 'rose-pine' })
     vim.cmd('colorscheme rose-pine')
     use {

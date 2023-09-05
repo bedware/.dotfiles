@@ -28,6 +28,8 @@ RunAlfred(apps) {
     {
         PlayErrorSound()
         hideAlfred()
+        ; MsgBox, Endkey pressed!
+        Sleep 100
         return
     }
 
@@ -40,7 +42,7 @@ showAlfred() {
     ; TaskBar overlap
     Gui, -Caption -Border -Toolwindow +AlwaysOnTop +DPIScale
     Gui, Margin, 0, 0
-    Gui, Add, ActiveX, w2000 h60, % "mshtml:<div style='border-bottom: 120px solid rgb(255, 222, 93); height: 0; margin: -10px 0 0 -10px;'></div>"
+    Gui, Add, ActiveX, w2000 h48, % "mshtml:<div style='border-bottom: 120px solid rgb(255, 222, 93); height: 0; margin: -10px 0 0 -10px;'></div>"
     Gui, Show, xCenter y2076 NoActivate
 }
 
@@ -58,12 +60,24 @@ getShortuctsByComa(apps) {
 }
 
 executeInput(apps, userInput) {
-    if (IsObject(apps[(userInput)])) { ; Otherwise, a match was found.
-        app := apps[(userInput)]
+    global desktops
+    if (IsObject(apps[userInput])) { ; Otherwise, a match was found.
+        app := apps[userInput]
         if (app.funcName != "") {
             Func(app.funcName).Call()
         } else if (app.selector != "") {
             RunIfNotExist(app.selector, app.path)
+            OutputDebug % "executed"
+            if (app.desktop != "") {
+                OutputDebug % "executed inside"
+                num := IndexOf(app.desktop, desktops)
+                current := GetCurrentDesktopNumber()
+                OutputDebug % "app's desktop:" num
+                OutputDebug % "current desktop:" current
+                if (num != current) {
+                    MoveActiveWinAndGoToVD(num)
+                }
+            }
         } else {
             Run % app.path
         }

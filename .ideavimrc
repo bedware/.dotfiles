@@ -5,6 +5,7 @@ set number
 set relativenumber
 set ignorecase
 set smartcase
+set incsearch
 
 " IDEA Set Handlers
 sethandler a:vim
@@ -16,12 +17,12 @@ sethandler <C-P> a:ide
 sethandler <C-Q> n-v:ide i:vim
 sethandler <C-N> n-v:ide
 sethandler <C-M> a:ide
-sethandler <A-W> a:vim
+" sethandler <A-W> a:vim
 sethandler <A-D> a:ide
 
 " Recommend to set Forward/Back hotkeys for these
-sethandler <C-I> a:ide
-sethandler <C-O> a:ide
+" sethandler <C-I> a:ide
+" sethandler <C-O> a:ide
 
 " Remap leader
 let mapleader = " "
@@ -53,6 +54,10 @@ nnoremap g; :action VcsShowNextChangeMarker<CR>
 nnoremap g, :action VcsShowPrevChangeMarker<CR>
 " nnoremap g, :action PreviousDiff<CR>
 
+nnoremap fg :action FindInPath<CR>
+nnoremap fc :action GotoClass<CR>
+nnoremap ff :action GotoFile<CR>
+nnoremap fa :action SearchEverywhere<CR>
 " Navigation (GO TO ...)
 nnoremap gd :action GotoDeclaration<CR>
 " nnoremap ge `.<CR>
@@ -65,6 +70,14 @@ nnoremap gu :action FindUsages<CR>
 nnoremap gf :action MethodDown<CR>:action MethodUp<CR>
 nnoremap gh :1<CR>:action MethodDown<CR>
 
+" Back/Forward history
+nnoremap <C-O> :action Back<CR>
+nnoremap <C-I> :action Forward<CR>
+" Remap Override & Implement methods
+nnoremap <A-O> :action OverrideMethods<CR>
+nnoremap <A-I> :action ImplementMethods<CR>
+inoremap <A-O> :action OverrideMethods<CR>
+inoremap <A-I> :action ImplementMethods<CR>
 
 " Run & Debug
 nnoremap ,v :action ChooseRunConfiguration<CR>
@@ -93,7 +106,7 @@ nnoremap <leader>vu :action Vcs.UpdateProject<CR>
 nnoremap <leader>vs :action Vcs.ShowHistoryForBlock<CR>
 vnoremap <leader>vs :action Vcs.ShowHistoryForBlock<CR>
 nnoremap <leader>vcb :action Git.CompareWithBranch<CR>
-nnoremap <leader>vcc :action Majera.CodeReview.GitLab.LeaveCommentForLineAction<CR>
+" nnoremap <leader>vcc :action Majera.CodeReview.GitLab.LeaveCommentForLineAction<CR>
 nnoremap <leader>vcs :action Compare.Selected<CR>
 nnoremap <leader>vcr :action Show.Current.Revision<CR>
 nnoremap <leader>vv :action Git.Branches<CR>
@@ -102,7 +115,9 @@ nnoremap <leader>vf :action Git.Fetch<CR>
 nnoremap <leader>vp :action Vcs.Push<CR>
 
 " Code
-nnoremap <leader>f :action ReformatCode<CR>
+" nnoremap <leader>f :action ReformatCode<CR>
+nnoremap == :action ReformatCode<CR>
+vnoremap == :action ReformatCode<CR>
 nnoremap <leader>o :action OptimizeImports<CR>
 nnoremap <leader>h :action HighlightUsagesInFile<CR>
 vnoremap <leader>h :action HighlightUsagesInFile<CR>
@@ -138,11 +153,12 @@ nnoremap <leader>im :action ExtractMethod<CR>
 vnoremap <leader>im :action ExtractMethod<CR>
 
 " External
-nnoremap <leader>ev :action VimActions<CR>
+nnoremap <leader>vis :action VimActions<CR>
+nnoremap <leader>vir :action IdeaVim.ReloadVimRc.reload<CR>
 " Building tools
 nnoremap <leader>edu :action ExternalSystem.ProjectRefreshAction<CR>
 
-" Books
+" Bookmarks
 nnoremap <leader>bb :action ToggleBookmark<CR>
 nnoremap <leader>bl :action ShowBookmarks<CR>
 
@@ -159,10 +175,10 @@ nnoremap <leader>td :action tasks.show.task.description<CR>
 nnoremap <leader>tb :action tasks.open.in.browser<CR>
 
 " Show
-"nnoremap <leader>q :action QuickImplementations<CR>
-nnoremap <leader>a :action GotoAction<CR>
+nnoremap <leader>q :action QuickImplementations<CR>
+" nnoremap <leader>a :action GotoAction<CR>
 nnoremap <leader>sa :action GotoAction<CR>
-vnoremap <leader>sa :action GotoAction<CR>
+"vnoremap <leader>sa :action GotoAction<CR>
 "nnoremap <leader>sc :action EditorContextInfo<CR>
 nnoremap <leader>sbj :action ByteCodeViewer<CR>
 nnoremap <leader>sbk :action ActivateKotlinBytecodeToolWindow<CR>
@@ -188,8 +204,12 @@ nnoremap <leader>wsc :action ChangeSplitOrientation<CR>
 nnoremap <leader>wo :action MoveEditorToOppositeTabGroup<CR>
 nnoremap <leader>wh :action HideAllWindows<CR>
 nnoremap <leader>wd :action RestoreDefaultLayout<CR>
+nnoremap <leader>zz :action ToggleZenMode<CR>
+nnoremap <leader>zp :action TogglePresentationMode<CR>
+nnoremap <leader>zf :action ToggleFullScreen<CR>
+
 " Tabs Close
-" nnoremap <leader>x :action CloseContent<CR>
+nnoremap <A-w> :action CloseContent<CR>
 nnoremap <leader>X :action ReopenClosedTab<CR>
 nnoremap <leader>wca :action CloseAllEditors<CR>
 nnoremap <leader>wco :action CloseAllEditorsButActive<CR>
@@ -199,7 +219,20 @@ nnoremap <leader>wcr :action CloseAllToTheRight<CR>
 " nnoremap <S-j> :action PreviousTab<CR>
 " nnoremap <S-k> :action NextTab<CR>
 " Window Go
-nnoremap <leader><leader><leader> :action Switcher<CR>
+" nnoremap <leader><leader><leader> :action Switcher<CR>
+nnoremap <leader>a :action AddToHarpoon<CR>
+nnoremap <leader>' :action ShowHarpoon<CR>
+nnoremap <C-h> :action GotoHarpoon1<CR>
+nnoremap <C-j> :action GotoHarpoon2<CR>
+nnoremap <C-k> :action GotoHarpoon3<CR>
+nnoremap <C-l> :action GotoHarpoon4<CR>
+nnoremap <C-;> :action GotoHarpoon5<CR>
+nnoremap <leader><C-h> :action SetHarpoon1<CR>
+nnoremap <leader><C-j> :action SetHarpoon2<CR>
+nnoremap <leader><C-k> :action SetHarpoon3<CR>
+nnoremap <leader><C-l> :action SetHarpoon4<CR>
+nnoremap <leader><C-;> :action SetHarpoon5<CR>
+
 nnoremap <leader><leader>p :action ActivateProjectToolWindow<CR>
 nnoremap <leader><leader>2 :action ActivateProblemsViewToolWindow<CR>
 nnoremap <leader><leader>c :action ActivateCommitToolWindow<CR>
@@ -210,6 +243,7 @@ nnoremap <leader><leader>r :action ActivateRunToolWindow<CR>
 nnoremap <leader><leader>d :action ActivateDatabaseToolWindow<CR>
 nnoremap <leader><leader>D :action ActivateDependenciesToolWindow<CR>
 nnoremap <leader><leader>s :action ActivateServicesToolWindow<CR>
+nnoremap <leader><leader>S :action ActivateStructureToolWindow<CR>
 nnoremap <leader><leader>t :action ActivateTerminalToolWindow<CR>
 nnoremap <leader><leader>P :action ActivateProfilerToolWindow<CR>
 nnoremap <leader><leader>f :action ActivateFindToolWindow<CR>
@@ -221,8 +255,8 @@ inoremap <C-j> <Esc>:m +1<CR>gi
 inoremap <C-k> <Esc>:m -2<CR>gi
 
 " Swapping statements [Normal mode]
-nnoremap <C-j> :action MoveStatementDown<CR>
-nnoremap <C-k> :action MoveStatementUp<CR>
+" nnoremap <C-j> :action MoveStatementDown<CR>
+" nnoremap <C-k> :action MoveStatementUp<CR>
 
 " System clipboard
 vnoremap <leader>y "+y

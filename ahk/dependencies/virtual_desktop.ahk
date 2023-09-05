@@ -13,6 +13,7 @@ IsWindowOnCurrentVirtualDesktopProc := DllCall("GetProcAddress", "Ptr", hVirtual
 IsWindowOnDesktopNumberProc := DllCall("GetProcAddress", "Ptr", hVirtualDesktopAccessor, "AStr", "IsWindowOnDesktopNumber", "Ptr")
 MoveWindowToDesktopNumberProc := DllCall("GetProcAddress", "Ptr", hVirtualDesktopAccessor, "AStr", "MoveWindowToDesktopNumber", "Ptr")
 IsPinnedWindowProc := DllCall("GetProcAddress", "Ptr", hVirtualDesktopAccessor, "AStr", "IsPinnedWindow", "Ptr")
+PinWindowProc := DllCall("GetProcAddress", "Ptr", hVirtualDesktopAccessor, "AStr", "PinWindow", "Ptr")
 GetDesktopNameProc := DllCall("GetProcAddress", "Ptr", hVirtualDesktopAccessor, "AStr", "GetDesktopName", "Ptr")
 SetDesktopNameProc := DllCall("GetProcAddress", "Ptr", hVirtualDesktopAccessor, "AStr", "SetDesktopName", "Ptr")
 CreateDesktopProc := DllCall("GetProcAddress", "Ptr", hVirtualDesktopAccessor, "AStr", "CreateDesktop", "Ptr")
@@ -27,10 +28,20 @@ GetDesktopCount() {
     count := DllCall(GetDesktopCountProc, "Int")
     return count
 }
+GetCurrentDesktopNumber() {
+    global GetCurrentDesktopNumberProc
+    current := DllCall(GetCurrentDesktopNumberProc, "Int")
+    ; starting from 0, but arrays in ahk start from 1. thats why +1
+    return current + 1
+}
 MoveCurrentWindowToDesktop(desktopNumber) {
     global MoveWindowToDesktopNumberProc, GoToDesktopNumberProc
     WinGet, activeHwnd, ID, A
     DllCall(MoveWindowToDesktopNumberProc, "Ptr", activeHwnd, "Int", desktopNumber, "Int")
+}
+PinWindow(hwnd) {
+    global PinWindowProc
+    return DllCall(PinWindowProc, UInt, hwnd)
 }
 MoveCurrentWindowToDesktopAndGoTo(desktopNumber) {
     global MoveWindowToDesktopNumberProc, GoToDesktopNumberProc
@@ -72,7 +83,7 @@ GoToDesktopNumber(num) {
 MoveOrGotoDesktopNumber(num) {
     ; If user is holding down Mouse left button, move the current window also
     if (GetKeyState("LButton")) {
-        MoveCurrentWindowToDesktop(num)
+        MoveCurrentWindowToDesktopAndGoTo(num)
     } else {
         GoToDesktopNumber(num)
     }
