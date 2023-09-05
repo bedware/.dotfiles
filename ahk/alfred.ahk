@@ -66,6 +66,7 @@ executeInput(apps, userInput) {
         if (app.funcName != "") {
             Func(app.funcName).Call()
         } else if (app.selector != "") {
+            OutputDebug % "Im going to run " app.path " on " app.selector
             RunIfNotExist(app.selector, app.path)
             OutputDebug % "executed"
             if (app.desktop != "") {
@@ -79,6 +80,7 @@ executeInput(apps, userInput) {
                 }
             }
         } else {
+            OutputDebug % "Im going to run the app without selector"
             Run % app.path
         }
     }

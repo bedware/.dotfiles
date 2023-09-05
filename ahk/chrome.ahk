@@ -1,9 +1,9 @@
 FocusOrRunWorkChromeProfile() {
-    RunIfNotExistChromeProfile("Will", """C:\Program Files\Google\Chrome\Application\chrome.exe"" --profile-directory=""Default""")
+    RunIfNotExistChromeProfile("Dmitry Surin", """C:\Program Files\Google\Chrome\Application\chrome.exe"" --profile-directory=""Default""")
 }
 
 FocusOrRunPersonalChromeProfile() {
-    RunIfNotExistChromeProfile("Power", """C:\Program Files\Google\Chrome\Application\chrome.exe"" --profile-directory=""Profile 4""")
+    RunIfNotExistChromeProfile("bedware", """C:\Program Files\Google\Chrome\Application\chrome.exe"" --profile-directory=""Profile 5""")
 }
 
 RunIfNotExistChromeProfile(profile, executablePath) {

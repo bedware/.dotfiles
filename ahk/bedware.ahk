@@ -8,6 +8,7 @@
 SetWorkingDir %A_ScriptDir% ; Ensures a consistent starting directory
 SendMode Input ; Recommended for new scripts due to its superior speed and reliability
 SetCapslockState, AlwaysOff
+SetTitleMatchMode, 2
 
 ; Constants
 EnvGet, HOME, UserProfile
@@ -57,6 +58,7 @@ apps[".o"] := { selector: "Oh-my-shell Settings ahk_exe WindowsTerminal.exe", pa
 apps[".t"] := { selector: "Windows Terminal Settings ahk_exe WindowsTerminal.exe", path: "wt new-tab --title ""Windows Terminal Settings"" pwsh -nop -c ""nvim -p $env:USERPROFILE\.dotfiles\wt\settings.json 'C:\Program Files\WindowsApps\Microsoft.WindowsTerminal_1.16.10262.0_x64__8wekyb3d8bbwe\defaults.json'""" }
 apps[".v"] := { selector: "Neovim Settings ahk_exe WindowsTerminal.exe", path: "wt new-tab --title ""Neovim Settings"" pwsh -nop -c ""Set-Location $env:USERPROFILE\.dotfiles\nvim && nvim . """ }
 apps["tr"] := { path: "C:\Program Files (x86)\ABBYY Lingvo x6\Lingvo.exe" }
+apps["ytr"] := { selector: "ahk_exe firefox.exe", path: """C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Firefox.lnk"" https://translate.yandex.ru" } 
 apps["dtr"] := { selector: "ahk_exe DeepL.exe", path: HOME . "\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\DeepL.lnk" }
 apps["adbg"] := { selector: "ahk_exe dbgview64.exe", path: HOME . "\OneDrive\Soft\DebugView\dbgview64.exe" }
 apps["ahelp"] := { selector: "AutoHotkey Help", path: AHK_FOLDER . "\AutoHotkey.chm" }

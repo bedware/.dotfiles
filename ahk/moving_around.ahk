@@ -87,6 +87,7 @@ feedWindowList() {
         if (filteredApps(obj) or !onThisMonitor(activeMonitor, obj)) {
             ; filtered.Push(hwnd)
         } else {
+            ; OutputDebug % "Window title: " obj.title ", class: " obj.class ", process:" obj.process
             tempArr.Push(hwnd)
         }
     }
@@ -175,9 +176,13 @@ PrevWindow() {
 filteredApps(obj) {
     if obj.title == ""
         return true
+    if obj.title == "PopupHost"
+        return true
     if obj.x == 0 and obj.y == 0 and obj.width == 0 and obj.height == 0
         return true
     if obj.class == "Progman"
+        return true
+    if obj.class == "Xaml_WindowedPopupClass"
         return true
     if obj.class == "WorkerW"
         return true

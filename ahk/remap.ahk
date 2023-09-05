@@ -145,6 +145,7 @@ return
 
     ; Context menu
     m::Send {AppsKey}
+    '::Send {Enter}
     ; Other
     `;::NumpadMult
 
@@ -189,8 +190,10 @@ return
 ; #h::#Left
 ; #j::#Down
 #j::NextWindow()
+#f::NextWindow()
 ; #k::#Up
 #k::PrevWindow()
+#b::PrevWindow()
 ; #l::#Right
 ;#t::#t ; Powertoys pin window on-top
 ; #m::Send ^+{Esc} ; Task manager

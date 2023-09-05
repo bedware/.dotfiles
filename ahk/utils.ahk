@@ -25,17 +25,21 @@ RunIfProcessNotExist(exeName, path) {
 }
 
 RunIfNotExist(selector, executablePath) {
-    if WinExist(selector)
+    OutputDebug % "Trying to activate " selector 
+    if WinExist(selector) {
+        OutputDebug % "Activating " selector 
         WinActivate
-    else {
+    } else {
         Run, %executablePath%
         WinWait, %selector%,, 10
         if ErrorLevel
         {
             PlayErrorSound()
         }
-        if WinExist(selector)
+        if WinExist(selector) {
+            OutputDebug % "Activating after run " selector 
             WinActivate
+        }
     }
 }
 

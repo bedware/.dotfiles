@@ -1,7 +1,7 @@
 [Console]::InputEncoding = [Console]::OutputEncoding = [System.Text.UTF8Encoding]::new()
 
 # Environment variables
-$env:ChocolateyToolsLocation = "$env:LOCALAPPDATA\tools"
+# $env:ChocolateyToolsLocation = "$env:LOCALAPPDATA\tools"
 $env:EDITOR = 'nvim'
 $env:DOTFILES = "$env:HOME\.dotfiles"
 # $env:XDG_CONFIG_HOME = "$env:HOME\.config"
@@ -31,19 +31,22 @@ function OnViModeChange {
         Write-Host -NoNewLine "`e[6 q"
     }
 }
+function CopyPathToClipboard {
+    Get-Location | Set-Clipboard
+}
 
 # Imports
 
-Import-Module PSProfiler
-$ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
-if (Test-Path($ChocolateyProfile)) {
-    Import-Module "$ChocolateyProfile"
-    Update-SessionEnvironment
-}
+# Import-Module PSProfiler
+# $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
+# if (Test-Path($ChocolateyProfile)) {
+#     Import-Module "$ChocolateyProfile"
+#     Update-SessionEnvironment
+# }
  
 Import-Module "$env:LOCALAPPDATA\tools\poshgit\dahlbyk-posh-git-9bda399\src\posh-git.psd1"
 New-Alias -Name 'Set-PoshContext' -Value 'Set-EnvVar' -Scope Global -Force
-oh-my-posh init pwsh --config "$env:LOCALAPPDATA\Programs\oh-my-posh\themes\bedware.omp.json" | Invoke-Expression
+# oh-my-posh init pwsh --config "$env:LOCALAPPDATA\Programs\oh-my-posh\themes\bedware.omp.json" | Invoke-Expression
 . "$env:DOTFILES\pwsh\Scripts\nvim-switcher.ps1"
 
 # Configuring
@@ -61,6 +64,7 @@ Set-PsFzfOption `
 . "$env:DOTFILES\pwsh\Scripts\alias_autocomplete.ps1"
 New-Alias -Name .f -Value 'Set-Location $env:DOTFILES'
 New-Alias -Name .fe -Value 'Set-Location $env:DOTFILES && nvim .'
+New-Alias -Name .p -Value CopyPathToClipboard
 #Set-Alias -Name gst -Value "git status"
 # Remove-Alias -Force -ErrorAction SilentlyContinue -Name gc
 # Set-Alias -Name gc -Value "git commit"
