@@ -7,6 +7,7 @@
     - node
 
 - name: Install n
+  become: yes
   npm: 
     name: n
     global: true
@@ -14,6 +15,7 @@
     - node
 
 - name: Install node 14
+  become: yes
   shell: n 14
   tags:
     - node
@@ -23,7 +25,7 @@
   snap:
     name: zig
     classic: yes
-    beta: yes
+    channel: beta
   tags:
     - zig
     - nvim

@@ -10,10 +10,6 @@
         - always
 
   tasks:
-    - name: Install SSH keys
-      import_tasks: tasks/ssh.yml
-      tags:
-        - ssh
     - name: Install build tools
       import_tasks: tasks/build_tools.yml
       tags:
@@ -30,10 +26,6 @@
       import_tasks: tasks/nvim.yml
       tags:
         - nvim
-    - name: Install node
-      import_tasks: tasks/node.yml
-      tags:
-        - node
     - name: Install pwsh
       import_tasks: tasks/pwsh.yml
       tags:
