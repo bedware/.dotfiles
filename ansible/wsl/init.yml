@@ -10,10 +10,6 @@
         - always
 
   tasks:
-    - name: Install SSH keys
-      import_tasks: tasks/ssh.yml
-      tags:
-        - ssh
     - name: Install build tools
       import_tasks: tasks/build_tools.yml
       tags:
