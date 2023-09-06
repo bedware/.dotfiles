@@ -30,10 +30,6 @@
       import_tasks: tasks/nvim.yml
       tags:
         - nvim
-    - name: Install node
-      import_tasks: tasks/node.yml
-      tags:
-        - node
     - name: Install pwsh
       import_tasks: tasks/pwsh.yml
       tags:
