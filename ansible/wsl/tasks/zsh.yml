@@ -1,0 +1,36 @@
+---
+- name: Install zsh
+  apt: name=zsh
+
+- name: Find path and remember
+  command: which zsh
+  register: zsh_path
+  changed_when: false
+  failed_when: false
+
+- name: Print zsh path
+  debug:
+    var: zsh_path.stdout
+
+- name: Change shell
+  user:
+    name: "{{ lookup('env', 'USER') }}"
+    shell: "{{ zsh_path.stdout }}"
+
+- name: Install ohmyzsh
+  become: false
+  shell: curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+
+- name: Install autosuggestions
+  become: false
+  ansible.builtin.git:
+    repo: https://github.com/zsh-users/zsh-autosuggestions
+    dest: ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+
+- name: Add zsh-autosuggestions to .zshrc
+  become: false
+  ansible.builtin.replace:
+    path: ~/.zshrc
+    regexp: '(plugins=\(git)(.*)\)'
+    replace: '\1\2 zsh-autosuggestions)'
+

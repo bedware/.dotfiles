@@ -1,0 +1,35 @@
+---
+- hosts: localhost
+  become: true
+  vars:
+    the_user: "{{ ansible_user_id }}"
+  pre_tasks:
+    - name: Update packages
+      apt:
+        update_cache: true
+      tags:
+        - node
+        - zsh
+    - name: Print environment variable
+      debug:
+        msg: "The value of USER is {{ lookup('env', 'USER') }}"
+    - name: Print user
+      debug:
+        var: the_user
+
+  tasks:
+    - include_tasks:
+        file: tasks/zsh.yml
+        apply:
+          tags:
+            - zsh
+      tags:
+        - zsh
+    - include_tasks:
+        file: tasks/node.yml
+        apply:
+          tags:
+            - node
+      tags:
+        - node
+
