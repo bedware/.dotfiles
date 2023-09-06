@@ -1,0 +1,29 @@
+---
+- name: Install Node
+  become: yes
+  apt:
+    name: ['nodejs', 'npm']
+  tags:
+    - node
+
+- name: Install n
+  npm: 
+    name: n
+    global: true
+  tags:
+    - node
+
+- name: Install node 14
+  shell: n 14
+  tags:
+    - node
+
+- name: Install Zig
+  become: yes
+  snap:
+    name: zig
+    classic: yes
+    beta: yes
+  tags:
+    - zig
+    - nvim
