@@ -1,10 +1,11 @@
 ---
 - hosts: localhost
-  become: true
+  become: no
   vars:
     the_user: "{{ ansible_user_id }}"
   pre_tasks:
     - name: Update packages
+      become: yes
       apt:
         update_cache: true
       tags:
@@ -18,10 +19,18 @@
         var: the_user
 
   tasks:
+    - name: Install build_tools
+      import_tasks: tasks/build_tools.yml
+      tags:
+        - build_tools
     - name: Install zsh
       import_tasks: tasks/zsh.yml
       tags:
         - zsh
+    - name: Install nvim
+      import_tasks: tasks/nvim.yml
+      tags:
+        - nvim
     - name: Install node
       import_tasks: tasks/node.yml
       tags:

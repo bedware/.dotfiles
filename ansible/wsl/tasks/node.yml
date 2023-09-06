@@ -1,5 +1,6 @@
 ---
 - name: Install Node
+  become: yes
   apt:
     name: ['nodejs', 'npm']
 

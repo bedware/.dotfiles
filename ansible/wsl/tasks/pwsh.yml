@@ -1,9 +1,11 @@
 ---
 - name: Update the list of packages
+  become: yes
   apt:
     update_cache: yes
 
 - name: Install pre-requisite packages
+  become: yes
   apt:
     name:
       - wget
@@ -17,6 +19,7 @@
     dest: /tmp/packages-microsoft-prod.deb
 
 - name: Register the Microsoft repository GPG keys
+  become: yes
   apt:
     deb: /tmp/packages-microsoft-prod.deb
 
@@ -26,10 +29,12 @@
     state: absent
 
 - name: Update the list of packages after adding packages.microsoft.com
+  become: yes
   apt:
     update_cache: yes
 
 - name: Install PowerShell
+  become: yes
   apt:
     name: powershell
     state: present
@@ -45,6 +50,7 @@
     var: pwsh_path.stdout
 
 - name: Change shell
+  become: yes
   user:
     name: "{{ lookup('env', 'USER') }}"
     shell: "{{ pwsh_path.stdout }}"
