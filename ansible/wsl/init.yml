@@ -18,18 +18,15 @@
         var: the_user
 
   tasks:
-    - include_tasks:
-        file: tasks/zsh.yml
-        apply:
-          tags:
-            - zsh
+    - name: Install zsh
+      import_tasks: tasks/zsh.yml
       tags:
         - zsh
-    - include_tasks:
-        file: tasks/node.yml
-        apply:
-          tags:
-            - node
+    - name: Install node
+      import_tasks: tasks/node.yml
       tags:
         - node
-
+    - name: Install pwsh
+      import_tasks: tasks/pwsh.yml
+      tags:
+        - pwsh

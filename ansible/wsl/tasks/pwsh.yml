@@ -1,0 +1,50 @@
+---
+- name: Update the list of packages
+  apt:
+    update_cache: yes
+
+- name: Install pre-requisite packages
+  apt:
+    name:
+      - wget
+      - apt-transport-https
+      - software-properties-common
+    state: present
+
+- name: Download the Microsoft repository GPG keys
+  get_url:
+    url: "https://packages.microsoft.com/config/ubuntu/{{ ansible_distribution_version }}/packages-microsoft-prod.deb"
+    dest: /tmp/packages-microsoft-prod.deb
+
+- name: Register the Microsoft repository GPG keys
+  apt:
+    deb: /tmp/packages-microsoft-prod.deb
+
+- name: Delete the Microsoft repository GPG keys file
+  file:
+    path: /tmp/packages-microsoft-prod.deb
+    state: absent
+
+- name: Update the list of packages after adding packages.microsoft.com
+  apt:
+    update_cache: yes
+
+- name: Install PowerShell
+  apt:
+    name: powershell
+    state: present
+
+- name: Find path and remember
+  command: which pwsh
+  register: pwsh_path
+  changed_when: false
+  failed_when: false
+
+- name: Print pwsh path
+  debug:
+    var: pwsh_path.stdout
+
+- name: Change shell
+  user:
+    name: "{{ lookup('env', 'USER') }}"
+    shell: "{{ pwsh_path.stdout }}"
