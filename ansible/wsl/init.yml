@@ -1,28 +1,27 @@
 ---
 - hosts: localhost
   become: no
-  vars:
-    the_user: "{{ ansible_user_id }}"
   pre_tasks:
     - name: Update packages
       become: yes
       apt:
         update_cache: true
       tags:
-        - node
-        - zsh
-    - name: Print environment variable
-      debug:
-        msg: "The value of USER is {{ lookup('env', 'USER') }}"
-    - name: Print user
-      debug:
-        var: the_user
+        - always
 
   tasks:
-    - name: Install build_tools
+    - name: Install SSH keys
+      import_tasks: tasks/ssh.yml
+      tags:
+        - ssh
+    - name: Install build tools
       import_tasks: tasks/build_tools.yml
       tags:
         - build_tools
+    - name: Install programming languages
+      import_tasks: tasks/programming_languages.yml
+      tags:
+        - programming_languages
     - name: Install zsh
       import_tasks: tasks/zsh.yml
       tags:

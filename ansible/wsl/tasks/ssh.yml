@@ -1,0 +1,4 @@
+- name: Clone ssh keys
+  ansible.builtin.git:
+    repo: 'git@github.com:bedware/.ssh.git'
+    dest: "~/.ssh"
