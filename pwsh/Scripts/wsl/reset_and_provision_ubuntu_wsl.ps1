@@ -4,10 +4,10 @@ $sw = [Diagnostics.Stopwatch]::StartNew()
 
 $user = "bedware"
 ./reset_ubuntu_wsl.ps1 $user $env:PASS
-Write-Host "Preparing for provioning"
+Write-Host "Preparing for proviosioning"
 $ubuntu = wsl -l | ForEach-Object { $_ -replace "`0", "" } |  Select-String -Pattern "ubuntu" | Select-Object -First 1
 wsl -d $ubuntu --cd ~ -- git clone https://github.com/bedware/.dotfiles.git
-Write-Host "dotfiles successfylly cloned to WSL"
+Write-Host "dotfiles successfully cloned to WSL"
 # Copy-Item -Recurse "$env:DOTFILES/ansible/wsl" "\\wsl.localhost\Ubuntu-22.04\home\$user"
 # Write-Host "Copying SSH-keys"
 # Copy-Item -Recurse "$env:HOME/.ssh" "\\wsl.localhost\Ubuntu-22.04\home\$user"
