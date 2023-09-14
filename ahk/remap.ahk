@@ -184,21 +184,17 @@ return
     !h::Send ^l@history{Space} ; Search in history
     !b::Send ^l@bookmarks{Space} ; Search in Bookmarks 
 #if
+#if WinActive("ahk_exe TOTALCMD64.EXE")
+    !g::Send {Home}{F2}
+    !p::Send ^{F12}
+#if
 
 #InputLevel 0
 ; Win-hotkeys
-; #h::#Left
-; #j::#Down
 #j::NextWindow()
 #f::NextWindow()
-; #k::#Up
 #k::PrevWindow()
 #b::PrevWindow()
-; #l::#Right
-;#t::#t ; Powertoys pin window on-top
-; #m::Send ^+{Esc} ; Task manager
-; #,::#^Left
-; #.::#^Right
 #^t::
     toggleTaskbar(-1)
     PlayErrorSound()

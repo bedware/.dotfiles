@@ -1,0 +1,9 @@
+---
+- name: Install utils
+  become: yes
+  apt: 
+    name: ["stow", "fzf", "fdfind"]
+
+- name: Link fd
+  shell: ln -s $(which fdfind) ~/.local/bin/fd 
+

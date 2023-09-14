@@ -1,2 +1,3 @@
-# General description
-This is my branch for Windows dotfiles
+# Description
+This is my dotfiles for Windows + WSL
+

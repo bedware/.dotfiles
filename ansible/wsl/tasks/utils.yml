@@ -1,4 +1,0 @@
----
-- name: Install stow
-  become: yes
-  apt: name=stow
