@@ -14,6 +14,10 @@
       import_tasks: tasks/build_tools.yml
       tags:
         - build_tools
+    - name: Install utils
+      import_tasks: tasks/utils.yml
+      tags:
+        - utils
     - name: Install programming languages
       import_tasks: tasks/programming_languages.yml
       tags:
