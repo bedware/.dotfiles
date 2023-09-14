@@ -9,7 +9,7 @@ End::F14
 PgUp::F15
 PgDn::F16
 ; Translate
-F20::
+F19::
     global HOME
 
     Send {Ctrl Down}cc{Ctrl Up}

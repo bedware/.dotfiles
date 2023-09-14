@@ -59,7 +59,3 @@ screencastProfile() {
     }
 }
 
-runWSL() {
-    Run, wt -p "Ubuntu"
-}
-
