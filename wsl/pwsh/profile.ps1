@@ -45,13 +45,15 @@ function OnViModeChange {
     }
 }
 
-# Init
+# Imports & Init
 
 Write-Host -NoNewLine "`e[6 q" # Set the cursor to a non blinking line.
 Set-PSReadLineOption -EditMode Vi -ViModeIndicator Script -ViModeChangeHandler $Function:OnViModeChange
 
 . "$env:DOTFILES/pwsh/nvim-switcher.ps1"
 . "$env:DOTFILES/pwsh/alias_autocomplete.ps1"
+
+Import-Module posh-git
  
 # Configuring
 
