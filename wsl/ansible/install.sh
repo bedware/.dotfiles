@@ -33,5 +33,5 @@ fi
 
 # Running playbook
 cd ~/.dotfiles/wsl/ansible
-ansible-playbook init.yml
+ansible-playbook init.yml --ask-become-pass
 

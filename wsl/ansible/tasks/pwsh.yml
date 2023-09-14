@@ -57,12 +57,18 @@
 
 - name: Install pwsh module - posh-git
   become: yes
-  ansible.builtin.shell: pwsh -Command "Install-Module -Name posh-git -Force"
+  ansible.builtin.shell: pwsh -Command "Install-Module -Name posh-git -Scope AllUsers -Force"
 
-- name: Install pwsh module - posh-git
+- name: Install pwsh module - PSFzf
   become: yes
-  ansible.builtin.shell: pwsh -Command "Install-Module -Name PSFzf -Force"
+  ansible.builtin.shell: pwsh -Command "Install-Module -Name PSFzf -Scope AllUsers -Force"
 
 - name: Install symlinks using pwsh
   ansible.builtin.shell: pwsh -Command "~/.dotfiles/wsl/install.ps1"
+
+- name: Run nvim packer once
+  ansible.builtin.shell: nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+
+- name: Run nvim packer twice
+  ansible.builtin.shell: nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 
