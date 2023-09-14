@@ -54,3 +54,7 @@
   user:
     name: "{{ lookup('env', 'USER') }}"
     shell: "{{ pwsh_path.stdout }}"
+
+- name: Install pwsh module - posh-git
+  ansible.builtin.shell: pwsh -Command "Install-Module -Name posh-git -Force"
+
