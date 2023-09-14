@@ -58,3 +58,6 @@
 - name: Install pwsh module - posh-git
   ansible.builtin.shell: pwsh -Command "Install-Module -Name posh-git -Force"
 
+- name: Install symlinks using pwsh
+  ansible.builtin.shell: pwsh -Command "~/.dotfiles/wsl/install.ps1"
+
