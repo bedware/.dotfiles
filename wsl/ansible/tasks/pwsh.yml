@@ -56,7 +56,12 @@
     shell: "{{ pwsh_path.stdout }}"
 
 - name: Install pwsh module - posh-git
+  become: yes
   ansible.builtin.shell: pwsh -Command "Install-Module -Name posh-git -Force"
+
+- name: Install pwsh module - posh-git
+  become: yes
+  ansible.builtin.shell: pwsh -Command "Install-Module -Name PSFzf -Force"
 
 - name: Install symlinks using pwsh
   ansible.builtin.shell: pwsh -Command "~/.dotfiles/wsl/install.ps1"
