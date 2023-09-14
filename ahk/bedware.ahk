@@ -14,7 +14,7 @@ SetTitleMatchMode, 2
 EnvGet, HOME, UserProfile
 SplitPath, A_AhkPath,, AHK_FOLDER
 
-desktops := ["Personal", "Work", "Terminal", "IDE", "Chats", "Planner", "Music", "Files", "Other"]
+desktops := ["Personal", "Work", "Dev", "Planner", "Chats", "Studio", "Music", "Files", "Other"]
 apps := {}
 ; Personal
 apps["steam"] := { desktop: "Personal", selector: "ahk_exe Steam.exe", path: "C:\Program Files (x86)\Steam\Steam.exe" }
@@ -28,19 +28,18 @@ apps["rize"] := { desktop: "Work", selector: "ahk_exe Rize.exe", path: "C:\Users
 ; apps["space"] := { desktop: "Work", selector: "ahk_exe spacedeskConsole.exe", path: "C:\Windows\System32\spacedeskConsole.exe" }
 apps["subl"] := { desktop: "Work", selector: "ahk_exe sublime_text.exe", path: "C:\Program Files\Sublime Text\sublime_text.exe" }
 apps["tf"] := { desktop: "Work", selector: "ahk_exe Teamflow.exe", path: HOME . "\AppData\Local\Programs\huddle\Teamflow.exe" }
-; IDE
-apps["idea"] := { desktop: "IDE", selector: "ahk_exe idea64.exe", path: HOME . "\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\JetBrains Toolbox\IntelliJ IDEA Ultimate.lnk" }
-apps["jvm"] := { desktop: "IDE", selector: "VisualVM", path: HOME . "\.jdks\visualvm_216\bin\visualvm-my-jdk.lnk" }
-apps["jmc"] := { desktop: "IDE", selector: "ahk_exe jmc.exe", path: HOME . "\.jdks\jmc-8.3.1_windows-x64\JDK Mission Control\jmc.exe" }
-apps["jkit"] := { desktop: "IDE", selector: "YourKit", path: "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\YourKit Java Profiler 2021.11-b227.lnk" }
-; Terminal
-apps["term"] := { desktop: "Terminal", selector: "ahk_exe WindowsTerminal.exe", path: "wt.exe" }
-apps["turm"] := { funcName: "runWSL"}
+; IDE & Terminal
+apps["idea"] := { desktop: "Dev", selector: "ahk_exe idea64.exe", path: HOME . "\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\JetBrains Toolbox\IntelliJ IDEA Ultimate.lnk" }
+apps["jvm"] := { desktop: "Dev", selector: "VisualVM", path: HOME . "\.jdks\visualvm_216\bin\visualvm-my-jdk.lnk" }
+apps["jmc"] := { desktop: "Dev", selector: "ahk_exe jmc.exe", path: HOME . "\.jdks\jmc-8.3.1_windows-x64\JDK Mission Control\jmc.exe" }
+apps["jkit"] := { desktop: "Dev", selector: "YourKit", path: "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\YourKit Java Profiler 2021.11-b227.lnk" }
+apps["term"] := { desktop: "Dev", selector: "PowerShell ahk_exe WindowsTerminal.exe", path: "wt" }
+apps["turm"] := { desktop: "Dev", selector: "Ubuntu ahk_exe WindowsTerminal.exe", path: "wt -p Ubuntu" }
 ; Chats
 apps["slack"] := { desktop: "Chats", selector: "ahk_exe slack.exe", path: HOME . "\AppData\Local\slack\slack.exe" }
 apps["tg"] := { desktop: "Chats", selector: "ahk_exe Telegram.exe", path: HOME . "\AppData\Roaming\Telegram Desktop\Telegram.exe" }
 ; Planner
-apps["day"] := { desktop: "Planner", selector: "DayCaptain ahk_exe firefox.exe", path: """C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Firefox.lnk"" https://daycaptain.com/week.html" } 
+apps["day"] := { desktop: "Planner", selector: "Calendar ahk_exe firefox.exe", path: """C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Firefox.lnk"" https://calendar.google.com" } 
 apps["note"] := { desktop: "Planner", selector: "ahk_exe Notion.exe", path: HOME . "\AppData\Local\Programs\Notion\Notion.exe" }
 apps["rize"] := { desktop: "Planner", selector: "ahk_exe Rize.exe", path: HOME . "\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Rize.lnk" }
 apps["map"] := { desktop: "Planner", selector: "FreeMind ahk_exe javaw.exe", path: "C:\Program Files (x86)\FreeMind\FreeMind.exe" }
@@ -49,8 +48,9 @@ apps["music"] := { desktop: "Music", selector: "Yandex Music ahk_exe firefox.exe
 ; Files
 apps["cmd"] := { desktop: "Files", selector: "ahk_exe TOTALCMD64.EXE", path: "C:\Program Files\totalcmd\TOTALCMD64.EXE" }
 ; Other
-apps["obs"] := { desktop: "Other", selector: "ahk_exe obs64.exe", path: "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\OBS Studio\OBS Studio (64bit).lnk" }
 apps["task"] := { desktop: "Other", selector: "ahk_class TaskManagerWindow", path: "Taskmgr.exe" }
+; Studio
+apps["obs"] := { desktop: "Studio", selector: "ahk_exe obs64.exe", path: "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\OBS Studio\OBS Studio (64bit).lnk" }
 
 ; desktop independent
 apps[".a"] := { selector: "AHK Settings ahk_exe WindowsTerminal.exe", path: "wt new-tab --title ""AHK Settings"" pwsh -nop -c ""Set-Location $env:USERPROFILE\.dotfiles\ahk && nvim .""" }
@@ -58,7 +58,7 @@ apps[".o"] := { selector: "Oh-my-shell Settings ahk_exe WindowsTerminal.exe", pa
 apps[".t"] := { selector: "Windows Terminal Settings ahk_exe WindowsTerminal.exe", path: "wt new-tab --title ""Windows Terminal Settings"" pwsh -nop -c ""nvim -p $env:USERPROFILE\.dotfiles\wt\settings.json 'C:\Program Files\WindowsApps\Microsoft.WindowsTerminal_1.16.10262.0_x64__8wekyb3d8bbwe\defaults.json'""" }
 apps[".v"] := { selector: "Neovim Settings ahk_exe WindowsTerminal.exe", path: "wt new-tab --title ""Neovim Settings"" pwsh -nop -c ""Set-Location $env:USERPROFILE\.dotfiles\nvim && nvim . """ }
 apps["tr"] := { path: "C:\Program Files (x86)\ABBYY Lingvo x6\Lingvo.exe" }
-apps["ytr"] := { selector: "ahk_exe firefox.exe", path: """C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Firefox.lnk"" https://translate.yandex.ru" } 
+apps["ytr"] := { selector: "Yandex Translate ahk_exe firefox.exe", path: """C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Firefox.lnk"" https://translate.yandex.com/en/" } 
 apps["dtr"] := { selector: "ahk_exe DeepL.exe", path: HOME . "\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\DeepL.lnk" }
 apps["adbg"] := { selector: "ahk_exe dbgview64.exe", path: HOME . "\OneDrive\Soft\DebugView\dbgview64.exe" }
 apps["ahelp"] := { selector: "AutoHotkey Help", path: AHK_FOLDER . "\AutoHotkey.chm" }

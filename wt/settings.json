@@ -4,14 +4,6 @@
     "actions": 
     [
         {
-            "command": "unbound",
-            "keys": "f11"
-        },
-        {
-            "command": "unbound",
-            "keys": "ctrl+shift+f"
-        },
-        {
             "command": 
             {
                 "action": "splitPane",
@@ -21,12 +13,12 @@
             "keys": "alt+d"
         },
         {
-            "command": 
-            {
-                "action": "splitPane",
-                "split": "right"
-            },
-            "keys": "alt+\\"
+            "command": "unbound",
+            "keys": "f11"
+        },
+        {
+            "command": "unbound",
+            "keys": "ctrl+shift+f"
         },
         {
             "command": 
@@ -40,21 +32,17 @@
             "command": 
             {
                 "action": "splitPane",
-                "split": "down"
+                "split": "right"
             },
-            "keys": "alt+minus"
-        },
-        {
-            "command": "openTabRenamer",
-            "keys": "alt+r"
+            "keys": "alt+\\"
         },
         {
             "command": 
             {
-                "action": "resizePane",
-                "direction": "down"
+                "action": "splitPane",
+                "split": "down"
             },
-            "keys": "alt+shift+j"
+            "keys": "alt+minus"
         },
         {
             "command": 
@@ -67,6 +55,18 @@
         {
             "command": "find",
             "keys": "ctrl+/"
+        },
+        {
+            "command": 
+            {
+                "action": "resizePane",
+                "direction": "down"
+            },
+            "keys": "alt+shift+j"
+        },
+        {
+            "command": "openTabRenamer",
+            "keys": "alt+r"
         },
         {
             "command": 
@@ -95,17 +95,17 @@
         {
             "command": 
             {
-                "action": "moveFocus",
-                "direction": "right"
+                "action": "closeTab"
             },
-            "keys": "alt+l"
+            "keys": "ctrl+f4"
         },
         {
             "command": 
             {
-                "action": "closeTab"
+                "action": "moveFocus",
+                "direction": "right"
             },
-            "keys": "ctrl+f4"
+            "keys": "alt+l"
         },
         {
             "command": 
@@ -159,14 +159,17 @@
         {
             "backgroundImage": null,
             "backgroundImageOpacity": 1.0,
-            "colorScheme": "Campbell",
+            "colorScheme": 
+            {
+                "light": "Campbell"
+            },
             "cursorShape": "filledBox",
             "font": 
             {
                 "face": "CaskaydiaCove NFM",
                 "size": 16.0
             },
-            "opacity": 95,
+            "opacity": 85,
             "padding": "0",
             "scrollbarState": "hidden",
             "useAtlasEngine": false
