@@ -64,7 +64,7 @@
   ansible.builtin.shell: pwsh -Command "Install-Module -Name PSFzf -Scope AllUsers -Force"
 
 - name: Install symlinks using pwsh
-  ansible.builtin.shell: pwsh -Command "~/.dotfiles/wsl/install.ps1"
+  ansible.builtin.shell: pwsh -Command "~/.dotfiles/wsl/ansible/tasks/install_symlinks.ps1"
 
 - name: Run nvim packer once
   ansible.builtin.shell: nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
