@@ -1,6 +1,7 @@
 ---
 - hosts: localhost
   become: no
+  gather_facts: no
   pre_tasks:
     - name: Update packages
       become: yes
@@ -10,34 +11,20 @@
         - always
 
   tasks:
-    - name: Install build tools
-      import_tasks: tasks/build_tools.yml
-      tags:
+    - name: Install steps
+      include_tasks: 
+        file: "tasks/{{ item }}.yml"
+        apply:
+          tags: "{{ item }}"
+      loop:
         - build_tools
-    - name: Install utils
-      import_tasks: tasks/utils.yml
-      tags:
         - utils
-    - name: Install programming languages
-      import_tasks: tasks/programming_languages.yml
-      tags:
         - programming_languages
-    - name: Install nvim
-      import_tasks: tasks/nvim.yml
-      tags:
         - nvim
-    - name: Install zsh
-      import_tasks: tasks/zsh.yml
-      tags:
         - zsh
-    - name: Install pwsh
-      import_tasks: tasks/pwsh.yml
-      tags:
         - pwsh
-    - name: Install .dotfiles
-      import_tasks: tasks/dotfiles.yml
-      tags:
         - dotfiles
+      tags: always
 
   post_tasks:
     - name: Run nvim packer
