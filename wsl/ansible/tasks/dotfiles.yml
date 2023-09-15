@@ -2,6 +2,7 @@
   ansible.builtin.shell: pwsh -c 'Set-Location $env:HOME/.dotfiles/wsl && stow -R -t $env:HOME {{ item }}'
   loop:
     - bash
+    - git
     - nvim
     - pwsh
     - tmux
