@@ -22,15 +22,19 @@
       import_tasks: tasks/programming_languages.yml
       tags:
         - programming_languages
-    - name: Install zsh
-      import_tasks: tasks/zsh.yml
-      tags:
-        - zsh
     - name: Install nvim
       import_tasks: tasks/nvim.yml
       tags:
         - nvim
+    - name: Install zsh
+      import_tasks: tasks/zsh.yml
+      tags:
+        - zsh
     - name: Install pwsh
       import_tasks: tasks/pwsh.yml
       tags:
         - pwsh
+    - name: Install .dotfiles
+      import_tasks: tasks/dotfiles.yml
+      tags:
+        - dotfiles
