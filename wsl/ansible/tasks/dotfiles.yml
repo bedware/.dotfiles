@@ -1,8 +1,9 @@
 - name: Use stow to install dotfiles
   ansible.builtin.shell: pwsh -c 'Set-Location $env:HOME/.dotfiles/wsl && stow -R -t $env:HOME {{ item }}'
   loop:
-    - nvim
-    - tmux
     - bash
+    - nvim
     - pwsh
+    - tmux
+    - zsh
 

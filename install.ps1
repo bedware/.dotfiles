@@ -11,7 +11,7 @@ $env:DOTFILES="$env:HOME\.dotfiles"
 $links = @(
     @{ # pwsh
         Path = "$env:HOME\Documents\Powershell\Microsoft.PowerShell_profile.ps1"
-        Target = "$env:DOTFILES\wsl\pwsh\profile.ps1"
+        Target = "$env:DOTFILES\wsl\pwsh\.config\powershell\Microsoft.PowerShell_profile.ps1"
     },
     @{ # pwsh scripts
         Path = "$env:HOME\Documents\Powershell\Scripts"
@@ -19,7 +19,7 @@ $links = @(
     },
     @{ # neovim
         Path = "$env:LOCALAPPDATA\nvim"
-        Target = "$env:DOTFILES\wsl\nvim"
+        Target = "$env:DOTFILES\wsl\nvim\.config\nvim"
     },
     @{ # widows terminal
         Path = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
