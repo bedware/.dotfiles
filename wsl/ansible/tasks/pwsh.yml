@@ -55,20 +55,10 @@
     name: "{{ lookup('env', 'USER') }}"
     shell: "{{ pwsh_path.stdout }}"
 
-- name: Install pwsh module - posh-git
+- name: Install pwsh modules
   become: yes
-  ansible.builtin.shell: pwsh -Command "Install-Module -Name posh-git -Scope AllUsers -Force"
-
-- name: Install pwsh module - PSFzf
-  become: yes
-  ansible.builtin.shell: pwsh -Command "Install-Module -Name PSFzf -Scope AllUsers -Force"
-
-- name: Install symlinks using pwsh
-  ansible.builtin.shell: pwsh -Command "~/.dotfiles/wsl/ansible/install_symlinks.ps1"
-
-- name: Run nvim packer once
-  ansible.builtin.shell: nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
-
-- name: Run nvim packer twice
-  ansible.builtin.shell: nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+  ansible.builtin.shell: pwsh -Command "Install-Module -Name {{ item }} -Scope AllUsers -Force"
+  loop:
+    - posh-git
+    - PSFzf
 

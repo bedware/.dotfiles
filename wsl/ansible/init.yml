@@ -38,3 +38,10 @@
       import_tasks: tasks/dotfiles.yml
       tags:
         - dotfiles
+
+  post_tasks:
+    - name: Run nvim packer
+      ansible.builtin.shell: nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+      loop:
+        - 1
+        - 2

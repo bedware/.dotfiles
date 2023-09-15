@@ -1,4 +1,8 @@
-- name: Clone ssh keys
-  ansible.builtin.git:
-    repo: 'git@github.com:bedware/.ssh.git'
-    dest: "~/.ssh"
+- name: Use stow to install dotfiles
+  ansible.builtin.shell: pwsh -c 'Set-Location $env:HOME/.dotfiles/wsl && stow -R -t $env:HOME {{ item }}'
+  loop:
+    - nvim
+    - tmux
+    - bash
+    - pwsh
+
