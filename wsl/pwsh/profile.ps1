@@ -3,17 +3,17 @@
 # Shared environment variables
 
 $env:DOTFILES = "$env:HOME/.dotfiles"
-$env:PATH = "$env:PATH`:$env:HOME/.sdkman/candidates/java/current/bin"
+$env:PATH = "$env:PATH`:$env:HOME/.local/bin"
 $env:EDITOR = 'nvim'
 $env:VISUAL = 'nvim'
-$fzfParam = "--path-separator / --hidden " + `
+$fzfParam = "--path-separator '/' --hidden " + `
+"--exclude '.git' " + `
 "--exclude 'AppData' " + `
 "--exclude '.m2' " + `
-"--exclude '.git' " + `
 "--exclude '.jdks' " + `
 "--exclude '.gradle' "
 $env:FZF_CTRL_T_COMMAND = "fd --type f $fzfParam"
-$env:FZF_ALT_C_COMMAND = "fd --type d $fzfParam"
+$env:FZF_ALT_C_COMMAND = "fd --type d --follow $fzfParam"
 
 # Platform-dependent stuff
 
