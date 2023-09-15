@@ -2,7 +2,7 @@
 - name: Install utils
   become: yes
   apt: 
-    name: ["stow", "fzf", "fd-find"]
+    name: ["stow", "fzf", "fd-find", "tldr", "jq"]
 
 - name: Link fd
   become: yes
