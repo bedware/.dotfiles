@@ -17,7 +17,6 @@ sethandler <C-P> a:ide
 sethandler <C-Q> n-v:ide i:vim
 sethandler <C-N> n-v:ide
 sethandler <C-M> a:ide
-" sethandler <A-W> a:vim
 sethandler <A-D> a:ide
 
 " Recommend to set Forward/Back hotkeys for these
@@ -155,6 +154,7 @@ vnoremap <leader>im :action ExtractMethod<CR>
 " External
 nnoremap <leader>vis :action VimActions<CR>
 nnoremap <leader>vir :action IdeaVim.ReloadVimRc.reload<CR>
+
 " Building tools
 nnoremap <leader>edu :action ExternalSystem.ProjectRefreshAction<CR>
 
@@ -176,15 +176,12 @@ nnoremap <leader>tb :action tasks.open.in.browser<CR>
 
 " Show
 nnoremap <leader>q :action QuickImplementations<CR>
-" nnoremap <leader>a :action GotoAction<CR>
 nnoremap <leader>sa :action GotoAction<CR>
-"vnoremap <leader>sa :action GotoAction<CR>
 "nnoremap <leader>sc :action EditorContextInfo<CR>
 nnoremap <leader>sbj :action ByteCodeViewer<CR>
 nnoremap <leader>sbk :action ActivateKotlinBytecodeToolWindow<CR>
 nnoremap <leader>sil :action SelectIn<CR>
 nnoremap <leader>sip :action SelectInProjectView<CR>
-" nnoremap <leader>sit :action Terminal.OpenInTerminal<CR>
 nnoremap <leader>sid :action sql.SelectInDatabaseView<CR>
 nnoremap <leader>siw :action Vcs.Diff.ShowDiffInNewWindow<CR>
 nnoremap <leader>sit :action Vcs.Diff.ShowDiffInEditorTab<CR>
@@ -220,13 +217,14 @@ nnoremap <leader>wcr :action CloseAllToTheRight<CR>
 " nnoremap <S-k> :action NextTab<CR>
 " Window Go
 " nnoremap <leader><leader><leader> :action Switcher<CR>
-nnoremap <leader>a :action AddToHarpoon<CR>
-nnoremap <leader>' :action ShowHarpoon<CR>
+nnoremap <A-e> :action ShowHarpoon<CR>
 nnoremap <C-h> :action GotoHarpoon1<CR>
 nnoremap <C-j> :action GotoHarpoon2<CR>
 nnoremap <C-k> :action GotoHarpoon3<CR>
 nnoremap <C-l> :action GotoHarpoon4<CR>
 nnoremap <C-;> :action GotoHarpoon5<CR>
+nnoremap <A-a> :action AddToHarpoon<CR>
+nnoremap <leader>a :action AddToHarpoon<CR>
 nnoremap <leader><C-h> :action SetHarpoon1<CR>
 nnoremap <leader><C-j> :action SetHarpoon2<CR>
 nnoremap <leader><C-k> :action SetHarpoon3<CR>

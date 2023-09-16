@@ -4,10 +4,14 @@
 *~MButton::return ; To make mouse hook work
 *~WheelDown::return ; To make mouse hook work
 *~WheelUp::return ; To make mouse hook work
-Home::F13
-End::F14
-PgUp::F15
-PgDn::F16
+; For laptop
+Home::F16 ; Start/stop recording
+End::F20 ; Pause/unpause recording
+PgUp::F24 ; First scene
+PgDn::F23 ; Second scene
+; For pedal
+F13::Shift
+
 ; Translate
 F19::
     global HOME
