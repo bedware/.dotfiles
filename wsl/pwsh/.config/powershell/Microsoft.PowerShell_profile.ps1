@@ -57,6 +57,7 @@ Import-Module posh-git
  
 # Configuring
 
+# fzf
 Set-PsFzfOption `
     -PSReadlineChordProvider 'Ctrl+f' `
     -PSReadlineChordReverseHistory 'Ctrl+r' `
@@ -64,8 +65,11 @@ Set-PsFzfOption `
 
 # Aliases
 
+# dotfiles
 New-Alias -Name .f -Value 'Set-Location $env:DOTFILES'
 New-Alias -Name .fe -Value 'Set-Location $env:DOTFILES && nvim .'
+
+# others
 New-Alias -Name .p -Value CopyPathToClipboard
 New-Alias -Name l -Value "Get-ChildItem -Force"
 Add-IgnoredAlias -Name vi -Value nvim
