@@ -238,7 +238,7 @@ return
 #3::GoToVD(3)
 #4::GoToVD(4)
 #5::GoToVD(5)
-#6::GoToVD(6)
+#6::GoToAlternateVD()
 #7::GoToVD(7)
 #8::GoToVD(8)
 #9::GoToVD(9)

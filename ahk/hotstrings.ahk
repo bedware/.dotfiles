@@ -6,5 +6,7 @@
 
 ; Git
 ::gst::git status
+::gd::git diff
 
 ; Other
+
