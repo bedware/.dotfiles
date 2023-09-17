@@ -121,7 +121,7 @@
         },
         {
             "command": "closePane",
-            "keys": "alt+w"
+            "keys": "alt+q"
         },
         {
             "command": "toggleFocusMode",

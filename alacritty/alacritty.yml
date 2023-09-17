@@ -1,0 +1,20 @@
+shell:
+  program: "C:/Program Files/PowerShell/7/pwsh.exe"
+font:
+  normal:
+    family: "CaskaydiaCove NFM"
+  bold:
+    family: "CaskaydiaCove NFM"
+  italic:
+    family: "CaskaydiaCove NFM"
+  bold_italic:
+    family: "CaskaydiaCove NFM"
+  size: 16
+window:
+  startup_mode: fullscreen
+  opacity: 0.85
+colors:
+  primary:
+    background: '#191724'
+    foreground: '#f6c177'
+

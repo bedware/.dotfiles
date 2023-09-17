@@ -27,20 +27,6 @@ Init(desktops) {
     ; RearrangeWindows()
 }
 
-MoveActiveWinAndGoToVD(num) {
-    selected := proceedAlternateVD(num)
-    MoveCurrentWindowToDesktopAndGoTo(selected - 1)
-    IconByThemeAndDesktopNumber(GetSystemTheme(), selected)
-}
-
-GoToVD(num) {
-    selected := proceedAlternateVD(num)
-    ; selected := num
-    MoveOrGotoDesktopNumber(selected - 1) ; indexes in this function start with 0
-    IconByThemeAndDesktopNumber(GetSystemTheme(), selected)
-    feedWindowList()
-}
-
 ; Mechanism to make double Win+N to go to previous VD like it was possible in i3.
 ;            alternate
 ;   prevSel  |
@@ -120,6 +106,25 @@ feedWindowList() {
 }
 
 ; Control
+
+MoveActiveWinAndGoToVD(num) {
+    selected := proceedAlternateVD(num)
+    MoveCurrentWindowToDesktopAndGoTo(selected - 1)
+    IconByThemeAndDesktopNumber(GetSystemTheme(), selected)
+}
+
+GoToVD(num) {
+    selected := proceedAlternateVD(num)
+    ; selected := num
+    MoveOrGotoDesktopNumber(selected - 1) ; indexes in this function start with 0
+    IconByThemeAndDesktopNumber(GetSystemTheme(), selected)
+    feedWindowList()
+}
+
+GoToAlternateVD() {
+    global altVD
+    GoToVD(altVD[2])
+}
 
 NextWindow() {
     global windowsList
