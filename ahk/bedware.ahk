@@ -8,7 +8,7 @@
 SetWorkingDir %A_ScriptDir% ; Ensures a consistent starting directory
 SendMode Input ; Recommended for new scripts due to its superior speed and reliability
 SetCapslockState, AlwaysOff
-SetTitleMatchMode, 2
+SetTitleMatchMode, RegEx
 
 ; Constants
 EnvGet, HOME, UserProfile
@@ -33,8 +33,8 @@ apps["idea"] := { desktop: "Dev", selector: "ahk_exe idea64.exe", path: HOME . "
 apps["jvm"] := { desktop: "Dev", selector: "VisualVM", path: HOME . "\.jdks\visualvm_216\bin\visualvm-my-jdk.lnk" }
 apps["jmc"] := { desktop: "Dev", selector: "ahk_exe jmc.exe", path: HOME . "\.jdks\jmc-8.3.1_windows-x64\JDK Mission Control\jmc.exe" }
 apps["jkit"] := { desktop: "Dev", selector: "YourKit", path: "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\YourKit Java Profiler 2021.11-b227.lnk" }
-apps["term"] := { desktop: "Dev", selector: "PowerShell ahk_exe WindowsTerminal.exe", path: "wt" }
-apps["turm"] := { desktop: "Dev", selector: "Ubuntu ahk_exe WindowsTerminal.exe", path: "wt -p Ubuntu" }
+apps["term"] := { desktop: "Dev", selector: "(Admin:)|(C:) ahk_exe WindowsTerminal.exe", path: "wt --fullscreen" }
+apps["turm"] := { desktop: "Dev", selector: "^(?!Admin).* ahk_exe WindowsTerminal.exe", path: "wt --fullscreen --profile Ubuntu" }
 ; Chats
 apps["slack"] := { desktop: "Chats", selector: "ahk_exe slack.exe", path: HOME . "\AppData\Local\slack\slack.exe" }
 apps["tg"] := { desktop: "Chats", selector: "ahk_exe Telegram.exe", path: HOME . "\AppData\Roaming\Telegram Desktop\Telegram.exe" }

@@ -2,8 +2,16 @@
 
 # Shared environment variables
 
+# Bun
+$env:BUN_INSTALL = "$env:HOME/.bun"
+$env:PATH = "$env:BUN_INSTALL/bin:$env:PATH"
+# Scripts
+$env:PATH = "$env:HOME/.local/bin:$env:PATH"
+# Java
+$env:JAVA_HOME = "$env:HOME/.jdks/jdk-21"
+$env:PATH = "$env:JAVA_HOME/bin:$env:PATH"
+
 $env:DOTFILES = "$env:HOME/.dotfiles"
-$env:PATH = "$env:PATH`:$env:HOME/.local/bin"
 $env:EDITOR = 'nvim'
 $env:VISUAL = 'nvim'
 $fzfParam = "--path-separator '/' --hidden " + `
@@ -47,7 +55,7 @@ function OnViModeChange {
 
 # Imports & Init
 
-Write-Host -NoNewLine "`e[6 q" # Set the cursor to a non blinking line.
+# Write-Host -NoNewLine "`e[6 q" # Set the cursor to a non blinking line.
 Set-PSReadLineOption -EditMode Vi -ViModeIndicator Script -ViModeChangeHandler $Function:OnViModeChange
 
 . "$env:DOTFILES/wsl/pwsh/.local/bin/alias_autocomplete.ps1"

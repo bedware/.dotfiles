@@ -4,12 +4,12 @@
 *~MButton::return ; To make mouse hook work
 *~WheelDown::return ; To make mouse hook work
 *~WheelUp::return ; To make mouse hook work
-; For laptop
+; Laptop
 Home::F16 ; Start/stop recording
 End::F20 ; Pause/unpause recording
 PgUp::F24 ; First scene
 PgDn::F23 ; Second scene
-; For pedal
+; Pedal
 F13::Shift
 
 ; Translate
@@ -209,24 +209,6 @@ return
     PlayErrorSound()
 return
 
-#/::
-    if WinActive("ChatGPT ahk_exe WindowsTerminal.exe") {
-        Send #{``}
-        return
-    }
-    Send #{``}
-    Sleep 100
-    Send {Esc}ddddi`,s{Space}
-return
-+#/::
-    if WinActive("ChatGPT ahk_exe WindowsTerminal.exe") {
-        Send {Enter}'@{Enter}
-        return
-    }
-    Send #{``}
-    Sleep 100
-    Send {Esc}ddddi`,sm{Space}
-return
 ; Close
 #w::Send ^{w}
 ; Quit
@@ -242,14 +224,16 @@ return
 #7::GoToVD(7)
 #8::GoToVD(8)
 #9::GoToVD(9)
+#0::GoToVD(6)
 
 #+1::MoveActiveWinAndGoToVD(1)
 #+2::MoveActiveWinAndGoToVD(2)
 #+3::MoveActiveWinAndGoToVD(3)
 #+4::MoveActiveWinAndGoToVD(4)
 #+5::MoveActiveWinAndGoToVD(5)
-#+6::MoveActiveWinAndGoToVD(6)
+; #+6
 #+7::MoveActiveWinAndGoToVD(7)
 #+8::MoveActiveWinAndGoToVD(8)
 #+9::MoveActiveWinAndGoToVD(9)
+#+0::MoveActiveWinAndGoToVD(6)
 
