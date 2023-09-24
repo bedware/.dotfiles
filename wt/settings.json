@@ -12,10 +12,6 @@
             "keys": "alt+u"
         },
         {
-            "command": "openNewTabDropdown",
-            "keys": "menu"
-        },
-        {
             "command": 
             {
                 "action": "splitPane",
@@ -24,16 +20,16 @@
             "keys": "alt+\\"
         },
         {
-            "command": "find",
-            "keys": "ctrl+/"
+            "command": "openNewTabDropdown",
+            "keys": "menu"
         },
         {
             "command": "openTabRenamer",
             "keys": "alt+r"
         },
         {
-            "command": "toggleFocusMode",
-            "keys": "alt+f"
+            "command": "find",
+            "keys": "ctrl+/"
         },
         {
             "command": 
@@ -42,6 +38,10 @@
                 "split": "down"
             },
             "keys": "alt+minus"
+        },
+        {
+            "command": "toggleFocusMode",
+            "keys": "alt+f"
         },
         {
             "command": 
@@ -76,6 +76,7 @@
     "copyFormatting": "none",
     "copyOnSelect": false,
     "defaultProfile": "{137409cc-2f7a-47ca-b351-2a4c457addbc}",
+    "disableAnimations": true,
     "initialCols": 131,
     "initialPosition": ",",
     "initialRows": 42,
@@ -540,6 +541,7 @@
             "yellow": "#F6C177"
         }
     ],
+    "theme": "system",
     "themes": 
     [
         {
