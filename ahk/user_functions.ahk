@@ -8,12 +8,42 @@ RearrangeWindows() {
                 WinActivate 
                 desktopNum := IndexOf(v.desktop, desktops)
                 if (IndexOf(v.desktop, desktops) != -1) {
-                    MoveCurrentWindowToDesktop(desktopNum - 1)
+                    ; MoveActiveWindowToDesktop(desktopNum - 1)
                     moved = true
                 }
             }
         }
     } 
+}
+
+defaultProfile() {
+    global apps
+    global desktops
+    init := [] 
+    init.Push({ name: "obs", ref: apps["obs"] })
+    init.Push({ name: "task", ref: apps["task"], maximize: true })
+    init.Push({ name: "tg", ref: apps["tg"] })
+    init.Push({ name: "music", ref: apps["music"] })
+    init.Push({ name: "note", ref: apps["note"], maximize: true })
+    init.Push({ name: "term", ref: apps["term"] })
+    init.Push({ name: "cmd", ref: apps["cmd"] })
+
+    for index, app in init {
+        if (app.ref.desktop != "") {
+            num := IndexOf(app.ref.desktop, desktops)
+                GoToVD(num)
+        }
+        executeInput(apps, app.name)
+
+        if (app.maximize) {
+            WinWait, % app.ref.selector,, 5
+            if WinExist(app.ref.selector) {
+                WinActivate
+                WinMinimize
+                WinMaximize
+            }
+        }
+    }
 }
 
 screencastProfile() {

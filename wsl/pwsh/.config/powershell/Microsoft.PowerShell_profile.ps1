@@ -1,15 +1,31 @@
 [Console]::InputEncoding = [Console]::OutputEncoding = [System.Text.UTF8Encoding]::new()
 
-# Shared environment variables
+# Platform-dependent stuff
+if ($PSVersionTable.OS -match "Linux") {
+    $env:PATH_SEPARATOR = ":"
+    if ($PSVersionTable.OS -match "WSL") {
+        # Remove windows stuff from linux. Great lookup booster.
+        $env:PATH = $env:PATH | tr ":" "\n" | grep -v -e /mnt -e "^$" | tr "\n" ":"
+    }
+} elseif ($PSVersionTable.OS -match "Windows") {
+    $env:PATH_SEPARATOR = ";"
+    # Functions
+    function scan {
+        & "$env:HOME\OneDrive\Soft\SpaceSniffer.exe" scan "$pwd"
+    }
+}
 
+
+# Shared environment variables
+# $env:HOME = $env:HOME.ToString().Replace("\", "/")
 # Bun
 $env:BUN_INSTALL = "$env:HOME/.bun"
-$env:PATH = "$env:BUN_INSTALL/bin:$env:PATH"
+$env:PATH = "$env:BUN_INSTALL/bin$env:PATH_SEPARATOR$env:PATH"
 # Scripts
-$env:PATH = "$env:HOME/.local/bin:$env:PATH"
+$env:PATH = "$env:HOME/.local/bin$env:PATH_SEPARATOR$env:PATH"
 # Java
 $env:JAVA_HOME = "$env:HOME/.jdks/jdk-21"
-$env:PATH = "$env:JAVA_HOME/bin:$env:PATH"
+$env:PATH = "$env:JAVA_HOME/bin$env:PATH_SEPARATOR$env:PATH"
 
 $env:DOTFILES = "$env:HOME/.dotfiles"
 $env:EDITOR = 'nvim'
@@ -22,20 +38,6 @@ $fzfParam = "--path-separator '/' --hidden " + `
 "--exclude '.gradle' "
 $env:FZF_CTRL_T_COMMAND = "fd --type f $fzfParam"
 $env:FZF_ALT_C_COMMAND = "fd --type d --follow $fzfParam"
-
-# Platform-dependent stuff
-
-if ($PSVersionTable.OS -match "Linux") {
-    if ($PSVersionTable.OS -match "WSL") {
-        # Remove windows stuff from linux. Great lookup booster.
-        $env:PATH = $env:PATH | tr ":" "\n" | grep -v -e /mnt -e "^$" | tr "\n" ":"
-    }
-} elseif ($PSVersionTable.OS -match "Windows") {
-    # Functions
-    function scan {
-        & "$env:HOME\OneDrive\Soft\SpaceSniffer.exe" scan "$pwd"
-    }
-}
 
 # Shared functions
 

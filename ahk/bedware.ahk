@@ -41,7 +41,6 @@ apps["tg"] := { desktop: "Chats", selector: "ahk_exe Telegram.exe", path: HOME .
 ; Planner
 apps["day"] := { desktop: "Planner", selector: "Calendar ahk_exe firefox.exe", path: """C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Firefox.lnk"" https://calendar.google.com" } 
 apps["note"] := { desktop: "Planner", selector: "ahk_exe Notion.exe", path: HOME . "\AppData\Local\Programs\Notion\Notion.exe" }
-apps["rize"] := { desktop: "Planner", selector: "ahk_exe Rize.exe", path: HOME . "\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Rize.lnk" }
 apps["map"] := { desktop: "Planner", selector: "FreeMind ahk_exe javaw.exe", path: "C:\Program Files (x86)\FreeMind\FreeMind.exe" }
 ; Music
 apps["music"] := { desktop: "Music", selector: "Yandex Music ahk_exe firefox.exe", path: """C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Firefox.lnk"" https://music.yandex.com/home" } 
@@ -53,10 +52,7 @@ apps["task"] := { desktop: "Other", selector: "ahk_class TaskManagerWindow", pat
 apps["obs"] := { desktop: "Studio", selector: "ahk_exe obs64.exe", path: "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\OBS Studio\OBS Studio (64bit).lnk" }
 
 ; desktop independent
-apps[".a"] := { selector: "AHK Settings ahk_exe WindowsTerminal.exe", path: "wt new-tab --title ""AHK Settings"" pwsh -nop -c ""Set-Location $env:USERPROFILE\.dotfiles\ahk && nvim .""" }
-apps[".o"] := { selector: "Oh-my-shell Settings ahk_exe WindowsTerminal.exe", path: "wt new-tab --title ""Oh-my-shell Settings"" pwsh -c ""nvim $env:LOCALAPPDATA\Programs\oh-my-posh\themes\bedware.omp.json""" }
-apps[".t"] := { selector: "Windows Terminal Settings ahk_exe WindowsTerminal.exe", path: "wt new-tab --title ""Windows Terminal Settings"" pwsh -nop -c ""nvim -p $env:USERPROFILE\.dotfiles\wt\settings.json 'C:\Program Files\WindowsApps\Microsoft.WindowsTerminal_1.16.10262.0_x64__8wekyb3d8bbwe\defaults.json'""" }
-apps[".v"] := { selector: "Neovim Settings ahk_exe WindowsTerminal.exe", path: "wt new-tab --title ""Neovim Settings"" pwsh -nop -c ""Set-Location $env:USERPROFILE\.dotfiles\nvim && nvim . """ }
+apps[".f"] := { selector: "ahk_exe WindowsTerminal.exe", path: "wt --fullscreen new-tab pwsh -nop -c ""Set-Location $env:USERPROFILE\.dotfiles && nvim .""" }
 apps["tr"] := { path: "C:\Program Files (x86)\ABBYY Lingvo x6\Lingvo.exe" }
 apps["ytr"] := { selector: "Yandex Translate ahk_exe firefox.exe", path: """C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Firefox.lnk"" https://translate.yandex.com/en/" } 
 apps["dtr"] := { selector: "ahk_exe DeepL.exe", path: HOME . "\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\DeepL.lnk" }
@@ -70,6 +66,7 @@ apps["paint"] := { selector: "ahk_exe mspaint.exe", path: "mspaint.exe" }
 apps["cl"] := { funcName: "RearrangeWindows" }
 apps["h"] := { funcName: "FocusOrRunPersonalChromeProfile" }
 apps["l"] := { funcName: "FocusOrRunWorkChromeProfile" }
+apps["pd"] := { funcName: "defaultProfile" }
 apps["psc"] := { funcName: "screencastProfile" }
 
 ; Dependencies

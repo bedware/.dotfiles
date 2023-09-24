@@ -32,22 +32,39 @@ RunAlfred(apps) {
         Sleep 100
         return
     }
-
     executeInput(apps, userInput)
-
     hideAlfred()
 }
 
 showAlfred() {
-    ; TaskBar overlap
-    Gui, -Caption -Border -Toolwindow +AlwaysOnTop +DPIScale
-    Gui, Margin, 0, 0
-    Gui, Add, ActiveX, w2000 h48, % "mshtml:<div style='border-bottom: 120px solid rgb(255, 222, 93); height: 0; margin: -10px 0 0 -10px;'></div>"
-    Gui, Show, xCenter y2076 NoActivate
+    ; Run, calc
+    ; selector := "Calculator"
+    Run, % HOME . "\.dotfiles\ahk\ahk-overlay.exe"
+    selector := "ahk-overlay"
+    WinWait, %selector%,, 5
+    if ErrorLevel
+    {
+        PlayErrorSound()
+    }
+    if WinExist(selector) {
+        WinActivate
+        WinSet, AlwaysOnTop, On, %selector%
+        WinGet, activeHwnd, ID, %selector%
+        PinWindow(activeHwnd)
+    }
+
+    OutputDebug % "Alfred show"
 }
 
 hideAlfred() {
-    Gui, Hide
+    ; selector := "Calculator"
+    selector := "ahk-overlay"
+
+    if WinExist(selector) {
+        WinClose, % selector 
+    }
+
+    OutputDebug % "Alfred hide"
 }
 
 getShortuctsByComa(apps) {
