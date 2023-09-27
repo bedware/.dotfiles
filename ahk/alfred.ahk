@@ -1,61 +1,94 @@
-; By Dmitry Surin aka bedware
-
-; Alfred
-
 RunAlfred(apps) {
     showAlfred()
 
+    endKey := "LShift"
+    timeout := "8" ; seconds
+    length := "5" ; chars
+
     ; Wait for user input
-    Input, userInput, T8 L5, {LShift}, % getShortuctsByComa(apps)
+    Input, userInput, T%timeout% L%length%, {%endKey%}, % getShortuctsByComa(apps)
     if (ErrorLevel = "Max")
     {
-        PlayErrorSound()
+        showAlfredError("You entered '" userInput "', which is the maximum length '" length "' of the text.")
         hideAlfred()
-        MsgBox, You entered "%userInput%", which is the maximum length of text.
         return
     }
     if (ErrorLevel = "Timeout")
     {
-        PlayErrorSound()
+        showAlfredError("You have reached the timeout of " timeout " per command.")
         hideAlfred()
         return
     }
     if (ErrorLevel = "NewInput") {
+        showAlfredError("New input begun.")
         hideAlfred()
         return
     }
     If InStr(ErrorLevel, "EndKey:")
     {
-        PlayErrorSound()
+        ; showAlfredError("You have endkey '" endKey "' pressed.")
         hideAlfred()
-        ; MsgBox, Endkey pressed!
-        Sleep 100
+        KeyWait, %endKey%
         return
     }
     executeInput(apps, userInput)
+
     hideAlfred()
 }
 
 showAlfred() {
-    ; TaskBar overlap
-    Gui, -Caption
-    ; Gui, -Caption -Border -Toolwindow +AlwaysOnTop +DPIScale
+    Gui, Destroy
+    Gui, -Caption -AlwaysOnTop +ToolWindow +DPIScale
     Gui, Margin, 0, 0
-    Gui, Add, ActiveX, w2000 h48, % "mshtml:<div style='border: 48px solid rgb(255, 222, 93); margin: -15px -10px;'></div>"
+    FormatTime, currentDateTime, %A_Now%, yyyy-MM-dd HH:mm:ss
+    info := "bedware.software | " currentDateTime
+    html := getHTMLForAlfred(info, "rgb(255, 222, 93)")
+    Gui, Add, ActiveX, w2000 h48, %html%
     Gui, Show, xCenter y2076 NoActivate
 
     selector := "bedware.ahk"
     if WinExist(selector) {
         WinActivate
-        WinSet, AlwaysOnTop, On, %selector%
+        ; WinSet, AlwaysOnTop, On, %selector%
         WinGet, activeHwnd, ID, %selector%
         PinWindow(activeHwnd)
     }
     OutputDebug % "Alfred show"
 }
 
+showAlfredError(errorText) {
+    Gui, Destroy
+    Gui, -Caption -AlwaysOnTop +ToolWindow +DPIScale
+    Gui, Margin, 0, 0
+    info := "bedware.software | " errorText
+    html := getHTMLForAlfred(errorText, "rgb(255, 0, 0)")
+    Gui, Add, ActiveX, w2000 h48, %html%
+    Gui, Show, xCenter y2076
+
+    OutputDebug % "Alfred error show"
+    Sleep 4000
+}
+
+getHTMLForAlfred(text, bgColor) {
+    html = 
+    (
+        mshtml:
+        <div style='
+                border: 48px solid %bgColor%;
+                background-color: %bgColor%;
+                margin-left: -10px;
+                margin-top: -38px;
+                font-size: 36px;
+                font-weight: bold;
+                font-style: none;
+                font-family: "Segoe UI";
+            '>%text%</div>
+    )
+    return html
+}
+
 hideAlfred() {
-    Gui, Hide
+    Gui, Destroy
     OutputDebug % "Alfred hide"
 }
 

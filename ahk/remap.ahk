@@ -4,6 +4,17 @@
 *~MButton::return ; To make mouse hook work
 *~WheelDown::return ; To make mouse hook work
 *~WheelUp::return ; To make mouse hook work
+
+; Use the Soundcard Analysis script found here to set these parameters
+; https://www.autohotkey.com/docs/commands/SoundSet.htm#Soundcard
+Volume_Up::
+SoundSet, +2, Master, Volume, 4
+return
+
+Volume_Down::
+SoundSet, -2, Master, Volume, 4
+return
+
 ; Laptop
 Home::F16 ; Start/stop recording
 End::F20 ; Pause/unpause recording
