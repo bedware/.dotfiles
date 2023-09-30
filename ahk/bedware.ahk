@@ -43,7 +43,7 @@ apps["day"] := { desktop: "Planner", selector: "Calendar ahk_exe firefox.exe", p
 apps["note"] := { desktop: "Planner", selector: "ahk_exe Notion.exe", path: HOME . "\AppData\Local\Programs\Notion\Notion.exe" }
 apps["map"] := { desktop: "Planner", selector: "FreeMind ahk_exe javaw.exe", path: "C:\Program Files (x86)\FreeMind\FreeMind.exe" }
 ; Music
-apps["music"] := { desktop: "Music", selector: "Yandex Music ahk_exe firefox.exe", path: """C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Firefox.lnk"" https://music.yandex.com/home" } 
+apps["music"] := { desktop: "Music", selector: "Yandex.Music", path: HOME . "\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Chrome Apps\Yandex.Music.lnk" } 
 ; Files
 apps["cmd"] := { desktop: "Files", selector: "ahk_exe TOTALCMD64.EXE", path: "C:\Program Files\totalcmd\TOTALCMD64.EXE" }
 ; Other
@@ -54,8 +54,8 @@ apps["obs"] := { desktop: "Studio", selector: "ahk_exe obs64.exe", path: "C:\Pro
 ; desktop independent
 apps[".f"] := { selector: "ahk_exe WindowsTerminal.exe", path: "wt --fullscreen new-tab pwsh -nop -c ""Set-Location $env:USERPROFILE\.dotfiles && nvim .""" }
 apps["tr"] := { path: "C:\Program Files (x86)\ABBYY Lingvo x6\Lingvo.exe" }
-apps["ytr"] := { selector: "Yandex Translate ahk_exe firefox.exe", path: """C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Firefox.lnk"" https://translate.yandex.com/en/" } 
-apps["dtr"] := { selector: "ahk_exe DeepL.exe", path: HOME . "\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\DeepL.lnk" }
+apps["ytr"] := { selector: "Yandex Translate", path: HOME . "\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Chrome Apps\Yandex.Translate.lnk" }
+apps["dtr"] := { selector: "DeepL Translate", path: HOME . "\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Chrome Apps\DeepL Translate.lnk" }
 apps["adbg"] := { selector: "ahk_exe dbgview64.exe", path: HOME . "\OneDrive\Soft\DebugView\dbgview64.exe" }
 apps["ahelp"] := { selector: "AutoHotkey Help", path: AHK_FOLDER . "\AutoHotkey.chm" }
 apps["adoc"] := apps["ahelp"]

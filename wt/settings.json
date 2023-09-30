@@ -4,6 +4,10 @@
     "actions": 
     [
         {
+            "command": "openNewTabDropdown",
+            "keys": "menu"
+        },
+        {
             "command": 
             {
                 "action": "sendInput",
@@ -20,16 +24,16 @@
             "keys": "alt+\\"
         },
         {
-            "command": "openNewTabDropdown",
-            "keys": "menu"
+            "command": "find",
+            "keys": "ctrl+/"
         },
         {
             "command": "openTabRenamer",
             "keys": "alt+r"
         },
         {
-            "command": "find",
-            "keys": "ctrl+/"
+            "command": "toggleFocusMode",
+            "keys": "alt+f"
         },
         {
             "command": 
@@ -38,10 +42,6 @@
                 "split": "down"
             },
             "keys": "alt+minus"
-        },
-        {
-            "command": "toggleFocusMode",
-            "keys": "alt+f"
         },
         {
             "command": 
@@ -104,7 +104,7 @@
                 "face": "CaskaydiaCove NFM",
                 "size": 16.0
             },
-            "opacity": 85,
+            "opacity": 80,
             "padding": "0",
             "scrollbarState": "hidden",
             "useAtlasEngine": false

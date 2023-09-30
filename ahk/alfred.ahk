@@ -77,7 +77,7 @@ getHTMLForAlfred(text, bgColor) {
                 border: 48px solid %bgColor%;
                 background-color: %bgColor%;
                 margin-left: -10px;
-                margin-top: -38px;
+                margin-top: -45px;
                 font-size: 36px;
                 font-weight: bold;
                 font-style: none;

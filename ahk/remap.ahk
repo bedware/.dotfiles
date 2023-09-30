@@ -77,28 +77,9 @@ RShift & LShift::ToggleCaps()
 return
 
 #if GetKeyState("Tab", "P")
-    ; Non-disappearing AltTab + Win
-    ; LAlt::Send ^!{Tab}
-    ; Layout set up
-    LWin::#z
-    j::
-        if WinActive("ahk_exe idea64.exe")
-            Send !{Left}
-        else ; Default
-            Send ^+{Tab}
-    return
-    k::
-        if WinActive("ahk_exe idea64.exe")
-            Send !{Right}
-        else ; Default
-            Send ^{Tab}
-    return
-    i:: ; Navigation history backward
-        Send ^!{Right}
-    return
-    o:: ; Navigation history forward
-        Send ^!{Left}
-    return
+    LWin::#z ; Windows layout popup
+    j::Send ^+{Tab} ; Next tab
+    k::Send ^{Tab} ; Prev tab
 #if
 
 LCtrl::LCtrl ; to enable hook
@@ -114,13 +95,6 @@ LCtrl::LCtrl ; to enable hook
         Send {Esc}
     }
 return
-
-#if GetKeyState("RCtrl", "P")
-    Backspace::
-        MsgBox % "Hit"
-        Send ^{Backspace}
-    return
-#if 
 
 ; Space
 *Space::
@@ -198,10 +172,12 @@ return
     !t::Send ^l@tabs{Space} ; Search in tabs
     !h::Send ^l@history{Space} ; Search in history
     !b::Send ^l@bookmarks{Space} ; Search in Bookmarks 
+    ^i::Send !{Right} ; Navigation history backward
+    ^o::Send !{Left} ; Navigation history forward
 #if
 #if WinActive("ahk_exe TOTALCMD64.EXE")
-    !g::Send {Home}{F2}
-    !p::Send ^{F12}
+    !e::Send {Home}{F2} ; Edit path
+    !p::Send ^{F12} ; Copy path to selected file
 #if
 
 #InputLevel 0
@@ -210,11 +186,11 @@ return
 #f::NextWindow()
 #k::PrevWindow()
 #b::PrevWindow()
-#^t::
+#^t:: ; Toggle taskbar
     toggleTaskbar(-1)
     PlayErrorSound()
 return
-#^d::
+#^d:: ; Show active windows on all virtual desktops (VD)
     WinGet, activeHwnd, ID, A
     PinWindow(activeHwnd)
     PlayErrorSound()
