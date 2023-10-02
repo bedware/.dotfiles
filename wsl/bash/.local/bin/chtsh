@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-languages=$(echo "java javascript python typescript go rust c" | tr " " "\n")
+languages=$(echo "java javascript python typescript go rust c lua" | tr " " "\n")
 selected=$(echo -e "$languages\nutil" | fzf)
 
 read -p "($selected) Ask: " query
