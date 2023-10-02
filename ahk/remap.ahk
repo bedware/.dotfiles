@@ -1,6 +1,13 @@
 ; Disable keys
 *~LButton::return ; To make mouse hook work
-*~RButton::return ; To make mouse hook work
+*RButton::
+if (GetKeyState("LButton")) {
+    ; KeyWait, LButton
+    Func("doTranslation").Call()
+} else {
+    Send {RButton}
+}
+return ; To make mouse hook work
 *~MButton::return ; To make mouse hook work
 *~WheelDown::return ; To make mouse hook work
 *~WheelUp::return ; To make mouse hook work
@@ -21,21 +28,12 @@ End::F20 ; Pause/unpause recording
 PgUp::F24 ; First scene
 PgDn::F23 ; Second scene
 ; Pedal
-F13::Shift
-
-; Translate
-F19::
-    global HOME
-
-    Send {Ctrl Down}cc{Ctrl Up}
-    KeyWait, LCtrl
-
-    translationFile := HOME . "\translations"
-    clipboardPlusSeparator := clipboard . "`n---`n"
-
-    FileAppend, %clipboardPlusSeparator%, %translationFile%
+F13::
+; if (GetKeyState("LButton")) {
+Func("doTranslation").Call()
+; }
+; Send Shift
 return
-
 
 ; Shift
 RShift & Capslock::Send +{Esc}
@@ -62,6 +60,8 @@ return
 ; Press both shift keys together to toggle Capslock
 LShift & RShift::ToggleCaps()
 RShift & LShift::ToggleCaps()
+; LShift & RShift::Func("doTranslation").Call()
+; RShift & LShift::Func("doTranslation").Call()
 
 ; Tab-hotkeys
 *Tab::

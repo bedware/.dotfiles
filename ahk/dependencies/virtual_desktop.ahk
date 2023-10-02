@@ -55,9 +55,9 @@ GoToPrevDesktop() {
     last_desktop := GetDesktopCount() - 1
     ; If current desktop is 0, go to last desktop
     if (current = 0) {
-        MoveOrGotoDesktopNumber(last_desktop)
+        GoToDesktopNumber(last_desktop)
     } else {
-        MoveOrGotoDesktopNumber(current - 1)
+        GoToDesktopNumber(current - 1)
     }
     return
 }
@@ -67,9 +67,9 @@ GoToNextDesktop() {
     last_desktop := GetDesktopCount() - 1
     ; If current desktop is last, go to first desktop
     if (current = last_desktop) {
-        MoveOrGotoDesktopNumber(0)
+        GoToDesktopNumber(0)
     } else {
-        MoveOrGotoDesktopNumber(current + 1)
+        GoToDesktopNumber(current + 1)
     }
     return
 }
@@ -80,15 +80,15 @@ GoToDesktopNumber(num) {
     DllCall(GoToDesktopNumberProc, "Int", num, "Int")
     return
 }
-MoveOrGotoDesktopNumber(num) {
-    ; If user is holding down Mouse left button, move the current window also
-    if (GetKeyState("LButton")) {
-        MoveCurrentWindowToDesktopAndGoTo(num)
-    } else {
-        GoToDesktopNumber(num)
-    }
-    return
-}
+; MoveOrGotoDesktopNumber(num) {
+;     ; If user is holding down Mouse left button, move the current window also
+;     if (GetKeyState("LButton")) {
+;         MoveCurrentWindowToDesktopAndGoTo(num)
+;     } else {
+;         GoToDesktopNumber(num)
+;     }
+;     return
+; }
 GetDesktopName(num) {
     global GetDesktopNameProc
     utf8_buffer := ""

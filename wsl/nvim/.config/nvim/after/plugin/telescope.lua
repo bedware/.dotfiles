@@ -1,3 +1,5 @@
+-- More info here:
+-- https://github.com/nvim-telescope/telescope.nvim/wiki/Configuration-Recipes#file-and-text-search-in-hidden-files-and-directories
 local telescope = require("telescope")
 local telescopeConfig = require("telescope.config")
 

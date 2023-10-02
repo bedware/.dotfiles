@@ -53,10 +53,6 @@ nnoremap g; :action VcsShowNextChangeMarker<CR>
 nnoremap g, :action VcsShowPrevChangeMarker<CR>
 " nnoremap g, :action PreviousDiff<CR>
 
-nnoremap fg :action FindInPath<CR>
-nnoremap fc :action GotoClass<CR>
-nnoremap ff :action GotoFile<CR>
-nnoremap fa :action SearchEverywhere<CR>
 " Navigation (GO TO ...)
 nnoremap gd :action GotoDeclaration<CR>
 " nnoremap ge `.<CR>

@@ -14,7 +14,7 @@ SetTitleMatchMode, RegEx
 EnvGet, HOME, UserProfile
 SplitPath, A_AhkPath,, AHK_FOLDER
 
-desktops := ["Personal", "Work", "Dev", "Planner", "Chats", "Studio", "Music", "Files", "Other"]
+desktops := ["Personal", "Work", "Dev", "Planner", "Chats", "Studio", "Translation", "Files", "Other"]
 apps := {}
 ; Personal
 apps["steam"] := { desktop: "Personal", selector: "ahk_exe Steam.exe", path: "C:\Program Files (x86)\Steam\Steam.exe" }
@@ -42,20 +42,21 @@ apps["tg"] := { desktop: "Chats", selector: "ahk_exe Telegram.exe", path: HOME .
 apps["day"] := { desktop: "Planner", selector: "Calendar ahk_exe firefox.exe", path: """C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Firefox.lnk"" https://calendar.google.com" } 
 apps["note"] := { desktop: "Planner", selector: "ahk_exe Notion.exe", path: HOME . "\AppData\Local\Programs\Notion\Notion.exe" }
 apps["map"] := { desktop: "Planner", selector: "FreeMind ahk_exe javaw.exe", path: "C:\Program Files (x86)\FreeMind\FreeMind.exe" }
-; Music
-apps["music"] := { desktop: "Music", selector: "Yandex.Music", path: HOME . "\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Chrome Apps\Yandex.Music.lnk" } 
+; Translation
+apps["atr"] := { desktop: "Translation", path: "C:\Program Files (x86)\ABBYY Lingvo x6\Lingvo.exe" }
+apps["ytr"] := { desktop: "Translation", selector: "Yandex Translate.*", path: HOME . "\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Chrome Apps\Yandex.Translate.lnk" }
+apps["dtr"] := { desktop: "Translation", selector: "DeepL Translate", path: HOME . "\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Chrome Apps\DeepL Translate.lnk" }
+; apps["tr"] := { funcName: "doTranslation" }
 ; Files
 apps["cmd"] := { desktop: "Files", selector: "ahk_exe TOTALCMD64.EXE", path: "C:\Program Files\totalcmd\TOTALCMD64.EXE" }
 ; Other
 apps["task"] := { desktop: "Other", selector: "ahk_class TaskManagerWindow", path: "Taskmgr.exe" }
 ; Studio
 apps["obs"] := { desktop: "Studio", selector: "ahk_exe obs64.exe", path: "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\OBS Studio\OBS Studio (64bit).lnk" }
+apps["music"] := { desktop: "Studio", selector: "Yandex.Music", path: HOME . "\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Chrome Apps\Yandex.Music.lnk" } 
 
 ; desktop independent
 apps[".f"] := { selector: "ahk_exe WindowsTerminal.exe", path: "wt --fullscreen new-tab pwsh -nop -c ""Set-Location $env:USERPROFILE\.dotfiles && nvim .""" }
-apps["tr"] := { path: "C:\Program Files (x86)\ABBYY Lingvo x6\Lingvo.exe" }
-apps["ytr"] := { selector: "Yandex Translate", path: HOME . "\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Chrome Apps\Yandex.Translate.lnk" }
-apps["dtr"] := { selector: "DeepL Translate", path: HOME . "\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Chrome Apps\DeepL Translate.lnk" }
 apps["adbg"] := { selector: "ahk_exe dbgview64.exe", path: HOME . "\OneDrive\Soft\DebugView\dbgview64.exe" }
 apps["ahelp"] := { selector: "AutoHotkey Help", path: AHK_FOLDER . "\AutoHotkey.chm" }
 apps["adoc"] := apps["ahelp"]

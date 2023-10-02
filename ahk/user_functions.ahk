@@ -46,6 +46,63 @@ defaultProfile() {
     }
 }
 
+doTranslation() {
+    global apps
+    global desktops
+
+    Send ^{Insert}
+    Sleep, 100
+    buffer := Trim(Clipboard)
+    Clipboard := buffer
+    GoToVDIgnoreAlternate(IndexOf("Translation", desktops))
+
+    if (InStr(buffer, " ")) { ; a sentence
+        selector := apps["dtr"].selector
+        if (!WinExist(selector)) {
+            executeInput(apps, "dtr")
+            WinWait, %selector%,, 5
+            Sleep, 500
+        }
+        if (WinExist(selector)) {
+            WinActivate
+            Send gi
+            Send ^a
+            Send +{Insert}
+            Sleep, 100
+            WinActivate, %selector%
+        }
+    } else { ; a word
+        ; Yandex Translate
+        yandex := apps["ytr"].selector
+        if (!WinExist(yandex)) {
+            executeInput(apps, "ytr")
+            WinWait, %yandex%,, 5
+            Sleep, 500
+        }
+        if (WinExist(yandex)) {
+            WinActivate
+            Send !d
+            Sleep, 150
+            Send +{Insert}
+        }
+
+        ; ABBY
+        abby := "ABBYY Lingvo ahk_exe Lingvo.exe"
+        if (!WinExist(abby)) {
+            executeInput(apps, "atr")
+            WinWait, %abby%,, 5
+            Sleep, 500
+            WinActivate, %abby%
+        }
+        if (WinExist(abby)) {
+            WinActivate
+            Send ^a
+            Send +{Insert}
+            Send {Enter}
+        }
+    }
+}
+
 screencastProfile() {
     init := {}
     ; init["Screen share"] := { exe: "duet.exe", path: "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\duet.lnk" }

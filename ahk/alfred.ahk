@@ -118,7 +118,7 @@ executeInput(apps, userInput) {
                 OutputDebug % "app's desktop:" num
                 OutputDebug % "current desktop:" current
                 if (num != current) {
-                    MoveActiveWinAndGoToVD(num)
+                    GoToVD(num)
                 }
             }
         } else {

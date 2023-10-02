@@ -1,7 +1,7 @@
 vim.g.mapleader = " "
 
 -- Navigation
-vim.keymap.set("n", "<Tab>", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>sip", vim.cmd.Ex)
 -- vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
 -- Command mode by arrows

@@ -28,10 +28,6 @@ $links = @(
     @{ # jetbrains idea vimrc
         Path = "$env:HOME\.ideavimrc"
         Target = "$env:DOTFILES\.ideavimrc"
-    },
-    @{ # total commander
-        Path = "$env:HOME\wincmd.ini"
-        Target = "$env:DOTFILES\wincmd.ini"
     }
 )
 

@@ -115,10 +115,14 @@ MoveActiveWinAndGoToVD(num) {
 
 GoToVD(num) {
     selected := proceedAlternateVD(num)
-    ; selected := num
-    MoveOrGotoDesktopNumber(selected - 1) ; indexes in this function start with 0
+    GoToDesktopNumber(selected - 1) ; indexes in this function start with 0
     IconByThemeAndDesktopNumber(GetSystemTheme(), selected)
     feedWindowList()
+}
+GoToVDIgnoreAlternate(num) {
+    if (GetCurrentDesktopNumber() != num) {
+        GoToVD(num)
+    }
 }
 
 GoToAlternateVD() {
