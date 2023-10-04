@@ -6,6 +6,7 @@ set relativenumber
 set ignorecase
 set smartcase
 set incsearch
+set scrolloff=10
 
 " IDEA Set Handlers
 sethandler a:vim
@@ -19,10 +20,6 @@ sethandler <C-N> n-v:ide
 sethandler <C-M> a:ide
 sethandler <A-D> a:ide
 
-" Recommend to set Forward/Back hotkeys for these
-" sethandler <C-I> a:ide
-" sethandler <C-O> a:ide
-
 " Remap leader
 let mapleader = " "
 
@@ -31,6 +28,9 @@ set easymotion
 set surround
 set multiple-cursors
 set commentary
+Plug 'vim-scripts/argtextobj.vim'
+Plug 'machakann/vim-highlightedyank'
+Plug 'terryma/vim-multiple-cursors'
 
 " Disabling things
 noremap <Up> <nop>
@@ -219,8 +219,7 @@ nnoremap <C-j> :action GotoHarpoon2<CR>
 nnoremap <C-k> :action GotoHarpoon3<CR>
 nnoremap <C-l> :action GotoHarpoon4<CR>
 nnoremap <C-;> :action GotoHarpoon5<CR>
-nnoremap <A-a> :action AddToHarpoon<CR>
-nnoremap <leader>a :action AddToHarpoon<CR>
+nnoremap <A-a> :action AddToHarpoon<CR>:echo "File added"<CR><CR>
 nnoremap <leader><C-h> :action SetHarpoon1<CR>
 nnoremap <leader><C-j> :action SetHarpoon2<CR>
 nnoremap <leader><C-k> :action SetHarpoon3<CR>

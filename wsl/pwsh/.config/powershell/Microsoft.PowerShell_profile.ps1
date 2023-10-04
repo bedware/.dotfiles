@@ -9,23 +9,23 @@ if ($PSVersionTable.OS -match "Linux") {
     }
 } elseif ($PSVersionTable.OS -match "Windows") {
     $env:PATH_SEPARATOR = ";"
-    # Functions
     function scan {
         & "$env:HOME\OneDrive\Soft\SpaceSniffer.exe" scan "$pwd"
     }
+} else {
+    throw "OS is not detected. Separator is not determined!"
 }
 
-
 # Shared environment variables
-# $env:HOME = $env:HOME.ToString().Replace("\", "/")
+
 # Bun
 $env:BUN_INSTALL = "$env:HOME/.bun"
-$env:PATH = "$env:BUN_INSTALL/bin$env:PATH_SEPARATOR$env:PATH"
+$env:PATH += "$env:PATH_SEPARATOR$env:BUN_INSTALL/bin"
 # Scripts
-$env:PATH = "$env:HOME/.local/bin$env:PATH_SEPARATOR$env:PATH"
+$env:PATH += "$env:PATH_SEPARATOR$env:HOME/.local/bin"
 # Java
 $env:JAVA_HOME = "$env:HOME/.jdks/jdk-21"
-$env:PATH = "$env:JAVA_HOME/bin$env:PATH_SEPARATOR$env:PATH"
+$env:PATH += "$env:PATH_SEPARATOR$env:JAVA_HOME/bin"
 
 $env:DOTFILES = "$env:HOME/.dotfiles"
 $env:EDITOR = 'nvim'
@@ -39,12 +39,19 @@ $fzfParam = "--path-separator '/' --hidden " + `
 $env:FZF_CTRL_T_COMMAND = "fd --type f $fzfParam"
 $env:FZF_ALT_C_COMMAND = "fd --type d --follow $fzfParam"
 
-# Shared functions
+# Imports & Init
 
-function CopyPathToClipboard {
-    Get-Location | Set-Clipboard
-}
+. "$env:DOTFILES/wsl/pwsh/.local/bin/lazyload.ps1" `
+    -Modules {Import-Module -Name posh-git} `
+    -AfterModulesLoad {
+        $global:GitPromptSettings.DefaultPromptPrefix.Text = '⭐'
+        # $global:GitPromptSettings.DefaultPromptBeforeSuffix.Text = '`n'
+    }
+. "$env:DOTFILES/wsl/pwsh/.local/bin/nvim-switcher.ps1"
+ 
+# Configuring
 
+Set-PSReadLineOption -EditMode Vi -ViModeIndicator Script -ViModeChangeHandler $Function:OnViModeChange
 function OnViModeChange {
     if ($args[0] -eq 'Command') {
         # Set the cursor to a non blinking block.
@@ -55,19 +62,6 @@ function OnViModeChange {
     }
 }
 
-# Imports & Init
-
-# Write-Host -NoNewLine "`e[6 q" # Set the cursor to a non blinking line.
-Set-PSReadLineOption -EditMode Vi -ViModeIndicator Script -ViModeChangeHandler $Function:OnViModeChange
-
-. "$env:DOTFILES/wsl/pwsh/.local/bin/alias_autocomplete.ps1"
-. "$env:DOTFILES/wsl/pwsh/.local/bin/nvim-switcher.ps1"
-
-Import-Module posh-git
- 
-# Configuring
-
-# fzf
 Set-PsFzfOption `
     -PSReadlineChordProvider 'Ctrl+f' `
     -PSReadlineChordReverseHistory 'Ctrl+r' `
@@ -75,12 +69,16 @@ Set-PsFzfOption `
 
 # Aliases
 
+. "$env:DOTFILES/wsl/pwsh/.local/bin/alias_autocomplete.ps1"
 # dotfiles
 New-Alias -Name .f -Value 'Set-Location $env:DOTFILES'
 New-Alias -Name .fe -Value 'Set-Location $env:DOTFILES && nvim .'
 
 # others
 New-Alias -Name .p -Value CopyPathToClipboard
+function CopyPathToClipboard {
+    Get-Location | Set-Clipboard
+}
 New-Alias -Name l -Value "Get-ChildItem -Force"
 Add-IgnoredAlias -Name vi -Value nvim
 Add-BlankAlias -Name e -Value "`$env:"

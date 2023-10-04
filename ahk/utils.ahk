@@ -18,7 +18,7 @@ ProcessExist(exeName) {
 
 RunIfProcessNotExist(exeName, path) {
     if (!ProcessExist(exeName)) {
-        Run % path
+        Run *RunAs %path%
         return ProcessExist(exeName) 
     }
     return 0

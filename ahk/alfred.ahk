@@ -103,10 +103,14 @@ getShortuctsByComa(apps) {
 
 executeInput(apps, userInput) {
     global desktops
-    if (IsObject(apps[userInput])) { ; Otherwise, a match was found.
-        app := apps[userInput]
+    if (IsObject(apps[userInput . ""])) { ; Otherwise, a match was found.
+        app := apps[userInput . ""]
         if (app.funcName != "") {
-            Func(app.funcName).Call()
+            if (app.param != "") {
+                Func(app.funcName).Call(app.param)
+            } else {
+                Func(app.funcName).Call()
+            }
         } else if (app.selector != "") {
             OutputDebug % "Im going to run " app.path " on " app.selector
             RunIfNotExist(app.selector, app.path)
@@ -123,7 +127,8 @@ executeInput(apps, userInput) {
             }
         } else {
             OutputDebug % "Im going to run the app without selector"
-            Run % app.path
+            path := app.path
+            Run *RunAs %path%
         }
     }
 }

@@ -70,6 +70,18 @@ apps["l"] := { funcName: "FocusOrRunWorkChromeProfile" }
 apps["pd"] := { funcName: "defaultProfile" }
 apps["psc"] := { funcName: "screencastProfile" }
 
+; hotkeys
+apps["1"] := { funcName: "GoToVD", param: 1 }
+apps["2"] := { funcName: "GoToVD", param: 2 }
+apps["3"] := { funcName: "GoToVD", param: 3 }
+apps["4"] := { funcName: "GoToVD", param: 4 }
+apps["5"] := { funcName: "GoToVD", param: 5 }
+apps["6"] := { funcName: "GoToAlternateVD" }
+apps["7"] := { funcName: "GoToVD", param: 7 }
+apps["8"] := { funcName: "GoToVD", param: 8 }
+apps["9"] := { funcName: "GoToVD", param: 9 }
+apps["0"] := { funcName: "GoToVD", param: 6 }
+
 ; Dependencies
 #Include %A_ScriptDir%/utils.ahk
 #Include %A_ScriptDir%/alfred.ahk
