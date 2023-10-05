@@ -39,10 +39,13 @@ map <Left> <nop>
 map <Right> <nop>
 map <Space> <nop>
 
+<<<<<<< HEAD
 " Enter hotkey
 nnoremap <Enter> o<Esc>
 nnoremap <S-Enter> O<Esc>
 
+=======
+>>>>>>> d2399c2c03807085474e81d271b31dad82d0c431
 " Line text object
 xnoremap il g_o0
 xnoremap al $o0
