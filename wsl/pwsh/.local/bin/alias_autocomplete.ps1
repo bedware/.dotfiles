@@ -1,33 +1,35 @@
 $global:BlankAliases = @()
-$global:IgnoredAliases = @()
-$global:IgnoredAliases += "*"
-$global:IgnoredAliases += "?"
-$global:IgnoredAliases += "cat"
-$global:IgnoredAliases += "clear"
-$global:IgnoredAliases += "compare"
-$global:IgnoredAliases += "copy"
-$global:IgnoredAliases += "diff"
-$global:IgnoredAliases += "echo"
-$global:IgnoredAliases += "erase"
-$global:IgnoredAliases += "group"
-$global:IgnoredAliases += "history"
-$global:IgnoredAliases += "kill"
-$global:IgnoredAliases += "ls"
-$global:IgnoredAliases += "man"
-$global:IgnoredAliases += "measure"
-$global:IgnoredAliases += "mount"
-$global:IgnoredAliases += "move"
-$global:IgnoredAliases += "ps"
-$global:IgnoredAliases += "r"
-$global:IgnoredAliases += "rm"
-$global:IgnoredAliases += "select"
-$global:IgnoredAliases += "set"
-$global:IgnoredAliases += "sleep"
-$global:IgnoredAliases += "sort"
-$global:IgnoredAliases += "start"
-$global:IgnoredAliases += "type"
-$global:IgnoredAliases += "where"
-$global:IgnoredAliases += "write"
+$global:IgnoredAliases = @(
+"*",
+"?",
+"%",
+"cat",
+"clear",
+"compare",
+"copy",
+"diff",
+"echo",
+"erase",
+"group",
+"history",
+"kill",
+"ls",
+"man",
+"measure",
+"mount",
+"move",
+"ps",
+"r",
+"rm",
+"select",
+"set",
+"sleep",
+"sort",
+"start",
+"type",
+"where",
+"write"
+)
 
 Set-PSReadLineKeyHandler -Key Spacebar -ScriptBlock {
     AliasExtention -SpaceMode $true

@@ -112,9 +112,6 @@ executeInput(apps, userInput) {
                 Func(app.funcName).Call()
             }
         } else if (app.selector != "") {
-            OutputDebug % "Im going to run " app.path " on " app.selector
-            RunIfNotExist(app.selector, app.path)
-            OutputDebug % "executed"
             if (app.desktop != "") {
                 OutputDebug % "executed inside"
                 num := IndexOf(app.desktop, desktops)
@@ -125,6 +122,9 @@ executeInput(apps, userInput) {
                     GoToVD(num)
                 }
             }
+            OutputDebug % "Im going to run " app.path " on " app.selector
+            RunIfNotExist(app.selector, app.path)
+            OutputDebug % "executed"
         } else {
             OutputDebug % "Im going to run the app without selector"
             path := app.path

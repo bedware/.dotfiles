@@ -21,20 +21,18 @@ apps["steam"] := { desktop: "Personal", selector: "ahk_exe Steam.exe", path: "C:
 ; Work
 apps["draw"] := { desktop: "Work", selector: "Excalidraw ahk_exe msedge.exe", path: HOME . "\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Excalidraw.lnk" }
 apps["figma"] := { desktop: "Work", selector: "ahk_exe Figma.exe", path: HOME . "\AppData\Local\Figma\app-116.5.18\Figma.exe" }
-; apps["g"] := { desktop: "Work", selector: "ahk_exe ChatGPT.exe", path: "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\ChatGPT\ChatGPT.lnk" }
 apps["miro"] := { desktop: "Work", selector: "ahk_exe Miro.exe", path: HOME . "\AppData\Local\RealtimeBoard\Miro.exe" }
-apps["post"] := { desktop: "Work", selector: "ahk_exe Postman.exe", path: HOME . "\AppData\Local\Postman\Postman.exe" }
 apps["rize"] := { desktop: "Work", selector: "ahk_exe Rize.exe", path: "C:\Users\dmitr\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Rize.lnk" }
-; apps["space"] := { desktop: "Work", selector: "ahk_exe spacedeskConsole.exe", path: "C:\Windows\System32\spacedeskConsole.exe" }
 apps["subl"] := { desktop: "Work", selector: "ahk_exe sublime_text.exe", path: "C:\Program Files\Sublime Text\sublime_text.exe" }
 apps["tf"] := { desktop: "Work", selector: "ahk_exe Teamflow.exe", path: HOME . "\AppData\Local\Programs\huddle\Teamflow.exe" }
 ; IDE & Terminal
-apps["idea"] := { desktop: "Dev", selector: "ahk_exe idea64.exe", path: HOME . "\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\JetBrains Toolbox\IntelliJ IDEA Ultimate.lnk" }
+apps["ide"] := { desktop: "Dev", selector: "ahk_exe idea64.exe", path: HOME . "\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\JetBrains Toolbox\IntelliJ IDEA Ultimate.lnk" }
 apps["jvm"] := { desktop: "Dev", selector: "VisualVM", path: HOME . "\.jdks\visualvm_216\bin\visualvm-my-jdk.lnk" }
 apps["jmc"] := { desktop: "Dev", selector: "ahk_exe jmc.exe", path: HOME . "\.jdks\jmc-8.3.1_windows-x64\JDK Mission Control\jmc.exe" }
 apps["jkit"] := { desktop: "Dev", selector: "YourKit", path: "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\YourKit Java Profiler 2021.11-b227.lnk" }
-apps["term"] := { desktop: "Dev", selector: "(Admin:)|(C:) ahk_exe WindowsTerminal.exe", path: "wt --fullscreen" }
-apps["turm"] := { desktop: "Dev", selector: "^(?!Admin).* ahk_exe WindowsTerminal.exe", path: "wt --fullscreen --profile Ubuntu" }
+apps["term"] := { desktop: "Dev", selector: "Admin.* ahk_exe WindowsTerminal.exe", path: "wt.exe --fullscreen" }
+apps["turm"] := { desktop: "Dev", selector: "^(?!Admin).* ahk_exe WindowsTerminal.exe", path: "wt.exe --fullscreen --profile Ubuntu" }
+apps["post"] := { desktop: "Dev", selector: "ahk_exe Postman.exe", path: HOME . "\AppData\Local\Postman\Postman.exe" }
 ; Chats
 apps["slack"] := { desktop: "Chats", selector: "ahk_exe slack.exe", path: HOME . "\AppData\Local\slack\slack.exe" }
 apps["tg"] := { desktop: "Chats", selector: "ahk_exe Telegram.exe", path: HOME . "\AppData\Roaming\Telegram Desktop\Telegram.exe" }
@@ -43,25 +41,25 @@ apps["day"] := { desktop: "Planner", selector: "Calendar ahk_exe firefox.exe", p
 apps["note"] := { desktop: "Planner", selector: "ahk_exe Notion.exe", path: HOME . "\AppData\Local\Programs\Notion\Notion.exe" }
 apps["map"] := { desktop: "Planner", selector: "FreeMind ahk_exe javaw.exe", path: "C:\Program Files (x86)\FreeMind\FreeMind.exe" }
 ; Translation
-apps["atr"] := { desktop: "Translation", path: "C:\Program Files (x86)\ABBYY Lingvo x6\Lingvo.exe" }
-apps["ytr"] := { desktop: "Translation", selector: "Yandex Translate.*", path: HOME . "\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Chrome Apps\Yandex.Translate.lnk" }
-apps["dtr"] := { desktop: "Translation", selector: "DeepL Translate", path: HOME . "\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Chrome Apps\DeepL Translate.lnk" }
-; apps["tr"] := { funcName: "doTranslation" }
+apps["tra"] := { desktop: "Translation", path: "C:\Program Files (x86)\ABBYY Lingvo x6\Lingvo.exe" }
+apps["try"] := { desktop: "Translation", selector: "Yandex Translate.*", path: HOME . "\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Chrome Apps\Yandex.Translate.lnk" }
+apps["trd"] := { desktop: "Translation", selector: "DeepL Translate", path: HOME . "\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Chrome Apps\DeepL Translate.lnk" }
 ; Files
 apps["cmd"] := { desktop: "Files", selector: "ahk_exe TOTALCMD64.EXE", path: "C:\Program Files\totalcmd\TOTALCMD64.EXE" }
 ; Other
 apps["task"] := { desktop: "Other", selector: "ahk_class TaskManagerWindow", path: "Taskmgr.exe" }
 ; Studio
 apps["obs"] := { desktop: "Studio", selector: "ahk_exe obs64.exe", path: "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\OBS Studio\OBS Studio (64bit).lnk" }
-apps["music"] := { desktop: "Studio", selector: "Yandex.Music", path: HOME . "\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Chrome Apps\Yandex.Music.lnk" } 
+apps["music"] := { desktop: "Studio", selector: "YaMusic", path: HOME . "\AppData\Local\Programs\yaradio-yamusic\YaMusic.app.exe" } 
 
 ; desktop independent
-apps[".f"] := { selector: "ahk_exe WindowsTerminal.exe", path: "wt --fullscreen new-tab pwsh -nop -c ""Set-Location $env:USERPROFILE\.dotfiles && nvim .""" }
+apps[".f"] := { selector: "ahk_exe WindowsTerminal.exe", path: "wt.exe --fullscreen new-tab pwsh -nop -c ""Set-Location $env:USERPROFILE\.dotfiles && nvim .""" }
 apps["adbg"] := { selector: "ahk_exe dbgview64.exe", path: HOME . "\OneDrive\Soft\DebugView\dbgview64.exe" }
 apps["ahelp"] := { selector: "AutoHotkey Help", path: AHK_FOLDER . "\AutoHotkey.chm" }
 apps["adoc"] := apps["ahelp"]
 apps["aspy"] := { selector: "Window Spy", path: AHK_FOLDER . "\WindowSpy.ahk" }
 apps["paint"] := { selector: "ahk_exe mspaint.exe", path: "mspaint.exe" }
+apps["pip"] := { selector: "Picture in picture ahk_exe chrome.exe" }
 
 ; functions
 apps["cl"] := { funcName: "RearrangeWindows" }

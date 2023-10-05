@@ -57,9 +57,9 @@ doTranslation() {
     GoToVDIgnoreAlternate(IndexOf("Translation", desktops))
 
     if (InStr(buffer, " ")) { ; a sentence
-        selector := apps["dtr"].selector
+        selector := apps["trd"].selector
         if (!WinExist(selector)) {
-            executeInput(apps, "dtr")
+            executeInput(apps, "trd")
             WinWait, %selector%,, 5
             Sleep, 500
         }
@@ -73,9 +73,9 @@ doTranslation() {
         }
     } else { ; a word
         ; Yandex Translate
-        yandex := apps["ytr"].selector
+        yandex := apps["try"].selector
         if (!WinExist(yandex)) {
-            executeInput(apps, "ytr")
+            executeInput(apps, "try")
             WinWait, %yandex%,, 5
             Sleep, 500
         }
@@ -89,7 +89,7 @@ doTranslation() {
         ; ABBY
         abby := "ABBYY Lingvo ahk_exe Lingvo.exe"
         if (!WinExist(abby)) {
-            executeInput(apps, "atr")
+            executeInput(apps, "tra")
             WinWait, %abby%,, 5
             Sleep, 500
             WinActivate, %abby%
