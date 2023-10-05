@@ -30,11 +30,12 @@ RunIfNotExist(selector, executablePath) {
         OutputDebug % "Activating " selector 
         WinActivate
     } else {
-        Run, %executablePath%
+        Run *RunAs %executablePath%
         WinWait, %selector%,, 10
         if ErrorLevel
         {
             PlayErrorSound()
+            showAlfredError("You have reached the timeout after running.")
         }
         if WinExist(selector) {
             OutputDebug % "Activating after run " selector 

@@ -10,7 +10,7 @@ set scrolloff=10
 
 " IDEA Set Handlers
 sethandler a:vim
-sethandler <S-Enter> a:ide
+sethandler <S-Enter> v-i:ide
 sethandler <C-C> a:ide
 sethandler <C-S> n:ide
 sethandler <C-E> a:ide
@@ -33,11 +33,22 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'terryma/vim-multiple-cursors'
 
 " Disabling things
-noremap <Up> <nop>
-noremap <Down> <nop>
-noremap <Left> <nop>
-noremap <Right> <nop>
-noremap <Space> <nop>
+map <Up> <nop>
+map <Down> <nop>
+map <Left> <nop>
+map <Right> <nop>
+map <Space> <nop>
+
+" Enter hotkey
+nnoremap <Enter> o<Esc>
+nnoremap <S-Enter> O<Esc>
+
+" Line text object
+xnoremap il g_o0
+xnoremap al $o0
+
+" Buffer text object
+xnoremap i% GoggV
 
 " New line on Enter/Shift-Enter
 nnoremap <S-CR> O<Esc>

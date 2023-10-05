@@ -1,8 +1,21 @@
 vim.g.mapleader = " "
 
 -- Navigation
-vim.keymap.set("n", "<leader>sip", vim.cmd.Ex)
--- vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+-- vim.keymap.set("n", "<leader>sip", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+
+-- Enter
+vim.keymap.set("n", "<Enter>", "o<Esc>")
+vim.keymap.set("n", "<S-Enter>", "O<Esc>")
+
+-- Line text object
+vim.keymap.set("x", "il", "g_o0")
+vim.keymap.set("o", "il", ":normal vil<CR>")
+vim.keymap.set("x", "al", "$o0")
+
+-- Buffer text object
+vim.keymap.set("x", "i%", "GoggV")
+vim.keymap.set("o", "i%", ":normal vi%<CR>")
 
 -- Command mode by arrows
 vim.keymap.set("c", "<Up>", "<C-p>")
