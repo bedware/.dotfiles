@@ -2,7 +2,7 @@
 
 # Environment variables
 
-$env:DOTFILES = "$env:HOME/.dotfiles"
+$env:DOTFILES = $env:HOME.ToString().Replace("\", "/") + "/.dotfiles"
 # Editor
 $env:EDITOR = "nvim"
 $env:VISUAL = "$env:EDITOR"
@@ -11,8 +11,8 @@ $env:BUN_INSTALL = "$env:HOME/.bun"
 # Java
 $env:JAVA_HOME = "$env:HOME/.jdks/jdk-21"
 # fzf
-$exclude = @('.git', 'AppData', '.m2', '.jdks', '.gradle')
-$fzfParam = "--path-separator '/' --hidden " + @($exclude | ForEach-Object {"--exclude '$_'"}) -join " "
+$fzfExclude = @('.git', 'AppData', '.m2', '.jdks', '.gradle')
+$fzfParam = "--path-separator '/' --hidden " + @($fzfExclude | ForEach-Object {"--exclude '$_'"}) -join " "
 $env:FZF_CTRL_T_COMMAND = "fd --type f $fzfParam"
 $env:FZF_ALT_C_COMMAND = "fd --type d --follow $fzfParam"
 
@@ -37,10 +37,15 @@ $env:PATH += "$env:PATH_SEPARATOR$env:JAVA_HOME/bin"
 $env:PATH += "$env:PATH_SEPARATOR$env:HOME/.local/bin"
 
 # Imports & Init
-
+$backup = $profile
 . "$env:DOTFILES/wsl/pwsh/.local/bin/lazyload.ps1" `
     -Modules { Import-Module -Name posh-git } `
-    -AfterModulesLoad { $global:GitPromptSettings.DefaultPromptPrefix.Text = '⭐' }
+    -AfterModulesLoad { 
+        $global:GitPromptSettings.DefaultPromptPrefix.Text = "☹️  "
+        $global:GitPromptSettings.DefaultPromptBeforeSuffix.Text = "`n"
+        $global:GitPromptSettings.DefaultPromptSuffix.Text = ""
+        $global:profile = $backup
+    }
 . "$env:DOTFILES/wsl/pwsh/.local/bin/vimode.ps1"
 . "$env:DOTFILES/wsl/pwsh/.local/bin/nvim-switcher.ps1"
 . "$env:DOTFILES/wsl/pwsh/.local/bin/alias_autocomplete.ps1"
@@ -56,6 +61,8 @@ Set-PsFzfOption -PSReadlineChordProvider "Ctrl+f" `
 
 New-Alias -Name .f -Value "Set-Location $env:DOTFILES"
 New-Alias -Name .fe -Value "Set-Location $env:DOTFILES && nvim ."
+New-Alias -Name .a -Value "Set-Location $env:DOTFILES/ahk"
+New-Alias -Name .ae -Value "Set-Location $env:DOTFILES/ahk && nvim ."
 New-Alias -Name l -Value "Get-ChildItem -Force"
 Add-IgnoredAlias -Name vi -Value "nvim"
 Add-BlankAlias -Name e -Value "`$env:"

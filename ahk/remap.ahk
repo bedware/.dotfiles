@@ -22,6 +22,31 @@ Volume_Down::
 SoundSet, -2, Master, Volume, 4
 return
 
+!^f:: ; Make any window windowed fullscreen
+WinSet, Style, -0xC40000, A
+; WinMove, A, , 0, 0, 3456, 2176
+; WinMove, A, , 0, 0, 2160, 3348
+return
+
+!^;::
+WinMove, A, , -10, -100, 2180, 1325
+return
+
+#`:: ; Quake alive
+    processName := "WindowsTerminal.exe"
+    if (!ProcessExist("WindowsTerminal.exe")) {
+        Run, wt.exe -w _quake
+        WinWait, ahk_exe WindowsTerminal.exe,, 5
+        WinActivate
+    } else {
+        Send #``
+    }
+return
+#Enter::
+    global apps
+    Run % apps["term"].path
+return
+
 ; Laptop
 Home::F16 ; Start/stop recording
 End::F20 ; Pause/unpause recording

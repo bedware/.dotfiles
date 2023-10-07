@@ -1,29 +1,32 @@
-$testRounds = 10
-$i = 100 / $testRounds
-$p = 0
-
 function testEmptyProfile {
+    $activity = "empty"
+    $testRounds = 10
+    $i = 100 / $testRounds
+    $totalTimeMs = 0
     1..$testRounds | ForEach-Object {
-        Write-Progress -Id 1 -Activity 'pwsh' -PercentComplete ($_ * $i)
-        $p += (Measure-Command {
+        Write-Progress -Id 1 -Activity $activity -PercentComplete ($_ * $i)
+        $totalTimeMs += (Measure-Command {
             pwsh -noprofile -command 1
         }).TotalMilliseconds 
     }
-    Write-Progress -id 1 -Activity 'profile' -Completed
-    $p = $p/$testRounds
-    $p
+    Write-Progress -id 1 -Activity $activity -Completed
+    Write-Host ($totalTimeMs/$testRounds)
 }
 
+
 function testMyProfile {
-    $a = 0
+    $activity = "myprofile"
+    $testRounds = 10
+    $i = 100 / $testRounds
+    $totalTimeMs = 0
     1..$testRounds | ForEach-Object {
-        Write-Progress -Id 1 -Activity 'profile' -PercentComplete ($_ * $i)
-        $a += (Measure-Command {
+        Write-Progress -Id 1 -Activity $activity -PercentComplete ($_ * $i)
+        $totalTimeMs += (Measure-Command {
             pwsh -command 1
         }).TotalMilliseconds
     }
-    Write-Progress -id 1 -activity 'profile' -Completed
-    $a/$testRounds - $p
+    Write-Progress -id 1 -activity $activity -Completed
+    Write-Host ($totalTimeMs/$testRounds)
 }
 
 testEmptyProfile

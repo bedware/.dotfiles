@@ -4,10 +4,6 @@
     "actions": 
     [
         {
-            "command": "openNewTabDropdown",
-            "keys": "menu"
-        },
-        {
             "command": 
             {
                 "action": "sendInput",
@@ -24,16 +20,16 @@
             "keys": "alt+\\"
         },
         {
-            "command": "find",
-            "keys": "ctrl+/"
+            "command": "openNewTabDropdown",
+            "keys": "menu"
         },
         {
             "command": "openTabRenamer",
             "keys": "alt+r"
         },
         {
-            "command": "toggleFocusMode",
-            "keys": "alt+f"
+            "command": "find",
+            "keys": "ctrl+/"
         },
         {
             "command": 
@@ -42,6 +38,10 @@
                 "split": "down"
             },
             "keys": "alt+minus"
+        },
+        {
+            "command": "toggleFocusMode",
+            "keys": "alt+f"
         },
         {
             "command": 
@@ -102,7 +102,7 @@
             "font": 
             {
                 "face": "CaskaydiaCove NFM",
-                "size": 16.0
+                "size": 14.0
             },
             "opacity": 80,
             "padding": "0",

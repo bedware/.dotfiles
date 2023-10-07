@@ -10,7 +10,7 @@ RunIfNotExistChromeProfile(profile, executablePath) {
     if ChromeProfileWinExist(profile)
        WinActivate
     else
-       Run, %executablePath%
+       Run %executablePath%
 }
 
 ChromeProfileWinExist(profile) {

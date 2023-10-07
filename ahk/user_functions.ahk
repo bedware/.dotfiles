@@ -23,7 +23,7 @@ defaultProfile() {
     init.Push({ name: "obs", ref: apps["obs"] })
     init.Push({ name: "task", ref: apps["task"], maximize: true })
     init.Push({ name: "tg", ref: apps["tg"] })
-    init.Push({ name: "music", ref: apps["music"] })
+    ; init.Push({ name: "music", ref: apps["music"] })
     init.Push({ name: "note", ref: apps["note"], maximize: true })
     init.Push({ name: "term", ref: apps["term"] })
     init.Push({ name: "cmd", ref: apps["cmd"] })

@@ -1,5 +1,5 @@
 shell:
-  program: "C:/Program Files/PowerShell/7/pwsh.exe"
+  program: "pwsh -wd ~"
 font:
   normal:
     family: "CaskaydiaCove NFM"
@@ -9,12 +9,10 @@ font:
     family: "CaskaydiaCove NFM"
   bold_italic:
     family: "CaskaydiaCove NFM"
-  size: 16
+  size: 14
 window:
-  startup_mode: fullscreen
-  opacity: 0.85
-colors:
-  primary:
-    background: '#191724'
-    foreground: '#f6c177'
-
+#  startup_mode: Maximized
+  decorations: None
+  opacity: 0.8
+import:
+ - ~/.config/alacritty/themes/themes/campbell.yaml

@@ -1,34 +1,34 @@
 $global:BlankAliases = @()
 $global:IgnoredAliases = @(
-"*",
-"?",
-"%",
-"cat",
-"clear",
-"compare",
-"copy",
-"diff",
-"echo",
-"erase",
-"group",
-"history",
-"kill",
-"ls",
-"man",
-"measure",
-"mount",
-"move",
-"ps",
-"r",
-"rm",
-"select",
-"set",
-"sleep",
-"sort",
-"start",
-"type",
-"where",
-"write"
+    "*",
+    "?",
+    "%",
+    "cat",
+    "clear",
+    "compare",
+    "copy",
+    "diff",
+    "echo",
+    "erase",
+    "group",
+    "history",
+    "kill",
+    "ls",
+    "man",
+    "measure",
+    "mount",
+    "move",
+    "ps",
+    "r",
+    "rm",
+    "select",
+    "set",
+    "sleep",
+    "sort",
+    "start",
+    "type",
+    "where",
+    "write"
 )
 
 Set-PSReadLineKeyHandler -Key Spacebar -ScriptBlock {
@@ -39,25 +39,27 @@ Set-PSReadLineKeyHandler -Key Enter -ScriptBlock {
     AliasExtention
     [Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
 }
+Set-PSReadLineKeyHandler -Chord Alt+u -ScriptBlock {
+    [Microsoft.PowerShell.PSConsoleReadLine]::DeleteLine()
+    [Microsoft.PowerShell.PSConsoleReadLine]::Insert('cd ..')
+    [Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
+}
 
-function Add-BlankAlias
-{
+function Add-BlankAlias {
     param($Name, $Value)
 
     Set-Alias -Scope Global -Name $Name -Value $Value
     $global:BlankAliases += $Name
 }
 
-function Add-IgnoredAlias
-{
+function Add-IgnoredAlias {
     param($Name, $Value)
 
     Set-Alias -Scope Global -Name $Name -Value $Value
     $global:IgnoredAliases += $Name
 }
 
-function AliasExtention
-{
+function AliasExtention {
     param($SpaceMode = $false)
     $wordBeforeCursorStartIndex = $null
     $wordBeforeCursor = GetLastWordBeforeCursor([ref]$wordBeforeCursorStartIndex)
@@ -66,23 +68,19 @@ function AliasExtention
     {
         if ($global:IgnoredAliases -contains $wordBeforeCursor)
         {
-            if ($SpaceMode)
-            { [Microsoft.PowerShell.PSConsoleReadLine]::Insert(" ") 
+            if ($SpaceMode) {
+                [Microsoft.PowerShell.PSConsoleReadLine]::Insert(" ")
             }
-        } else
-        {
+        } else {
             [Microsoft.PowerShell.PSConsoleReadLine]::Replace($wordBeforeCursorStartIndex, $wordBeforeCursor.Length, $alias.Definition)
-            if ($global:BlankAliases -notcontains $wordBeforeCursor)
-            {
-                if ($SpaceMode)
-                { [Microsoft.PowerShell.PSConsoleReadLine]::Insert(" ") 
+            if ($global:BlankAliases -notcontains $wordBeforeCursor) {
+                if ($SpaceMode) {
+                    [Microsoft.PowerShell.PSConsoleReadLine]::Insert(" ") 
                 }
             }
         }
-    } else
-    {
-        if (-not [string]::IsNullOrEmpty($wordBeforeCursor) -and $wordBeforeCursor.Chars(0) -eq ",")
-        {
+    } else {
+        if (-not [string]::IsNullOrEmpty($wordBeforeCursor) -and $wordBeforeCursor.Chars(0) -eq ",") {
             if ($wordBeforeCursor -eq ",s") {
                 [Microsoft.PowerShell.PSConsoleReadLine]::Replace($wordBeforeCursorStartIndex, $wordBeforeCursor.Length, "sgpt `'`'")
                 [Microsoft.PowerShell.PSConsoleReadLine]::BackwardChar()
@@ -94,23 +92,20 @@ function AliasExtention
             }
             [Microsoft.PowerShell.PSConsoleReadLine]::Replace($wordBeforeCursorStartIndex, $wordBeforeCursor.Length, $wordBeforeCursor.Substring(1, $wordBeforeCursor.Length - 1))
         }
-        if ($SpaceMode)
-        { [Microsoft.PowerShell.PSConsoleReadLine]::Insert(" ") 
+        if ($SpaceMode) {
+            [Microsoft.PowerShell.PSConsoleReadLine]::Insert(" ")
         }
     }
 }
 
-function GetAliasByWord($wordBeforeCursor)
-{
-    if (-not [string]::IsNullOrEmpty($wordBeforeCursor) -and (Get-Alias).Name -Contains $wordBeforeCursor)
-    {
+function GetAliasByWord($wordBeforeCursor) {
+    if (-not [string]::IsNullOrEmpty($wordBeforeCursor) -and (Get-Alias).Name -Contains $wordBeforeCursor) {
         return Get-Alias -Name $wordBeforeCursor
     }
     return $null
 }
 
-function GetLastWordBeforeCursor([ref]$wordBeforeCursorStartIndex = $null)
-{
+function GetLastWordBeforeCursor([ref]$wordBeforeCursorStartIndex = $null) {
     $buffer = $null
     $cursor = $null
     [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref]$buffer, [ref]$cursor)

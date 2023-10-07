@@ -18,7 +18,7 @@ ProcessExist(exeName) {
 
 RunIfProcessNotExist(exeName, path) {
     if (!ProcessExist(exeName)) {
-        Run *RunAs %path%
+        Run %path%
         return ProcessExist(exeName) 
     }
     return 0
@@ -30,7 +30,7 @@ RunIfNotExist(selector, executablePath) {
         OutputDebug % "Activating " selector 
         WinActivate
     } else {
-        Run *RunAs %executablePath%
+        Run %executablePath%
         WinWait, %selector%,, 10
         if ErrorLevel
         {

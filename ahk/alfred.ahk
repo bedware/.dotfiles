@@ -15,7 +15,7 @@ RunAlfred(apps) {
     }
     if (ErrorLevel = "Timeout")
     {
-        showAlfredError("You have reached the timeout of " timeout " per command.")
+        showAlfredError("You have reached the timeout of " timeout " seconds.")
         hideAlfred()
         return
     }
@@ -37,14 +37,9 @@ RunAlfred(apps) {
 }
 
 showAlfred() {
-    Gui, Destroy
-    Gui, -Caption -AlwaysOnTop +ToolWindow +DPIScale
-    Gui, Margin, 0, 0
     FormatTime, currentDateTime, %A_Now%, yyyy-MM-dd HH:mm:ss
-    info := "bedware.software | " currentDateTime
-    html := getHTMLForAlfred(info, "rgb(255, 222, 93)")
-    Gui, Add, ActiveX, w2000 h48, %html%
-    Gui, Show, xCenter y2076 NoActivate
+    color := "rgb(255, 222, 93)"
+    getHTMLForAlfred(color, currentDateTime)
 
     selector := "bedware.ahk"
     if WinExist(selector) {
@@ -57,33 +52,34 @@ showAlfred() {
 }
 
 showAlfredError(errorText) {
-    Gui, Destroy
-    Gui, -Caption -AlwaysOnTop +ToolWindow +DPIScale
-    Gui, Margin, 0, 0
-    info := "bedware.software | " errorText
-    html := getHTMLForAlfred(errorText, "rgb(255, 0, 0)")
-    Gui, Add, ActiveX, w2000 h48, %html%
-    Gui, Show, xCenter y2076
-
+    color := "rgb(255, 0, 0)"
+    getHTMLForAlfred(color, errorText)
     OutputDebug % "Alfred error show"
     Sleep 4000
 }
 
-getHTMLForAlfred(text, bgColor) {
+getHTMLForAlfred(bgColor, text) {
+    Gui, Destroy
+    Gui, -Caption -AlwaysOnTop +ToolWindow +DPIScale
+    Gui, Margin, 0, 0
+    info := "bedware.software | " text
+    taskbarHeight := 52
     html = 
     (
         mshtml:
         <div style='
-                border: 48px solid %bgColor%;
-                background-color: %bgColor%;
-                margin-left: -10px;
-                margin-top: -45px;
+                margin: -15px -10px;
+                background: %bgColor%;
+                padding: 35px;
                 font-size: 36px;
                 font-weight: bold;
                 font-style: none;
                 font-family: "Segoe UI";
-            '>%text%</div>
+            '>%info%</div>
+        </body>
     )
+    Gui, Add, ActiveX, w960 h%taskbarHeight%, %html%
+    Gui, Show, xCenter y1100 NoActivate
     return html
 }
 
