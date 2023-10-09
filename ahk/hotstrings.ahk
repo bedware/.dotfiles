@@ -6,7 +6,7 @@
 
 ; Git
 ::gst::git status
-::gd::git diff
+::gd::git diff --color | less -R
 
 ; Other
 

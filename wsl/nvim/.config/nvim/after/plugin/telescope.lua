@@ -1,5 +1,3 @@
--- More info here:
--- https://github.com/nvim-telescope/telescope.nvim/wiki/Configuration-Recipes#file-and-text-search-in-hidden-files-and-directories
 local telescope = require("telescope")
 local telescopeConfig = require("telescope.config")
 
@@ -14,14 +12,20 @@ table.insert(vimgrep_arguments, "--hidden")
 
 telescope.setup({
 	defaults = {
-		-- `hidden = true` is not supported in text grep commands.
 		vimgrep_arguments = vimgrep_arguments,
 	},
 	pickers = {
 		find_files = {
-			-- `hidden = true` will still show the inside of `.git/` as it's not `.gitignore`d.
-			-- find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
-			find_command = { "fd", "--hidden", "--exclude",  ".git" },
+			find_command = { "fd", "--hidden", "--follow", "--type", "file", "--exclude",  ".git" },
 		},
 	},
 })
+
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+vim.keymap.set('n', '<leader>fk', builtin.keymaps, {})
+vim.keymap.set('n', '<leader>fd', builtin.diagnostics, {})
+vim.keymap.set('n', '<C-p>', builtin.git_files, {})
+

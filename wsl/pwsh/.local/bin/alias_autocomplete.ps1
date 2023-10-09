@@ -34,7 +34,6 @@ $global:IgnoredAliases = @(
 Set-PSReadLineKeyHandler -Key Spacebar -ScriptBlock {
     AliasExtention -SpaceMode $true
 }
-
 Set-PSReadLineKeyHandler -Key Enter -ScriptBlock {
     AliasExtention
     [Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
@@ -43,6 +42,9 @@ Set-PSReadLineKeyHandler -Chord Alt+u -ScriptBlock {
     [Microsoft.PowerShell.PSConsoleReadLine]::DeleteLine()
     [Microsoft.PowerShell.PSConsoleReadLine]::Insert('cd ..')
     [Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
+}
+Set-PSReadLineKeyHandler -Chord Ctrl+w -ScriptBlock {
+    [Microsoft.PowerShell.PSConsoleReadLine]::BackwardDeleteWord()
 }
 
 function Add-BlankAlias {

@@ -32,8 +32,7 @@ RunIfNotExist(selector, executablePath) {
     } else {
         Run %executablePath%
         WinWait, %selector%,, 10
-        if ErrorLevel
-        {
+        if ErrorLevel {
             PlayErrorSound()
             showAlfredError("You have reached the timeout after running.")
         }

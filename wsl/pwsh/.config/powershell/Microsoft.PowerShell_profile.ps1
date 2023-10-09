@@ -1,6 +1,6 @@
 [Console]::InputEncoding = [Console]::OutputEncoding = [System.Text.UTF8Encoding]::new()
 
-# Environment variables
+# Environment variables {{{1
 
 $env:DOTFILES = $env:HOME.ToString().Replace("\", "/") + "/.dotfiles"
 # Editor
@@ -16,7 +16,7 @@ $fzfParam = "--path-separator '/' --hidden " + @($fzfExclude | ForEach-Object {"
 $env:FZF_CTRL_T_COMMAND = "fd --type f $fzfParam"
 $env:FZF_ALT_C_COMMAND = "fd --type d --follow $fzfParam"
 
-# Platform-dependent stuff
+# Platform-dependent stuff {{{1
 
 if ($PSVersionTable.OS -match "Linux") {
     $env:PATH_SEPARATOR = ":"
@@ -31,12 +31,14 @@ if ($PSVersionTable.OS -match "Linux") {
     throw "OS is not detected. Separator is not determined!"
 }
 
-# Path
+# Path {{{1
+
 $env:PATH += "$env:PATH_SEPARATOR$env:BUN_INSTALL/bin"
 $env:PATH += "$env:PATH_SEPARATOR$env:JAVA_HOME/bin"
 $env:PATH += "$env:PATH_SEPARATOR$env:HOME/.local/bin"
 
-# Imports & Init
+# Imports & Init {{{1
+
 $backup = $profile
 . "$env:DOTFILES/wsl/pwsh/.local/bin/lazyload.ps1" `
     -Modules { Import-Module -Name posh-git } `
@@ -51,22 +53,23 @@ $backup = $profile
 . "$env:DOTFILES/wsl/pwsh/.local/bin/alias_autocomplete.ps1"
 . "$env:DOTFILES/wsl/pwsh/.local/bin/user_functions.ps1"
  
-# Configuring
+# Configuring {{{1
 
 Set-PsFzfOption -PSReadlineChordProvider "Ctrl+f" `
                 -PSReadlineChordReverseHistory "Ctrl+r" `
                 -PSReadlineChordSetLocation "Ctrl+g"
 
-# Aliases
+# Aliases {{{1
 
-New-Alias -Name .f -Value "Set-Location $env:DOTFILES"
-New-Alias -Name .fe -Value "Set-Location $env:DOTFILES && nvim ."
-New-Alias -Name .a -Value "Set-Location $env:DOTFILES/ahk"
-New-Alias -Name .ae -Value "Set-Location $env:DOTFILES/ahk && nvim ."
+New-Alias -Name .f -Value "cd $env:DOTFILES"
+New-Alias -Name .fe -Value "`$curr=pwd;cd $env:DOTFILES && nvim .; cd `$curr"
+New-Alias -Name .a -Value "cd $env:DOTFILES/ahk"
+New-Alias -Name .ae -Value "`$curr=pwd;cd $env:DOTFILES/ahk && nvim .; cd `$curr"
+New-Alias -Name .n -Value "cd $env:DOTFILES/wsl/nvim/.config/nvim"
+New-Alias -Name .ne -Value "`$curr=pwd;cd $env:DOTFILES/wsl/nvim/.config/nvim && nvim .; cd `$curr"
+New-Alias -Name .p -Value CopyPathToClipboard
+New-Alias -Name .pe -Value "vi `$profile" 
 New-Alias -Name l -Value "Get-ChildItem -Force"
 Add-IgnoredAlias -Name vi -Value "nvim"
 Add-BlankAlias -Name e -Value "`$env:"
-
-# aliases with functions
-New-Alias -Name .p -Value CopyPathToClipboard
 

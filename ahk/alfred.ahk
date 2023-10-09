@@ -63,7 +63,7 @@ getHTMLForAlfred(bgColor, text) {
     Gui, -Caption -AlwaysOnTop +ToolWindow +DPIScale
     Gui, Margin, 0, 0
     info := "bedware.software | " text
-    taskbarHeight := 52
+    taskbarHeight := 48
     html = 
     (
         mshtml:
@@ -101,13 +101,7 @@ executeInput(apps, userInput) {
     global desktops
     if (IsObject(apps[userInput . ""])) { ; Otherwise, a match was found.
         app := apps[userInput . ""]
-        if (app.funcName != "") {
-            if (app.param != "") {
-                Func(app.funcName).Call(app.param)
-            } else {
-                Func(app.funcName).Call()
-            }
-        } else if (app.selector != "") {
+        if (app.selector != "") {
             if (app.desktop != "") {
                 OutputDebug % "executed inside"
                 num := IndexOf(app.desktop, desktops)
@@ -124,7 +118,14 @@ executeInput(apps, userInput) {
         } else {
             OutputDebug % "Im going to run the app without selector"
             path := app.path
-            Run *RunAs %path%
+            Run %path%
         }
+        if (app.postFunction != "") {
+            if (app.postFunctionParam != "") {
+                Func(app.postFunction).Call(app.postFunctionParam)
+            } else {
+                Func(app.postFunction).Call()
+            }
+        } 
     }
 }

@@ -15,21 +15,19 @@ return ; To make mouse hook work
 ; Use the Soundcard Analysis script found here to set these parameters
 ; https://www.autohotkey.com/docs/commands/SoundSet.htm#Soundcard
 Volume_Up::
-SoundSet, +2, Master, Volume, 4
+    SoundSet, +2, Master, Volume, 4
 return
 
 Volume_Down::
-SoundSet, -2, Master, Volume, 4
+    SoundSet, -2, Master, Volume, 4
 return
 
 !^f:: ; Make any window windowed fullscreen
-WinSet, Style, -0xC40000, A
-; WinMove, A, , 0, 0, 3456, 2176
-; WinMove, A, , 0, 0, 2160, 3348
+    makeAnyWindowFullsreen()
 return
 
 !^;::
-WinMove, A, , -10, -100, 2180, 1325
+    WinMove, A, , -10, -100, 2180, 1325
 return
 
 #`:: ; Quake alive
@@ -43,8 +41,10 @@ return
     }
 return
 #Enter::
-    global apps
-    Run % apps["term"].path
+    ; global apps
+    ; app := apps["term"]
+    ; RunIfNotExist(app.selector, app.path)
+    Run wt
 return
 
 ; Laptop

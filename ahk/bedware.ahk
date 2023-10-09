@@ -20,7 +20,9 @@ desktops := ["Personal", "Work", "Dev", "Planner", "Chats", "Studio", "Translati
 apps := {}
 ; Personal
 apps["steam"] := { desktop: "Personal", selector: "ahk_exe Steam.exe", path: "C:\Program Files (x86)\Steam\Steam.exe" }
+apps["h"] := { desktop: "Personal", selector: "ahk_exe chrome.exe", path: ALOCAL . "\Google\Chrome SxS\Application\chrome.exe" }
 ; Work
+apps["l"] := { desktop: "Work", selector: "ahk_exe chrome.exe", path: "C:\Program Files\Google\Chrome\Application\chrome.exe" }
 apps["draw"] := { desktop: "Work", selector: "Excalidraw ahk_exe msedge.exe", path: AROAMI . "\Microsoft\Windows\Start Menu\Programs\Excalidraw.lnk" }
 apps["figma"] := { desktop: "Work", selector: "ahk_exe Figma.exe", path: ALOCAL . "\Figma\app-116.5.18\Figma.exe" }
 apps["miro"] := { desktop: "Work", selector: "ahk_exe Miro.exe", path: ALOCAL . "\RealtimeBoard\Miro.exe" }
@@ -33,6 +35,8 @@ apps["jmc"] := { desktop: "Dev", selector: "ahk_exe jmc.exe", path: HOME . "\.jd
 apps["jkit"] := { desktop: "Dev", selector: "YourKit", path: "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\YourKit Java Profiler 2021.11-b227.lnk" }
 apps["post"] := { desktop: "Dev", selector: "ahk_exe Postman.exe", path: ALOCAL . "\Postman\Postman.exe" }
 apps["pod"] := { desktop: "Dev", selector: "ahk_exe Podman Desktop.exe", path: ALOCAL . "\Programs\podman-desktop\Podman Desktop.exe" }
+apps["term"] := { desktop: "Dev", selector: "windows ahk_exe alacritty.exe", path: """C:\Program Files\Alacritty\alacritty.exe"" --title windows", postFunction: "makeAnyWindowFullsreen" }
+apps["turm"] := { desktop: "Dev", selector: "ubuntu ahk_exe alacritty.exe", path: """C:\Program Files\Alacritty\alacritty.exe"" --title ubuntu --command wsl -d Ubuntu-22.04 --cd ~", postFunction: "makeAnyWindowFullsreen"}
 ; Chats
 apps["slack"] := { desktop: "Chats", selector: "ahk_exe slack.exe", path: ALOCAL . "\slack\slack.exe" }
 apps["tg"] := { desktop: "Chats", selector: "ahk_exe Telegram.exe", path: AROAMI . "\Telegram Desktop\Telegram.exe" }
@@ -52,8 +56,6 @@ apps["task"] := { desktop: "Other", selector: "ahk_class TaskManagerWindow", pat
 apps["obs"] := { desktop: "Studio", selector: "ahk_exe obs64.exe", path: "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\OBS Studio\OBS Studio (64bit).lnk" }
 
 ; desktop independent
-apps["term"] := { selector: "windows ahk_exe alacritty.exe", path: """C:\Program Files\Alacritty\alacritty.exe"" --title windows" }
-apps["turm"] := { selector: "ubuntu ahk_exe alacritty.exe", path: """C:\Program Files\Alacritty\alacritty.exe"" --title ubuntu --command wsl -d Ubuntu-22.04 --cd ~" }
 apps["quake"] := { selector: "ahk_exe WindowsTerminal.exe", path: "wt.exe -w _quake" }
 apps["adbg"] := { selector: "ahk_exe dbgview64.exe", path: HOME . "\OneDrive\Soft\DebugView\dbgview64.exe" }
 apps["ahelp"] := { selector: "AutoHotkey Help", path: AHK_FOLDER . "\AutoHotkey.chm" }
@@ -61,24 +63,24 @@ apps["adoc"] := apps["ahelp"]
 apps["aspy"] := { selector: "Window Spy", path: AHK_FOLDER . "\WindowSpy.ahk" }
 apps["paint"] := { selector: "ahk_exe mspaint.exe", path: "mspaint.exe" }
 apps["pip"] := { selector: "Picture in picture ahk_exe chrome.exe" }
+apps["razer"] := { selector: "Razer", path: "C:\Program Files (x86)\Razer\Synapse3\WPFUI\Framework\Razer Synapse 3 Host\Razer Synapse 3.exe /StartMinimized" }
 
 ; functions
-apps["cl"] := { funcName: "RearrangeWindows" }
-apps["h"] := { selector: "ahk_exe chrome.exe", path: ALOCAL . "\Google\Chrome SxS\Application\chrome.exe" }
-apps["l"] := { selector: "ahk_exe chrome.exe", path: "C:\Program Files\Google\Chrome\Application\chrome.exe" }
-apps["pd"] := { funcName: "defaultProfile" }
+apps["cl"] := { postFunction: "RearrangeWindows" }
+apps["pd"] := { postFunction: "defaultProfile" }
+apps["ps"] := { postFunction: "screencastProfile" }
 
 ; hotkeys
-apps["1"] := { funcName: "GoToVD", param: 1 }
-apps["2"] := { funcName: "GoToVD", param: 2 }
-apps["3"] := { funcName: "GoToVD", param: 3 }
-apps["4"] := { funcName: "GoToVD", param: 4 }
-apps["5"] := { funcName: "GoToVD", param: 5 }
-apps["6"] := { funcName: "GoToAlternateVD" }
-apps["7"] := { funcName: "GoToVD", param: 7 }
-apps["8"] := { funcName: "GoToVD", param: 8 }
-apps["9"] := { funcName: "GoToVD", param: 9 }
-apps["0"] := { funcName: "GoToVD", param: 6 }
+apps["1"] := { postFunction: "GoToVD", postFunctionParam: 1 }
+apps["2"] := { postFunction: "GoToVD", postFunctionParam: 2 }
+apps["3"] := { postFunction: "GoToVD", postFunctionParam: 3 }
+apps["4"] := { postFunction: "GoToVD", postFunctionParam: 4 }
+apps["5"] := { postFunction: "GoToVD", postFunctionParam: 5 }
+apps["6"] := { postFunction: "GoToAlternateVD" }
+apps["7"] := { postFunction: "GoToVD", postFunctionParam: 7 }
+apps["8"] := { postFunction: "GoToVD", postFunctionParam: 8 }
+apps["9"] := { postFunction: "GoToVD", postFunctionParam: 9 }
+apps["0"] := { postFunction: "GoToVD", postFunctionParam: 6 }
 
 ; Dependencies
 #Include %A_ScriptDir%/utils.ahk
