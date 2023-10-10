@@ -12,6 +12,8 @@ return ; To make mouse hook work
 *~WheelDown::return ; To make mouse hook work
 *~WheelUp::return ; To make mouse hook work
 
+^;::^F5
+^'::^F6
 ; Use the Soundcard Analysis script found here to set these parameters
 ; https://www.autohotkey.com/docs/commands/SoundSet.htm#Soundcard
 Volume_Up::
