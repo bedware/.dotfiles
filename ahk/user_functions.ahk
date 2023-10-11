@@ -112,6 +112,7 @@ screencastProfile() {
     init := [] 
     init.Push({ name: "obs", ref: apps["obs"] })
     init.Push({ name: "razer", ref: apps["razer"] })
+    init.Push({ name: "carnac", ref: apps["carnac"] })
 
     for index, app in init {
         if (app.ref.desktop != "") {
