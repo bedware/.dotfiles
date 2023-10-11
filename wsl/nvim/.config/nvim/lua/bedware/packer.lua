@@ -21,7 +21,6 @@ return require('packer').startup(function(use)
     })
     use({
         'nvim-telescope/telescope.nvim',
-        tag = '0.1.1',
         requires = { { 'nvim-lua/plenary.nvim' } }
     })
     use({
@@ -30,7 +29,7 @@ return require('packer').startup(function(use)
     })
     use({
         "windwp/nvim-autopairs",
-        config = function() require("nvim-autopairs").setup {} end
+        config = function() require("nvim-autopairs").setup() end
     })
     use('mbbill/undotree')
     use('folke/trouble.nvim')
@@ -71,14 +70,12 @@ return require('packer').startup(function(use)
     use("github/copilot.vim")
     use({
         "jackMort/ChatGPT.nvim",
-        config = function()
-            require("chatgpt").setup({})
-        end,
         requires = {
             "MunifTanjim/nui.nvim",
             "nvim-lua/plenary.nvim",
             "nvim-telescope/telescope.nvim"
-        }
+        },
+        config = function() require("chatgpt").setup() end
     })
     -------------- Other
     use('folke/zen-mode.nvim')
