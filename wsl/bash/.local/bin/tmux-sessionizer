@@ -3,7 +3,9 @@
 if [[ $# -eq 1 ]]; then
     session_path=$1
 else
-    session_path=$(find ~ ~/personal/ -mindepth 1 -maxdepth 2 -type d | grep -v -e .cache -e .git -e _logs | fzf)
+    session_path=$(fd --min-depth 1 --max-depth 2 --type directory . ~/personal ~/work \
+    | grep -v -e .cache -e .git -e _logs \
+    | fzf)
 fi
 
 session_name=$(basename "$session_path" | tr . _)
