@@ -68,7 +68,7 @@ return require('packer').startup(function(use)
         }
     })
     -------------- AI
-    -- use("github/copilot.vim")
+    use("github/copilot.vim")
     use({
         "jackMort/ChatGPT.nvim",
         config = function()
