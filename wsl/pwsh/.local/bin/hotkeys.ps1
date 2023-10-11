@@ -1,5 +1,3 @@
-. "alias_autocomplete.ps1"
-
 Set-PSReadLineKeyHandler -Key Spacebar -ScriptBlock {
     AliasExtention -Mode "Space"
 }

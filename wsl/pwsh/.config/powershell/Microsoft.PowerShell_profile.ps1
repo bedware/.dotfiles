@@ -47,6 +47,7 @@ $backup = $profile
     }
 . "$env:DOTFILES/wsl/pwsh/.local/bin/vimode.ps1"
 . "$env:DOTFILES/wsl/pwsh/.local/bin/nvim-switcher.ps1"
+. "$env:DOTFILES/wsl/pwsh/.local/bin/alias_autocomplete.ps1"
 . "$env:DOTFILES/wsl/pwsh/.local/bin/hotkeys.ps1"
 . "$env:DOTFILES/wsl/pwsh/.local/bin/user_functions.ps1"
  

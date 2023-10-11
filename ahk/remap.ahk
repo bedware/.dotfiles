@@ -195,12 +195,12 @@ return
 #if
 
 #if WinActive("ahk_exe chrome.exe") or WinActive("ahk_exe msedge.exe")
-    !g::Send ^+{a} ; Search in tabs popup
+    ^g::Send ^+{a} ; Search in tabs popup
     !t::Send ^l@tabs{Space} ; Search in tabs
     !h::Send ^l@history{Space} ; Search in history
     !b::Send ^l@bookmarks{Space} ; Search in Bookmarks 
-    ^i::Send !{Right} ; Navigation history backward
-    ^o::Send !{Left} ; Navigation history forward
+    ^i::Send !{Right} ; Navigation history forward 
+    ^o::Send !{Left} ; Navigation history backward
 #if
 #if WinActive("ahk_exe TOTALCMD64.EXE")
     !e::Send {Home}{F2} ; Edit path
