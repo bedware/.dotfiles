@@ -73,7 +73,7 @@ New-Alias -Name .ne -Value "`$curr=pwd; cd $env:DOTFILES/wsl/nvim/.config/nvim &
 New-Alias -Name .p -Value CopyPathToClipboard
 New-Alias -Name .pe -Value "vi `$profile" 
 New-Alias -Name cs -Value "GoToDirAndList"
-New-Alias -Name l -Value "Get-ChildItem -Force"
+New-Alias -Name l -Value "Get-ChildItem -Force | Format-Table -AutoSize"
 New-Alias -Name rmr -Value "Remove-Item -Force -Recurse"
 Add-IgnoredAlias -Name vi -Value "nvim"
 Add-BlankAlias -Name e -Value "`$env:"

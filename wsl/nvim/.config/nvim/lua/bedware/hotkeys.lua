@@ -8,11 +8,17 @@ vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 vim.keymap.set("n", "<leader>x", ":!chmod +x %<CR>")
 -- Source curent file
 vim.keymap.set("n", "<leader>s", ":source %<CR>")
+-- Quickfix & Location lists
+vim.keymap.set("n", "<A-k>", ":cprev<CR>")
+vim.keymap.set("n", "<A-j>", ":cnext<CR>")
+vim.keymap.set("n", "<A-S-k>", ":lprev<CR>")
+vim.keymap.set("n", "<A-S-j>", ":lnext<CR>")
+vim.keymap.set("n", "<leader>q", ":cclose<CR>:lclose<CR>")
 -- Registers
-vim.keymap.set({ "n", "x" }, "<leader>p", [["*p]])
-vim.keymap.set({ "n", "x" }, "<leader>y", [["*y]])
+vim.keymap.set({ "n", "x" }, "<leader>p", [["+p]])
+vim.keymap.set({ "n", "x" }, "<leader>y", [["+y]])
 vim.keymap.set({ 'n', 'x' }, 'x', '"_x')
-vim.keymap.set("n", [["c]], [[:let @*=@"<CR>:echo "In clipboard now"<CR>]])
+vim.keymap.set("n", [["c]], [[:let @*=@"<CR>:echo "Saved to clipboard now"<CR>]])
 -- Put space not leaving normal mode
 vim.keymap.set("n", "[<space>", "i <Esc>")
 vim.keymap.set("n", "]<space>", "a <Esc>")

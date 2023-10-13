@@ -3,12 +3,12 @@ function CopyPathToClipboard {
 }
 
 function GoUpDirAndList {
-    Set-Location .. && Get-ChildItem -Force
+    Set-Location .. && Get-ChildItem -Force | Format-Table -AutoSize
 }
 
 function GoToDirAndList {
     param(
             [string]$Path = "~"
     )
-    Set-Location $Path && Get-ChildItem -Force
+    Set-Location $Path && Get-ChildItem -Force | Format-Table -AutoSize
 }

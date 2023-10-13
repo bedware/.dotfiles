@@ -1,8 +1,7 @@
 local telescope = require("telescope")
-local telescopeConfig = require("telescope.config")
 
 -- Clone the default Telescope configuration
-local vimgrep_arguments = { unpack(telescopeConfig.values.vimgrep_arguments) }
+local vimgrep_arguments = { unpack(require("telescope.config").values.vimgrep_arguments) }
 
 -- I want to search in hidden/dot files.
 table.insert(vimgrep_arguments, "--hidden")
@@ -19,7 +18,15 @@ telescope.setup({
 			find_command = { "fd", "--hidden", "--follow", "--type", "file", "--exclude",  ".git" },
 		},
 	},
+    extensions = {
+    ["ui-select"] = {
+      require("telescope.themes").get_dropdown { }
+    }
+  }
 })
+-- To get ui-select loaded and working with telescope, you need to call
+-- load_extension, somewhere after setup function:
+require("telescope").load_extension("ui-select")
 
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})

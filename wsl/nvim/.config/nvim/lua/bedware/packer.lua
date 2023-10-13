@@ -10,6 +10,11 @@ return require('packer').startup(function(use)
     use('nvim-treesitter/nvim-treesitter-context')
     -------------- Coding
     use({
+        'nvim-telescope/telescope.nvim',
+        requires = { { 'nvim-lua/plenary.nvim' } }
+    })
+    use('nvim-telescope/telescope-ui-select.nvim')
+    use({
         'tpope/vim-surround',
         requires = { { 'tpope/vim-repeat' } }
     })
@@ -20,10 +25,6 @@ return require('packer').startup(function(use)
         requires = { { 'tpope/vim-repeat' } }
     })
     use({
-        'nvim-telescope/telescope.nvim',
-        requires = { { 'nvim-lua/plenary.nvim' } }
-    })
-    use({
         'numToStr/Comment.nvim',
         config = function() require('Comment').setup() end
     })
@@ -32,25 +33,13 @@ return require('packer').startup(function(use)
         config = function() require("nvim-autopairs").setup() end
     })
     use('mbbill/undotree')
-    use('folke/trouble.nvim')
-    -- Neovim
-    use("folke/neodev.nvim")
     -- Arduino
     use('stevearc/vim-arduino')
-    -------------- Testing
-    use({
-        "nvim-neotest/neotest",
-        requires = {
-            "nvim-lua/plenary.nvim",
-            "nvim-treesitter/nvim-treesitter",
-            "antoinemadec/FixCursorHold.nvim"
-        }
-    })
-    use('andy-bell101/neotest-java')
-    -------------- Git
-    use('tpope/vim-fugitive')
-    use('lewis6991/gitsigns.nvim')
     -------------- LSP
+    -- Neovim
+    use("folke/neodev.nvim")
+    -- Java
+    use('mfussenegger/nvim-jdtls')
     use({
         'VonHeikemen/lsp-zero.nvim',
         branch = 'v3.x',
@@ -66,6 +55,12 @@ return require('packer').startup(function(use)
             { 'L3MON4D3/LuaSnip' },
         }
     })
+    -------------- Debugging
+    use('mfussenegger/nvim-dap')
+    use('rcarriga/nvim-dap-ui')
+    -------------- Git
+    use('tpope/vim-fugitive')
+    use('lewis6991/gitsigns.nvim')
     -------------- AI
     use("github/copilot.vim")
     use({
