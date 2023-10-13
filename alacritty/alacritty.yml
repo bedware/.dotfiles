@@ -1,5 +1,7 @@
 import:
- - ~/.config/alacritty/themes/themes/campbell.yaml
+#  - ~/.config/alacritty/themes/themes/marine_dark.yaml
+#  - ~/.config/alacritty/themes/themes/blood_moon.yaml
+  - ~/.config/alacritty/themes/themes/argonaut_mod.yaml
 shell:
   program: "pwsh -wd ~"
 font:
@@ -15,8 +17,17 @@ font:
 window:
 #  startup_mode: Maximized
   decorations: None
-  opacity: 0.8
+  opacity: 0.5
+  dimensions:
+    columns: 1
+    lines: 1
+  position:
+    x: 0
+    y: 3000
 selection:
   save_to_clipboard: true
 key_bindings:
- - { key: Back, mods: Control, chars: "\x08" }
+#  - { key: Back, mods: Control, chars: "\x08" }
+  - { key: Back, mods: Control, chars: "\x17" }
+  - { key: Key6, mods: Control, chars: "\x1e" }
+

@@ -56,7 +56,8 @@ apps["task"] := { desktop: "Other", selector: "ahk_class TaskManagerWindow", pat
 apps["obs"] := { desktop: "Studio", selector: "ahk_exe obs64.exe", path: "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\OBS Studio\OBS Studio (64bit).lnk" }
 
 ; desktop independent
-apps["carnac"] := { selector: "ahk_exe Carnac.exe", path: "C:\Users\dmitr\AppData\Local\carnac\Carnac.exe" }
+apps["music"] := { selector: "Yandex.Music ahk_exe chrome.exe", path: AROAMI . "\Microsoft\Windows\Start Menu\Programs\Chrome Apps\Yandex.Music.lnk" }
+apps["carnac"] := { selector: "ahk_exe Carnac.exe", path: ALOCAL . "\carnac\Carnac.exe" }
 apps["quake"] := { selector: "ahk_exe WindowsTerminal.exe", path: "wt.exe -w _quake" }
 apps["adbg"] := { selector: "ahk_exe dbgview64.exe", path: HOME . "\OneDrive\Soft\DebugView\dbgview64.exe" }
 apps["ahelp"] := { selector: "AutoHotkey Help", path: AHK_FOLDER . "\AutoHotkey.chm" }
