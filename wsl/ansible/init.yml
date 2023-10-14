@@ -21,6 +21,7 @@
         - utils
         - programming_languages
         - nvim
+        - tmux
         - zsh
         - pwsh
         - dotfiles

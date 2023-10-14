@@ -34,7 +34,7 @@ function AliasExtention {
     $wordBeforeCursorStartIndex = $null
     $wordBeforeCursor = GetLastWordBeforeCursor([ref]$wordBeforeCursorStartIndex)
     $alias = GetAliasByWord($wordBeforeCursor)
-    if ($alias -ne $null) {
+    if ($null -ne $alias) {
         if ($global:IgnoredAliases -notcontains $wordBeforeCursor) {
             [Microsoft.PowerShell.PSConsoleReadLine]::Replace(
                 $wordBeforeCursorStartIndex,
@@ -57,7 +57,7 @@ function AliasExtention {
                 )
             }
     }
-    if ($Mode -eq "Space") {
+    if ($Mode -eq "Space" -and $global:BlankAliases -notcontains $alias) {
         [Microsoft.PowerShell.PSConsoleReadLine]::Insert(" ")
     }
 }

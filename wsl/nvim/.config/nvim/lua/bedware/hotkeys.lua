@@ -6,6 +6,14 @@ vim.keymap.set("n", "<C-f>", ":!tmux new-window ~/.dotfiles/wsl/bash/.local/bin/
 vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 -- Make current file executable
 vim.keymap.set("n", "<leader>x", ":!chmod +x %<CR>")
+-- Fold method
+vim.keymap.set("n", "zi", function()
+    if vim.opt.foldmethod:get() ~= 'marker' then
+        vim.cmd(":set foldmethod=marker")
+    else
+        vim.api.nvim_feedkeys('zi', 'n', false)
+    end
+end, { silent = true })
 -- Source curent file
 vim.keymap.set("n", "<leader>s", ":source %<CR>")
 -- Quickfix & Location lists
@@ -18,7 +26,7 @@ vim.keymap.set("n", "<leader>q", ":cclose<CR>:lclose<CR>")
 vim.keymap.set({ "n", "x" }, "<leader>p", [["+p]])
 vim.keymap.set({ "n", "x" }, "<leader>y", [["+y]])
 vim.keymap.set({ 'n', 'x' }, 'x', '"_x')
-vim.keymap.set("n", [["c]], [[:let @*=@"<CR>:echo "Saved to clipboard now"<CR>]])
+vim.keymap.set("n", [["c]], [[:let @+=@"<CR>:echo "Saved to clipboard now"<CR>]])
 -- Put space not leaving normal mode
 vim.keymap.set("n", "[<space>", "i <Esc>")
 vim.keymap.set("n", "]<space>", "a <Esc>")

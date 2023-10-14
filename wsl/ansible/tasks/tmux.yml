@@ -1,0 +1,24 @@
+- name: Remove tmux
+  shell: rm -rf ~/tmux
+
+- name: Clone tmux
+  ansible.builtin.git:
+    repo: 'https://github.com/tmux/tmux.git'
+    dest: "{{ lookup('env', 'HOME') }}/tmux"
+
+- name: Install pre-requisite packages
+  become: yes
+  apt:
+    name:
+      - libevent-dev
+      - bison
+      - byacc
+    state: present
+
+- name: Build tmux
+  shell: "cd {{ lookup('env', 'HOME') }}/tmux && ./configure && make"
+
+- name: Install tmux
+  become: true
+  shell: "cd {{ lookup('env', 'HOME') }}/tmux && make install"
+

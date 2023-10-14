@@ -1,14 +1,27 @@
-function CopyPathToClipboard {
+function Copy-PathToClipboard {
     Get-Location | Set-Clipboard
 }
 
-function GoUpDirAndList {
-    Set-Location .. && Get-ChildItem -Force | Format-Table -AutoSize
+function Set-LocationToParentAndList {
+    Set-Location .. && Get-ChildItemCompact
 }
 
-function GoToDirAndList {
-    param(
-            [string]$Path = "~"
-    )
-    Set-Location $Path && Get-ChildItem -Force | Format-Table -AutoSize
+function Set-LocationAndList([string]$Path = "~") {
+    Set-Location $Path && Get-ChildItemCompact
+}
+
+function Get-ChildItemCompact([string]$Path = ".") {
+    Get-ChildItem -Force $Path | Format-Table -AutoSize
+}
+
+function Edit-AndComeBack([string]$TempPath = ".") {
+    $currentDir = Get-Location
+    Set-Location $TempPath
+    vi .
+    Set-Location $currentDir
+}
+
+Register-EngineEvent -SourceIdentifier PowerShell.Exiting -SupportEvent -Action {
+    $Path = (Get-PSReadlineOption).HistorySavePath
+    Get-Content $Path | ForEach-Object {$_.Trim()}| Select-Object -Unique | Set-Content -Path $Path
 }

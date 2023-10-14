@@ -6,7 +6,9 @@
 
 ; Git
 ::gst::git status
-::gd::git diff --color | less -R
+::glp::git log --follow --patch
+::gdiff::git diff --color | less -R
+::gdifs::git diff --staged --color | less -R
 
 ; Other
 

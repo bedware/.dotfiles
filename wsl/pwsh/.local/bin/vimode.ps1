@@ -9,3 +9,8 @@ function OnViModeChange {
 }
 Set-PSReadLineOption -EditMode Vi -ViModeIndicator Script -ViModeChangeHandler $Function:OnViModeChange
 
+# Preserve cursor shape
+function vi {
+    nvim $args
+    Write-Host -NoNewLine "`e[6 q"
+}

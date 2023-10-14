@@ -3,14 +3,10 @@
 # Environment variables {{{1
 
 $env:DOTFILES = $env:HOME.ToString().Replace("\", "/") + "/.dotfiles"
-# Editor
 $env:EDITOR = "nvim"
 $env:VISUAL = "$env:EDITOR"
-# Bun
 $env:BUN_INSTALL = "$env:HOME/.bun"
-# Java
 $env:JAVA_HOME = "$env:HOME/.jdks/jdk-21"
-# OpenAI
 $env:OPENAI_API_KEY = Get-Content "$env:HOME/.ssh/openai"
 
 # Platform-dependent stuff {{{1
@@ -42,39 +38,28 @@ $backup = $profile
     -AfterModulesLoad { 
         $global:GitPromptSettings.DefaultPromptPrefix.Text = "☹️  "
         $global:GitPromptSettings.DefaultPromptBeforeSuffix.Text = "`n"
-        $global:GitPromptSettings.DefaultPromptSuffix.Text = ""
+        $global:GitPromptSettings.DefaultPromptSuffix.Text = " > "
         $global:profile = $backup
     }
 . "$env:DOTFILES/wsl/pwsh/.local/bin/vimode.ps1"
-. "$env:DOTFILES/wsl/pwsh/.local/bin/nvim-switcher.ps1"
 . "$env:DOTFILES/wsl/pwsh/.local/bin/alias_autocomplete.ps1"
 . "$env:DOTFILES/wsl/pwsh/.local/bin/hotkeys.ps1"
 . "$env:DOTFILES/wsl/pwsh/.local/bin/user_functions.ps1"
- 
-# Configuring {{{1
-
-# fzf
-$fzfExclude = @('.git', 'AppData', '.m2', '.jdks', '.gradle')
-$fzfParam = "--path-separator '/' --hidden " + @($fzfExclude | ForEach-Object {"--exclude '$_'"}) -join " "
-$env:FZF_CTRL_T_COMMAND = "fd --type f $fzfParam"
-$env:FZF_ALT_C_COMMAND = "fd --type d --follow $fzfParam"
-Set-PsFzfOption -PSReadlineChordProvider "Ctrl+f" `
-                -PSReadlineChordReverseHistory "Ctrl+r" `
-                -PSReadlineChordSetLocation "Ctrl+g"
+. "$env:DOTFILES/wsl/pwsh/.local/bin/nvim-switcher.ps1"
 
 # Aliases {{{1
 
-New-Alias -Name .f -Value "cd $env:DOTFILES"
-New-Alias -Name .fe -Value "`$curr=pwd; cd $env:DOTFILES && nvim .; cd `$curr"
-New-Alias -Name .a -Value "cd $env:DOTFILES/ahk"
-New-Alias -Name .ae -Value "`$curr=pwd; cd $env:DOTFILES/ahk && nvim .; cd `$curr"
-New-Alias -Name .n -Value "cd $env:DOTFILES/wsl/nvim/.config/nvim"
-New-Alias -Name .ne -Value "`$curr=pwd; cd $env:DOTFILES/wsl/nvim/.config/nvim && nvim .; cd `$curr"
-New-Alias -Name .p -Value CopyPathToClipboard
-New-Alias -Name .pe -Value "vi `$profile" 
-New-Alias -Name cs -Value "GoToDirAndList"
-New-Alias -Name l -Value "Get-ChildItem -Force | Format-Table -AutoSize"
+New-Alias -Name .f -Value 'cd $env:DOTFILES'
+New-Alias -Name .fe -Value 'Edit-AndComeBack($env:DOTFILES)'
+New-Alias -Name .a -Value 'cd $env:DOTFILES/ahk'
+New-Alias -Name .ae -Value 'Edit-AndComeBack("$env:DOTFILES/ahk")'
+New-Alias -Name .n -Value 'cd $env:DOTFILES/wsl/nvim/.config/nvim'
+New-Alias -Name .ne -Value 'Edit-AndComeBack("$env:DOTFILES/wsl/nvim/.config/nvim")'
+New-Alias -Name .p -Value Copy-PathToClipboard
+New-Alias -Name .pe -Value 'vi $profile' 
+Remove-Alias cd
+Set-Alias -Force -Name cd -Value Set-LocationAndList
+New-Alias -Name l -Value Get-ChildItemCompact
 New-Alias -Name rmr -Value "Remove-Item -Force -Recurse"
-Add-IgnoredAlias -Name vi -Value "nvim"
-Add-BlankAlias -Name e -Value "`$env:"
+Add-BlankAlias -Name e -Value '$env:'
 
