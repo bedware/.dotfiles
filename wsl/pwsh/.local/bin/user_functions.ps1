@@ -20,8 +20,13 @@ function Edit-AndComeBack([string]$TempPath = ".") {
     vi .
     Set-Location $currentDir
 }
-
-Register-EngineEvent -SourceIdentifier PowerShell.Exiting -SupportEvent -Action {
-    $Path = (Get-PSReadlineOption).HistorySavePath
-    Get-Content $Path | ForEach-Object {$_.Trim()}| Select-Object -Unique | Set-Content -Path $Path
+function Count-History {
+   Get-Content (Get-PSReadlineOption).HistorySavePath | Measure-Object -Line
+}
+function Deduplicate-HistoryOnExit {
+    Register-EngineEvent -SourceIdentifier PowerShell.Exiting -SupportEvent -Action {
+        $Path = (Get-PSReadlineOption).HistorySavePath
+        Get-Content $Path | ForEach-Object {$_.Trim()}| Select-Object -Unique | Set-Content -Path $Path
+    }
+    Write-Host "History will be cleared on exit"
 }

@@ -6,4 +6,3 @@ function total {
     $currentPath = Get-Location
     & "c:\Program Files\totalcmd\TOTALCMD64.EXE" /O /T /L="$currentPath" /R="$currentPath"
 }
-

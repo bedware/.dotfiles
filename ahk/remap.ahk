@@ -12,21 +12,29 @@ return ; To make mouse hook work
 *~WheelDown::return ; To make mouse hook work
 *~WheelUp::return ; To make mouse hook work
 
+; Laptop
+Escape::F15 ; On/Off speakers
+Home::F16 ; Start/stop recording
+End::F20 ; Pause/unpause recording
+PgUp::F24 ; First scene
+PgDn::F23 ; Second scene
+; Pedal
+F13::Func("doTranslation").Call()
+; Shift
+RShift & Capslock::Send +{Esc}
+; Press both shift keys together to toggle Capslock
+LShift & RShift::ToggleCaps()
+RShift & LShift::ToggleCaps()
+
+; it is for harpoon to work
 ^;::^F5
 ^'::^F6
 ; Use the Soundcard Analysis script found here to set these parameters
 ; https://www.autohotkey.com/docs/commands/SoundSet.htm#Soundcard
-Volume_Up::
-    SoundSet, +2, Master, Volume, 4
-return
+Volume_Up::SoundSet, +2, Master, Volume, 4
+Volume_Down::SoundSet, -2, Master, Volume, 4
 
-Volume_Down::
-    SoundSet, -2, Master, Volume, 4
-return
-
-!^f:: ; Make any window windowed fullscreen
-    makeAnyWindowFullsreen()
-return
+!^f::makeAnyWindowFullsreen()
 
 !^;::
     WinMove, A, , -10, -100, 2180, 1325
@@ -43,27 +51,9 @@ return
     }
 return
 #Enter::
-    ; global apps
-    ; app := apps["term"]
-    ; RunIfNotExist(app.selector, app.path)
     Run wt
+    WinWait, "Administrator: PowerShell ahk_exe WindowsTerminal.exe",, 3
 return
-
-; Laptop
-Home::F16 ; Start/stop recording
-End::F20 ; Pause/unpause recording
-PgUp::F24 ; First scene
-PgDn::F23 ; Second scene
-; Pedal
-F13::
-; if (GetKeyState("LButton")) {
-Func("doTranslation").Call()
-; }
-; Send Shift
-return
-
-; Shift
-RShift & Capslock::Send +{Esc}
 
 #if GetKeyState("LShift", "P")
 LShift up::
@@ -83,12 +73,6 @@ return
         Send #{Space}
     }
 return 
-
-; Press both shift keys together to toggle Capslock
-LShift & RShift::ToggleCaps()
-RShift & LShift::ToggleCaps()
-; LShift & RShift::Func("doTranslation").Call()
-; RShift & LShift::Func("doTranslation").Call()
 
 ; Tab-hotkeys
 *Tab::
