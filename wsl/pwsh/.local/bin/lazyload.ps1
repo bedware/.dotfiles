@@ -14,7 +14,7 @@ $runspace.Open()
 $null = Register-ObjectEvent -InputObject $profile -EventName InvocationStateChanged -Action {
     Invoke-Command $Modules
     Invoke-Command $AfterModulesLoad
-    Write-Host -NoNewLine "Loaded!`e[6 q"
+    Write-Host -NoNewLine "`e[6 q"
     $profile.Dispose()
     $runspace.Close()
     $runspace.Dispose()

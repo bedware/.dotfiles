@@ -34,7 +34,7 @@ vim.keymap.set("n", "]<space>", "a <Esc>")
 vim.keymap.set("c", "<Up>", "<C-p>")
 vim.keymap.set("c", "<Down>", "<C-n>")
 -- Line text object
-vim.keymap.set("x", "il", "g_o0")
+vim.keymap.set("x", "il", "g_o_")
 vim.keymap.set("o", "il", ":normal vil<CR>")
 vim.keymap.set("x", "al", "$o0")
 -- Buffer text object

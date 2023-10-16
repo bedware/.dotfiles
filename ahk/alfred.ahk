@@ -51,6 +51,18 @@ showAlfred() {
     OutputDebug % "Alfred show"
 }
 
+showAlfredRunning(text) {
+    color := "rgb(223, 255, 93)"
+    getHTMLForAlfred(color, text)
+
+    selector := "bedware.ahk"
+    if WinExist(selector) {
+        WinActivate
+        ; WinSet, AlwaysOnTop, On, %selector%
+        WinGet, activeHwnd, ID, %selector%
+        PinWindow(activeHwnd)
+    }
+}
 showAlfredError(errorText) {
     color := "rgb(255, 0, 0)"
     getHTMLForAlfred(color, errorText)
@@ -100,6 +112,7 @@ getShortuctsByComa(apps) {
 executeInput(apps, userInput) {
     global desktops
     if (IsObject(apps[userInput . ""])) { ; Otherwise, a match was found.
+        showAlfredRunning(userInput)
         app := apps[userInput . ""]
         if (app.selector != "") {
             if (app.desktop != "") {
