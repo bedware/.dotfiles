@@ -29,17 +29,15 @@ return require('packer').startup(function(use)
         config = function() require('Comment').setup() end
     })
     use({
-        "windwp/nvim-autopairs",
-        config = function() require("nvim-autopairs").setup() end
+        'windwp/nvim-autopairs',
+        config = function() require('nvim-autopairs').setup() end
     })
     use('mbbill/undotree')
     -- Arduino
     use('stevearc/vim-arduino')
     -------------- LSP
     -- Neovim
-    use("folke/neodev.nvim")
-    -- Java
-    use('mfussenegger/nvim-jdtls')
+    use('folke/neodev.nvim')
     use({
         'VonHeikemen/lsp-zero.nvim',
         branch = 'v3.x',
@@ -55,6 +53,16 @@ return require('packer').startup(function(use)
             { 'L3MON4D3/LuaSnip' },
         }
     })
+    -- Java
+    use('mfussenegger/nvim-jdtls')
+    use({
+        'JavaHello/java-deps.nvim',
+        -- requires = {
+        --     { 'mfussenegger/nvim-jdtls' },
+        --     { 'simrat39/symbols-outline.nvim' }
+        -- },
+    })
+    -- use('simrat39/symbols-outline.nvim')
     -------------- Debugging
     use('mfussenegger/nvim-dap')
     use('rcarriga/nvim-dap-ui')
@@ -62,13 +70,13 @@ return require('packer').startup(function(use)
     use('tpope/vim-fugitive')
     use('lewis6991/gitsigns.nvim')
     -------------- AI
-    use("github/copilot.vim")
+    -- use('github/copilot.vim')
     use({
-        "jackMort/ChatGPT.nvim",
+        'jackMort/ChatGPT.nvim',
         requires = {
-            "MunifTanjim/nui.nvim",
-            "nvim-lua/plenary.nvim",
-            "nvim-telescope/telescope.nvim"
+            'MunifTanjim/nui.nvim',
+            'nvim-lua/plenary.nvim',
+            'nvim-telescope/telescope.nvim'
         },
         config = function() require("chatgpt").setup() end
     })

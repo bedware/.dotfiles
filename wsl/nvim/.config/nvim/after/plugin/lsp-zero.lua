@@ -21,6 +21,7 @@ lsp_zero.on_attach(function(_, bufnr)
     vim.keymap.set('n', '<C-p>', vim.lsp.buf.signature_help, opts)
     vim.keymap.set('n', '<leader>re', vim.lsp.buf.rename, opts)
     vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts)
+    vim.keymap.set({ 'n', 'v', 'i' }, '<A-Enter>', vim.lsp.buf.code_action, opts)
     vim.keymap.set('n', '<leader>f', function()
         vim.lsp.buf.format { async = true }
     end, opts)
@@ -80,6 +81,8 @@ cmp.setup({
     mapping = cmp.mapping.preset.insert({
         -- `Enter` key to confirm completion
         ['<CR>'] = cmp.mapping.confirm({ select = true }),
+        -- Ctrl+P to trigger completion menu
+        ['<C-p>'] = cmp.mapping.complete(),
         -- Navigate between snippet placeholder
         ['<C-f>'] = cmp_action.luasnip_jump_forward(),
         ['<C-b>'] = cmp_action.luasnip_jump_backward(),

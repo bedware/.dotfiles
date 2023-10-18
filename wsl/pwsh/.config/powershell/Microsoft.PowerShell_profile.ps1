@@ -3,7 +3,7 @@
 # Environment variables {{{1
 
 $env:DOTFILES = $env:HOME.ToString().Replace("\", "/") + "/.dotfiles"
-$env:EDITOR = "nvim"
+$env:EDITOR = "vi"
 $env:VISUAL = "$env:EDITOR"
 $env:BUN_INSTALL = "$env:HOME/.bun"
 $env:JAVA_HOME = "$env:HOME/.jdks/jdk-21"

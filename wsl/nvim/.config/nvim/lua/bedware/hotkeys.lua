@@ -3,7 +3,7 @@ vim.g.mapleader = " "
 -- Tmux
 vim.keymap.set("n", "<C-f>", ":!tmux new-window ~/.dotfiles/wsl/bash/.local/bin/tmux-sessionizer<CR>")
 -- Replace word in all buffer
-vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set("n", "<leader>rr", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 -- Make current file executable
 vim.keymap.set("n", "<leader>x", ":!chmod +x %<CR>")
 -- Fold method

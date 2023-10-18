@@ -10,6 +10,16 @@ local features = {
     debugger = true,
 }
 
+-- `nvim-jdtls` will look for these files/folders
+-- to determine the root directory of your project
+local root_files = {
+    '.git',
+    'pom.xml',
+    'build.gradle',
+    'mvnw',
+    'gradlew',
+}
+
 -- Codelens setup {{{1
 local function enable_codelens(bufnr)
     pcall(vim.lsp.codelens.refresh)
@@ -24,7 +34,10 @@ end
 -- Attach function (key bindings) {{{1
 -- This function will be executed everytime jdtls gets attached to a file.
 -- Here we will create the keybindings.
-local function jdtls_on_attach(_, bufnr)
+local function jdtls_on_attach(client, bufnr)
+    local root_dir = require('jdtls').setup.find_root(root_files)
+    require("java-deps").attach(client, bufnr, root_dir)
+
     if features.codelens then
         enable_codelens(bufnr)
     end
@@ -105,6 +118,20 @@ local function get_jdtls_paths()
 
     if java_debug_bundle[1] ~= '' then
         vim.list_extend(path.bundles, java_debug_bundle)
+    end
+
+    ---
+    -- Include vscode-java-dependency bundle if present
+    ---
+    local home = vim.fn.getenv("HOME")
+
+    local java_dependency_bundle = vim.split(
+        vim.fn.glob(home .. '/.local/share/nvim/mason/packages/vscode-java-dependency/jdtls.ext/com.microsoft.jdtls.ext.core/target/com.microsoft.jdtls.ext.core-*.jar'),
+        '\n'
+    )
+
+    if java_dependency_bundle[1] ~= '' then
+        vim.list_extend(path.bundles, java_dependency_bundle)
     end
 
     cache_vars.paths = path
@@ -218,16 +245,6 @@ local function jdtls_setup(event)
             },
             useBlocks = true,
         },
-    }
-
-    -- `nvim-jdtls` will look for these files/folders
-    -- to determine the root directory of your project
-    local root_files = {
-        '.git',
-        'pom.xml',
-        'build.gradle',
-        'mvnw',
-        'gradlew',
     }
 
     -- This starts a new client & server,
