@@ -4,8 +4,12 @@
     "actions": 
     [
         {
-            "command": "openNewTabDropdown",
-            "keys": "menu"
+            "command": 
+            {
+                "action": "splitPane",
+                "split": "right"
+            },
+            "keys": "alt+\\"
         },
         {
             "command": 
@@ -16,24 +20,16 @@
             "keys": "alt+u"
         },
         {
-            "command": 
-            {
-                "action": "splitPane",
-                "split": "right"
-            },
-            "keys": "alt+\\"
-        },
-        {
-            "command": "find",
-            "keys": "ctrl+/"
+            "command": "openNewTabDropdown",
+            "keys": "menu"
         },
         {
             "command": "openTabRenamer",
             "keys": "alt+r"
         },
         {
-            "command": "toggleFocusMode",
-            "keys": "alt+f"
+            "command": "find",
+            "keys": "ctrl+shift+\\"
         },
         {
             "command": 
@@ -42,6 +38,10 @@
                 "split": "down"
             },
             "keys": "alt+minus"
+        },
+        {
+            "command": "toggleFocusMode",
+            "keys": "alt+f"
         },
         {
             "command": 
@@ -157,15 +157,15 @@
                 "source": "Windows.Terminal.Wsl"
             },
             {
-                "guid": "{4fc9f285-60f0-59e2-9c87-3e51b102561f}",
+                "guid": "{8a40080b-5735-53d9-b1f1-fac1af3b09a8}",
                 "hidden": false,
-                "name": "Developer Command Prompt for VS 2022",
+                "name": "Developer Command Prompt for VS 2022 [Preview]",
                 "source": "Windows.Terminal.VisualStudio"
             },
             {
-                "guid": "{cab6aee3-898b-5070-8d3d-58adeead4fbd}",
+                "guid": "{a81ea7af-af5e-58c0-adb5-f92f259673eb}",
                 "hidden": false,
-                "name": "Developer PowerShell for VS 2022",
+                "name": "Developer PowerShell for VS 2022 [Preview]",
                 "source": "Windows.Terminal.VisualStudio"
             }
         ]

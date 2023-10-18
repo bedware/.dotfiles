@@ -219,6 +219,7 @@ return
 #4::GoToVD(4)
 #5::GoToVD(5)
 #6::GoToAlternateVD()
+#=::GoToAlternateVD()
 #7::GoToVD(7)
 #8::GoToVD(8)
 #9::GoToVD(9)
