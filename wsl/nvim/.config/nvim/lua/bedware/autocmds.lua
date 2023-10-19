@@ -8,7 +8,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
         vim.highlight.on_yank({ higroup = 'Visual', timeout = 950 })
     end
 })
-vim.api.nvim_create_autocmd('TextYankPost', {
+vim.api.nvim_create_autocmd('FileType', {
     group = bedware_group,
     desc = 'Key bindings for help',
     pattern = 'help',

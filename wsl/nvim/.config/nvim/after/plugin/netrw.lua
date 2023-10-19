@@ -1,4 +1,11 @@
 -- Netrw
+
+-- Optiongs
+vim.g.netrw_preview = 1
+vim.g.netrw_banner = 0
+vim.g.netrw_winsize = 20
+
+-- Key bindings
 vim.keymap.set('n', '<leader>e', '<cmd>Lexplore %:p:h<cr>')
 vim.keymap.set("n", "<leader>E", vim.cmd.Lexplore)
 
@@ -18,8 +25,6 @@ local state = {
     selected = 'LEFT',
     alt_window_cursor_pos = nil,
 }
-
--- local totalnrw_state = vim.g.totalnrw_state
 
 vim.keymap.set("n", "<leader>t", vim.cmd.TotalNetrw)
 
@@ -73,6 +78,11 @@ local function netrw_key_binding(buffer)
     vim.keymap.set("n", "<leader>w", function()
         print(vim.inspect(state))
     end, { buffer = buffer, nowait = true })
+    vim.keymap.set("n", "%", function()
+        local filename = vim.fn.input("New filename %>")
+        local current_dir = vim.fn.expand('%:p:h')
+        vim.cmd("!touch " .. current_dir .. "/" .. filename)
+    end, { buffer = buffer })
 
     -- Toggle dotfiles
     vim.keymap.set('n', '.', 'gh', { buffer = buffer, remap = true })
@@ -96,12 +106,20 @@ vim.api.nvim_create_user_command('TotalNetrw', init, {})
 -- WIP END }}}
 
 local bedware_group = vim.api.nvim_create_augroup('bedware_group', { clear = false })
+vim.api.nvim_create_autocmd('BufEnter', {
+    group = bedware_group,
+    pattern = '*',
+    desc = 'Autoclose preview window',
+    callback = function(e)
+        local key = vim.api.nvim_replace_termcodes("<C-w>z", true, false, true)
+        vim.api.nvim_feedkeys(key, 'n', false)
+    end
+})
 vim.api.nvim_create_autocmd('FileType', {
     group = bedware_group,
     pattern = 'netrw',
     desc = 'Apply key binding in TotalNetrw',
     callback = function(e)
-        -- netrw_state.e = e
         if e.buf ~= nil then
             local success, _ = pcall(vim.api.nvim_buf_get_var, e.buf, 'totalnrw_status')
             if not success then
