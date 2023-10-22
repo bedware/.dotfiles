@@ -1,5 +1,8 @@
 -- Netrw
 
+local feedkey = function(key, mode)
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
+end
 -- Optiongs
 vim.g.netrw_preview = 1
 vim.g.netrw_banner = 0
@@ -10,6 +13,7 @@ vim.keymap.set('n', '<leader>e', '<cmd>Lexplore %:p:h<cr>')
 vim.keymap.set("n", "<leader>E", vim.cmd.Lexplore)
 
 -- WIP {{{1
+vim.keymap.set("n", "<leader>t", vim.cmd.TotalNetrw)
 -- State
 local state = {
     LEFT = {
@@ -25,8 +29,6 @@ local state = {
     selected = 'LEFT',
     alt_window_cursor_pos = nil,
 }
-
-vim.keymap.set("n", "<leader>t", vim.cmd.TotalNetrw)
 
 local function react()
     local prev_cursor_position = state.alt_window_cursor_pos
@@ -61,7 +63,7 @@ local function netrw_key_binding(buffer)
     end, { buffer = buffer })
 
     vim.keymap.set("n", "<leader>mc", function()
-        vim.cmd(':normal ma')
+        vim.cmd('normal ma')
         -- vim.api.nvim_feedkeys('ma', 'n', false)
         local res = {}
         local i = 1
@@ -79,9 +81,14 @@ local function netrw_key_binding(buffer)
         print(vim.inspect(state))
     end, { buffer = buffer, nowait = true })
     vim.keymap.set("n", "%", function()
-        local filename = vim.fn.input("New filename %>")
+        vim.cmd('normal cd')
         local current_dir = vim.fn.expand('%:p:h')
-        vim.cmd("!touch " .. current_dir .. "/" .. filename)
+        local success, value = pcall(vim.fn.input, "Create file in directory:" .. current_dir .. ". Filename: ")
+        if success then
+            vim.cmd(":silent! !touch " .. current_dir .. "/" .. value)
+            vim.cmd('e %:p:h')
+            feedkey('/' .. value .. '<CR>', 'n')
+        end
     end, { buffer = buffer })
 
     -- Toggle dotfiles
@@ -89,7 +96,6 @@ local function netrw_key_binding(buffer)
 end
 
 local function init(event)
-    vim.cmd('highlight netrwMarkFile guibg=#aa0000')
     vim.cmd.Explore()
     vim.cmd.vs()
     if #vim.api.nvim_list_wins() ~= 2 then
@@ -111,8 +117,7 @@ vim.api.nvim_create_autocmd('BufEnter', {
     pattern = '*',
     desc = 'Autoclose preview window',
     callback = function(e)
-        local key = vim.api.nvim_replace_termcodes("<C-w>z", true, false, true)
-        vim.api.nvim_feedkeys(key, 'n', false)
+        feedkey("<C-w>z", 'n')
     end
 })
 vim.api.nvim_create_autocmd('FileType', {
@@ -120,6 +125,7 @@ vim.api.nvim_create_autocmd('FileType', {
     pattern = 'netrw',
     desc = 'Apply key binding in TotalNetrw',
     callback = function(e)
+        vim.cmd('highlight netrwMarkFile guibg=#eb6f92')
         if e.buf ~= nil then
             local success, _ = pcall(vim.api.nvim_buf_get_var, e.buf, 'totalnrw_status')
             if not success then
