@@ -8,6 +8,7 @@ $env:VISUAL = "$env:EDITOR"
 $env:BUN_INSTALL = "$env:HOME/.bun"
 $env:JAVA_HOME = "$env:HOME/.jdks/jdk-21"
 $env:OPENAI_API_KEY = Get-Content "$env:HOME/.ssh/openai"
+$env:SDKMAN_DIR = "$env:HOME/.sdkman"
 
 # Platform-dependent stuff {{{1
 
@@ -29,6 +30,12 @@ if ($PSVersionTable.OS -match "Linux") {
 $env:PATH += "$env:PATH_SEPARATOR$env:BUN_INSTALL/bin"
 $env:PATH += "$env:PATH_SEPARATOR$env:JAVA_HOME/bin"
 $env:PATH += "$env:PATH_SEPARATOR$env:HOME/.local/bin"
+if (Test-Path $env:SDKMAN_DIR) {
+    Get-ChildItem "$env:SDKMAN_DIR/candidates" | ForEach-Object { 
+        $env:PATH += "$env:PATH_SEPARATOR$env:SDKMAN_DIR/candidates/$($_.Name)/current/bin"
+    }
+}
+$env:PATH = ($env:PATH).Replace("$env:PATH_SEPARATOR$env:PATH_SEPARATOR", "$env:PATH_SEPARATOR")
 
 # Imports & Init {{{1
 
