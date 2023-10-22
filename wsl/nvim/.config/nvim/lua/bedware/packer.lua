@@ -36,33 +36,32 @@ return require('packer').startup(function(use)
     -- Arduino
     use('stevearc/vim-arduino')
     -------------- LSP
-    -- Neovim
-    use('folke/neodev.nvim')
     use({
         'VonHeikemen/lsp-zero.nvim',
         branch = 'v3.x',
         requires = {
+            -- LSP Support
+            { 'neovim/nvim-lspconfig' },
             --- Manage LSP servers from neovim
             { 'williamboman/mason.nvim' },
             { 'williamboman/mason-lspconfig.nvim' },
-            -- LSP Support
-            { 'neovim/nvim-lspconfig' },
             -- Autocompletion
-            { 'hrsh7th/nvim-cmp' },
-            { 'hrsh7th/cmp-nvim-lsp' },
-            { 'L3MON4D3/LuaSnip' },
+            { 'hrsh7th/nvim-cmp' },     -- ac itself
+                { 'hrsh7th/cmp-nvim-lsp' },     -- nvim-lsp source
+            -- everything below is optional
+                { 'hrsh7th/cmp-nvim-lsp-signature-help' },
+                { 'hrsh7th/cmp-nvim-lua' },
+                { 'hrsh7th/cmp-buffer' },
+                { 'hrsh7th/cmp-path' },
+            { 'L3MON4D3/LuaSnip' },     -- snippet engine
+                { 'saadparwaiz1/cmp_luasnip' }, -- luasnip source
         }
     })
+    -- Neovim
+    use('folke/neodev.nvim')
     -- Java
     use('mfussenegger/nvim-jdtls')
-    use({
-        'JavaHello/java-deps.nvim',
-        -- requires = {
-        --     { 'mfussenegger/nvim-jdtls' },
-        --     { 'simrat39/symbols-outline.nvim' }
-        -- },
-    })
-    -- use('simrat39/symbols-outline.nvim')
+    use('JavaHello/java-deps.nvim')
     -------------- Debugging
     use('mfussenegger/nvim-dap')
     use('rcarriga/nvim-dap-ui')

@@ -1,19 +1,9 @@
 vim.g.mapleader = " "
 
--- Tmux
-vim.keymap.set("n", "<C-f>", ":!tmux new-window ~/.dotfiles/wsl/bash/.local/bin/tmux-sessionizer<CR>")
 -- Replace word in all buffer
 vim.keymap.set("n", "<leader>rr", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 -- Make current file executable
 vim.keymap.set("n", "<leader>x", ":!chmod +x %<CR>")
--- Fold method
-vim.keymap.set("n", "zi", function()
-    if vim.opt.foldmethod:get() ~= 'marker' then
-        vim.cmd(":set foldmethod=marker")
-    else
-        vim.api.nvim_feedkeys('zi', 'n', false)
-    end
-end, { silent = true })
 -- Source curent file
 vim.keymap.set("n", "<leader>s", ":source %<CR>")
 -- Quickfix & Location lists
@@ -49,3 +39,11 @@ vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
+-- Fold method
+vim.keymap.set("n", "zi", function()
+    if vim.opt.foldmethod:get() ~= 'marker' then
+        vim.cmd(":set foldmethod=marker")
+    else
+        vim.api.nvim_feedkeys('zi', 'n', false)
+    end
+end, { silent = true })
