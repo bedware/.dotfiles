@@ -28,7 +28,7 @@ lsp_zero.on_attach(function(_, bufnr)
     lsp_zero.default_keymaps({ buffer = bufnr })
 end)
 
-require('mason').setup({})
+require('mason').setup()
 require('mason-lspconfig').setup({
     ensure_installed = { "lua_ls", "jdtls" },
     handlers = {
@@ -50,49 +50,3 @@ require('mason-lspconfig').setup({
     },
 })
 
-local cmp = require('cmp')
-local cmp_action = lsp_zero.cmp_action()
-cmp.setup({
-    formatting = {
-        fields = { 'kind', 'abbr', 'menu', },
-        format = function(entry, item)
-            -- Make 2nd column like method_name(parms) and 3rd like return_type
-            local inout = entry.completion_item.labelDetails
-            if item.kind == "Method" then
-                item.abbr = string.gsub(item.abbr, "~", inout.detail)
-                item.menu = inout.description
-            end
-            local function cut(target, above)
-                if item[target] ~= nil and string.len(item[target]) > above then
-                    item[target] = string.sub(item[target], 1, above) .. "!"
-                end
-            end
-            -- Cut length
-            cut("abbr", 30)
-            cut("menu", 15)
-            return item
-        end,
-    },
-    window = {
-        completion = {
-            col_offset = -7,
-        }
-    },
-    mapping = cmp.mapping.preset.insert({
-        -- `Enter` key to confirm completion
-        ['<CR>'] = cmp.mapping.confirm({ select = true }),
-        -- Ctrl+P to trigger completion menu
-        ['<C-p>'] = cmp.mapping.complete(),
-        -- Navigate between snippet placeholder
-        ['<C-f>'] = cmp_action.luasnip_jump_forward(),
-        ['<C-b>'] = cmp_action.luasnip_jump_backward(),
-        -- Scroll up and down in the completion documentation
-        ['<C-u>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-d>'] = cmp.mapping.scroll_docs(4),
-    }),
-    -- Autoselect 1st item
-    preselect = 'item',
-    completion = {
-        completeopt = 'menu,menuone,noinsert'
-    },
-})
