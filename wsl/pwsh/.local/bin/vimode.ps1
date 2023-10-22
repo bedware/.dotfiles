@@ -10,7 +10,19 @@ function OnViModeChange {
 Set-PSReadLineOption -EditMode Vi -ViModeIndicator Script -ViModeChangeHandler $Function:OnViModeChange
 
 # Preserve cursor shape
+
 function vi {
-    nvim $args
+    end {
+        if ($args.Length -eq 0) {
+            $input | nvim
+        } else {
+            nvim $args
+        }
+        Write-Host -NoNewLine "`e[6 q"
+    }
+}
+
+function tmux {
+    /usr/bin/tmux $args
     Write-Host -NoNewLine "`e[6 q"
 }
