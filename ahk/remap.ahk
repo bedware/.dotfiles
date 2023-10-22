@@ -31,8 +31,14 @@ RShift & LShift::ToggleCaps()
 ^'::^F6
 ; Use the Soundcard Analysis script found here to set these parameters
 ; https://www.autohotkey.com/docs/commands/SoundSet.htm#Soundcard
-Volume_Up::SoundSet, +2, Master, Volume, 4
-Volume_Down::SoundSet, -2, Master, Volume, 4
+Volume_Up::
+    SoundSet, +2, Master, Volume, 2
+    SoundSet, +2, Master, Volume, 4
+return
+Volume_Down::
+    SoundSet, -2, Master, Volume, 2
+    SoundSet, -2, Master, Volume, 4
+return
 
 !^f::makeAnyWindowFullsreen()
 
