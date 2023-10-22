@@ -2,3 +2,6 @@
 	excludesfile = ~/.config/git/.gitignore
 [include]
 	path = ~/.config/git/.gitconfig
+[user]
+	email = dmitry.surin@gmail.com
+	name = Dmitry Surin
