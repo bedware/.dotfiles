@@ -126,7 +126,9 @@ executeInput(apps, userInput) {
                 }
             }
             OutputDebug % "Im going to run " app.path " on " app.selector
-            RunIfNotExist(app.selector, app.path)
+            if (RunIfNotExist(app.selector, app.path) == -1) {
+                return
+            }
             OutputDebug % "executed"
         } else {
             OutputDebug % "Im going to run the app without selector"

@@ -35,6 +35,7 @@ RunIfNotExist(selector, executablePath) {
         if ErrorLevel {
             PlayErrorSound()
             showAlfredError("You have reached the timeout after running.")
+            return -1
         }
         if WinExist(selector) {
             OutputDebug % "Activating after run " selector 

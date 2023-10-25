@@ -3,7 +3,7 @@ import:
 #  - ~/.config/alacritty/themes/themes/blood_moon.yaml
   - ~/.config/alacritty/themes/themes/argonaut_mod.yaml
 shell:
-  program: "pwsh -wd ~"
+  program: "pwsh -Interactive -wd ~"
 font:
   normal:
     family: "CaskaydiaCove NFM"

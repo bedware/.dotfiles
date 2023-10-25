@@ -21,6 +21,10 @@ $links = @(
         Path = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
         Target = "$env:DOTFILES\win\wt\settings.json"
     },
+    @{ # widows terminal
+        Path = "$env:APPDATA\alacritty\alacritty.yml"
+        Target = "$env:DOTFILES\all\alacritty\alacritty.yml"
+    },
     @{ # jetbrains idea vimrc
         Path = "$env:HOME\.ideavimrc"
         Target = "$env:DOTFILES\all\.ideavimrc"

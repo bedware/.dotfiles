@@ -14,7 +14,9 @@ $runspace.Open()
 $null = Register-ObjectEvent -InputObject $profile -EventName InvocationStateChanged -Action {
     Invoke-Command $Modules
     Invoke-Command $AfterModulesLoad
-    if ([Environment]::GetCommandLineArgs().Length -eq 1) {
+    if ([Environment]::GetCommandLineArgs().Length -eq 1 `
+        -or `
+        [Environment]::GetCommandLineArgs() -contains "-Interactive") {
         # We are in an interactive shell.
         Write-Host -NoNewLine "`e[6 q"
     }
