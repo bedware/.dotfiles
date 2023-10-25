@@ -1,4 +1,5 @@
 vim.api.nvim_create_user_command('ReloadConfig', 'source $MYVIMRC', {})
+vim.api.nvim_create_user_command('W', ':w', {})
 
 local bedware_group = vim.api.nvim_create_augroup('bedware_group', { clear = false })
 vim.api.nvim_create_autocmd('TextYankPost', {

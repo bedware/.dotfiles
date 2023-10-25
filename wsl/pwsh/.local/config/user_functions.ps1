@@ -30,3 +30,4 @@ function Deduplicate-HistoryOnExit {
     }
     Write-Host "History will be cleared on exit"
 }
+

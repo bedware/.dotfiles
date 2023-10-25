@@ -18,9 +18,10 @@ if ($PSVersionTable.OS -match "Linux") {
         # Remove windows stuff from linux. Great lookup booster.
         $env:PATH = $env:PATH | tr ":" "\n" | grep -v -e /mnt -e "^$" | tr "\n" ":"
     }
+    . "$env:DOTFILES/wsl/pwsh/.local/config/borrowed.ps1"
 } elseif ($PSVersionTable.OS -match "Windows") {
     $env:PATH_SEPARATOR = ";"
-    . "$env:DOTFILES/pwsh/user_functions_win.ps1"
+    . "$env:DOTFILES/win/pwsh/config/user_functions.ps1"
 } else {
     throw "OS is not detected. Separator is not determined!"
 }
@@ -48,11 +49,11 @@ $backup = $profile
         $global:GitPromptSettings.DefaultPromptSuffix.Text = " > "
         $global:profile = $backup
     }
-. "$env:DOTFILES/wsl/pwsh/.local/bin/vimode.ps1"
-. "$env:DOTFILES/wsl/pwsh/.local/bin/alias_autocomplete.ps1"
-. "$env:DOTFILES/wsl/pwsh/.local/bin/hotkeys.ps1"
-. "$env:DOTFILES/wsl/pwsh/.local/bin/user_functions.ps1"
-. "$env:DOTFILES/wsl/pwsh/.local/bin/nvim-switcher.ps1"
+. "$env:DOTFILES/wsl/pwsh/.local/config/vimode.ps1"
+. "$env:DOTFILES/wsl/pwsh/.local/config/alias_autocomplete.ps1"
+. "$env:DOTFILES/wsl/pwsh/.local/config/hotkeys.ps1"
+. "$env:DOTFILES/wsl/pwsh/.local/config/user_functions.ps1"
+. "$env:DOTFILES/wsl/pwsh/.local/config/nvim-switcher.ps1"
 
 # Aliases {{{1
 

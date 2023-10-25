@@ -1,5 +1,3 @@
-Add-Type -Path "$env:DOTFILES/wsl/pwsh/.local/bin/PSFzf.dll"
-
 function Set-PSReadLineKeyHandlerBothModes($Chord, $ScriptBlock) {
     # Set-PSReadLineKeyHandler -ViMode Command @Args
     Set-PSReadLineKeyHandler -Chord $PSBoundParameters.Chord `
@@ -96,6 +94,8 @@ function shellGptMultiline($wordBeforeCursor)
 $global:AbbrFunctions += "shellGptMultiline"
 
 # Not mine
+
+Add-Type -Path "$env:DOTFILES/wsl/pwsh/.local/config/PSFzf.dll"
 
 # $((Get-PSReadlineOption).HistorySavePath)
 # Set-PsFzfOption -PSReadlineChordReverseHistory "Ctrl+r"
