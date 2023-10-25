@@ -18,9 +18,10 @@ if ($PSVersionTable.OS -match "Linux") {
         # Remove windows stuff from linux. Great lookup booster.
         $env:PATH = $env:PATH | tr ":" "\n" | grep -v -e /mnt -e "^$" | tr "\n" ":"
     }
+    . "$env:DOTFILES/wsl/pwsh/.local/config/borrowed.ps1"
 } elseif ($PSVersionTable.OS -match "Windows") {
     $env:PATH_SEPARATOR = ";"
-    . "$env:DOTFILES/pwsh/user_functions_win.ps1"
+    . "$env:DOTFILES/win/pwsh/config/user_functions.ps1"
 } else {
     throw "OS is not detected. Separator is not determined!"
 }
@@ -40,7 +41,7 @@ $env:PATH = ($env:PATH).Replace("$env:PATH_SEPARATOR$env:PATH_SEPARATOR", "$env:
 # Imports & Init {{{1
 
 $backup = $profile
-. "$env:DOTFILES/wsl/pwsh/.local/bin/lazyload.ps1" `
+. "$env:DOTFILES/wsl/pwsh/.local/config/lazyload.ps1" `
     -Modules { Import-Module -Name posh-git } `
     -AfterModulesLoad { 
         $global:GitPromptSettings.DefaultPromptPrefix.Text = "☹️  "
@@ -48,18 +49,18 @@ $backup = $profile
         $global:GitPromptSettings.DefaultPromptSuffix.Text = " > "
         $global:profile = $backup
     }
-. "$env:DOTFILES/wsl/pwsh/.local/bin/vimode.ps1"
-. "$env:DOTFILES/wsl/pwsh/.local/bin/alias_autocomplete.ps1"
-. "$env:DOTFILES/wsl/pwsh/.local/bin/hotkeys.ps1"
-. "$env:DOTFILES/wsl/pwsh/.local/bin/user_functions.ps1"
-. "$env:DOTFILES/wsl/pwsh/.local/bin/nvim-switcher.ps1"
+. "$env:DOTFILES/wsl/pwsh/.local/config/vimode.ps1"
+. "$env:DOTFILES/wsl/pwsh/.local/config/alias_autocomplete.ps1"
+. "$env:DOTFILES/wsl/pwsh/.local/config/hotkeys.ps1"
+. "$env:DOTFILES/wsl/pwsh/.local/config/user_functions.ps1"
+. "$env:DOTFILES/wsl/pwsh/.local/config/nvim-switcher.ps1"
 
 # Aliases {{{1
 
 New-Alias -Name .f -Value 'cd $env:DOTFILES'
 New-Alias -Name .fe -Value 'Edit-AndComeBack($env:DOTFILES)'
-New-Alias -Name .a -Value 'cd $env:DOTFILES/ahk'
-New-Alias -Name .ae -Value 'Edit-AndComeBack("$env:DOTFILES/ahk")'
+New-Alias -Name .a -Value 'cd $env:DOTFILES/win/ahk'
+New-Alias -Name .ae -Value 'Edit-AndComeBack("$env:DOTFILES/win/ahk")'
 New-Alias -Name .n -Value 'cd $env:DOTFILES/wsl/nvim/.config/nvim'
 New-Alias -Name .ne -Value 'Edit-AndComeBack("$env:DOTFILES/wsl/nvim/.config/nvim")'
 New-Alias -Name .p -Value Copy-PathToClipboard

@@ -14,7 +14,7 @@ if [[ ! ansible-playbook ]] ; then
 
   # Installing ssh keys
   mkdir -p ~/.ssh
-  cp ~/.dotfiles/ssh/id_ed25519 ~/.ssh/
+  cp ~/.dotfiles/all/ssh/id_ed25519 ~/.ssh/
   ansible-vault decrypt ~/.ssh/id_ed25519
   chmod 600 ~/.ssh/id_ed25519
   git clone git@github.com:bedware/.ssh.git ~/ssh_tmp
@@ -34,4 +34,3 @@ fi
 # Running playbook
 cd ~/.dotfiles/wsl/ansible
 ansible-playbook init.yml --ask-become-pass
-
