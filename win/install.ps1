@@ -13,27 +13,25 @@ $links = @(
         Path = "$env:HOME\Documents\Powershell\Microsoft.PowerShell_profile.ps1"
         Target = "$env:DOTFILES\wsl\pwsh\.config\powershell\Microsoft.PowerShell_profile.ps1"
     },
-    @{ # pwsh scripts
-        Path = "$env:HOME\Documents\Powershell\Scripts"
-        Target = "$env:DOTFILES\pwsh\"
-    },
     @{ # neovim
         Path = "$env:LOCALAPPDATA\nvim"
         Target = "$env:DOTFILES\wsl\nvim\.config\nvim"
     },
     @{ # widows terminal
         Path = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
-        Target = "$env:DOTFILES\wt\settings.json"
+        Target = "$env:DOTFILES\win\wt\settings.json"
     },
     @{ # jetbrains idea vimrc
         Path = "$env:HOME\.ideavimrc"
-        Target = "$env:DOTFILES\.ideavimrc"
+        Target = "$env:DOTFILES\all\.ideavimrc"
     }
 )
 
 foreach ($link in $links) {
     New-Item -ItemType SymbolicLink -Force -Path $link.Path -Target $link.Target
 }
+
+Copy-Item "$env:DOTFILES\win\ahk\runAutoHotkey.ps1" "c:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\"
 
 # CREATE AUTOSTARTUP TASKS
 
