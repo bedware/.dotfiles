@@ -44,10 +44,10 @@ $backup = $profile
 . "$env:DOTFILES/wsl/pwsh/.local/config/lazyload.ps1" `
     -Modules { Import-Module -Name posh-git } `
     -AfterModulesLoad { 
+        $global:profile = $backup
         $global:GitPromptSettings.DefaultPromptPrefix.Text = "☹️  "
         $global:GitPromptSettings.DefaultPromptBeforeSuffix.Text = "`n"
-        $global:GitPromptSettings.DefaultPromptSuffix.Text = " > "
-        $global:profile = $backup
+        $global:GitPromptSettings.DefaultPromptSuffix.Text = ' > $(OnViModeChange([Microsoft.PowerShell.PSConsoleReadLine]::InViCommandMode() ? "Command" : "Insert"))'
     }
 . "$env:DOTFILES/wsl/pwsh/.local/config/vimode.ps1"
 . "$env:DOTFILES/wsl/pwsh/.local/config/alias_autocomplete.ps1"
