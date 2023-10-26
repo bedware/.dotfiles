@@ -9,10 +9,11 @@
 
 # Editing tools and IDEs
 .idea
+packer_compiled.lua
 
 # Logs and databases
-*.log
-*.sql
+# *.log
+# *.sql
 *.sqlite
 
 # OS generated files 

@@ -18,21 +18,3 @@ vim.api.nvim_create_autocmd('FileType', {
     end
 })
 
--- function nvim_create_augroups(definitions)
---     for group_name, definition in pairs(definitions) do
---         vim.api.nvim_command('bedware_group '..group_name)
---         vim.api.nvim_command('autocmd!')
---         for _, def in ipairs(definition) do
---             local command = table.concat(vim.tbl_flatten{'autocmd', def}, ' ')
---             vim.api.nvim_command(command)
---         end
---         vim.api.nvim_command('bedware_group END')
---     end
--- end
---
--- local autoCommands = {
---     open_folds = {
---         {"BufReadPost,FileReadPost", "*", "normal zR"}
---     }
--- }
--- nvim_create_augroups(autoCommands)

@@ -3,14 +3,30 @@
 local feedkey = function(key, mode)
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
 end
--- Optiongs
+-- Options
 vim.g.netrw_preview = 1
 vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 20
+vim.g.netrw_liststyle = 3
+vim.g.netrw_localrmdir = 'rm -r'
 
 -- Key bindings
-vim.keymap.set('n', '<leader>e', '<cmd>Lexplore %:p:h<cr>')
-vim.keymap.set("n", "<leader>E", vim.cmd.Lexplore)
+vim.keymap.set('n', '<leader>e', function ()
+    local relative_path = vim.fn.expand("%:h")
+    vim.cmd [[:let @/=expand("%:t")]]
+    vim.cmd("Lexplore " .. relative_path)
+    local count = 1
+    local startPos, endPos = string.find(relative_path, "/")
+    while startPos do
+        count = count + 1
+        startPos, endPos = string.find(relative_path, "/", endPos + 1)
+    end
+    while count > 0 do
+        count = count - 1
+        vim.cmd("call netrw#Call('NetrwBrowseUpDir', 1)")
+    end
+    vim.cmd(":normal n<CR>zz")
+end)
 
 -- WIP {{{1
 vim.keymap.set("n", "<leader>t", vim.cmd.TotalNetrw)
@@ -74,22 +90,16 @@ local function netrw_key_binding(buffer)
         vim.cmd('2,$argd')
         state[state.selected].selected_files = res
     end, { buffer = buffer, nowait = true })
-    -- vim.keymap.set("n", "<space>", function()
-    --     vim.cmd(':normal mf')
-    -- end, { buffer = buffer, remap = true, nowait = true })
-    vim.keymap.set("n", "<leader>w", function()
-        print(vim.inspect(state))
-    end, { buffer = buffer, nowait = true })
-    vim.keymap.set("n", "%", function()
-        vim.cmd('normal cd')
-        local current_dir = vim.fn.expand('%:p:h')
-        local success, value = pcall(vim.fn.input, "Create file in directory:" .. current_dir .. ". Filename: ")
-        if success then
-            vim.cmd(":silent! !touch " .. current_dir .. "/" .. value)
-            vim.cmd('e %:p:h')
-            feedkey('/' .. value .. '<CR>', 'n')
-        end
-    end, { buffer = buffer })
+    -- vim.keymap.set("n", "%", function()
+    --     vim.cmd('normal cd')
+    --     local current_dir = vim.fn.expand('%:p:h')
+    --     local success, value = pcall(vim.fn.input, "Create file in directory:" .. current_dir .. ". Filename: ")
+    --     if success then
+    --         vim.cmd(":silent! !touch " .. current_dir .. "/" .. value)
+    --         vim.cmd('e %:p:h')
+    --         feedkey('/' .. value .. '<CR>', 'n')
+    --     end
+    -- end, { buffer = buffer })
 
     -- Toggle dotfiles
     vim.keymap.set('n', '.', 'gh', { buffer = buffer, remap = true })
