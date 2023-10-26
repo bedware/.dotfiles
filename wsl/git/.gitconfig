@@ -1,5 +1,6 @@
 [core]
 	excludesfile = ~/.config/git/.gitignore
+    editor = nvim
 [include]
 	path = ~/.config/git/.gitconfig
 [user]

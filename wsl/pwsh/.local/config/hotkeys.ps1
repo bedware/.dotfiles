@@ -2,9 +2,11 @@ function Set-PSReadLineKeyHandlerBothModes($Chord, $ScriptBlock) {
     # Set-PSReadLineKeyHandler -ViMode Command @Args
     Set-PSReadLineKeyHandler -Chord $PSBoundParameters.Chord `
         -ScriptBlock $PSBoundParameters.ScriptBlock
-    Set-PSReadLineKeyHandler -Chord $PSBoundParameters.Chord `
-        -ScriptBlock $PSBoundParameters.ScriptBlock `
-        -ViMode Command
+    if ((Get-PSReadLineOption).EditMode -eq "Vi") {
+        Set-PSReadLineKeyHandler -Chord $PSBoundParameters.Chord `
+            -ScriptBlock $PSBoundParameters.ScriptBlock `
+            -ViMode Command
+    }
 }
 
 # Alias extention

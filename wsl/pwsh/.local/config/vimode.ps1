@@ -26,3 +26,8 @@ function tmux {
     /usr/bin/tmux $args
     Write-Host -NoNewLine "`e[6 q"
 }
+
+function tmux-sessionizer {
+    /home/bedware/.dotfiles/wsl/bash/.local/bin/tmux-sessionizer $args
+    Write-Host -NoNewLine "`e[6 q"
+}

@@ -1,17 +1,27 @@
 #!/usr/bin/env bash
 
 if [[ $# -eq 1 ]]; then
-    session_path=$1
+    mode="name"
+    session_path="."
+    session_name=$(echo "$1" | tr . _)
 else
+    mode="path"
     session_path=$(fd --min-depth 1 --max-depth 2 --type directory . ~/personal ~/work \
-    | grep -v -e .cache -e .git -e _logs \
-    | fzf)
+                 | grep -v -e .cache -e .git -e _logs \
+                 | fzf)
+    session_name=$(basename "$session_path" | tr . _)
 fi
 
-session_name=$(basename "$session_path" | tr . _)
+echo "Mode: $mode. Session name: $session_name"
 
 if ! tmux has-session -t "$session_name" 2> /dev/null; then
     tmux new-session -s "$session_name" -c "$session_path" -d
 fi
 
-tmux switch-client -t "$session_name"
+if [[ -v TMUX ]]; then
+    echo "I'm inside tmux session. Switching session."
+    tmux switch-client -t "$session_name"
+else
+    echo "Tmux is not running. Attaching to session."
+    tmux attach -t "$session_name"
+fi
