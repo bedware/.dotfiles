@@ -26,6 +26,14 @@ $links = @(
         Target = "$env:DOTFILES\all\alacritty\alacritty.yml"
     },
     @{ # jetbrains idea vimrc
+        Path = "$env:HOME\.gitconfig"
+        Target = "$env:DOTFILES\wsl\git\.gitconfig"
+    },
+    @{ # jetbrains idea vimrc
+        Path = "$env:HOME\.config\git\.gitignore"
+        Target = "$env:DOTFILES\wsl\git\.config\git\.gitignore"
+    },
+    @{ # jetbrains idea vimrc
         Path = "$env:HOME\.ideavimrc"
         Target = "$env:DOTFILES\all\.ideavimrc"
     }

@@ -70,4 +70,5 @@ Set-Alias -Force -Name cd -Value Set-LocationAndList
 New-Alias -Name l -Value Get-ChildItemCompact
 New-Alias -Name rmr -Value "Remove-Item -Force -Recurse"
 Add-BlankAlias -Name e -Value '$env:'
+Add-IgnoredAlias -Name vi -Value nvim
 

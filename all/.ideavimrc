@@ -26,11 +26,11 @@ let mapleader = " "
 " IDEA Plugins
 set easymotion
 set surround
-set multiple-cursors
 set commentary
 Plug 'vim-scripts/argtextobj.vim'
 Plug 'machakann/vim-highlightedyank'
 Plug 'terryma/vim-multiple-cursors'
+set multiple-cursors
 
 " Disabling things
 map <Up> <nop>
@@ -39,20 +39,12 @@ map <Left> <nop>
 map <Right> <nop>
 map <Space> <nop>
 
-" Enter hotkey
-nnoremap <Enter> o<Esc>
-nnoremap <S-Enter> O<Esc>
-
 " Line text object
 xnoremap il g_o0
 xnoremap al $o0
 
 " Buffer text object
 xnoremap i% GoggV
-
-" New line on Enter/Shift-Enter
-nnoremap <S-CR> O<Esc>
-nnoremap <CR> o<Esc>
 
 " Navigation (Methods)
 nnoremap <A-j> :action MethodDown<CR>
@@ -121,7 +113,9 @@ nnoremap <leader>vf :action Git.Fetch<CR>
 nnoremap <leader>vp :action Vcs.Push<CR>
 
 " Code
-" nnoremap <leader>f :action ReformatCode<CR>
+nnoremap <leader>ff :action GotoFile<CR>
+nnoremap <leader>fif :action FindInPath<CR>
+nnoremap <leader>mvn :action com.jetbrains.packagesearch.intellij.plugin.actions.AddDependencyAction<CR>
 nnoremap == :action ReformatCode<CR>
 vnoremap == :action ReformatCode<CR>
 nnoremap <leader>o :action OptimizeImports<CR>

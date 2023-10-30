@@ -142,5 +142,6 @@ executeInput(apps, userInput) {
                 Func(app.postFunction).Call()
             }
         } 
+        hideAlfred()
     }
 }

@@ -19,7 +19,8 @@ End::F20 ; Pause/unpause recording
 PgUp::F24 ; First scene
 PgDn::F23 ; Second scene
 ; Pedal
-F13::Func("doTranslation").Call()
+F13::GoToAlternateVD()
+; F13::Func("doTranslation").Call()
 ; Shift
 RShift & Capslock::Send +{Esc}
 ; Press both shift keys together to toggle Capslock
@@ -195,6 +196,10 @@ return
 #if WinActive("ahk_exe TOTALCMD64.EXE")
     !e::Send {Home}{F2} ; Edit path
     !p::Send ^{F12} ; Copy path to selected file
+#if
+#if WinActive("ahk_exe Notion.exe")
+    ^o::^[
+    ^i::^]
 #if
 #if WinActive("ahk_class TLister ahk_exe TOTALCMD64.EXE")
     j::Down
