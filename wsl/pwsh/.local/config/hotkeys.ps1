@@ -18,6 +18,12 @@ Set-PSReadLineKeyHandler -Key Enter -ScriptBlock {
     AliasExtention -Mode "Enter"
     [Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
 }
+Set-PSReadLineKeyHandler -ViMode Command -Key . -ScriptBlock {
+    [Microsoft.PowerShell.PSConsoleReadLine]::DeleteLine()
+    [Microsoft.PowerShell.PSConsoleReadLine]::Insert('vi .')
+    [Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
+}
+    
 
 # General moves
 

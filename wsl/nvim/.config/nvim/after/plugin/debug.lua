@@ -44,3 +44,10 @@ vim.keymap.set('n', ',b', "<cmd>lua require('dap').toggle_breakpoint()<cr>", {})
 vim.keymap.set('n', ',c', "<cmd>lua require('dap').continue()<cr>", {})
 vim.keymap.set('n', ',h', "<cmd>lua require('dap').run_to_cursor()<cr>", {})
 vim.keymap.set('n', ',s', "<cmd>lua require('dap').terminate()<cr>", {})
+
+-- require'telescope'.extensions.dap.commands{}
+-- require'telescope'.extensions.dap.configurations{}
+-- require'telescope'.extensions.dap.list_breakpoints{}
+-- require'telescope'.extensions.dap.variables{}
+-- require'telescope'.extensions.dap.frames{}
+

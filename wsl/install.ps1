@@ -13,13 +13,13 @@ $links = @(
         Path = "$env:HOME/.config/powershell/Microsoft.PowerShell_profile.ps1"
         Target = "$env:DOTFILES/wsl/pwsh/profile.ps1"
     },
-    @{ # tmux
-        Path = "$env:HOME/.tmux.conf"
-        Target = "$env:DOTFILES/wsl/tmux/.tmux.conf"
-    },
     @{ # neovim
         Path = "$env:HOME/.config/nvim"
         Target = "$env:DOTFILES/wsl/nvim"
+    },
+    @{ # tmux
+        Path = "$env:HOME/.tmux.conf"
+        Target = "$env:DOTFILES/wsl/tmux/.tmux.conf"
     }
 )
 

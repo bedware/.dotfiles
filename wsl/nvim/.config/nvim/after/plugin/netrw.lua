@@ -22,6 +22,7 @@ local state = {
     },
     selected = 'LEFT',
     alt_window_cursor_pos = { 1, 0 },
+    state = nil
 }
 
 -- Functions {{{1
@@ -37,6 +38,11 @@ local debug_output_var = function(var)
 end
 
 local toggle_sidebar = function()
+    local relative_path = tostring(vim.fn.expand("%:h"))
+    if string.sub(relative_path, 0, 1) == '/' then
+        local pwd = vim.fn.getcwd() .. '/'
+        relative_path = string.gsub(relative_path, pwd, "");
+    end
     for _, win_id in ipairs(vim.api.nvim_list_wins()) do
         local buf_id = vim.api.nvim_win_get_buf(win_id)
         if vim.api.nvim_get_option_value('filetype', { buf = buf_id }) == 'netrw' then
@@ -44,14 +50,15 @@ local toggle_sidebar = function()
             return
         end
     end
-    vim.g.netrw_liststyle = 3
-    local relative_path = vim.fn.expand("%:h")
     local startPos, endPos = string.find(relative_path, "/")
     if startPos == 1 then
         relative_path = "."
     end
     vim.cmd [[:let @/=expand("%:t")]]
-    vim.cmd("Lexplore " .. relative_path)
+    vim.cmd.Vex()
+    -- vim.g.netrw_liststyle = 3
+    vim.g.netrw_browse_split = 4
+    vim.cmd(":normal iii")
     if startPos ~= nil and startPos > 1 then
         while startPos ~= nil do
             startPos, endPos = string.find(relative_path, "/", endPos + 1)
@@ -59,7 +66,7 @@ local toggle_sidebar = function()
         end
         vim.cmd("call netrw#Call('NetrwBrowseUpDir', 1)")
     end
-    vim.cmd(":normal n<CR>zz")
+    vim.cmd(":normal nzz")
 end
 
 local open_total_on_windows = function()
@@ -105,47 +112,56 @@ local create_new_file = function()
     end
 end
 
-local search_by_directory = function() vim.cmd('Telescope fd find_command=fd,--type,directory,--hidden,--strip-cwd-prefix') end
+local search_by_directory = function()
+    vim.cmd('Telescope fd find_command=fd,--type,directory,--hidden,--strip-cwd-prefix')
+end
 
 -- Command handlers {{{1
 local function on_open(_)
     if #vim.api.nvim_list_wins() == 1 then
         vim.cmd.Explore()
         vim.cmd.vs()
+        vim.g.netrw_browse_split = 0
         vim.opt.statusline = '%{b:netrw_curdir}'
+        state.state = 'open'
         react()
     end
 end
 
-local function on_close(_)
-    local if_window_is_netrw = function(win)
-        return vim.api.nvim_get_option_value('filetype',
-            { buf = vim.api.nvim_win_get_buf(win) }) == 'netrw'
-    end
-    local window_used_in_total = function(win)
-        return state.LEFT.window == win or state.RIGHT.window == win
-    end
-    local left_windows_are_totals_windows = function()
-        for _, win_id in ipairs(vim.api.nvim_list_wins()) do
-            if not window_used_in_total(win_id) then
-                return false
-            end
+local function on_close(opts)
+    local buf_id = vim.api.nvim_win_get_buf(vim.api.nvim_get_current_win())
+    local ft = vim.api.nvim_get_option_value('filetype', { buf = buf_id })
+    if state.state == 'open' then
+        local window_used_in_total = function(win)
+            return state.LEFT.window == win or state.RIGHT.window == win
         end
-        return true
-    end
-    if not window_used_in_total(vim.api.nvim_get_current_win()) and if_window_is_netrw(vim.api.nvim_get_current_win()) then
-        vim.cmd.quit()
-    elseif #vim.api.nvim_list_wins() == 2 and left_windows_are_totals_windows() then
-        if (if_window_is_netrw(state.LEFT.window) and if_window_is_netrw(state.RIGHT.window)) then
+        local only_totals_windows_left = function()
+            for _, win_id in ipairs(vim.api.nvim_list_wins()) do
+                if not window_used_in_total(win_id) then
+                    return false
+                end
+            end
+            return true
+        end
+        local bufname = vim.fn.bufname(buf_id)
+        if opts.fargs[1] == 'autoclose' then
+            if #bufname > 0 and bufname ~= '.' then
+                vim.opt.statusline = ''
+                vim.api.nvim_win_close(state[opposite()].window, false)
+                state.state = 'closed'
+            end
+        elseif #vim.api.nvim_list_wins() == 2 and only_totals_windows_left() then
             vim.cmd.quitall()
-        else
-            vim.opt.statusline = ''
-            vim.api.nvim_win_close(state[opposite()].window, false)
+        end
+        state.alt_window_cursor_pos = { 1, 0 }
+    else
+        if ft == 'netrw' then
+            vim.cmd.quit()
         end
     end
 end
 
--- WIP Copy marked files {{{1
+-- File actions {{{1
 local do_with_marked_files = function(func)
     vim.cmd('normal ma')
     if vim.fn.argc() < 2 then
@@ -166,12 +182,10 @@ local do_with_marked_files = function(func)
         table.insert(quoted, "'" .. filename .. "'")
         i = i + 1
     end
-    -- vim.cmd.args()
     vim.cmd('2,$argd')
     state[state.selected].selected_files = unquoted
 
     local success, result = pcall(func, quoted)
-    -- debug_output_var(result)
     if success then
         vim.cmd(result)
     end
@@ -198,31 +212,31 @@ local move_marked_files = function()
 end
 
 -- Global key bindings {{{1
-vim.keymap.set("n", "<leader>t", vim.cmd.TotalOpen)
-vim.keymap.set("n", "<leader>d", function() debug_output_var(state) end)
+vim.keymap.set('n', '<leader>t', vim.cmd.TotalOpen)
+vim.keymap.set('n', '<leader>d', function() debug_output_var(state) end)
 vim.keymap.set('n', '<leader>e', toggle_sidebar)
 
 -- Buffer key bindings {{{1
-local function netrw_key_binding(buffer)
-    vim.keymap.set("n", "<leader><leader>", open_total_on_windows, { buffer = buffer, nowait = true, silent = true })
-    vim.keymap.set("n", "<Tab>", change_total_pane, { buffer = buffer })
-    vim.keymap.set("n", "<F5>", copy_marked_files, { buffer = buffer, nowait = true })
-    vim.keymap.set("n", "<F6>", move_marked_files, { buffer = buffer, nowait = true })
-    vim.keymap.set("n", "<F8>", delete_marked_files, { buffer = buffer, nowait = true })
-    vim.keymap.set("n", "q", vim.cmd.TotalClose, { buffer = buffer, nowait = true })
+local function total_key_binding(buffer)
+    vim.keymap.set('n', '<leader><leader>', open_total_on_windows, { buffer = buffer, nowait = true, silent = true })
+    vim.keymap.set('n', '<Tab>', change_total_pane, { buffer = buffer })
+    vim.keymap.set('n', '<F5>', copy_marked_files, { buffer = buffer, nowait = true })
+    vim.keymap.set('n', '<F6>', move_marked_files, { buffer = buffer, nowait = true })
+    vim.keymap.set('n', '<F8>', delete_marked_files, { buffer = buffer, nowait = true })
+    vim.keymap.set('n', 'q', vim.cmd.TotalClose, { buffer = buffer, nowait = true })
     vim.keymap.set('n', '<C-g>', search_by_directory, { buffer = buffer })
     vim.keymap.set('n', '.', 'gh', { buffer = buffer, remap = true }) -- Toggle dotfiles
-    vim.keymap.set('n', 's', function()
-        feedkey("<Down>", "n")
+    vim.keymap.set('n', 's', function()                               -- Mark a file
         vim.cmd('normal mf')
-    end, { buffer = buffer })                                                              -- Mark a file
+        feedkey('<Down>', 'n')
+    end, { buffer = buffer })
     vim.keymap.set('n', '<Esc>', function() vim.cmd('normal mF') end, { buffer = buffer }) -- Unmark all files
     -- vim.keymap.set("n", "%", create_new_file, { buffer = buffer })
 end
 
 -- User commands {{{1
 vim.api.nvim_create_user_command('TotalOpen', on_open, {})
-vim.api.nvim_create_user_command('TotalClose', on_close, {})
+vim.api.nvim_create_user_command('TotalClose', on_close, { nargs = '?' })
 
 local bedware_group = vim.api.nvim_create_augroup('bedware_group', { clear = false })
 
@@ -240,11 +254,11 @@ vim.api.nvim_create_autocmd('VimEnter', {
 vim.api.nvim_create_autocmd('BufEnter', {
     group = bedware_group,
     pattern = '*',
-    desc = 'Autoclose preview window',
+    desc = 'Autoclose total windows',
     callback = function(e)
         local filetype = vim.api.nvim_get_option_value('filetype', { buf = e.buf })
-        if filetype ~= '' and filetype ~= 'netrw' then
-            vim.cmd.TotalClose()
+        if filetype ~= 'netrw' then
+            vim.cmd.TotalClose('autoclose')
         end
     end
 })
@@ -255,7 +269,7 @@ vim.api.nvim_create_autocmd('FileType', {
     callback = function(e)
         if e.buf ~= nil then
             vim.cmd('highlight netrwMarkFile guibg=#eb6f92')
-            netrw_key_binding(e.buf)
+            total_key_binding(e.buf)
         end
     end
 })
