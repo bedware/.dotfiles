@@ -46,7 +46,7 @@ local function jdtls_on_attach(client, bufnr)
         require('jdtls').setup_dap({ hotcodereplace = 'auto' })
         require('jdtls.dap').setup_dap_main_class_configs()
         vim.keymap.set('n', ',tf', "<cmd>lua require('jdtls').test_class()<cr>", opts)
-        vim.keymap.set('n', ',tt', "<cmd>lua require('jdtls').test_nearest_method()<cr>", opts)
+        vim.keymap.set('n', ',tn', "<cmd>lua require('jdtls').test_nearest_method()<cr>", opts)
     end
     -- The following mappings are based on the suggested usage of nvim-jdtls
     -- https://github.com/mfussenegger/nvim-jdtls#usage

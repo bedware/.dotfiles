@@ -32,7 +32,9 @@ Set-PSReadLineKeyHandler -Chord Ctrl+w -ScriptBlock {
 
 # Fzf
 
-$fzfExclude = @('.git', 'AppData', '.npm', '.m2', '.jdks', '.gradle')
+$fzfExclude = @('.git', 'AppData', '.npm', '.m2', '.sdkman', '.local', '.config',
+                '.oh-my-zsh', '.tmp', '.cache',
+                '.jdks', '.gradle', '.java', '.lemminx')
 $fzfParam = "--path-separator '/' --hidden --strip-cwd-prefix " + `
 @($fzfExclude | ForEach-Object {"--exclude '$_'"}) -join " "
 

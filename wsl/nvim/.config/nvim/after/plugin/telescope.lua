@@ -1,4 +1,5 @@
 local telescope = require("telescope")
+local actions = require("telescope.actions")
 
 -- Clone the default Telescope configuration
 local vimgrep_arguments = { unpack(require("telescope.config").values.vimgrep_arguments) }
@@ -12,6 +13,12 @@ table.insert(vimgrep_arguments, "--hidden")
 telescope.setup({
     defaults = {
         vimgrep_arguments = vimgrep_arguments,
+        mappings = {
+            i = {
+                ["<C-j>"] = actions.preview_scrolling_left,
+                ["<M-j>"] = actions.results_scrolling_left,
+            }
+        }
     },
     pickers = {
         find_files = {
@@ -38,11 +45,11 @@ require("telescope").load_extension("ui-select")
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fif', builtin.live_grep, {})
+vim.keymap.set('n', '<leader>fic', builtin.current_buffer_fuzzy_find, {})
 vim.keymap.set('n', '<leader>fig', builtin.git_files, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 vim.keymap.set('n', '<leader>fk', builtin.keymaps, {})
 vim.keymap.set('n', '<leader>fd', builtin.diagnostics, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-vim.keymap.set('n', '<leader>fg', function()
-    vim.cmd('Telescope fd find_command=fd,--type,directory,--hidden')
-end, {})
+vim.keymap.set('n', '<leader>fc', builtin.autocommands, {})
+vim.keymap.set('n', '<leader>ft', builtin.builtin, {})
