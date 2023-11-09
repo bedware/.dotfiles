@@ -3,7 +3,7 @@
 # Environment variables {{{1
 
 $env:DOTFILES = $env:HOME.ToString().Replace("\", "/") + "/.dotfiles"
-$env:EDITOR = "vi"
+$env:EDITOR = "nvim"
 $env:VISUAL = "$env:EDITOR"
 $env:BUN_INSTALL = "$env:HOME/.bun"
 $env:JAVA_HOME = "$env:HOME/.jdks/jdk-21"
@@ -22,12 +22,14 @@ if ($PSVersionTable.OS -match "Linux") {
 } elseif ($PSVersionTable.OS -match "Windows") {
     $env:PATH_SEPARATOR = ";"
     . "$env:DOTFILES/win/pwsh/config/user_functions.ps1"
+    $env:PATH += "$env:PATH_SEPARATOR$env:DOTFILES/win/pwsh/bin/"
 } else {
     throw "OS is not detected. Separator is not determined!"
 }
 
 # Path {{{1
 
+$env:PATH += "$env:PATH_SEPARATOR$env:DOTFILES/wsl/pwsh/.local/bin/"
 $env:PATH += "$env:PATH_SEPARATOR$env:BUN_INSTALL/bin"
 $env:PATH += "$env:PATH_SEPARATOR$env:JAVA_HOME/bin"
 $env:PATH += "$env:PATH_SEPARATOR$env:HOME/.local/bin"

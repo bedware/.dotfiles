@@ -3,6 +3,9 @@ makeAnyWindowFullsreen() {
     WinMove, A, , 0, 0, 3456, 2166
     ; WinMove, A, , 0, 0, 2160, 3348
 }
+makeAnyWindowMaximized() {
+    WinMaximize, A
+}
 
 doTranslation() {
     global apps
@@ -59,24 +62,6 @@ doTranslation() {
             Send {Enter}
         }
     }
-}
-
-RearrangeWindows() {
-    global apps
-    global desktops
-    for i, v in apps {
-        if (v.desktop != "" && v.selector != "") {
-            moved := false
-            while (WinExist(v.selector) and !moved) {
-                WinActivate 
-                desktopNum := IndexOf(v.desktop, desktops)
-                if (IndexOf(v.desktop, desktops) != -1) {
-                    ; MoveActiveWindowToDesktop(desktopNum - 1)
-                    moved = true
-                }
-            }
-        }
-    } 
 }
 
 defaultProfile() {

@@ -48,7 +48,6 @@ return
 return
 
 #`:: ; Quake alive
-    processName := "WindowsTerminal.exe"
     if (!ProcessExist("WindowsTerminal.exe")) {
         Run, wt.exe -w _quake
         WinWait, ahk_exe WindowsTerminal.exe,, 5

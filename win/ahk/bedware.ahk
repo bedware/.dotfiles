@@ -45,13 +45,13 @@ apps["tra"] := { desktop: "Translation", path: "C:\Program Files (x86)\ABBYY Lin
 apps["trd"] := { desktop: "Translation", selector: "DeepL Translate", path: AROAMI . "\Microsoft\Windows\Start Menu\Programs\Chrome Apps\DeepL Translate.lnk" }
 apps["try"] := { desktop: "Translation", selector: "Yandex Translate.*", path: AROAMI . "\Microsoft\Windows\Start Menu\Programs\Chrome Apps\Yandex.Translate.lnk" }
 apps["cmd"] := { desktop: "Files", selector: "ahk_exe TOTALCMD64.EXE", path: "C:\Program Files\totalcmd\TOTALCMD64.EXE" }
-apps["task"] := { desktop: "Other", selector: "ahk_class TaskManagerWindow", path: "Taskmgr.exe" }
-; apps["obs"] := { desktop: "Studio", selector: "ahk_exe obs64.exe", path: "C:\Program Files\obs-studio\bin\64bit\obs64.exe" }
+apps["pdf"] := { desktop: "Files", selector: "ahk_exe SumatraPDF.exe", path: ALOCAL . "\SumatraPDF\SumatraPDF.exe" }
+apps["task"] := { desktop: "Other", selector: "ahk_class TaskManagerWindow", path: "Taskmgr.exe", postFunction: "makeAnyWindowMaximized" }
 apps["obs"] := { desktop: "Studio", selector: "ahk_exe obs64.exe", path: "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\OBS Studio\OBS Studio (64bit).lnk" }
 ; desktop independent
 apps["adbg"] := { selector: "ahk_exe dbgview64.exe", path: HOME . "\OneDrive\Soft\DebugView\dbgview64.exe" }
-apps["adoc"] := apps["ahelp"]
 apps["ahelp"] := { selector: "AutoHotkey Help", path: AHK_FOLDER . "\AutoHotkey.chm" }
+apps["adoc"] := apps["ahelp"]
 apps["aspy"] := { selector: "Window Spy", path: AHK_FOLDER . "\WindowSpy.ahk" }
 apps["carnac"] := { selector: "ahk_exe Carnac.exe", path: ALOCAL . "\carnac\Carnac.exe" }
 apps["music"] := { selector: "Yandex.Music ahk_exe chrome.exe", path: AROAMI . "\Microsoft\Windows\Start Menu\Programs\Chrome Apps\Yandex.Music.lnk" }
@@ -61,9 +61,8 @@ apps["quake"] := { selector: "ahk_exe WindowsTerminal.exe", path: "wt.exe -w _qu
 apps["razer"] := { selector: "Razer", path: "C:\Program Files (x86)\Razer\Synapse3\WPFUI\Framework\Razer Synapse 3 Host\Razer Synapse 3.exe /StartMinimized" }
 
 ; functions
-apps["cl"] := { postFunction: "RearrangeWindows" }
-apps["pd"] := { postFunction: "defaultProfile" }
-apps["ps"] := { postFunction: "screencastProfile" }
+apps[" pd"] := { postFunction: "defaultProfile" }
+apps[" ps"] := { postFunction: "screencastProfile" }
 
 ; hotkeys
 apps["1"] := { postFunction: "GoToVD", postFunctionParam: 1 }

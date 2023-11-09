@@ -1,5 +1,5 @@
 RunAlfred(apps) {
-    showAlfred()
+    showAlfredAsync()
 
     endKey := "LShift"
     timeout := "8" ; seconds
@@ -49,6 +49,10 @@ showAlfred() {
         PinWindow(activeHwnd)
     }
     OutputDebug % "Alfred show"
+}
+showAlfredAsync() {
+    fu := Func("showAlfred")
+    SetTimer %fu%, -1
 }
 
 showAlfredRunning(text) {
