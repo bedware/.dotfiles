@@ -1,6 +1,5 @@
--- ---@diagnostic disable: missing-fields
--- Global mappings.
-vim.keymap.set("n", "<leader>cl", ":LspInfo<CR>")
+-- Settings
+-- vim.lsp.set_log_level('trace')
 
 -- IMPORTANT: make sure to setup neodev BEFORE lspconfig
 require("neodev").setup({
@@ -9,7 +8,11 @@ require("neodev").setup({
     library = { plugins = { "nvim-dap-ui" }, types = true },
 })
 local lsp_zero = require('lsp-zero')
+local lspconfig = require('lspconfig')
 
+-- Global key binding
+vim.keymap.set("n", "<leader>cl", ":LspInfo<CR>")
+-- LSP key binding
 lsp_zero.on_attach(function(_, bufnr)
     local opts = { buffer = bufnr, remap = false }
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
@@ -30,9 +33,10 @@ end)
 
 require('mason').setup()
 require('mason-lspconfig').setup({
-    ensure_installed = { "lua_ls", "jdtls" },
+    ensure_installed = { "lua_ls" },
     handlers = {
         lsp_zero.default_setup,
+        jdtls = lsp_zero.noop, -- let plugin do the work (check jdtls.lua)
         lua_ls = function()
             local tweaks = {
                 settings = {
@@ -40,13 +44,23 @@ require('mason-lspconfig').setup({
                         diagnostics = {
                             disable = { "missing-fields" }
                         },
-                    }
+                        workspace = {
+                            -- https://luals.github.io/wiki/settings/#runtimepath 
+                            library = {
+                                vim.fn.expand '~/.local/share/nvim/site/pack/packer/start/plenary.nvim/lua'
+                            },
+                            -- library = vim.api.nvim_get_runtime_file('', true),
+                        },
+                    },
                 }
             }
             local lua_opts = lsp_zero.nvim_lua_ls(tweaks)
-            require('lspconfig').lua_ls.setup(lua_opts)
+            lspconfig.lua_ls.setup(lua_opts)
         end,
-        jdtls = lsp_zero.noop, -- let a plugin do the work (check jdtls.lua)
+        julials = function()
+            lspconfig.julials.setup {
+                symbol_cache_download = false,
+            }
+        end,
     },
 })
-

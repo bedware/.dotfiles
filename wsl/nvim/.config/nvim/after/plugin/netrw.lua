@@ -1,28 +1,38 @@
 -- Netrw
 
--- Options {{{1
+-- Variables {{{1
 vim.g.netrw_preview = 1
 vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 20
 vim.g.netrw_localrmdir = 'rm -r'
 
 -- State {{{1
-local state = {
+local M = {}
+M = {
+    debug = false,
     LEFT = {
         window = nil,
-        bufnr = nil,
-        path = nil,
-        selected_files = nil
+        get_bufnr = function ()
+            return vim.api.nvim_win_get_buf(M.LEFT.window)
+        end,
+        get_path = function ()
+            return vim.api.nvim_buf_get_var(M.LEFT.get_bufnr(), 'netrw_curdir')
+        end,
+        selected_files = {}
     },
     RIGHT = {
         window = nil,
-        bufnr = nil,
-        path = nil,
-        selected_files = nil
+        get_bufnr = function ()
+            return vim.api.nvim_win_get_buf(M.RIGHT.window)
+        end,
+        get_path = function ()
+            return vim.api.nvim_buf_get_var(M.RIGHT.get_bufnr(), 'netrw_curdir')
+        end,
+        selected_files = {}
     },
     selected = 'LEFT',
     alt_window_cursor_pos = { 1, 0 },
-    state = nil
+    state = 'closed'
 }
 
 -- Functions {{{1
@@ -70,46 +80,31 @@ local toggle_sidebar = function()
 end
 
 local open_total_on_windows = function()
-    vim.fn.win_gotoid(state["LEFT"].window)
+    vim.fn.win_gotoid(M["LEFT"].window)
     local left = vim.b.netrw_curdir
 
-    vim.fn.win_gotoid(state["RIGHT"].window)
+    vim.fn.win_gotoid(M["RIGHT"].window)
     local right = vim.b.netrw_curdir
     vim.cmd("silent !total -Left '" .. left .. "' -Right '" .. right .. "'")
 end
 
 local react = function()
     if #vim.api.nvim_list_wins() == 2 then
-        local prev_cursor_position = state.alt_window_cursor_pos
-        state.alt_window_cursor_pos = vim.api.nvim_win_get_cursor(vim.api.nvim_get_current_win())
+        local prev_cursor_position = M.alt_window_cursor_pos
+        M.alt_window_cursor_pos = vim.api.nvim_win_get_cursor(vim.api.nvim_get_current_win())
 
-        state.LEFT.window = vim.api.nvim_list_wins()[1]
-        state.LEFT.bufnr = vim.fn.winbufnr(state.LEFT.window)
-        state.LEFT.path = vim.api.nvim_buf_get_var(state.LEFT.bufnr, 'netrw_curdir')
-        state.RIGHT.window = vim.api.nvim_list_wins()[2]
-        state.RIGHT.bufnr = vim.fn.winbufnr(state.RIGHT.window)
-        state.RIGHT.path = vim.api.nvim_buf_get_var(state.RIGHT.bufnr, 'netrw_curdir')
+        M.LEFT.window = vim.api.nvim_list_wins()[1]
+        M.RIGHT.window = vim.api.nvim_list_wins()[2]
 
-        vim.fn.win_gotoid(state[state.selected].window)
+        vim.fn.win_gotoid(M[M.selected].window)
 
-        vim.api.nvim_win_set_cursor(state[state.selected].window, prev_cursor_position)
+        vim.api.nvim_win_set_cursor(M[M.selected].window, prev_cursor_position)
     end
 end
-local opposite = function() return state.selected == 'LEFT' and 'RIGHT' or 'LEFT' end
+local opposite = function() return M.selected == 'LEFT' and 'RIGHT' or 'LEFT' end
 local change_total_pane = function()
-    state.selected = opposite()
+    M.selected = opposite()
     react()
-end
-
-local create_new_file = function()
-    vim.cmd('normal cd')
-    local current_dir = vim.fn.expand('%:p:h')
-    local success, value = pcall(vim.fn.input, "Create file in directory:" .. current_dir .. ". Filename: ")
-    if success then
-        vim.cmd("silent !touch " .. current_dir .. "/" .. value)
-        vim.cmd('e %:p:h')
-        feedkey('/' .. value .. '<CR>', 'n')
-    end
 end
 
 local search_by_directory = function()
@@ -117,13 +112,17 @@ local search_by_directory = function()
 end
 
 -- Command handlers {{{1
-local function on_open(_)
+local function on_open(opts)
     if #vim.api.nvim_list_wins() == 1 then
-        vim.cmd.Explore()
+        if opts.fargs[1] == 'root' then
+            vim.cmd.Explore(vim.fn.argv()[1])
+        else
+            vim.cmd.Explore()
+        end
         vim.cmd.vs()
         vim.g.netrw_browse_split = 0
         vim.opt.statusline = '%{b:netrw_curdir}'
-        state.state = 'open'
+        M.state = 'open'
         react()
     end
 end
@@ -131,9 +130,9 @@ end
 local function on_close(opts)
     local buf_id = vim.api.nvim_win_get_buf(vim.api.nvim_get_current_win())
     local ft = vim.api.nvim_get_option_value('filetype', { buf = buf_id })
-    if state.state == 'open' then
+    if M.state == 'open' then
         local window_used_in_total = function(win)
-            return state.LEFT.window == win or state.RIGHT.window == win
+            return M.LEFT.window == win or M.RIGHT.window == win
         end
         local only_totals_windows_left = function()
             for _, win_id in ipairs(vim.api.nvim_list_wins()) do
@@ -147,13 +146,13 @@ local function on_close(opts)
         if opts.fargs[1] == 'autoclose' then
             if #bufname > 0 and bufname ~= '.' then
                 vim.opt.statusline = ''
-                vim.api.nvim_win_close(state[opposite()].window, false)
-                state.state = 'closed'
+                vim.api.nvim_win_close(M[opposite()].window, false)
+                M.state = 'closed'
             end
         elseif #vim.api.nvim_list_wins() == 2 and only_totals_windows_left() then
             vim.cmd.quitall()
         end
-        state.alt_window_cursor_pos = { 1, 0 }
+        M.alt_window_cursor_pos = { 1, 0 }
     else
         if ft == 'netrw' then
             vim.cmd.quit()
@@ -162,6 +161,9 @@ local function on_close(opts)
 end
 
 -- File actions {{{1
+
+local dbg_or_silent = M.debug and "" or "silent "
+
 local do_with_marked_files = function(func)
     vim.cmd('normal ma')
     if vim.fn.argc() < 2 then
@@ -183,59 +185,97 @@ local do_with_marked_files = function(func)
         i = i + 1
     end
     vim.cmd('2,$argd')
-    state[state.selected].selected_files = unquoted
+    M[M.selected].selected_files = unquoted
 
     local success, result = pcall(func, quoted)
     if success then
         vim.cmd(result)
     end
 end
-local copy_marked_files = function()
+
+M.move_marked_files = function()
     do_with_marked_files(
         function(selected_files)
-            return "silent !Copy-Item -Recurse -Path " ..
-                table.concat(selected_files, ",") .. " -Destination '" .. state[opposite()]["path"] .. "'"
+            return dbg_or_silent .. "!Move-Item -Path " ..
+                table.concat(selected_files, ",") .. " -Destination '" .. M[opposite()].get_path() .. "'"
         end)
 end
-local delete_marked_files = function()
+M.copy_marked_files = function()
     do_with_marked_files(
         function(selected_files)
-            return "silent !Remove-Item -Force -Recurse " .. table.concat(selected_files, ",")
+            return dbg_or_silent .. "!Copy-Item -Recurse -Path " ..
+                table.concat(selected_files, ",") .. " -Destination '" .. M[opposite()].get_path() .. "'"
         end)
 end
-local move_marked_files = function()
+M.delete_marked_files = function()
     do_with_marked_files(
         function(selected_files)
-            return "silent !Move-Item -Path " ..
-                table.concat(selected_files, ",") .. " -Destination '" .. state[opposite()]["path"] .. "'"
+            return dbg_or_silent .. "!Remove-Item -Force -Recurse " .. table.concat(selected_files, ",")
         end)
 end
+M.create_new_file_dir_path = function()
+    local success, value = pcall(vim.fn.input, "Create file/dir/path: ")
+    if success then
+        if string.sub(value, 0, 1) == '/' then
+            print("You provided absolute path, but it will be converted to relative")
+        end
+        local command = dbg_or_silent .. '!New-Item -Force -Type '
+        if string.sub(value, -1) == '/' then
+            command = command .. "Directory"
+        else
+            command = command .. "File"
+        end
+
+
+        local path = vim.api.nvim_buf_get_var(vim.api.nvim_get_current_buf(), 'netrw_curdir')
+        command = command .. " '" .. path .. "/" .. value .. "'"
+
+        local startPos, endPos = string.find(value, "/")
+        if startPos ~= nil then
+            value = string.sub(value, 1, startPos)
+        end
+
+        vim.cmd(command)
+        vim.cmd("e " .. path)
+        vim.cmd("let @/='" .. value .. "'")
+        vim.cmd("silent normal nzz")
+    end
+end
+
 
 -- Global key bindings {{{1
 vim.keymap.set('n', '<leader>t', vim.cmd.TotalOpen)
-vim.keymap.set('n', '<leader>d', function() debug_output_var(state) end)
+vim.keymap.set('n', '<leader>T', function() vim.cmd.TotalOpen('root') end)
+vim.keymap.set('n', '<leader>d', function() debug_output_var(M) end)
 vim.keymap.set('n', '<leader>e', toggle_sidebar)
 
 -- Buffer key bindings {{{1
 local function total_key_binding(buffer)
     vim.keymap.set('n', '<leader><leader>', open_total_on_windows, { buffer = buffer, nowait = true, silent = true })
     vim.keymap.set('n', '<Tab>', change_total_pane, { buffer = buffer })
-    vim.keymap.set('n', '<F5>', copy_marked_files, { buffer = buffer, nowait = true })
-    vim.keymap.set('n', '<F6>', move_marked_files, { buffer = buffer, nowait = true })
-    vim.keymap.set('n', '<F8>', delete_marked_files, { buffer = buffer, nowait = true })
+    vim.keymap.set('n', '<F5>', M.copy_marked_files, { buffer = buffer })
+    vim.keymap.set('n', '<F6>', M.move_marked_files, { buffer = buffer })
+    vim.keymap.set('n', '<F8>', M.delete_marked_files, { buffer = buffer })
+    vim.keymap.set("n", "<F7>", M.create_new_file_dir_path, { buffer = buffer })
     vim.keymap.set('n', 'q', vim.cmd.TotalClose, { buffer = buffer, nowait = true })
     vim.keymap.set('n', '<C-g>', search_by_directory, { buffer = buffer })
-    vim.keymap.set('n', '.', 'gh', { buffer = buffer, remap = true }) -- Toggle dotfiles
-    vim.keymap.set('n', 's', function()                               -- Mark a file
+    -- Toggle dotfiles
+    vim.keymap.set('n', '.', 'gh', { buffer = buffer, remap = true })
+    -- Quickfix list => Marked files
+    vim.keymap.set('n', 'f', function() vim.cmd('normal qF') end, { buffer = buffer })
+    -- Mark a file
+    vim.keymap.set('n', 's', function()
         vim.cmd('normal mf')
         feedkey('<Down>', 'n')
     end, { buffer = buffer })
-    vim.keymap.set('n', '<Esc>', function() vim.cmd('normal mF') end, { buffer = buffer }) -- Unmark all files
-    -- vim.keymap.set("n", "%", create_new_file, { buffer = buffer })
+    -- Unmark all files
+    vim.keymap.set('n', '<Esc>', function() vim.cmd('normal mF') end, { buffer = buffer })
+    -- Up
+    vim.keymap.set('n', '<A-u>', function() vim.cmd('normal -') end, { buffer = buffer })
 end
 
 -- User commands {{{1
-vim.api.nvim_create_user_command('TotalOpen', on_open, {})
+vim.api.nvim_create_user_command('TotalOpen', on_open, { nargs = '?' })
 vim.api.nvim_create_user_command('TotalClose', on_close, { nargs = '?' })
 
 local bedware_group = vim.api.nvim_create_augroup('bedware_group', { clear = false })
@@ -268,8 +308,10 @@ vim.api.nvim_create_autocmd('FileType', {
     desc = 'Apply Total key binding',
     callback = function(e)
         if e.buf ~= nil then
-            vim.cmd('highlight netrwMarkFile guibg=#eb6f92')
+            vim.cmd('highlight netrwMarkFile guifg=#191724 guibg=#eb6f92')
             total_key_binding(e.buf)
         end
     end
 })
+
+return M

@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 
-languages=$(echo "java javascript python typescript go rust c lua" | tr " " "\n")
+languages=$(echo "java javascript julia python typescript go rust c lua" | tr " " "\n")
 selected=$(echo -e "any\n$languages" | fzf)
+
+if [ -z "$selected" ]; then
+    exit 1
+fi
 
 read -p "($selected) Ask: " query
 

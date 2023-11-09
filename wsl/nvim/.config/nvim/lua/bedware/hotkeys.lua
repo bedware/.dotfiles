@@ -7,11 +7,12 @@ vim.keymap.set("n", "<leader>x", ":!chmod +x %<CR>")
 -- Source curent file
 vim.keymap.set("n", "<leader>s", ":source %<CR>")
 -- Quickfix & Location lists
+vim.keymap.set("n", "<leader>q", ":copen<CR>", { silent = true })
+vim.keymap.set("n", "<leader>l", ":lopen<CR>", { silent = true })
 vim.keymap.set("n", "<A-k>", ":cprev<CR>", { silent = true })
 vim.keymap.set("n", "<A-j>", ":cnext<CR>", { silent = true })
 vim.keymap.set("n", "<A-S-k>", ":lprev<CR>", { silent = true })
 vim.keymap.set("n", "<A-S-j>", ":lnext<CR>", { silent = true })
-vim.keymap.set("n", "<leader>q", ":cclose<CR>:lclose<CR>", { silent = true })
 -- Registers
 vim.keymap.set({ "n", "x" }, "<leader>p", [["+p]])
 vim.keymap.set({ "n", "x" }, "<leader>y", [["+y]])
