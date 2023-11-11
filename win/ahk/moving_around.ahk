@@ -26,29 +26,15 @@ Init(desktops) {
 }
 
 ; Mechanism to make double Win+N to go to previous VD like it was possible in i3.
-;            alternate
-;   prevSel  |
-;         |  |
-altVD := [1, 1]
+altVD := GetCurrentDesktopNumber()
 
 proceedAlternateVD(num) {
     global altVD
- 
-    selected := -1
-
-    ; target exists in buffer
-    if (IndexOf(num, altVD) != -1) {
-        selected := altVD[2]
-        altVD[2] := altVD[1]
-        altVD[1] := selected
-    } else 
-    ; target not exists in buffer
-    {
-        selected := num
-        altVD[2] := altVD[1]
-        altVD[1] := selected
+    if (num == GetCurrentDesktopNumber()) {
+        return altVD
+    } else {
+        return num
     }
-    return selected
 }
 
 ; Better alt+tab in the way of monoid layout in i3
@@ -108,13 +94,10 @@ feedWindowList() {
 MoveActiveWinAndGoToVD(num) {
     selected := proceedAlternateVD(num)
     MoveCurrentWindowToDesktopAndGoTo(selected - 1)
-    ; IconByThemeAndDesktopNumber(GetSystemTheme(), selected)
 }
-
 GoToVD(num) {
     selected := proceedAlternateVD(num)
     GoToDesktopNumber(selected - 1) ; indexes in this function start with 0
-    ; IconByThemeAndDesktopNumber(GetSystemTheme(), selected)
     feedWindowList()
 }
 GoToVDIgnoreAlternate(num) {
@@ -122,10 +105,9 @@ GoToVDIgnoreAlternate(num) {
         GoToVD(num)
     }
 }
-
 GoToAlternateVD() {
     global altVD
-    GoToVD(altVD[2])
+    GoToVD(altVD)
 }
 
 NextWindow() {

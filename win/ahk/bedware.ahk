@@ -25,7 +25,6 @@ apps["figma"] := { desktop: "Work", selector: "ahk_exe Figma.exe", path: ALOCAL 
 apps["fire"] := { desktop: "Work", selector: "ahk_exe firefox.exe", path: "C:\Program Files\Mozilla Firefox\firefox.exe" }
 apps["l"] := { desktop: "Work", selector: "ahk_exe chrome.exe", path: "C:\Program Files\Google\Chrome\Application\chrome.exe" }
 apps["miro"] := { desktop: "Work", selector: "ahk_exe Miro.exe", path: ALOCAL . "\RealtimeBoard\Miro.exe" }
-apps["subl"] := { desktop: "Work", selector: "ahk_exe sublime_text.exe", path: "C:\Program Files\Sublime Text\sublime_text.exe" }
 apps["tf"] := { desktop: "Work", selector: "ahk_exe Teamflow.exe", path: ALOCAL . "\Programs\huddle\Teamflow.exe" }
 apps["idea"] := { desktop: "Dev", selector: "ahk_exe idea64.exe", path: AROAMI . "\Microsoft\Windows\Start Menu\Programs\JetBrains Toolbox\IntelliJ IDEA Ultimate.lnk" }
 apps["jkit"] := { desktop: "Dev", selector: "YourKit", path: "C:\Program Files\YourKit Java Profiler 2021.11-b227\bin\profiler.exe" }
@@ -50,6 +49,7 @@ apps["pdf"] := { desktop: "Files", selector: "ahk_exe SumatraPDF.exe", path: ALO
 apps["task"] := { desktop: "Other", selector: "ahk_class TaskManagerWindow", path: "Taskmgr.exe", postFunction: "makeAnyWindowMaximized" }
 apps["obs"] := { desktop: "Studio", selector: "ahk_exe obs64.exe", path: "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\OBS Studio\OBS Studio (64bit).lnk" }
 ; desktop independent
+apps["subl"] := { selector: "ahk_exe sublime_text.exe", path: "C:\Program Files\Sublime Text\sublime_text.exe" }
 apps["adbg"] := { selector: "ahk_exe dbgview64.exe", path: HOME . "\OneDrive\Soft\DebugView\dbgview64.exe" }
 apps["ahelp"] := { selector: "AutoHotkey Help", path: AHK_FOLDER . "\AutoHotkey.chm" }
 apps["adoc"] := apps["ahelp"]
