@@ -24,8 +24,11 @@ F13::GoToAlternateVD()
 ; Shift
 RShift & Capslock::Send +{Esc}
 ; Press both shift keys together to toggle Capslock
-LShift & RShift::ToggleCaps()
-RShift & LShift::ToggleCaps()
+; LShift & RShift::ToggleCaps()
+; RShift & LShift::ToggleCaps()
+raceMode := false
+LShift & RShift::ToggleRaceMode()
+RShift & LShift::ToggleRaceMode()
 
 ; it is for harpoon to work
 ^;::^F5
@@ -33,12 +36,16 @@ RShift & LShift::ToggleCaps()
 ; Use the Soundcard Analysis script found here to set these parameters
 ; https://www.autohotkey.com/docs/commands/SoundSet.htm#Soundcard
 Volume_Up::
-    SoundSet, +2, Master, Volume, 2
-    SoundSet, +2, Master, Volume, 4
+    scSpeakers := 3
+    scHeadphones := 5
+    SoundSet, +2, Master, Volume, %scSpeakers%
+    SoundSet, +2, Master, Volume, %scHeadphones%
 return
 Volume_Down::
-    SoundSet, -2, Master, Volume, 2
-    SoundSet, -2, Master, Volume, 4
+    scSpeakers := 3
+    scHeadphones := 5
+    SoundSet, -2, Master, Volume, %scSpeakers%
+    SoundSet, -2, Master, Volume, %scHeadphones%
 return
 
 !^f::makeAnyWindowFullsreen()
@@ -61,7 +68,7 @@ return
     WinWait, "Administrator: PowerShell ahk_exe WindowsTerminal.exe",, 3
 return
 
-#if GetKeyState("LShift", "P")
+#if !raceMode && GetKeyState("LShift", "P")
 LShift up::
     global apps
     if (A_PriorKey = "LShift") {
@@ -100,6 +107,7 @@ return
 #if
 
 LCtrl::LCtrl ; to enable hook
+#if !raceMode
 *CapsLock::
     SendEvent {Ctrl DownR}
     KeyWait, Capslock
@@ -112,6 +120,7 @@ LCtrl::LCtrl ; to enable hook
         Send {Esc}
     }
 return
+#if
 
 ; Space
 *Space::

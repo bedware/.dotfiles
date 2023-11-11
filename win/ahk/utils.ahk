@@ -56,7 +56,7 @@ GetSystemTheme() {
 }
 
 ; Icon
-IconByThemeAndDesktopNumber(theme, num) {
+IconByThemeAndDesktopNumber(num) {
     theme := GetSystemTheme()
     pathToIcon := ResolveIconPathDependingOnTheme(theme)
     pathToIcon := % pathToIcon "\" num ".ico"
@@ -108,3 +108,12 @@ ToggleCaps(){
     return
 }
 
+ToggleRaceMode() {
+    global raceMode
+    raceMode := !raceMode
+    if (raceMode) {
+        Menu, Tray, Icon, shell32.dll, 28
+    } else {
+        IconByThemeAndDesktopNumber(GetCurrentDesktopNumber())
+    }
+}

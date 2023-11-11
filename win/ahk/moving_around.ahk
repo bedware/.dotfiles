@@ -22,9 +22,7 @@ Init(desktops) {
     }
 
     ; Icon
-    defaultIcon := % ResolveIconPathDependingOnTheme(GetSystemTheme()) "\+.ico"  
-    ChangeTrayIcon(defaultIcon)
-    ; RearrangeWindows()
+    IconByThemeAndDesktopNumber(GetCurrentDesktopNumber())
 }
 
 ; Mechanism to make double Win+N to go to previous VD like it was possible in i3.
@@ -110,13 +108,13 @@ feedWindowList() {
 MoveActiveWinAndGoToVD(num) {
     selected := proceedAlternateVD(num)
     MoveCurrentWindowToDesktopAndGoTo(selected - 1)
-    IconByThemeAndDesktopNumber(GetSystemTheme(), selected)
+    ; IconByThemeAndDesktopNumber(GetSystemTheme(), selected)
 }
 
 GoToVD(num) {
     selected := proceedAlternateVD(num)
     GoToDesktopNumber(selected - 1) ; indexes in this function start with 0
-    IconByThemeAndDesktopNumber(GetSystemTheme(), selected)
+    ; IconByThemeAndDesktopNumber(GetSystemTheme(), selected)
     feedWindowList()
 }
 GoToVDIgnoreAlternate(num) {

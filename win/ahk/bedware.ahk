@@ -7,7 +7,7 @@
 #MaxHotkeysPerInterval 200
 SetWorkingDir %A_ScriptDir% ; Ensures a consistent starting directory
 SendMode Input ; Recommended for new scripts due to its superior speed and reliability
-SetCapslockState, AlwaysOff
+; SetCapslockState, AlwaysOff
 SetTitleMatchMode, RegEx
 
 ; Constants
@@ -40,7 +40,8 @@ apps["tg"] := { desktop: "Chats", selector: "ahk_exe Telegram.exe", path: AROAMI
 apps["day"] := { desktop: "Planner", selector: "Calendar ahk_exe firefox.exe", path: """C:\Program Files\Mozilla Firefox\firefox.exe"" https://calendar.google.com" } 
 apps["map"] := { desktop: "Planner", selector: "FreeMind ahk_exe javaw.exe", path: "C:\Program Files (x86)\FreeMind\FreeMind.exe" }
 apps["note"] := { desktop: "Planner", selector: "ahk_exe Obsidian.exe", path: ALOCAL . "\Obsidian\Obsidian.exe" }
-apps["plan"] := { desktop: "Planner", selector: "ahk_exe Notion.exe", path: ALOCAL . "\Programs\Notion\Notion.exe" }
+apps["plan"] := { desktop: "Planner", selector: "ahk_exe Notion.exe", path: ALOCAL . "\Programs\Notion\Notion.exe", postFunction: "makeAnyWindowMaximized" }
+apps["books"] := { desktop: "Planner", selector: "ahk_exe calibre.exe", path: "C:\Program Files\Calibre2\calibre.exe" }
 apps["tra"] := { desktop: "Translation", path: "C:\Program Files (x86)\ABBYY Lingvo x6\Lingvo.exe" }
 apps["trd"] := { desktop: "Translation", selector: "DeepL Translate", path: AROAMI . "\Microsoft\Windows\Start Menu\Programs\Chrome Apps\DeepL Translate.lnk" }
 apps["try"] := { desktop: "Translation", selector: "Yandex Translate.*", path: AROAMI . "\Microsoft\Windows\Start Menu\Programs\Chrome Apps\Yandex.Translate.lnk" }
