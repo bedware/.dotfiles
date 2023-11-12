@@ -47,7 +47,8 @@ require('mason-lspconfig').setup({
                         workspace = {
                             -- https://luals.github.io/wiki/settings/#runtimepath 
                             library = {
-                                vim.fn.expand '~/.local/share/nvim/site/pack/packer/start/plenary.nvim/lua'
+                                vim.fn.expand '~/.local/share/nvim/site/pack/packer/start/plenary.nvim/lua',
+                                vim.fn.expand '~/.local/share/nvim/site/pack/packer/start/harpoon/lua'
                             },
                             -- library = vim.api.nvim_get_runtime_file('', true),
                         },
