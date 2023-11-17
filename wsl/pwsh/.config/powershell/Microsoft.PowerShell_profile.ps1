@@ -12,14 +12,14 @@ $env:SDKMAN_DIR = "$env:HOME/.sdkman"
 
 # Platform-dependent stuff {{{1
 
-if ($PSVersionTable.OS -match "Linux") {
+if ($IsLinux) {
     $env:PATH_SEPARATOR = ":"
     if ($PSVersionTable.OS -match "WSL") {
         # Remove windows stuff from linux. Great lookup booster.
         $env:PATH = $env:PATH | tr ":" "\n" | grep -v -e /mnt -e "^$" | tr "\n" ":"
     }
     . "$env:DOTFILES/wsl/pwsh/.local/config/borrowed.ps1"
-} elseif ($PSVersionTable.OS -match "Windows") {
+} elseif ($IsWindows) {
     $env:PATH_SEPARATOR = ";"
     . "$env:DOTFILES/win/pwsh/config/user_functions.ps1"
     $env:PATH += "$env:PATH_SEPARATOR$env:DOTFILES/win/pwsh/bin/"
@@ -67,6 +67,7 @@ New-Alias -Name .n -Value 'cd $env:DOTFILES/wsl/nvim/.config/nvim'
 New-Alias -Name .ne -Value 'Edit-AndComeBack("$env:DOTFILES/wsl/nvim/.config/nvim")'
 New-Alias -Name .p -Value Copy-PathToClipboard
 New-Alias -Name .pe -Value 'vi $profile' 
+New-Alias -Name tmuxi -Value 'tmux-init' 
 Remove-Alias cd
 Set-Alias -Force -Name cd -Value Set-LocationAndList
 New-Alias -Name l -Value Get-ChildItemCompact
