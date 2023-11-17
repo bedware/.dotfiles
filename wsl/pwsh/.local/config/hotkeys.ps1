@@ -8,6 +8,11 @@ function Set-PSReadLineKeyHandlerBothModes($Chord, $ScriptBlock) {
             -ViMode Command
     }
 }
+function RunExactCommand($cmd) {
+    [Microsoft.PowerShell.PSConsoleReadLine]::DeleteLine()
+    [Microsoft.PowerShell.PSConsoleReadLine]::Insert($cmd)
+    [Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
+}
 
 # Alias extention
 
@@ -19,18 +24,16 @@ Set-PSReadLineKeyHandler -Key Enter -ScriptBlock {
     [Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
 }
 Set-PSReadLineKeyHandler -ViMode Command -Key . -ScriptBlock {
-    [Microsoft.PowerShell.PSConsoleReadLine]::DeleteLine()
-    [Microsoft.PowerShell.PSConsoleReadLine]::Insert('vi .')
-    [Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
+    RunExactCommand('vi .')
 }
-    
 
 # General moves
 
+Set-PSReadLineKeyHandlerBothModes -Chord Alt+h -ScriptBlock {
+    RunExactCommand('cd')
+}
 Set-PSReadLineKeyHandlerBothModes -Chord Alt+u -ScriptBlock {
-    [Microsoft.PowerShell.PSConsoleReadLine]::DeleteLine()
-    [Microsoft.PowerShell.PSConsoleReadLine]::Insert('Set-LocationToParentAndList')
-    [Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
+    RunExactCommand('Set-LocationToParentAndList')
 }
 Set-PSReadLineKeyHandler -Chord Ctrl+w -ScriptBlock {
     [Microsoft.PowerShell.PSConsoleReadLine]::BackwardDeleteWord()

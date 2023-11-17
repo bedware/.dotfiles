@@ -13,11 +13,12 @@ local features = {
 -- `nvim-jdtls` will look for these files/folders
 -- to determine the root directory of your project
 local root_files = {
-    '.git',
-    'pom.xml',
-    'build.gradle',
     'mvnw',
+    'pom.xml',
     'gradlew',
+    'settings.gradle',
+    'settings.gradle.kts',
+    '.git',
 }
 
 -- Codelens setup {{{1
