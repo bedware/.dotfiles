@@ -8,6 +8,11 @@ function Set-PSReadLineKeyHandlerBothModes($Chord, $ScriptBlock) {
             -ViMode Command
     }
 }
+function RunExactCommand($cmd) {
+    [Microsoft.PowerShell.PSConsoleReadLine]::DeleteLine()
+    [Microsoft.PowerShell.PSConsoleReadLine]::Insert($cmd)
+    [Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
+}
 
 # Alias extention
 
@@ -19,24 +24,23 @@ Set-PSReadLineKeyHandler -Key Enter -ScriptBlock {
     [Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
 }
 Set-PSReadLineKeyHandler -ViMode Command -Key . -ScriptBlock {
-    [Microsoft.PowerShell.PSConsoleReadLine]::DeleteLine()
-    [Microsoft.PowerShell.PSConsoleReadLine]::Insert('vi .')
-    [Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
+    RunExactCommand('vi .')
 }
-    
 
 # General moves
 
+Set-PSReadLineKeyHandlerBothModes -Chord Alt+h -ScriptBlock {
+    RunExactCommand('cd')
+}
 Set-PSReadLineKeyHandlerBothModes -Chord Alt+u -ScriptBlock {
-    [Microsoft.PowerShell.PSConsoleReadLine]::DeleteLine()
-    [Microsoft.PowerShell.PSConsoleReadLine]::Insert('Set-LocationToParentAndList')
-    [Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
+    RunExactCommand('Set-LocationToParentAndList')
 }
 Set-PSReadLineKeyHandler -Chord Ctrl+w -ScriptBlock {
     [Microsoft.PowerShell.PSConsoleReadLine]::BackwardDeleteWord()
 }
 
 # Fzf
+Import-Module PSFzf
 
 $fzfExclude = @('.git', 'AppData', '.npm', '.oh-my-zsh', '.tmp', '.cache',
                 '.jdks', '.gradle', '.java', '.lemminx')
@@ -65,6 +69,33 @@ Set-PSReadLineKeyHandlerBothModes -Chord Ctrl+f -ScriptBlock {
     Invoke-Expression $fileCommand | Invoke-Fzf | ForEach-Object {
         [Microsoft.PowerShell.PSConsoleReadLine]::Insert($_)
     }
+}
+
+Add-Type -Path "$env:DOTFILES/wsl/pwsh/.local/config/PSFzf.dll"
+function Invoke-FzfPsReadlineHandlerHistory {
+	$result = $null
+	try {
+		$line = $null
+		$cursor = $null
+		[Microsoft.PowerShell.PSConsoleReadline]::GetBufferState([ref]$line, [ref]$cursor)
+
+		$reader = New-Object PSFzf.IO.ReverseLineReader -ArgumentList $((Get-PSReadlineOption).HistorySavePath)
+
+		$fileHist = @{}
+		$reader.GetEnumerator() | ForEach-Object {
+			if (-not $fileHist.ContainsKey($_)) {
+				$fileHist.Add($_,$true)
+				$_
+			}
+		} | Invoke-Fzf -Query "$line" -NoSort -Bind ctrl-r:toggle-sort | ForEach-Object { $result = $_ }
+	}
+	finally
+	{
+		$reader.Dispose()
+	}
+	if (-not [string]::IsNullOrEmpty($result)) {
+		[Microsoft.PowerShell.PSConsoleReadLine]::Replace(0,$line.Length,$result)
+	}
 }
 
 # ChatGPT
@@ -101,35 +132,3 @@ function shellGptMultiline($wordBeforeCursor)
     return $false
 }
 $global:AbbrFunctions += "shellGptMultiline"
-
-# Not mine
-
-Add-Type -Path "$env:DOTFILES/wsl/pwsh/.local/config/PSFzf.dll"
-
-# $((Get-PSReadlineOption).HistorySavePath)
-# Set-PsFzfOption -PSReadlineChordReverseHistory "Ctrl+r"
-function Invoke-FzfPsReadlineHandlerHistory {
-	$result = $null
-	try {
-		$line = $null
-		$cursor = $null
-		[Microsoft.PowerShell.PSConsoleReadline]::GetBufferState([ref]$line, [ref]$cursor)
-
-		$reader = New-Object PSFzf.IO.ReverseLineReader -ArgumentList $((Get-PSReadlineOption).HistorySavePath)
-
-		$fileHist = @{}
-		$reader.GetEnumerator() | ForEach-Object {
-			if (-not $fileHist.ContainsKey($_)) {
-				$fileHist.Add($_,$true)
-				$_
-			}
-		} | Invoke-Fzf -Query "$line" -NoSort -Bind ctrl-r:toggle-sort | ForEach-Object { $result = $_ }
-	}
-	finally
-	{
-		$reader.Dispose()
-	}
-	if (-not [string]::IsNullOrEmpty($result)) {
-		[Microsoft.PowerShell.PSConsoleReadLine]::Replace(0,$line.Length,$result)
-	}
-}

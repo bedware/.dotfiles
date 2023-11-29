@@ -13,11 +13,12 @@ local features = {
 -- `nvim-jdtls` will look for these files/folders
 -- to determine the root directory of your project
 local root_files = {
-    '.git',
-    'pom.xml',
-    'build.gradle',
     'mvnw',
+    'pom.xml',
     'gradlew',
+    'settings.gradle',
+    'settings.gradle.kts',
+    '.git',
 }
 
 -- Codelens setup {{{1
@@ -45,17 +46,39 @@ local function jdtls_on_attach(client, bufnr)
     if features.debugger then
         require('jdtls').setup_dap({ hotcodereplace = 'auto' })
         require('jdtls.dap').setup_dap_main_class_configs()
-        vim.keymap.set('n', ',tf', "<cmd>lua require('jdtls').test_class()<cr>", opts)
-        vim.keymap.set('n', ',tn', "<cmd>lua require('jdtls').test_nearest_method()<cr>", opts)
+        vim.keymap.set('n', ',tf', function()
+            local windows = require("dapui.windows")
+            for i = 1, #windows.layouts, 1 do
+                if windows.layouts[i]:is_open() then
+                    require('jdtls').test_class()
+                    return
+                end
+            end
+            require("dapui").open({ layout = 2, reset = true })
+            require("dapui").close({ layout = 1, reset = true })
+            require('jdtls').test_class()
+        end, opts)
+        vim.keymap.set('n', ',tt', function()
+            local windows = require("dapui.windows")
+            for i = 1, #windows.layouts, 1 do
+                if windows.layouts[i]:is_open() then
+                    require('jdtls').test_nearest_method()
+                    return
+                end
+            end
+            require("dapui").open({ layout = 2, reset = true })
+            require("dapui").close({ layout = 1, reset = true })
+            require('jdtls').test_nearest_method()
+        end, opts)
     end
     -- The following mappings are based on the suggested usage of nvim-jdtls
     -- https://github.com/mfussenegger/nvim-jdtls#usage
-    vim.keymap.set('n', '<A-o>', "<cmd>lua require('jdtls').organize_imports()<cr>", opts)
-    vim.keymap.set('n', '<leader>iv', "<cmd>lua require('jdtls').extract_variable()<cr>", opts)
+    vim.keymap.set('n', '<A-o>', function() require('jdtls').organize_imports() end, opts)
+    vim.keymap.set('n', '<leader>iv', function() require('jdtls').extract_variable() end, opts)
+    vim.keymap.set('n', '<leader>ic', function() require('jdtls').extract_constant() end, opts)
     vim.keymap.set('x', '<leader>iv', "<esc><cmd>lua require('jdtls').extract_variable(true)<cr>", opts)
-    vim.keymap.set('n', '<leader>ic', "<cmd>lua require('jdtls').extract_constant()<cr>", opts)
     vim.keymap.set('x', '<leader>ic', "<esc><cmd>lua require('jdtls').extract_constant(true)<cr>", opts)
-    vim.keymap.set('x', '<leader>im', "<esc><Cmd>lua require('jdtls').extract_method(true)<cr>", opts)
+    vim.keymap.set('x', '<leader>im', "<esc><cmd>lua require('jdtls').extract_method(true)<cr>", opts)
 end
 
 -- Paths lookup {{{1
@@ -126,7 +149,8 @@ local function get_jdtls_paths()
     local home = vim.fn.getenv("HOME")
 
     local java_dependency_bundle = vim.split(
-        vim.fn.glob(home .. '/.local/share/nvim/mason/packages/vscode-java-dependency/jdtls.ext/com.microsoft.jdtls.ext.core/target/com.microsoft.jdtls.ext.core-*.jar'),
+        vim.fn.glob(home ..
+        '/.local/share/nvim/mason/packages/vscode-java-dependency/jdtls.ext/com.microsoft.jdtls.ext.core/target/com.microsoft.jdtls.ext.core-*.jar'),
         '\n'
     )
 
@@ -164,7 +188,8 @@ local function jdtls_setup(event)
     -- Watch out for the 💀, it indicates that you must adjust something.
     local cmd = {
         -- 💀
-        'java', -- or '/path/to/java17_or_newer/bin/java'
+        -- 'java', -- or '/path/to/java17_or_newer/bin/java'
+        '/home/bedware/.sdkman/candidates/java/current/bin/java',
         -- depends on if `java` is in your $PATH env variable and if it points to the right version.
         '-Declipse.application=org.eclipse.jdt.ls.core.id1',
         '-Dosgi.bundles.defaultStartLevel=4',
