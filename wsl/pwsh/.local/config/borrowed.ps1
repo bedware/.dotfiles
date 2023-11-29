@@ -14,6 +14,6 @@ function total {
     }
 }
 
-function podman {
-    & "/mnt/c/Program Files/RedHat/Podman/podman.exe" $args
-}
+# function podman {
+#     & "/mnt/c/Program Files/RedHat/Podman/podman.exe" $args
+# }

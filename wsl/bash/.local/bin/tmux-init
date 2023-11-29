@@ -1,18 +1,9 @@
 #!/usr/bin/env bash
 
 tmux kill-server
-tmux new-session -d -s settings -n nvim -c exec pwsh -Interactive -wd ~/.dotfiles
-tmux new-window -t settings -n tmux -c exec pwsh -Interactive -wd ~/.dotfiles
-sleep 2
-tmux send-keys -t settings:nvim '.ne' Enter
-tmux send-keys -t settings:tmux '.fe' Enter
+# tmux send-keys -t settings:nvim '.ne' Enter
+# tmux new-window -t settings -n .dotfiles -c exec pwsh -Interactive -wd ~/.dotfiles -NoExit -c 'vi .'
 
+tmux new-session -d -s settings -n nvim -c exec pwsh -Interactive -NoExit -wd ~/.dotfiles/wsl/nvim/.config/nvim
+tmux new-window -t settings -n .dotfiles -c exec pwsh -Interactive -NoExit -wd ~/.dotfiles
 tmux-sessionizer $1
-
-# tmux attach -t settings
-# tmux rename-window -t settings nvim
-# tmux new-session -d -s settings -n nvim -c exec pwsh -wd /home/bedware/.local -c vi .
- 
-# Ctrl-B :
-# setw synchronize-panes on
-# clear history

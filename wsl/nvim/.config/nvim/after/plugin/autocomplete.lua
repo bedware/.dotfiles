@@ -9,10 +9,10 @@ cmp.setup({
         end,
     },
     sources = cmp.config.sources({            -- Check packer.lua
-        { name = 'luasnip' },                 -- saadparwaiz1/cmp_luasnip
         { name = 'nvim_lsp' },                -- hrsh7th/cmp-nvim-lsp
         { name = 'nvim_lsp_signature_help' }, -- hrsh7th/cmp-nvim-lsp-signature-help
         { name = 'nvim_lua' },                -- hrsh7th/cmp-nvim-lua
+        { name = 'luasnip' },                 -- saadparwaiz1/cmp_luasnip
         { name = 'path' },                    -- hrsh7th/cmp-path
         { name = 'buffer' },                  -- hrsh7th/cmp-buffer
     }),
@@ -42,6 +42,7 @@ cmp.setup({
         -- Scroll up and down in the completion documentation
         ['<C-u>'] = cmp.mapping.scroll_docs(-4),
         ['<C-d>'] = cmp.mapping.scroll_docs(4),
+        ['<C-Space>'] = cmp.mapping.complete(),
     }),
     formatting = {
         fields = { 'kind', 'abbr', 'menu', },

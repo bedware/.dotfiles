@@ -25,3 +25,4 @@ else
     echo "Tmux is not running. Attaching to session."
     tmux attach -t "$session_name"
 fi
+

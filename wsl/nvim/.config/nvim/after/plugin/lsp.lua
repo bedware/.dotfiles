@@ -11,7 +11,8 @@ local lsp_zero = require('lsp-zero')
 local lspconfig = require('lspconfig')
 
 -- Global key binding
-vim.keymap.set("n", "<leader>cl", ":LspInfo<CR>")
+vim.keymap.set("n", "<leader>ci", ":LspInfo<CR>")
+vim.keymap.set("n", "<leader>cl", ":LspLog<CR>")
 -- LSP key binding
 lsp_zero.on_attach(function(_, bufnr)
     local opts = { buffer = bufnr, remap = false }
@@ -48,6 +49,7 @@ require('mason-lspconfig').setup({
                             -- https://luals.github.io/wiki/settings/#runtimepath 
                             library = {
                                 vim.fn.expand '~/.local/share/nvim/site/pack/packer/start/plenary.nvim/lua',
+                                vim.fn.expand '~/.local/share/nvim/site/pack/packer/start/lsp-zero.nvim/lua',
                                 vim.fn.expand '~/.local/share/nvim/site/pack/packer/start/harpoon/lua'
                             },
                             -- library = vim.api.nvim_get_runtime_file('', true),

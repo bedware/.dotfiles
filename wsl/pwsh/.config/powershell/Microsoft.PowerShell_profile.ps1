@@ -6,7 +6,7 @@ $env:DOTFILES = $env:HOME.ToString().Replace("\", "/") + "/.dotfiles"
 $env:EDITOR = "nvim"
 $env:VISUAL = "$env:EDITOR"
 $env:BUN_INSTALL = "$env:HOME/.bun"
-$env:JAVA_HOME = "$env:HOME/.jdks/jdk-21"
+$env:JAVA_HOME = "$env:HOME/.sdkman/candidates/java/current/"
 $env:OPENAI_API_KEY = Get-Content "$env:HOME/.ssh/openai"
 $env:SDKMAN_DIR = "$env:HOME/.sdkman"
 
@@ -42,15 +42,11 @@ $env:PATH = ($env:PATH).Replace("$env:PATH_SEPARATOR$env:PATH_SEPARATOR", "$env:
 
 # Imports & Init {{{1
 
-$backup = $profile
-. "$env:DOTFILES/wsl/pwsh/.local/config/lazyload.ps1" `
-    -Modules { Import-Module -Name posh-git } `
-    -AfterModulesLoad { 
-        $global:profile = $backup
-        $global:GitPromptSettings.DefaultPromptPrefix.Text = "☹️  "
-        $global:GitPromptSettings.DefaultPromptBeforeSuffix.Text = "`n"
-        $global:GitPromptSettings.DefaultPromptSuffix.Text = ' > $(OnViModeChange([Microsoft.PowerShell.PSConsoleReadLine]::InViCommandMode() ? "Command" : "Insert"))'
-    }
+Import-Module -Name posh-git
+$global:GitPromptSettings.DefaultPromptPrefix.Text = ""
+$global:GitPromptSettings.DefaultPromptBeforeSuffix.Text = "`n"
+$global:GitPromptSettings.DefaultPromptSuffix.Text = '> $(OnViModeChange([Microsoft.PowerShell.PSConsoleReadLine]::InViCommandMode() ? "Command" : "Insert"))'
+
 . "$env:DOTFILES/wsl/pwsh/.local/config/vimode.ps1"
 . "$env:DOTFILES/wsl/pwsh/.local/config/alias_autocomplete.ps1"
 . "$env:DOTFILES/wsl/pwsh/.local/config/hotkeys.ps1"
@@ -69,9 +65,9 @@ New-Alias -Name .p -Value Copy-PathToClipboard
 New-Alias -Name .pe -Value 'vi $profile' 
 New-Alias -Name tmuxi -Value 'tmux-init' 
 Remove-Alias cd
-Set-Alias -Force -Name cd -Value Set-LocationAndList
-New-Alias -Name l -Value Get-ChildItemCompact
+New-Alias -Name cd -Value 'Set-LocationAndList'
+New-Alias -Name l -Value 'Get-ChildItemCompact'
 New-Alias -Name rmr -Value "Remove-Item -Force -Recurse"
 Add-BlankAlias -Name e -Value '$env:'
-Add-IgnoredAlias -Name vi -Value nvim
+Add-IgnoredAlias -Name vi -Value 'nvim'
 
