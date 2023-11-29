@@ -1,14 +1,22 @@
+; <arg> - optional argument
+; !<arg> - required argument 
+
 ; Docker
-::dps::docker ps -a
+::dps::podman ps -a ; <container> show containers table
+
 ; Docker Compose
-::dcu::docker-compose up -d
-::dcd::docker-compose down
+::dcu::docker-compose up -d ; <container> up containers detached
+::dcd::docker-compose down ; <container> down containers
 
 ; Git
-::gst::git status
-::glp::git log --follow --patch
-::gdiff::git diff --color | less -R
-::gdifs::git diff --staged --color | less -R
+::gst::git status ; <file>
+::glf::git log --follow --patch ; !<file> history as patches
+::gdiff::git diff --color | less -R ; <file> view current diff (WorkTree to Staged)
+::gdifs::git diff --staged --color | less -R ; <file> view current diff (Staged to Commited)
 
-; Other
+; Tmux
+::ti::tmux-init ; <new_session_name> create preinitialized workplace
+::ta::tmux attach ; <session_name> connect to session
+::tn::tmux new -s ; <session_name> new session
+::tk::tmux kill-server ; kill all sessions
 

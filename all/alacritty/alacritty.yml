@@ -30,4 +30,5 @@ key_bindings:
 #  - { key: Back, mods: Control, chars: "\x08" }
   - { key: Back, mods: Control, chars: "\x17" }
   - { key: Key6, mods: Control, chars: "\x1e" }
+  - { key: Space, mods: Control, chars: "\x00" }
   - { key: Return, mods: Alt, action: ReceiveChar }

@@ -19,7 +19,7 @@ SplitPath, A_AhkPath,, AHK_FOLDER
 desktops := ["Personal", "Work", "Dev", "Planner", "Chats", "Studio", "Translation", "Files", "Other"]
 apps := {}
 apps["h"] := { desktop: "Personal", selector: "ahk_exe chrome.exe", path: ALOCAL . "\Google\Chrome SxS\Application\chrome.exe" }
-apps["steam"] := { desktop: "Personal", selector: "ahk_exe Steam.exe", path: "C:\Program Files (x86)\Steam\Steam.exe" }
+apps["steam"] := { desktop: "Personal", selector: "ahk_exe steamwebhelper.exe", path: "C:\Program Files (x86)\Steam\Steam.exe" }
 apps["draw"] := { desktop: "Work", selector: "Excalidraw ahk_exe msedge.exe", path: AROAMI . "\Microsoft\Windows\Start Menu\Programs\Excalidraw.lnk" }
 apps["figma"] := { desktop: "Work", selector: "ahk_exe Figma.exe", path: ALOCAL . "\Figma\app-116.5.18\Figma.exe" }
 apps["fire"] := { desktop: "Work", selector: "ahk_exe firefox.exe", path: "C:\Program Files\Mozilla Firefox\firefox.exe" }

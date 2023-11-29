@@ -1,49 +1,30 @@
-; Disable keys
-*~LButton::return ; To make mouse hook work
-*RButton::
-if (GetKeyState("LButton")) {
-    ; KeyWait, LButton
-    Func("doTranslation").Call()
-} else {
-    Send {RButton}
-}
-return ; To make mouse hook work
+*~RButton::return
 *~MButton::return ; To make mouse hook work
-*~WheelDown::return ; To make mouse hook work
-*~WheelUp::return ; To make mouse hook work
+*~LButton::return
+*~WheelDown::return
+*~WheelUp::return
+RButton & LButton::GoToAlternateVD()
+LButton & RButton::Func("doTranslation").Call()
 
-; Laptop
-Escape::F15 ; On/Off speakers
-Home::F16 ; Start/stop recording
-End::F20 ; Pause/unpause recording
-PgUp::F24 ; First scene
-PgDn::F23 ; Second scene
+Home::^!+F7 ; Start/stop recording
 ; Pedal
-F13::GoToAlternateVD()
-; F13::Func("doTranslation").Call()
-; Shift
-RShift & Capslock::Send +{Esc}
-; Press both shift keys together to toggle Capslock
-; LShift & RShift::ToggleCaps()
-; RShift & LShift::ToggleCaps()
-raceMode := false
-LShift & RShift::ToggleRaceMode()
-RShift & LShift::ToggleRaceMode()
+F21::Run, "c:\Users\dmitr\iCloudDrive\iCloud~md~obsidian\Obsidian Vault\Computers\Keyboard\Layer 1.png"
 
-; it is for harpoon to work
+; it is for neovim's harpoon
 ^;::^F5
-^'::^F6
+; ^'::^F6
+
 ; Use the Soundcard Analysis script found here to set these parameters
 ; https://www.autohotkey.com/docs/commands/SoundSet.htm#Soundcard
 Volume_Up::
-    scSpeakers := 3
-    scHeadphones := 5
+    scSpeakers := 2
+    scHeadphones := 4
     SoundSet, +2, Master, Volume, %scSpeakers%
     SoundSet, +2, Master, Volume, %scHeadphones%
 return
 Volume_Down::
-    scSpeakers := 3
-    scHeadphones := 5
+    scSpeakers := 2
+    scHeadphones := 4
     SoundSet, -2, Master, Volume, %scSpeakers%
     SoundSet, -2, Master, Volume, %scHeadphones%
 return
@@ -63,21 +44,16 @@ return
         Send #``
     }
 return
+
 #Enter::
     Run wt
     WinWait, "Administrator: PowerShell ahk_exe WindowsTerminal.exe",, 3
 return
 
-#if !raceMode && GetKeyState("LShift", "P")
-LShift up::
-    global apps
-    if (A_PriorKey = "LShift") {
-        RunAlfred(apps)
-    }
-return 
-#if
+LShift & RShift::ToggleRaceMode()
+RShift & LShift::ToggleRaceMode()
+RShift & Capslock::Send +{Esc}
 
-; Language switch
 ~*RShift::
     Send {RShift DownR}
     KeyWait, RShift
@@ -87,7 +63,6 @@ return
     }
 return 
 
-; Tab-hotkeys
 *Tab::
     if (A_PriorKey = "LAlt") {
         SendEvent {Blind}{Tab}
@@ -107,30 +82,40 @@ return
 #if
 
 LCtrl::LCtrl ; to enable hook
+
+raceMode := false
 #if !raceMode
-*CapsLock::
-    SendEvent {Ctrl DownR}
-    KeyWait, Capslock
-    SendEvent {Ctrl Up}
-    if (A_PriorKey = "Capslock") {
-        if WinExist("ahk_exe DeepL.exe") and WinExist("ahk_exe Lingvo.exe") or WinExist("ahk_exe DeepL.exe") {
-            WinClose, ahk_exe Lingvo.exe
-            WinClose, ahk_exe DeepL.exe
+    *CapsLock::
+        SendEvent {Ctrl DownR}
+        KeyWait, Capslock
+        SendEvent {Ctrl Up}
+        if (A_PriorKey = "Capslock") {
+            if WinExist("ahk_exe DeepL.exe") and WinExist("ahk_exe Lingvo.exe") or WinExist("ahk_exe DeepL.exe") {
+                WinClose, ahk_exe Lingvo.exe
+                WinClose, ahk_exe DeepL.exe
+            }
+            Send {Esc}
         }
-        Send {Esc}
-    }
-return
+    return
+
+    *Space::
+        KeyWait, Space
+        if (A_ThisHotkey = "*Space" and A_PriorKey = "Space") {
+            SendEvent {Blind}{Space}
+        }
+    return
+#if 
+
+#if !raceMode && GetKeyState("LShift", "P")
+    LShift up::
+        global apps
+        if (A_PriorKey = "LShift") {
+            RunAlfred(apps)
+        }
+    return 
 #if
 
-; Space
-*Space::
-    KeyWait, Space
-    if (A_ThisHotkey = "*Space" and A_PriorKey = "Space") {
-        SendEvent {Blind}{Space}
-    }
-return
-
-#if GetKeyState("Space", "P")
+#if !raceMode && GetKeyState("Space", "P")
     *Tab::
         Send {LAlt DownR}
         KeyWait, Tab
@@ -193,7 +178,7 @@ return
     *.::End
 #if
 
-#if WinActive("ahk_exe chrome.exe") or WinActive("ahk_exe msedge.exe")
+#if WinActive("ahk_exe chrome.exe") or WinActive("ahk_exe msedge.exe") or WinActive("ahk_exe firefox.exe")
     ^g::Send ^+{a} ; Search in tabs popup
     !t::Send ^l@tabs{Space} ; Search in tabs
     !h::Send ^l@history{Space} ; Search in history
