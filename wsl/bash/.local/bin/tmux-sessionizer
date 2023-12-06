@@ -4,6 +4,10 @@ if [[ $# -eq 1 ]]; then
     mode="name"
     session_path="."
     session_name=$(echo "$1" | tr . _)
+elif [[ $# -eq 2 ]]; then
+    mode="name + path"
+    session_path="$2"
+    session_name=$(echo "$1" | tr . _)
 else
     mode="path"
     session_path=$(fd --min-depth 1 --max-depth 2 --type directory . ~/personal ~/work \
@@ -12,17 +16,17 @@ else
     session_name=$(basename "$session_path" | tr . _)
 fi
 
-echo "Mode: $mode. Session name: $session_name"
+info="Mode: $mode. Session name: $session_name."
 
 if ! tmux has-session -t "$session_name" 2> /dev/null; then
     tmux new-session -s "$session_name" -c "$session_path" -d
 fi
 
 if [[ -v TMUX ]]; then
-    echo "I'm inside tmux session. Switching session."
     tmux switch-client -t "$session_name"
+    tmux display "$info I'm inside tmux session. Switching session."
 else
-    echo "Tmux is not running. Attaching to session."
     tmux attach -t "$session_name"
+    tmux display "$info Tmux is not running. Attaching to session."
 fi
 
