@@ -3,7 +3,7 @@
 -- Variables {{{1
 vim.g.netrw_preview = 1
 vim.g.netrw_banner = 0
-vim.g.netrw_winsize = 20
+vim.g.netrw_winsize = 35
 vim.g.netrw_localrmdir = 'rm -r'
 
 -- State {{{1
@@ -85,7 +85,8 @@ local open_total_on_windows = function()
 
     vim.fn.win_gotoid(M["RIGHT"].window)
     local right = vim.b.netrw_curdir
-    vim.cmd("silent !total -Left '" .. left .. "' -Right '" .. right .. "'")
+    vim.cmd("!total -Left '" .. left .. "' -Right '" .. right .. "'")
+    -- vim.cmd("silent !total -Left '" .. left .. "' -Right '" .. right .. "'")
 end
 
 local react = function()
@@ -103,6 +104,16 @@ local react = function()
 end
 local opposite = function() return M.selected == 'LEFT' and 'RIGHT' or 'LEFT' end
 local change_total_pane = function()
+    M.selected = opposite()
+    react()
+end
+
+local match_src = function()
+    M.selected = opposite()
+    react()
+
+    vim.api.nvim_set_current_buf(M[opposite()].get_bufnr())
+
     M.selected = opposite()
     react()
 end
@@ -253,6 +264,7 @@ vim.keymap.set('n', '<leader>e', toggle_sidebar)
 local function total_key_binding(buffer)
     vim.keymap.set('n', '<leader><leader>', open_total_on_windows, { buffer = buffer, nowait = true, silent = true })
     vim.keymap.set('n', '<Tab>', change_total_pane, { buffer = buffer })
+    vim.keymap.set('n', '=', match_src, { buffer = buffer })
     vim.keymap.set('n', '<F5>', M.copy_marked_files, { buffer = buffer })
     vim.keymap.set('n', '<F6>', M.move_marked_files, { buffer = buffer })
     vim.keymap.set('n', '<F8>', M.delete_marked_files, { buffer = buffer })

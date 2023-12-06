@@ -27,10 +27,10 @@ telescope.setup({
             }
         },
         layout_config = {
-            horizontal = { prompt_position = "bottom", preview_width = 0.55, results_width = 0.8 },
+            horizontal = { prompt_position = "bottom", preview_width = 0.5, results_width = 0.5 },
 
             vertical = { mirror = false },
-            width = 200,
+            width = 300,
             height = 100,
 
             preview_cutoff = 100, -- if preview columns less than that value its not shown 
@@ -48,6 +48,13 @@ telescope.setup({
                 "--exclude", ".git"
             },
         },
+        git_files = {
+            use_git_root = false,
+            recurse_submodules = true
+        },
+        lsp_document_symbols = {
+            symbol_width = 75
+        }
     },
     extensions = {
         ["ui-select"] = {

@@ -5,20 +5,11 @@ local cache_vars = {}
 
 local features = {
     codelens = true,
-    -- Change this to `true` if you have `nvim-dap`,
-    -- `java-test` and `java-debug-adapter` installed
+    -- Change this to `true` if you have installed
+    -- `nvim-dap`,
+    -- `java-test`,
+    -- `java-debug-adapter`
     debugger = true,
-}
-
--- `nvim-jdtls` will look for these files/folders
--- to determine the root directory of your project
-local root_files = {
-    'mvnw',
-    'pom.xml',
-    'gradlew',
-    'settings.gradle',
-    'settings.gradle.kts',
-    '.git',
 }
 
 -- Codelens setup {{{1
@@ -36,9 +27,6 @@ end
 -- This function will be executed everytime jdtls gets attached to a file.
 -- Here we will create the keybindings.
 local function jdtls_on_attach(client, bufnr)
-    local root_dir = require('jdtls').setup.find_root(root_files)
-    require("java-deps").attach(client, bufnr, root_dir)
-
     if features.codelens then
         enable_codelens(bufnr)
     end
@@ -143,21 +131,6 @@ local function get_jdtls_paths()
         vim.list_extend(path.bundles, java_debug_bundle)
     end
 
-    ---
-    -- Include vscode-java-dependency bundle if present
-    ---
-    local home = vim.fn.getenv("HOME")
-
-    local java_dependency_bundle = vim.split(
-        vim.fn.glob(home ..
-        '/.local/share/nvim/mason/packages/vscode-java-dependency/jdtls.ext/com.microsoft.jdtls.ext.core/target/com.microsoft.jdtls.ext.core-*.jar'),
-        '\n'
-    )
-
-    if java_dependency_bundle[1] ~= '' then
-        vim.list_extend(path.bundles, java_dependency_bundle)
-    end
-
     cache_vars.paths = path
     return path
 end
@@ -189,8 +162,7 @@ local function jdtls_setup(event)
     local cmd = {
         -- 💀
         -- 'java', -- or '/path/to/java17_or_newer/bin/java'
-        '/home/bedware/.sdkman/candidates/java/current/bin/java',
-        -- depends on if `java` is in your $PATH env variable and if it points to the right version.
+        '/home/bedware/.sdkman/candidates/java/17.0.9-tem/bin/java',
         '-Declipse.application=org.eclipse.jdt.ls.core.id1',
         '-Dosgi.bundles.defaultStartLevel=4',
         '-Declipse.product=org.eclipse.jdt.ls.core.product',
@@ -228,16 +200,8 @@ local function jdtls_setup(event)
             referencesCodeLens = {
                 enabled = true,
             },
-            -- inlayHints = {
-            --   parameterNames = {
-            --     enabled = 'all' -- literals, all, none
-            --   }
-            -- },
             format = {
                 enabled = true,
-                -- settings = {
-                --   profile = 'asdf'
-                -- },
             }
         },
         signatureHelp = {
@@ -279,7 +243,7 @@ local function jdtls_setup(event)
         settings = lsp_settings,
         on_attach = jdtls_on_attach,
         capabilities = cache_vars.capabilities,
-        root_dir = jdtls.setup.find_root(root_files),
+        root_dir = vim.fn.getcwd(),
         flags = {
             allow_incremental_sync = true,
         },
@@ -296,3 +260,4 @@ vim.api.nvim_create_autocmd('FileType', {
     desc = 'Setup jdtls',
     callback = jdtls_setup,
 })
+
