@@ -57,10 +57,15 @@ GetSystemTheme() {
 
 ; Icon
 IconByThemeAndDesktopNumber(num) {
-    theme := GetSystemTheme()
-    pathToIcon := ResolveIconPathDependingOnTheme(theme)
-    pathToIcon := % pathToIcon "\" num ".ico"
-    return ChangeTrayIcon(pathToIcon)
+    global raceMode
+    if (raceMode) {
+        Menu, Tray, Icon, shell32.dll, 28
+    } else {
+        theme := GetSystemTheme()
+        pathToIcon := ResolveIconPathDependingOnTheme(theme)
+        pathToIcon := % pathToIcon "\" num ".ico"
+        ChangeTrayIcon(pathToIcon)
+    }
 }
 ResolveIconPathDependingOnTheme(theme) {
     IconsFolder := "icons"
@@ -111,9 +116,5 @@ ToggleCaps(){
 ToggleRaceMode() {
     global raceMode
     raceMode := !raceMode
-    if (raceMode) {
-        Menu, Tray, Icon, shell32.dll, 28
-    } else {
-        IconByThemeAndDesktopNumber(GetCurrentDesktopNumber())
-    }
+    IconByThemeAndDesktopNumber(GetCurrentDesktopNumber())
 }

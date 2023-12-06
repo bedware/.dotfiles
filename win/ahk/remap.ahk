@@ -54,14 +54,17 @@ LShift & RShift::ToggleRaceMode()
 RShift & LShift::ToggleRaceMode()
 RShift & Capslock::Send +{Esc}
 
-~*RShift::
-    Send {RShift DownR}
-    KeyWait, RShift
-    Send {RShift Up}
-    if (A_PriorKey = "RShift") {
-        Send #{Space}
-    }
-return 
+LCtrl::LCtrl ; to enable hook
+
+raceMode := false
+#if !raceMode && GetKeyState("LShift", "P")
+    LShift up::
+        global apps
+        if (A_PriorKey = "LShift") {
+            RunAlfred(apps)
+        }
+    return 
+#if
 
 *Tab::
     if (A_PriorKey = "LAlt") {
@@ -81,10 +84,15 @@ return
     k::Send ^{Tab} ; Prev tab
 #if
 
-LCtrl::LCtrl ; to enable hook
-
-raceMode := false
 #if !raceMode
+    ~*RShift::
+        Send {RShift DownR}
+        KeyWait, RShift
+        Send {RShift Up}
+        if (A_PriorKey = "RShift") {
+            Send #{Space}
+        }
+    return 
     *CapsLock::
         SendEvent {Ctrl DownR}
         KeyWait, Capslock
@@ -105,15 +113,6 @@ raceMode := false
         }
     return
 #if 
-
-#if !raceMode && GetKeyState("LShift", "P")
-    LShift up::
-        global apps
-        if (A_PriorKey = "LShift") {
-            RunAlfred(apps)
-        }
-    return 
-#if
 
 #if !raceMode && GetKeyState("Space", "P")
     *Tab::

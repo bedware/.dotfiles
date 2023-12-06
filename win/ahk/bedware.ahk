@@ -36,14 +36,14 @@ apps["term"] := { desktop: "Dev", selector: "windows ahk_exe alacritty.exe", pat
 apps["turm"] := { desktop: "Dev", selector: "ubuntu ahk_exe alacritty.exe", path: """C:\Program Files\Alacritty\alacritty.exe"" --title ubuntu --command wsl -d Ubuntu-22.04 --cd ~", postFunction: "makeAnyWindowFullsreen"}
 apps["slack"] := { desktop: "Chats", selector: "ahk_exe slack.exe", path: ALOCAL . "\slack\slack.exe" }
 apps["tg"] := { desktop: "Chats", selector: "ahk_exe Telegram.exe", path: AROAMI . "\Telegram Desktop\Telegram.exe" }
-apps["day"] := { desktop: "Planner", selector: "Calendar ahk_exe firefox.exe", path: """C:\Program Files\Mozilla Firefox\firefox.exe"" https://calendar.google.com" } 
+apps["day"] := { desktop: "Planner", selector: "Calendar ahk_exe msedge.exe", path: "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe --app=https://calendar.google.com", postFunction: "makeAnyWindowMaximized" } 
 apps["map"] := { desktop: "Planner", selector: "FreeMind ahk_exe javaw.exe", path: "C:\Program Files (x86)\FreeMind\FreeMind.exe" }
 apps["note"] := { desktop: "Planner", selector: "ahk_exe Obsidian.exe", path: ALOCAL . "\Obsidian\Obsidian.exe" }
 apps["plan"] := { desktop: "Planner", selector: "ahk_exe Notion.exe", path: ALOCAL . "\Programs\Notion\Notion.exe", postFunction: "makeAnyWindowMaximized" }
 apps["books"] := { desktop: "Planner", selector: "ahk_exe calibre.exe", path: "C:\Program Files\Calibre2\calibre.exe" }
 apps["tra"] := { desktop: "Translation", path: "C:\Program Files (x86)\ABBYY Lingvo x6\Lingvo.exe" }
-apps["trd"] := { desktop: "Translation", selector: "DeepL Translate", path: AROAMI . "\Microsoft\Windows\Start Menu\Programs\Chrome Apps\DeepL Translate.lnk" }
-apps["try"] := { desktop: "Translation", selector: "Yandex Translate.*", path: AROAMI . "\Microsoft\Windows\Start Menu\Programs\Chrome Apps\Yandex.Translate.lnk" }
+apps["trd"] := { desktop: "Translation", selector: "DeepL Translate ahk_exe msedge.exe", path: "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe --app=https://www.deepl.com/translator#ru/en/", postFunction: "makeAnyWindowMaximized" }
+apps["try"] := { desktop: "Translation", selector: "Yandex Translate.* ahk_exe msedge.exe", path: "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe --app=https://translate.yandex.com/en/", postFunction: "makeAnyWindowMaximized" }
 apps["cmd"] := { desktop: "Files", selector: "ahk_exe TOTALCMD64.EXE", path: "C:\Program Files\totalcmd\TOTALCMD64.EXE" }
 apps["pdf"] := { desktop: "Files", selector: "ahk_exe SumatraPDF.exe", path: ALOCAL . "\SumatraPDF\SumatraPDF.exe" }
 apps["task"] := { desktop: "Other", selector: "ahk_class TaskManagerWindow", path: "Taskmgr.exe", postFunction: "makeAnyWindowMaximized" }
@@ -55,7 +55,7 @@ apps["ahelp"] := { selector: "AutoHotkey Help", path: AHK_FOLDER . "\AutoHotkey.
 apps["adoc"] := apps["ahelp"]
 apps["aspy"] := { selector: "Window Spy", path: AHK_FOLDER . "\WindowSpy.ahk" }
 apps["carnac"] := { selector: "ahk_exe Carnac.exe", path: ALOCAL . "\carnac\Carnac.exe" }
-apps["music"] := { selector: "Yandex.Music ahk_exe chrome.exe", path: AROAMI . "\Microsoft\Windows\Start Menu\Programs\Chrome Apps\Yandex.Music.lnk" }
+apps["music"] := { selector: "Yandex.Music ahk_exe msedge.exe", path: "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe --app=https://music.yandex.ru", postFunction: "makeAnyWindowMaximized" }
 apps["paint"] := { selector: "ahk_exe mspaint.exe", path: "mspaint.exe" }
 apps["pip"] := { selector: "Picture in picture ahk_exe chrome.exe" }
 apps["quake"] := { selector: "ahk_exe WindowsTerminal.exe", path: "wt.exe -w _quake" }
