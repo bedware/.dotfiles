@@ -6,7 +6,11 @@
 RButton & LButton::GoToAlternateVD()
 LButton & RButton::Func("doTranslation").Call()
 
-Home::^!+F7 ; Start/stop recording
+Home::F19 ; Start/stop recording
+End::F20
+PgUp::F17
+PgDn::F18
+
 ; Pedal
 F21::Run, "c:\Users\dmitr\iCloudDrive\iCloud~md~obsidian\Obsidian Vault\Computers\Keyboard\Layer 1.png"
 
@@ -16,23 +20,33 @@ F21::Run, "c:\Users\dmitr\iCloudDrive\iCloud~md~obsidian\Obsidian Vault\Computer
 
 ; Use the Soundcard Analysis script found here to set these parameters
 ; https://www.autohotkey.com/docs/commands/SoundSet.htm#Soundcard
-Volume_Up::
-    scSpeakers := 2
-    scHeadphones := 4
-    SoundSet, +2, Master, Volume, %scSpeakers%
-    SoundSet, +2, Master, Volume, %scHeadphones%
-return
-Volume_Down::
-    scSpeakers := 2
-    scHeadphones := 4
-    SoundSet, -2, Master, Volume, %scSpeakers%
-    SoundSet, -2, Master, Volume, %scHeadphones%
-return
+; Volume_Up::
+;     scSpeakers := 2
+;     scHeadphones := 4
+;     SoundSet, +2, Master, Volume, %scSpeakers%
+;     SoundSet, +2, Master, Volume, %scHeadphones%
+; return
+; Volume_Down::
+;     scSpeakers := 2
+;     scHeadphones := 4
+;     SoundSet, -2, Master, Volume, %scSpeakers%
+;     SoundSet, -2, Master, Volume, %scHeadphones%
+; return
 
-!^f::makeAnyWindowFullsreen()
+; !^f::makeAnyWindowFullsreen()
+;
+; !^;::
+;     WinMove, A, , -10, -100, 2180, 1325
+; return
 
-!^;::
-    WinMove, A, , -10, -100, 2180, 1325
+#b::
+Send #a
+Sleep 800
+Send {Right}
+Send {Tab}
+Send {Enter}
+Sleep 800
+Send {Tab}
 return
 
 #`:: ; Quake alive
@@ -189,6 +203,10 @@ return
     !e::Send {Home}{F2} ; Edit path
     !p::Send ^{F12} ; Copy path to selected file
 #if
+#if WinActive("ahk_exe Telegram.exe")
+    !j::Send ^+{Down}
+    !k::Send ^+{Up}
+#if
 #if WinActive("ahk_exe Notion.exe")
     ^o::^[
     ^i::^]
@@ -207,14 +225,14 @@ return
 #InputLevel 0
 ; Win-hotkeys
 #j::NextWindow()
-#f::NextWindow()
+; #f::NextWindow()
 #k::PrevWindow()
-#b::PrevWindow()
-#^t:: ; Toggle taskbar
-    toggleTaskbar(-1)
-    PlayErrorSound()
-return
-#^d:: ; Show active windows on all virtual desktops (VD)
+; #b::PrevWindow()
+; #^t:: ; Toggle taskbar
+;     toggleTaskbar(-1)
+;     PlayErrorSound()
+; return
+#^t:: ; Show active windows on all virtual desktops (VD)
     WinGet, activeHwnd, ID, A
     PinWindow(activeHwnd)
     PlayErrorSound()

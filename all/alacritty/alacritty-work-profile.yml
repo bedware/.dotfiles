@@ -1,0 +1,4 @@
+import:
+  - ~/.dotfiles/all/alacritty/alacritty.yml
+font:
+  size: 10.5

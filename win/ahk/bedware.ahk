@@ -8,7 +8,7 @@
 SetWorkingDir %A_ScriptDir% ; Ensures a consistent starting directory
 SendMode Input ; Recommended for new scripts due to its superior speed and reliability
 ; SetCapslockState, AlwaysOff
-SetTitleMatchMode, RegEx
+SetTitleMatchMode, RegEx ; Write selectors using regexp
 
 ; Constants
 EnvGet, HOME, UserProfile
@@ -23,6 +23,7 @@ apps["steam"] := { desktop: "Personal", selector: "ahk_exe steamwebhelper.exe", 
 apps["draw"] := { desktop: "Work", selector: "Excalidraw ahk_exe msedge.exe", path: AROAMI . "\Microsoft\Windows\Start Menu\Programs\Excalidraw.lnk" }
 apps["figma"] := { desktop: "Work", selector: "ahk_exe Figma.exe", path: ALOCAL . "\Figma\app-116.5.18\Figma.exe" }
 apps["fire"] := { desktop: "Work", selector: "ahk_exe firefox.exe", path: "C:\Program Files\Mozilla Firefox\firefox.exe" }
+apps["brave"] := { desktop: "Work", selector: "ahk_exe brave.exe", path: "C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe" }
 apps["l"] := { desktop: "Work", selector: "ahk_exe chrome.exe", path: "C:\Program Files\Google\Chrome\Application\chrome.exe" }
 apps["miro"] := { desktop: "Work", selector: "ahk_exe Miro.exe", path: ALOCAL . "\RealtimeBoard\Miro.exe" }
 apps["tf"] := { desktop: "Work", selector: "ahk_exe Teamflow.exe", path: ALOCAL . "\Programs\huddle\Teamflow.exe" }
@@ -33,7 +34,7 @@ apps["jvm"] := { desktop: "Dev", selector: "VisualVM", path: HOME . "\.jdks\visu
 apps["pod"] := { desktop: "Dev", selector: "ahk_exe Podman Desktop.exe", path: ALOCAL . "\Programs\podman-desktop\Podman Desktop.exe" }
 apps["post"] := { desktop: "Dev", selector: "ahk_exe Postman.exe", path: ALOCAL . "\Postman\Postman.exe" }
 apps["term"] := { desktop: "Dev", selector: "windows ahk_exe alacritty.exe", path: """C:\Program Files\Alacritty\alacritty.exe"" --title windows", postFunction: "makeAnyWindowFullsreen" }
-apps["turm"] := { desktop: "Dev", selector: "ubuntu ahk_exe alacritty.exe", path: """C:\Program Files\Alacritty\alacritty.exe"" --title ubuntu --command wsl -d Ubuntu-22.04 --cd ~", postFunction: "makeAnyWindowFullsreen"}
+apps["turm"] := { desktop: "Dev", selector: "ubuntu ahk_exe alacritty.exe", path: """C:\Program Files\Alacritty\alacritty.exe"" --config-file " . HOME . "\.dotfiles\all\alacritty\alacritty-work-profile.yml" .  " --title ubuntu --command wsl -d Ubuntu-22.04 --cd ~", postFunction: "makeAnyWindowFullsreen"}
 apps["slack"] := { desktop: "Chats", selector: "ahk_exe slack.exe", path: ALOCAL . "\slack\slack.exe" }
 apps["tg"] := { desktop: "Chats", selector: "ahk_exe Telegram.exe", path: AROAMI . "\Telegram Desktop\Telegram.exe" }
 apps["day"] := { desktop: "Planner", selector: "Calendar ahk_exe msedge.exe", path: "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe --app=https://calendar.google.com", postFunction: "makeAnyWindowMaximized" } 
@@ -65,7 +66,7 @@ apps["razer"] := { selector: "Razer", path: "C:\Program Files (x86)\Razer\Synaps
 apps[" pd"] := { postFunction: "defaultProfile" }
 apps[" ps"] := { postFunction: "screencastProfile" }
 
-; hotkeys
+; VD navigation for alfred
 apps["1"] := { postFunction: "GoToVD", postFunctionParam: 1 }
 apps["2"] := { postFunction: "GoToVD", postFunctionParam: 2 }
 apps["3"] := { postFunction: "GoToVD", postFunctionParam: 3 }
@@ -96,5 +97,6 @@ Init(desktops) ; Must be run before hotkeys & hotstrings
 ; Set InputLevel 0 to make hotstrings can be triggered by script events
 #InputLevel 0
 ; Hotstrings
+#Hotstring ? ; Make it work inside a word
 #Include %A_ScriptDir%/hotstrings.ahk
 

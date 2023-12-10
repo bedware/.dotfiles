@@ -2,7 +2,8 @@
 ; !<arg> - required argument 
 
 ; Docker
-::dps::podman ps -a ; <container> show containers table
+::dps::podman ps ; <container> show containers table
+::dpsa::podman ps -a ; <container> show containers table
 
 ; Docker Compose
 ::dcu::docker-compose up -d ; <container> up containers detached
