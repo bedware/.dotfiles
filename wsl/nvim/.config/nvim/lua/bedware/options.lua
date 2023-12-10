@@ -18,6 +18,7 @@ vim.opt.smartindent = true
 -- if set, only insert spaces; otherwise insert \t and complete with spaces:
 vim.opt.expandtab = true -- use :retab to change indentings in current file
 -- Other {{{1
+vim.opt.fixeol = false
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.wrap = false
@@ -38,4 +39,5 @@ vim.opt.colorcolumn = "80"
 -- vim.opt.mouse = ''
 -- vim.opt.shell = '/bin/pwsh'
 vim.opt.shellcmdflag = '-NoProfile -c'
+-- vim.opt.shell = '/bin/bash'
 

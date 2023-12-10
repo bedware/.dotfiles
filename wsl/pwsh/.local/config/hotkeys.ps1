@@ -63,6 +63,12 @@ Set-PSReadLineKeyHandlerBothModes -Chord Ctrl+g -ScriptBlock {
         [Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
     }
 }
+Set-PSReadLineKeyHandler -ViMode Command -Key g -ScriptBlock {
+    Invoke-Expression $dirCommand | Invoke-Fzf | ForEach-Object { 
+        [Microsoft.PowerShell.PSConsoleReadLine]::Insert("Set-LocationAndList $_")
+        [Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
+    }
+}
 
 $fileCommand = "fd --type f $fzfParam"
 Set-PSReadLineKeyHandlerBothModes -Chord Ctrl+f -ScriptBlock {

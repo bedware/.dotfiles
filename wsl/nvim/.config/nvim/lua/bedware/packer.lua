@@ -63,7 +63,6 @@ return require('packer').startup(function(use)
     use('folke/neodev.nvim')
     -- Java
     use('mfussenegger/nvim-jdtls')
-    use('JavaHello/java-deps.nvim')
     -------------- Debugging
     use('mfussenegger/nvim-dap')
     use('rcarriga/nvim-dap-ui')
