@@ -1,3 +1,12 @@
+local width = vim.api.nvim_win_get_width(0) - 85
+if width < 80 then
+    width = 80
+end
+require("harpoon").setup({
+    menu = {
+        width = width
+    }
+})
 local mark = require("harpoon.mark")
 local ui = require("harpoon.ui")
 

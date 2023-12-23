@@ -7,3 +7,5 @@
 [user]
 	email = dmitry.surin@gmail.com
 	name = Dmitry Surin
+[color "diff"]
+	meta = bold yellow

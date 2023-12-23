@@ -46,23 +46,26 @@ cmp.setup({
     }),
     formatting = {
         fields = { 'kind', 'abbr', 'menu', },
-        -- format = function(entry, item)
-        --     -- Make 2nd column like method_name(parms) and 3rd like return_type
-        --     local inout = entry.completion_item.labelDetails
-        --     if inout ~= nil and item.kind == "Method" then
-        --         item.abbr = string.gsub(item.abbr, "~", inout.detail)
-        --         item.menu = inout.description
-        --     end
-        --     local function cut(target, above)
-        --         if item[target] ~= nil and string.len(item[target]) > above then
-        --             item[target] = string.sub(item[target], 1, above) .. "!"
-        --         end
-        --     end
-        --     -- Cut length
-        --     cut("abbr", 30)
-        --     cut("menu", 15)
-        --     return item
-        -- end
+        format = function(entry, item)
+            -- Make 2nd column like method_name(parms) and 3rd like return_type
+            -- local inout = entry.completion_item.labelDetails
+            if entry.completion_item.filterText ~= nil and item.kind == "Method" then
+                item.abbr = entry.completion_item.filterText
+                item.menu = nil
+                -- item.abbr = string.gsub(item.abbr, "~", inout.detail)
+                -- item.abbr = entry.resolved_completion_item.detail
+                -- item.menu = inout.description
+            end
+            local function cut(target, above)
+                if item[target] ~= nil and string.len(item[target]) > above then
+                    item[target] = string.sub(item[target], 1, above) .. "!"
+                end
+            end
+            -- Cut length
+            -- cut("abbr", 30)
+            -- cut("menu", 15)
+            return item
+        end
     },
     window = {
         completion = {

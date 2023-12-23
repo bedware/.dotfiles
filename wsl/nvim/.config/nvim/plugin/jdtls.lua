@@ -34,7 +34,7 @@ local function jdtls_on_attach(client, bufnr)
     if features.debugger then
         require('jdtls').setup_dap({ hotcodereplace = 'auto' })
         require('jdtls.dap').setup_dap_main_class_configs()
-        vim.keymap.set('n', ',tf', function()
+        vim.keymap.set('n', ',tf', function() -- test class
             local windows = require("dapui.windows")
             for i = 1, #windows.layouts, 1 do
                 if windows.layouts[i]:is_open() then
@@ -46,7 +46,7 @@ local function jdtls_on_attach(client, bufnr)
             require("dapui").close({ layout = 1, reset = true })
             require('jdtls').test_class()
         end, opts)
-        vim.keymap.set('n', ',tt', function()
+        vim.keymap.set('n', ',tt', function() -- test nearest method
             local windows = require("dapui.windows")
             for i = 1, #windows.layouts, 1 do
                 if windows.layouts[i]:is_open() then
@@ -67,6 +67,16 @@ local function jdtls_on_attach(client, bufnr)
     vim.keymap.set('x', '<leader>iv', "<esc><cmd>lua require('jdtls').extract_variable(true)<cr>", opts)
     vim.keymap.set('x', '<leader>ic', "<esc><cmd>lua require('jdtls').extract_constant(true)<cr>", opts)
     vim.keymap.set('x', '<leader>im', "<esc><cmd>lua require('jdtls').extract_method(true)<cr>", opts)
+
+    -- Work related :TODO move to another work-related place 
+    vim.keymap.set('n', ',g', function()
+        local configurations = require('dap').configurations.java
+        for _, configuration in ipairs(configurations) do
+            if configuration["mainClass"] == "ru.nadeks.aria.ganz.GanzesSystem" then
+                configuration["vmArgs"] = "-Dspring.config.location=ru.nadeks.aria.ganz/app-ganz-dima.properties"
+            end
+        end
+    end, opts)
 end
 
 -- Paths lookup {{{1
@@ -162,7 +172,8 @@ local function jdtls_setup(event)
     local cmd = {
         -- 💀
         -- 'java', -- or '/path/to/java17_or_newer/bin/java'
-        '/home/bedware/.sdkman/candidates/java/17.0.9-tem/bin/java',
+        '/home/bedware/.sdkman/candidates/java/21-tem/bin/java',
+        -- '/home/bedware/.sdkman/candidates/java/17.0.9-tem/bin/java',
         '-Declipse.application=org.eclipse.jdt.ls.core.id1',
         '-Dosgi.bundles.defaultStartLevel=4',
         '-Declipse.product=org.eclipse.jdt.ls.core.product',
@@ -251,6 +262,18 @@ local function jdtls_setup(event)
             bundles = path.bundles,
         },
     })
+
+    -- disable semantic highlighting from lsp for java files
+    -- https://github.com/simrat39/rust-tools.nvim/issues/365
+    -- for _, group in ipairs(vim.fn.getcompletion("@lsp", "highlight")) do
+    --     vim.api.nvim_set_hl(0, group, {})
+    -- end
+    -- vim.api.nvim_set_hl(0, 'lsp.typemod.property.private.java', { fg = 'Red' })
+    -- vim.api.nvim_set_hl(0, "@lsp.type.property.java", {})
+    vim.api.nvim_set_hl(0, "@lsp.type.property.java", { link = "@variable.builtin" })
+    vim.api.nvim_set_hl(0, "@lsp.typemod.property.static.java", { link = "@constant" })
+    vim.api.nvim_set_hl(0, "@attribute.java", { link = "@string" })
+    vim.api.nvim_set_hl(0, "@lsp.type.modifier.java", { link = "@keyword.java" })
 end
 
 -- Register autocmd for filetype: java {{{1
