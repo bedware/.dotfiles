@@ -23,7 +23,7 @@ apps["steam"] := { desktop: "Personal", selector: "ahk_exe steamwebhelper.exe", 
 apps["draw"] := { desktop: "Work", selector: "Excalidraw ahk_exe msedge.exe", path: AROAMI . "\Microsoft\Windows\Start Menu\Programs\Excalidraw.lnk" }
 apps["figma"] := { desktop: "Work", selector: "ahk_exe Figma.exe", path: ALOCAL . "\Figma\app-116.5.18\Figma.exe" }
 apps["fire"] := { desktop: "Work", selector: "ahk_exe firefox.exe", path: "C:\Program Files\Mozilla Firefox\firefox.exe" }
-apps["brave"] := { desktop: "Work", selector: "ahk_exe brave.exe", path: "C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe" }
+apps["work"] := { desktop: "Work", selector: "ahk_exe brave.exe", path: "C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe" }
 apps["l"] := { desktop: "Work", selector: "ahk_exe chrome.exe", path: "C:\Program Files\Google\Chrome\Application\chrome.exe" }
 apps["miro"] := { desktop: "Work", selector: "ahk_exe Miro.exe", path: ALOCAL . "\RealtimeBoard\Miro.exe" }
 apps["tf"] := { desktop: "Work", selector: "ahk_exe Teamflow.exe", path: ALOCAL . "\Programs\huddle\Teamflow.exe" }
@@ -37,7 +37,8 @@ apps["term"] := { desktop: "Dev", selector: "windows ahk_exe alacritty.exe", pat
 apps["turm"] := { desktop: "Dev", selector: "ubuntu ahk_exe alacritty.exe", path: """C:\Program Files\Alacritty\alacritty.exe"" --config-file " . HOME . "\.dotfiles\all\alacritty\alacritty-work-profile.yml" .  " --title ubuntu --command wsl -d Ubuntu-22.04 --cd ~", postFunction: "makeAnyWindowFullsreen"}
 apps["slack"] := { desktop: "Chats", selector: "ahk_exe slack.exe", path: ALOCAL . "\slack\slack.exe" }
 apps["tg"] := { desktop: "Chats", selector: "ahk_exe Telegram.exe", path: AROAMI . "\Telegram Desktop\Telegram.exe" }
-apps["day"] := { desktop: "Planner", selector: "Calendar ahk_exe msedge.exe", path: "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe --app=https://calendar.google.com", postFunction: "makeAnyWindowMaximized" } 
+apps["cal"] := { desktop: "Planner", selector: "Calendar ahk_exe msedge.exe", path: "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe --app=https://calendar.google.com", postFunction: "makeAnyWindowMaximized" } 
+apps["mail"] := { desktop: "Planner", selector: "ahk_exe mailspring.exe", path: "C:\Users\dmitr\AppData\Local\Mailspring\mailspring.exe" } 
 apps["map"] := { desktop: "Planner", selector: "FreeMind ahk_exe javaw.exe", path: "C:\Program Files (x86)\FreeMind\FreeMind.exe" }
 apps["note"] := { desktop: "Planner", selector: "ahk_exe Obsidian.exe", path: ALOCAL . "\Obsidian\Obsidian.exe" }
 apps["plan"] := { desktop: "Planner", selector: "ahk_exe Notion.exe", path: ALOCAL . "\Programs\Notion\Notion.exe", postFunction: "makeAnyWindowMaximized" }
@@ -49,6 +50,7 @@ apps["cmd"] := { desktop: "Files", selector: "ahk_exe TOTALCMD64.EXE", path: "C:
 apps["pdf"] := { desktop: "Files", selector: "ahk_exe SumatraPDF.exe", path: ALOCAL . "\SumatraPDF\SumatraPDF.exe" }
 apps["task"] := { desktop: "Other", selector: "ahk_class TaskManagerWindow", path: "Taskmgr.exe", postFunction: "makeAnyWindowMaximized" }
 apps["obs"] := { desktop: "Studio", selector: "ahk_exe obs64.exe", path: "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\OBS Studio\OBS Studio (64bit).lnk" }
+apps["music"] := { desktop: "Studio", selector: "ahk_exe msedge.exe", path: "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe --app=https://music.yandex.ru", postFunction: "makeAnyWindowMaximized" }
 ; desktop independent
 apps["subl"] := { selector: "ahk_exe sublime_text.exe", path: "C:\Program Files\Sublime Text\sublime_text.exe" }
 apps["adbg"] := { selector: "ahk_exe dbgview64.exe", path: HOME . "\OneDrive\Soft\DebugView\dbgview64.exe" }
@@ -56,7 +58,6 @@ apps["ahelp"] := { selector: "AutoHotkey Help", path: AHK_FOLDER . "\AutoHotkey.
 apps["adoc"] := apps["ahelp"]
 apps["aspy"] := { selector: "Window Spy", path: AHK_FOLDER . "\WindowSpy.ahk" }
 apps["carnac"] := { selector: "ahk_exe Carnac.exe", path: ALOCAL . "\carnac\Carnac.exe" }
-apps["music"] := { selector: "Yandex.Music ahk_exe msedge.exe", path: "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe --app=https://music.yandex.ru", postFunction: "makeAnyWindowMaximized" }
 apps["paint"] := { selector: "ahk_exe mspaint.exe", path: "mspaint.exe" }
 apps["pip"] := { selector: "Picture in picture ahk_exe chrome.exe" }
 apps["quake"] := { selector: "ahk_exe WindowsTerminal.exe", path: "wt.exe -w _quake" }
@@ -98,5 +99,6 @@ Init(desktops) ; Must be run before hotkeys & hotstrings
 #InputLevel 0
 ; Hotstrings
 #Hotstring ? ; Make it work inside a word
+#Hotstring EndChars -()[]{}`n `t
 #Include %A_ScriptDir%/hotstrings.ahk
 

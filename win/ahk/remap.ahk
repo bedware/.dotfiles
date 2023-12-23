@@ -191,7 +191,10 @@ return
     *.::End
 #if
 
-#if WinActive("ahk_exe chrome.exe") or WinActive("ahk_exe msedge.exe") or WinActive("ahk_exe firefox.exe")
+#if WinActive("ahk_exe chrome.exe")
+    or WinActive("ahk_exe msedge.exe")
+    or WinActive("ahk_exe firefox.exe")
+    or WinActive("ahk_exe brave.exe")
     ^g::Send ^+{a} ; Search in tabs popup
     !t::Send ^l@tabs{Space} ; Search in tabs
     !h::Send ^l@history{Space} ; Search in history
