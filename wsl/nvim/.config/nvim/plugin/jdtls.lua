@@ -32,7 +32,17 @@ local function jdtls_on_attach(client, bufnr)
     end
     local opts = { buffer = bufnr }
     if features.debugger then
-        require('jdtls').setup_dap({ hotcodereplace = 'auto' })
+        local dap_setup = {
+            hotcodereplace = 'auto',
+        }
+
+        -- Work related :TODO move to another work-related place 
+        dap_setup["config_overrides"] = {
+            vmArgs = "-Dspring.config.location=/home/bedware/work/nadex/ru.nadeks.aria.ganz/app-ganz-dima.properties"
+        }
+        -- Work related END
+
+        require('jdtls').setup_dap(dap_setup)
         require('jdtls.dap').setup_dap_main_class_configs()
         vim.keymap.set('n', ',tf', function() -- test class
             local windows = require("dapui.windows")
@@ -61,22 +71,13 @@ local function jdtls_on_attach(client, bufnr)
     end
     -- The following mappings are based on the suggested usage of nvim-jdtls
     -- https://github.com/mfussenegger/nvim-jdtls#usage
+    vim.keymap.set('n', ',R', "<esc><cmd>JdtWipeDataAndRestart<cr>", opts)
     vim.keymap.set('n', '<A-o>', function() require('jdtls').organize_imports() end, opts)
     vim.keymap.set('n', '<leader>iv', function() require('jdtls').extract_variable() end, opts)
     vim.keymap.set('n', '<leader>ic', function() require('jdtls').extract_constant() end, opts)
     vim.keymap.set('x', '<leader>iv', "<esc><cmd>lua require('jdtls').extract_variable(true)<cr>", opts)
     vim.keymap.set('x', '<leader>ic', "<esc><cmd>lua require('jdtls').extract_constant(true)<cr>", opts)
     vim.keymap.set('x', '<leader>im', "<esc><cmd>lua require('jdtls').extract_method(true)<cr>", opts)
-
-    -- Work related :TODO move to another work-related place 
-    vim.keymap.set('n', ',g', function()
-        local configurations = require('dap').configurations.java
-        for _, configuration in ipairs(configurations) do
-            if configuration["mainClass"] == "ru.nadeks.aria.ganz.GanzesSystem" then
-                configuration["vmArgs"] = "-Dspring.config.location=ru.nadeks.aria.ganz/app-ganz-dima.properties"
-            end
-        end
-    end, opts)
 end
 
 -- Paths lookup {{{1

@@ -15,14 +15,14 @@ $global:IgnoredAliases = @(
 )
 $global:AbbrFunctions = @()
 
-function Add-BlankAlias {
+function New-BlankAlias {
     param($Name, $Value)
 
     Set-Alias -Scope Global -Name $Name -Value $Value
     $global:BlankAliases += $Name
 }
 
-function Add-IgnoredAlias {
+function New-IgnoredAlias {
     param($Name, $Value)
 
     Set-Alias -Scope Global -Name $Name -Value $Value
