@@ -13,7 +13,6 @@ $global:IgnoredAliases = @(
     "type",
     "where", "write"
 )
-$global:AbbrFunctions = @()
 
 function New-BlankAlias {
     param($Name, $Value)
@@ -42,20 +41,6 @@ function AliasExtention {
                 $alias.Definition
             )
         }
-    } else {
-        $inputCanBeAbbr = -not [string]::IsNullOrEmpty($wordBeforeCursor) -and $wordBeforeCursor.Chars(0) -eq ","
-            if ($inputCanBeAbbr) {
-                foreach ($func in $global:AbbrFunctions) {
-                    if (Invoke-Expression "$func('$wordBeforeCursor')") {
-                        return
-                    }
-                }
-                [Microsoft.PowerShell.PSConsoleReadLine]::Replace(
-                    $wordBeforeCursorStartIndex,
-                    $wordBeforeCursor.Length,
-                    $wordBeforeCursor.Substring(1, $wordBeforeCursor.Length - 1)
-                )
-            }
     }
     if ($Mode -eq "Space" -and $global:BlankAliases -notcontains $alias) {
         [Microsoft.PowerShell.PSConsoleReadLine]::Insert(" ")

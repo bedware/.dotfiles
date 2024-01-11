@@ -15,6 +15,7 @@
 ::glf::git log --follow --patch ; !<file> history as patches
 ::gdiff::git diff --color | less -R ; <file> view current diff (WorkTree to Staged)
 ::gdifs::git diff --staged --color | less -R ; <file> view current diff (Staged to Commited)
+:*:gpsup::git push --set-upstream origin $(git branch --show-current)
 
 ; Tmux
 :*:tmi::tmux-init ; <new_session_name> create preinitialized workplace
@@ -22,3 +23,6 @@
 :*:tmn::tmux new -s ; <session_name> new session
 :*:tmk::tmux kill-server ; kill all sessions
 
+; ShellGpt
+:*:,ss::sgpt ''{Left}
+:*:,sm::sgpt @'{Enter}

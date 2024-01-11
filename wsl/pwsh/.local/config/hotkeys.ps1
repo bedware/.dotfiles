@@ -108,37 +108,3 @@ function Invoke-FzfPsReadlineHandlerHistory {
 	}
 }
 
-# ChatGPT
-
-function shellGpt($wordBeforeCursor)
-{
-    # Must start with coma
-    if ($wordBeforeCursor -eq ",s")
-    {
-        [Microsoft.PowerShell.PSConsoleReadLine]::Replace(
-            $wordBeforeCursorStartIndex,
-            $wordBeforeCursor.Length,
-            "sgpt `'`'"
-        )
-        [Microsoft.PowerShell.PSConsoleReadLine]::BackwardChar()
-        return $true
-    }
-    return $false
-}
-$global:AbbrFunctions += "shellGpt"
-
-function shellGptMultiline($wordBeforeCursor)
-{
-    # Must start with coma
-    if ($wordBeforeCursor -eq ",sm")
-    {
-        [Microsoft.PowerShell.PSConsoleReadLine]::Replace(
-            $wordBeforeCursorStartIndex,
-            $wordBeforeCursor.Length,
-            "sgpt @`'`n"
-        )
-        return $true
-    }
-    return $false
-}
-$global:AbbrFunctions += "shellGptMultiline"
