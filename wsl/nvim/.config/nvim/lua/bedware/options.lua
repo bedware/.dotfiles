@@ -38,6 +38,6 @@ vim.opt.updatetime = 50
 vim.opt.colorcolumn = "80"
 -- vim.opt.mouse = ''
 -- vim.opt.shell = '/bin/pwsh'
-vim.opt.shellcmdflag = '-NoProfile -c'
+-- vim.opt.shellcmdflag = '-NoProfile -c'
 -- vim.opt.shell = '/bin/bash'
 

@@ -16,15 +16,16 @@ ALOCAL := HOME . "\AppData\Local"
 AROAMI := HOME . "\AppData\Roaming"
 SplitPath, A_AhkPath,, AHK_FOLDER
 
-desktops := ["Personal", "Work", "Dev", "Planner", "Chats", "Studio", "Translation", "Files", "Other"]
+desktops := ["Personal", "Work", "Dev", "Office", "Studio", "Chats", "English", "Files", "Other"]
 apps := {}
-apps["h"] := { desktop: "Personal", selector: "ahk_exe chrome.exe", path: ALOCAL . "\Google\Chrome SxS\Application\chrome.exe" }
+; apps["h"] := { desktop: "Personal", selector: "ahk_exe chrome.exe", path: ALOCAL . "\Google\Chrome SxS\Application\chrome.exe" }
 apps["steam"] := { desktop: "Personal", selector: "ahk_exe steamwebhelper.exe", path: "C:\Program Files (x86)\Steam\Steam.exe" }
+apps["data"] := { desktop: "Personal", selector: "ahk_exe datagrip64.exe", path: AROAMI . "\Microsoft\Windows\Start Menu\Programs\JetBrains Toolbox\DataGrip Release.lnk" }
+apps["bro"] := { desktop: "Work", selector: "ahk_exe chrome.exe", path: "C:\Program Files\Google\Chrome\Application\chrome.exe" }
 apps["draw"] := { desktop: "Work", selector: "Excalidraw ahk_exe msedge.exe", path: AROAMI . "\Microsoft\Windows\Start Menu\Programs\Excalidraw.lnk" }
 apps["figma"] := { desktop: "Work", selector: "ahk_exe Figma.exe", path: ALOCAL . "\Figma\app-116.5.18\Figma.exe" }
 apps["fire"] := { desktop: "Work", selector: "ahk_exe firefox.exe", path: "C:\Program Files\Mozilla Firefox\firefox.exe" }
 apps["work"] := { desktop: "Work", selector: "ahk_exe brave.exe", path: "C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe" }
-apps["l"] := { desktop: "Work", selector: "ahk_exe chrome.exe", path: "C:\Program Files\Google\Chrome\Application\chrome.exe" }
 apps["miro"] := { desktop: "Work", selector: "ahk_exe Miro.exe", path: ALOCAL . "\RealtimeBoard\Miro.exe" }
 apps["tf"] := { desktop: "Work", selector: "ahk_exe Teamflow.exe", path: ALOCAL . "\Programs\huddle\Teamflow.exe" }
 apps["idea"] := { desktop: "Dev", selector: "ahk_exe idea64.exe", path: AROAMI . "\Microsoft\Windows\Start Menu\Programs\JetBrains Toolbox\IntelliJ IDEA Ultimate.lnk" }
@@ -36,16 +37,15 @@ apps["post"] := { desktop: "Dev", selector: "ahk_exe Postman.exe", path: ALOCAL 
 apps["term"] := { desktop: "Dev", selector: "windows ahk_exe alacritty.exe", path: """C:\Program Files\Alacritty\alacritty.exe"" --title windows", postFunction: "makeAnyWindowFullsreen" }
 apps["turm"] := { desktop: "Dev", selector: "ubuntu ahk_exe alacritty.exe", path: """C:\Program Files\Alacritty\alacritty.exe"" --config-file " . HOME . "\.dotfiles\all\alacritty\alacritty-work-profile.yml" .  " --title ubuntu --command wsl -d Ubuntu-22.04 --cd ~", postFunction: "makeAnyWindowFullsreen"}
 apps["slack"] := { desktop: "Chats", selector: "ahk_exe slack.exe", path: ALOCAL . "\slack\slack.exe" }
+apps["disc"] := { desktop: "Chats", selector: "ahk_exe Discord.exe", path: AROAMI . "\Microsoft\Windows\Start Menu\Programs\Discord Inc\Discord.lnk" }
 apps["tg"] := { desktop: "Chats", selector: "ahk_exe Telegram.exe", path: AROAMI . "\Telegram Desktop\Telegram.exe" }
-apps["cal"] := { desktop: "Planner", selector: "Calendar ahk_exe msedge.exe", path: "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe --app=https://calendar.google.com", postFunction: "makeAnyWindowMaximized" } 
-apps["mail"] := { desktop: "Planner", selector: "ahk_exe mailspring.exe", path: "C:\Users\dmitr\AppData\Local\Mailspring\mailspring.exe" } 
-apps["map"] := { desktop: "Planner", selector: "FreeMind ahk_exe javaw.exe", path: "C:\Program Files (x86)\FreeMind\FreeMind.exe" }
-apps["note"] := { desktop: "Planner", selector: "ahk_exe Obsidian.exe", path: ALOCAL . "\Obsidian\Obsidian.exe" }
-apps["plan"] := { desktop: "Planner", selector: "ahk_exe Notion.exe", path: ALOCAL . "\Programs\Notion\Notion.exe", postFunction: "makeAnyWindowMaximized" }
-apps["books"] := { desktop: "Planner", selector: "ahk_exe calibre.exe", path: "C:\Program Files\Calibre2\calibre.exe" }
-apps["tra"] := { desktop: "Translation", path: "C:\Program Files (x86)\ABBYY Lingvo x6\Lingvo.exe" }
-apps["trd"] := { desktop: "Translation", selector: "DeepL Translate ahk_exe msedge.exe", path: "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe --app=https://www.deepl.com/translator#ru/en/", postFunction: "makeAnyWindowMaximized" }
-apps["try"] := { desktop: "Translation", selector: "Yandex Translate.* ahk_exe msedge.exe", path: "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe --app=https://translate.yandex.com/en/", postFunction: "makeAnyWindowMaximized" }
+apps["cal"] := { desktop: "Office", selector: "ahk_exe Notion Calendar.exe", path: "C:\Users\dmitr\AppData\Local\Programs\cron-web\Notion Calendar.exe", postFunction: "makeAnyWindowMaximized" }  
+apps["mail"] := { desktop: "Office", selector: "ahk_exe Spark Desktop.exe", path: ALOCAL . "\Programs\SparkDesktop\Spark Desktop.exe", postFunction: "makeAnyWindowMaximized" } 
+apps["note"] := { desktop: "Office", selector: "ahk_exe Notion.exe", path: ALOCAL . "\Programs\Notion\Notion.exe", postFunction: "makeAnyWindowMaximized" }
+apps["book"] := { desktop: "Office", selector: "ahk_exe calibre.exe", path: "C:\Program Files\Calibre2\calibre.exe" }
+apps["tra"] := { desktop: "English", path: "C:\Program Files (x86)\ABBYY Lingvo x6\Lingvo.exe" }
+apps["trd"] := { desktop: "English", selector: "DeepL Translate ahk_exe msedge.exe", path: "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe --app=https://www.deepl.com/translator#ru/en/", postFunction: "makeAnyWindowMaximized" }
+apps["try"] := { desktop: "English", selector: "Yandex Translate.* ahk_exe msedge.exe", path: "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe --app=https://translate.yandex.com/en/" , postFunction: "makeAnyWindowMaximized" }
 apps["cmd"] := { desktop: "Files", selector: "ahk_exe TOTALCMD64.EXE", path: "C:\Program Files\totalcmd\TOTALCMD64.EXE" }
 apps["pdf"] := { desktop: "Files", selector: "ahk_exe SumatraPDF.exe", path: ALOCAL . "\SumatraPDF\SumatraPDF.exe" }
 apps["task"] := { desktop: "Other", selector: "ahk_class TaskManagerWindow", path: "Taskmgr.exe", postFunction: "makeAnyWindowMaximized" }

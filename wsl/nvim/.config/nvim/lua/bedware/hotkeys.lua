@@ -51,3 +51,5 @@ vim.keymap.set("n", "zi", function()
         vim.api.nvim_feedkeys('zi', 'n', false)
     end
 end, { silent = true })
+-- For nvim-qt
+vim.keymap.set("c", "<S-Insert>", "<C-R>+")

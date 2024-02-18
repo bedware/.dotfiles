@@ -68,4 +68,5 @@ New-Alias -Name l -Value 'Get-ChildItemCompact'
 New-Alias -Name rmr -Value "Remove-Item -Force -Recurse"
 New-BlankAlias -Name e -Value '$env:'
 New-IgnoredAlias -Name vi -Value 'nvim'
+New-IgnoredAlias -Name docker -Value 'podman' 
 

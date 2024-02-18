@@ -84,7 +84,7 @@ getHTMLForAlfred(bgColor, text) {
     (
         mshtml:
         <div style='
-                margin: -15px -10px;
+                margin: -25px -10px;
                 background: %bgColor%;
                 padding: 35px;
                 font-size: 36px;

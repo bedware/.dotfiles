@@ -9,3 +9,5 @@
 	name = Dmitry Surin
 [color "diff"]
 	meta = bold yellow
+[safe]
+	directory = C:\\Users\\dmitr\\work

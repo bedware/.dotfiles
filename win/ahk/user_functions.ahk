@@ -1,7 +1,9 @@
 makeAnyWindowFullsreen() {
     WinSet, Style, -0xC40000, A
-    WinMove, A, , 0, 0, 3456, 2166
-    ; WinMove, A, , 0, 0, 2160, 3348
+    ; WinMaximize, A
+    ; WinMove, A, , 0, 0, 3456, 2166
+    ; WinMove, A, , 0, 0, 2560, 1600
+    WinMove, A, , 0, 0, A_ScreenWidth, A_ScreenHeight
 }
 makeAnyWindowMaximized() {
     WinMaximize, A
@@ -33,19 +35,6 @@ doTranslation() {
             WinActivate, %selector%
         }
     } else { ; a word
-        ; Yandex Translate
-        yandex := apps["try"].selector
-        if (!WinExist(yandex)) {
-            executeInput(apps, "try")
-            WinWait, %yandex%,, 5
-            Sleep, 500
-        }
-        if (WinExist(yandex)) {
-            WinActivate
-            Send !d
-            Sleep, 150
-            Send +{Insert}
-        }
 
         ; ABBY
         abby := "ABBYY Lingvo ahk_exe Lingvo.exe"
@@ -60,6 +49,20 @@ doTranslation() {
             Send ^a
             Send +{Insert}
             Send {Enter}
+        }
+
+        ; Yandex Translate
+        yandex := apps["try"].selector
+        if (!WinExist(yandex)) {
+            executeInput(apps, "try")
+            WinWait, %yandex%,, 5
+            Sleep, 500
+        }
+        if (WinExist(yandex)) {
+            WinActivate
+            Send !d
+            Sleep, 150
+            Send +{Insert}
         }
     }
 }
