@@ -290,11 +290,11 @@ end
 vim.api.nvim_create_user_command('TotalOpen', on_open, { nargs = '?' })
 vim.api.nvim_create_user_command('TotalClose', on_close, { nargs = '?' })
 
-local bedware_group = vim.api.nvim_create_augroup('bedware_group', { clear = false })
+local group = vim.api.nvim_create_augroup('bedware_software_group', { clear = false })
 
 -- Auto commands {{{1
 vim.api.nvim_create_autocmd('VimEnter', {
-    group = bedware_group,
+    group = group,
     pattern = '*',
     desc = 'At the beginning',
     callback = function(_)
@@ -304,7 +304,7 @@ vim.api.nvim_create_autocmd('VimEnter', {
     end
 })
 vim.api.nvim_create_autocmd('BufEnter', {
-    group = bedware_group,
+    group = group,
     pattern = '*',
     desc = 'Autoclose total windows',
     callback = function(e)
@@ -315,7 +315,7 @@ vim.api.nvim_create_autocmd('BufEnter', {
     end
 })
 vim.api.nvim_create_autocmd('FileType', {
-    group = bedware_group,
+    group = group,
     pattern = 'netrw',
     desc = 'Apply Total key binding',
     callback = function(e)

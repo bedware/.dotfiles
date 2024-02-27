@@ -1,16 +1,75 @@
 -- :h dap-configuration
-require("dapui").setup()
+require("dapui").setup({
+    layouts = { {
+        elements = {},
+        position = "left",
+        size = 40
+      }, {
+        elements = { {
+            id = "console",
+            size = 1.0
+        } },
+        position = "bottom",
+        size = 10
+      } },
+    mappings = {
+      edit = "e",
+      expand = { "<CR>", "<2-LeftMouse>" },
+      open = "o",
+      remove = "d",
+      repl = "r",
+      toggle = "t"
+    }
+})
 
+-- local function open_like_I_said()
+--     require("dapui").open()
+--     require("dapui").close({ layout = 1 })
+-- end
+
+require('dap').listeners.after.event_initialized["dapui_config"] = function() require("dapui").open() end
+require('dap').listeners.before.event_terminated["dapui_config"] = function() require("dapui").close() end
+require('dap').listeners.before.event_exited["dapui_config"] = function() require("dapui").close() end
+
+-- SHOW {{{1
 vim.keymap.set('n', '<leader>,', function()
     local windows = require("dapui.windows")
     for i = 1, #windows.layouts, 1 do
         if windows.layouts[i]:is_open() then
-            require("dapui").close({ reset = true })
+            require("dapui").close()
             return
         end
     end
-    require("dapui").open({ reset = true })
+    require("dapui").open()
 end, {})
+
+vim.keymap.set('n', ',r', function()
+    require('telescope').extensions.dap.configurations({})
+end, {})
+-- vim.keymap.set('n', ',lc', function() require 'telescope'.extensions.dap.configurations {} end, {})
+vim.keymap.set('n', ',lb', function() require 'telescope'.extensions.dap.list_breakpoints {} end, {})
+
+vim.keymap.set('n', ',ff', function() -- scope
+    local widgets = require('dap.ui.widgets')
+    widgets.centered_float(widgets.scopes)
+end)
+
+vim.keymap.set('n', ',fs', function() -- stack
+    local widgets = require('dap.ui.widgets')
+    widgets.centered_float(widgets.frames)
+end)
+
+-- vim.keymap.set('n', ',t', function() require'telescope'.extensions.dap.commands{} end, {})
+-- vim.keymap.set('n', ',lf', function() require'telescope'.extensions.dap.frames{} end, {})
+-- vim.keymap.set('n', ',r', function() require('dap').repl.toggle() end)
+-- vim.keymap.set('n', ',B',
+--     function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
+
+-- vim.keymap.set({ 'n', 'v' }, ',K', function()
+--     require('dap.ui.widgets').hover()
+-- end)
+
+-- DO {{{1
 vim.keymap.set('n', ',c', function() require('dap').continue() end, {})
 vim.keymap.set('n', ',,', function() require('dap').step_over() end, {})
 vim.keymap.set('n', ',i', function() require('dap').step_into() end, {})
@@ -23,54 +82,21 @@ vim.keymap.set('n', ',l', function() require('dap').run_last() end)
 vim.keymap.set('v', ',K', function() require('dapui').eval() end, {})
 vim.keymap.set('n', ',K', function() require('dapui').eval() end, {})
 
-vim.keymap.set('n', ',lc', function() require 'telescope'.extensions.dap.configurations {} end, {})
-vim.keymap.set('n', ',lb', function() require 'telescope'.extensions.dap.list_breakpoints {} end, {})
+-- Group
+local group = vim.api.nvim_create_augroup('bedware_software_group', { clear = false })
 
-vim.keymap.set('n', ',r', function()
-    require("dapui").open({ layout = 2, reset = true })
-    require("dapui").close({ layout = 1, reset = true })
-    require('telescope').extensions.dap.configurations({})
-end, {})
-
-
--- vim.keymap.set('n', ',l', function() -- scope
---     local widgets = require('dap.ui.widgets')
---     widgets.centered_float(widgets.scopes)
--- end)
---
--- vim.keymap.set('n', ',s', function() -- stack
---     local widgets = require('dap.ui.widgets')
---     widgets.centered_float(widgets.frames)
--- end)
-
--- vim.keymap.set('n', ',t', function() require'telescope'.extensions.dap.commands{} end, {})
--- vim.keymap.set('n', ',lf', function() require'telescope'.extensions.dap.frames{} end, {})
--- vim.keymap.set('n', ',r', function() require('dap').repl.toggle() end)
--- vim.keymap.set('n', ',B',
---     function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
-
--- vim.keymap.set({ 'n', 'v' }, ',K', function()
---     require('dap.ui.widgets').hover()
--- end)
-
--- dap.listeners.after.event_initialized["dapui_config"] = function() require('dap').repl.open() end
--- dap.listeners.after.event_initialized["dapui_config"] = function() dapui.open() end
--- dap.listeners.before.event_terminated["dapui_config"] = function() dapui.close() end
--- dap.listeners.before.event_exited["dapui_config"] = function() dapui.close() end
-
--- local dapui = require("dapui")
--- {
---     elements = { {
---         id = "stacks",
---         size = 0.40
---     }, {
---         id = "watches",
---         size = 0.10
---     }, {
---         id = "scopes",
---         size = 0.50
---     } },
---     position = "left",
---     size = 45
--- },
--- dapui.setup()
+-- Auto commands {{{1
+local feedkey = function(key, mode)
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
+end
+vim.api.nvim_create_autocmd('BufEnter', {
+    group = group,
+    pattern = '*',
+    desc = 'Automatically move cursor to the end on focusing console',
+    callback = function(e)
+        local filetype = vim.api.nvim_get_option_value('filetype', { buf = e.buf })
+        if filetype == 'dapui_console' then
+            feedkey("<S-g>", "n")
+        end
+    end
+})
