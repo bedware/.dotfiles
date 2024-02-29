@@ -13,7 +13,7 @@ local stub = require('luassert.stub')
 
 describe("example", function()
   -- instance of module to be tested
-  local testModule = require('tests/module')
+  local testModule = require('tests.module')
   -- mocked instance of api to interact with
 
   describe("realistic_func", function()

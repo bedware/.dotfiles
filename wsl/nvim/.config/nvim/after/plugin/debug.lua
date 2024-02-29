@@ -86,9 +86,6 @@ vim.keymap.set('n', ',K', function() require('dapui').eval() end, {})
 local group = vim.api.nvim_create_augroup('bedware_software_group', { clear = false })
 
 -- Auto commands {{{1
-local feedkey = function(key, mode)
-    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
-end
 vim.api.nvim_create_autocmd('BufEnter', {
     group = group,
     pattern = '*',
@@ -96,7 +93,7 @@ vim.api.nvim_create_autocmd('BufEnter', {
     callback = function(e)
         local filetype = vim.api.nvim_get_option_value('filetype', { buf = e.buf })
         if filetype == 'dapui_console' then
-            feedkey("<S-g>", "n")
+            require('bedware.utils').feedkeys("<S-g>", "n")
         end
     end
 })

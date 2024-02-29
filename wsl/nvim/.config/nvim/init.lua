@@ -1,1 +1,1 @@
-require("bedware/settings")
+require("bedware.settings")

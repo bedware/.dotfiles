@@ -48,7 +48,7 @@ vim.keymap.set("n", "zi", function()
     if vim.opt.foldmethod:get() ~= 'marker' then
         vim.cmd(":set foldmethod=marker")
     else
-        vim.api.nvim_feedkeys('zi', 'n', false)
+        require('bedware.utils').feedkeys('zi', 'n')
     end
 end, { silent = true })
 -- For nvim-qt

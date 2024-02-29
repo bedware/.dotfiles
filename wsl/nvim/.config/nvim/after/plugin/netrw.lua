@@ -36,15 +36,11 @@ M = {
 }
 
 -- Functions {{{1
-local feedkey = function(key, mode)
-    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
-end
-
 local debug_counter = 0
 local debug_output_var = function(var)
     print("dbg_cnt: " .. debug_counter .. " " .. vim.inspect(var))
     debug_counter = debug_counter + 1
-    feedkey(":messages<CR>", "n")
+    require('bedware.utils').feedkeys(":messages<CR>", "n")
 end
 
 local toggle_sidebar = function()
@@ -278,7 +274,7 @@ local function total_key_binding(buffer)
     -- Mark a file
     vim.keymap.set('n', 's', function()
         vim.cmd('normal mf')
-        feedkey('<Down>', 'n')
+        require('bedware.utils').feedkeys('<Down>', 'n')
     end, { buffer = buffer })
     -- Unmark all files
     vim.keymap.set('n', '<Esc>', function() vim.cmd('normal mF') end, { buffer = buffer })
