@@ -25,14 +25,14 @@ apps["fire"] := { desktop: "Browsing", selector: "ahk_exe firefox.exe", path: "C
 apps["pip"] := { selector: "Picture in picture ahk_exe chrome.exe" }
 
 apps["post"] := { desktop: "Dev", selector: "ahk_exe Postman.exe", path: ALOCAL . "\Postman\Postman.exe" }
-apps["data"] := { desktop: "Dev", selector: "ahk_exe datagrip64.exe", path: AROAMI . "\Microsoft\Windows\Start Menu\Programs\JetBrains Toolbox\DataGrip Release.lnk" }
+apps["db"] := { desktop: "Dev", selector: "ahk_exe datagrip64.exe", path: AROAMI . "\Microsoft\Windows\Start Menu\Programs\JetBrains Toolbox\DataGrip Release.lnk" }
 apps["idea"] := { desktop: "Dev", selector: "ahk_exe idea64.exe", path: AROAMI . "\Microsoft\Windows\Start Menu\Programs\JetBrains Toolbox\IntelliJ IDEA Ultimate.lnk" }
 apps["jkit"] := { desktop: "Dev", selector: "YourKit", path: "C:\Program Files\YourKit Java Profiler 2021.11-b227\bin\profiler.exe" }
 apps["jmc"] := { desktop: "Dev", selector: "ahk_exe jmc.exe", path: HOME . "\.jdks\jmc-8.3.1_windows-x64\JDK Mission Control\jmc.exe" }
 apps["jvm"] := { desktop: "Dev", selector: "VisualVM", path: HOME . "\.jdks\visualvm_216\bin\visualvm-my-jdk.lnk" }
 apps["pod"] := { desktop: "Dev", selector: "ahk_exe Podman Desktop.exe", path: ALOCAL . "\Programs\podman-desktop\Podman Desktop.exe" }
-apps["term"] := { desktop: "Dev", selector: "windows ahk_exe alacritty.exe", path: """C:\Program Files\Alacritty\alacritty.exe"" --title windows", postFunction: "makeAnyWindowFullsreen" }
-apps["turm"] := { desktop: "Dev", selector: "ubuntu ahk_exe alacritty.exe", path: """C:\Program Files\Alacritty\alacritty.exe"" --config-file " . HOME . "\.dotfiles\all\alacritty\alacritty-work-profile.yml" .  " --title ubuntu --command wsl -d Ubuntu-22.04 --cd ~", postFunction: "makeAnyWindowFullsreen"}
+apps["term"] := { desktop: "Dev", selector: "windows ahk_exe alacritty.exe", path: """C:\Program Files\Alacritty\alacritty.exe"" --title windows", postFunction: "makeAnyWindowFullscreen" }
+apps["turm"] := { desktop: "Dev", selector: "ubuntu ahk_exe alacritty.exe", path: """C:\Program Files\Alacritty\alacritty.exe"" --config-file " . HOME . "\.dotfiles\all\alacritty\alacritty-work-profile.yml" .  " --title ubuntu --command wsl -d Ubuntu-22.04 --cd ~", postFunction: "makeAnyWindowFullscreen"}
 apps["adoc"] := { selector: "AutoHotkey Help", path: AHK_FOLDER . "\AutoHotkey.chm" }
 apps["adbg"] := { selector: "ahk_exe dbgview64.exe", path: HOME . "\OneDrive\Soft\DebugView\dbgview64.exe" }
 apps["aspy"] := { selector: "Window Spy", path: AHK_FOLDER . "\WindowSpy.ahk" }

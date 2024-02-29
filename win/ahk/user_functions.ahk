@@ -1,4 +1,4 @@
-makeAnyWindowFullsreen() {
+makeAnyWindowFullscreen() {
     WinSet, Style, -0xC40000, A
     ; WinMaximize, A
     ; WinMove, A, , 0, 0, 3456, 2166

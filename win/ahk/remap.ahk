@@ -1,32 +1,28 @@
-*~RButton::return
-*~MButton::return ; To make mouse hook work
-*~LButton::return
+isNeedToCancel := false
+*~RButton::
+    isNeedToCancel := true
+return
+*~MButton::
+    isNeedToCancel := true
+return
+*~LButton::
+    isNeedToCancel := true
+return
 *~WheelDown::return
 *~WheelUp::return
 RButton & LButton::GoToAlternateVD()
 LButton & RButton::Func("doTranslation").Call()
 
+; Left finger
 Home::F19 ; Start/stop recording
-End::F20
-PgUp::F17
+End::F17 ; Pause/unpause
+
+; Right finger
+PgUp::F20
 PgDn::F18
 
 ; Pedal
-; F21::Run, "c:\Users\dmitr\iCloudDrive\iCloud~md~obsidian\Obsidian Vault\Computers\Keyboard\Layer 1.png"
-F21::
-    ; delay := 250
-    ; Send :w{Enter}
-    ; Sleep delay
-    ; Send `,c
-    ; Sleep delay
-    ; Send {Enter}
-    ; Sleep delay
-    ; Send `,r
-    ; Sleep delay
-    ; Send ganz
-    ; Sleep delay
-    ; Send {Enter}
-return
+F21::Run, "g:\My Drive\Keyboard\Layer 1.png"
 
 ; it is for neovim's harpoon
 ; ^;::^F5
@@ -47,20 +43,20 @@ return
 ;     SoundSet, -2, Master, Volume, %scHeadphones%
 ; return
 
-; !^f::makeAnyWindowFullsreen()
-;
+!^f::makeAnyWindowFullscreen()
+
 ; !^;::
 ;     WinMove, A, , -10, -100, 2180, 1325
 ; return
 
 #b::
-Send #a
-Sleep 800
-Send {Right}
-Send {Tab}
-Send {Enter}
-Sleep 800
-Send {Tab}
+    Send #a
+    Sleep 800
+    Send {Right}
+    Send {Tab}
+    Send {Enter}
+    Sleep 800
+    Send {Tab}
 return
 
 #`:: ; Quake alive
@@ -130,7 +126,10 @@ return
                 WinClose, ahk_exe Lingvo.exe
                 WinClose, ahk_exe DeepL.exe
             }
-            Send {Esc}
+            if (!isNeedToCancel) {
+                Send {Esc}
+                isNeedToCancel := false
+            }
         }
     return
 
@@ -218,6 +217,11 @@ return
     !b::Send ^l@bookmarks{Space} ; Search in Bookmarks 
     ^i::Send !{Right} ; Navigation history forward 
     ^o::Send !{Left} ; Navigation history backward
+    ^6::
+        Send ^+a
+        Sleep 50
+        Send {Enter}
+    return
 #if
 #if WinActive("ahk_exe TOTALCMD64.EXE")
     !e::Send {Home}{F2} ; Edit path
