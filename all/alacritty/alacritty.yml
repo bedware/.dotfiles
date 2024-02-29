@@ -27,8 +27,12 @@ window:
 selection:
   save_to_clipboard: true
 key_bindings:
-#  - { key: Back, mods: Control, chars: "\x08" }
   - { key: Back, mods: Control, chars: "\x17" }
   - { key: Key6, mods: Control, chars: "\x1e" }
   - { key: Space, mods: Control, chars: "\x00" }
   - { key: Return, mods: Alt, action: ReceiveChar }
+  - { key: H, mods: Control|Alt, chars: "\u001b\u0008" }
+  - { key: J, mods: Control|Alt, chars: "\u001b\u000a" }
+  - { key: K, mods: Control|Alt, chars: "\u001b\u000b" }
+  - { key: L, mods: Control|Alt, chars: "\u001b\u000c" }
+

@@ -14,22 +14,22 @@ PgDn::F18
 ; Pedal
 ; F21::Run, "c:\Users\dmitr\iCloudDrive\iCloud~md~obsidian\Obsidian Vault\Computers\Keyboard\Layer 1.png"
 F21::
-    delay := 250
-    Send :w{Enter}
-    Sleep delay
-    Send `,c
-    Sleep delay
-    Send {Enter}
-    Sleep delay
-    Send `,r
-    Sleep delay
-    Send ganz
-    Sleep delay
-    Send {Enter}
+    ; delay := 250
+    ; Send :w{Enter}
+    ; Sleep delay
+    ; Send `,c
+    ; Sleep delay
+    ; Send {Enter}
+    ; Sleep delay
+    ; Send `,r
+    ; Sleep delay
+    ; Send ganz
+    ; Sleep delay
+    ; Send {Enter}
 return
 
 ; it is for neovim's harpoon
-^;::^F5
+; ^;::^F5
 ; ^'::^F6
 
 ; Use the Soundcard Analysis script found here to set these parameters
@@ -205,12 +205,15 @@ return
     *.::End
 #if
 
+#if WinActive("ahk_exe explorer.exe")
+    !1::Send ^+6
+    !2::Send ^+2
+#if
 #if WinActive("ahk_exe chrome.exe")
     or WinActive("ahk_exe msedge.exe")
     or WinActive("ahk_exe firefox.exe")
-    or WinActive("ahk_exe brave.exe")
     ^g::Send ^+{a} ; Search in tabs popup
-    ; !t::Send ^l@tabs{Space} ; Search in tabs
+    ^k::Send ^+{p}
     !h::Send ^l@history{Space} ; Search in history
     !b::Send ^l@bookmarks{Space} ; Search in Bookmarks 
     ^i::Send !{Right} ; Navigation history forward 
