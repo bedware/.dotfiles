@@ -33,13 +33,13 @@ Set-PSReadLineKeyHandler -ViMode Command -Key V -ScriptBlock {
 
 # General moves
 
-Set-PSReadLineKeyHandlerBothModes -Chord Ctrl+h -ScriptBlock {
+Set-PSReadLineKeyHandlerBothModes -Chord Alt+h -ScriptBlock {
     RunExactCommand('cd')
 }
 Set-PSReadLineKeyHandlerBothModes -Chord Ctrl+k -ScriptBlock {
     RunExactCommand('Get-ChildItemCompact')
 }
-Set-PSReadLineKeyHandlerBothModes -Chord Ctrl+u -ScriptBlock {
+Set-PSReadLineKeyHandlerBothModes -Chord Alt+u -ScriptBlock {
     RunExactCommand('Set-LocationToParentAndList')
 }
 Set-PSReadLineKeyHandler -Chord Ctrl+w -ScriptBlock {
