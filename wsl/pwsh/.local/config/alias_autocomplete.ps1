@@ -17,7 +17,11 @@ $ResetAliases = @(
     # "type",
     # "where", "write"
 )
-$ResetAliases | ForEach-Object { Remove-Alias -Force $_ }
+$ResetAliases | ForEach-Object { 
+    if ($null -ne (Get-Alias | Where-Object Name -Contains $_)) {
+        Remove-Alias -Force $_
+    }
+}
 
 function New-BlankAlias {
     param($Name, $Value)
