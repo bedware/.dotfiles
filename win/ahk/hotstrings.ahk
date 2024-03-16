@@ -1,41 +1,56 @@
 
 ; Git
-:*:;gst::git status
-:*:;gbr::git branch -vvv
-:*:;gsm::git submodule
-:*:;gco::git checkout
-:*:;gcm::git checkout master
-:*:;gcb::git checkout -b
-:*:;glf::git log --follow --patch
-:*:;glo::git log -n10 --oneline
-:*:;gdiff::git diff --color | less -R
-:*:;gdifs::git diff --staged --color | less -R
-:*:;gpsup::git push --set-upstream origin $(git branch --show-current)
+::ga::git add .
+::gA::git add --all
+::gb::git branch -vvv
+::gcb::git checkout -b
+:*:gcm::git checkout master
+:*:gco::git checkout
+::g.::git commit
+:*:g.m::git commit -m ""{Left}
+:*:g.a::git commit --amend --no-edit
+:*:gdif::git diff --color | less -R
+::gdifs::git diff --staged --color | less -R
+::glf::git log --follow --patch
+::glo::git log -n10 --oneline
+::g>::git push
+::g<::git pull
+::g<r::git pull --rebase
+::gpsup::git push --set-upstream origin $(git branch --show-current)
+::gsm::git submodule
+::gst::git status
 
 ; Docker/Podman
-:*:;dps::podman ps
-:*:;dpa::podman ps -a
-:*:;dv::podman volume list
-:*:;ds::podman container st
-:*:;drm::podman container rm -f
-:*:;dcu::podman compose up -d
-:*:;dcd::podman compose down
+::dc::podman container
+::dcd::podman compose down
+::dcu::podman compose up -d
+::dpa::podman ps -a
+::dps::podman ps
+::drm::podman container rm -f
+::dstart::podman container start
+::dstop::podman container stop
+::dv::podman volume
+::dvl::podman volume list
 
 ; Tmux
-:*:;ti::tmux-init
 :*:;ta::tmux attach
-:*:;tn::tmux new -s
+:*:;ti::tmux-init
 :*:;tk::tmux kill-server
+:*:;tn::tmux new -s
 
 ; ShellGpt
-:*:;ss::sgpt ''{Left}
 :*:;sm::sgpt @'{Enter}
+:*:;ss::sgpt ''{Left}
 
 ; Maven
-:*:;mg::mvn archetype:generate
-:*:;mq::mvn archetype:generate -D"archetypeArtifactId=maven-archetype-quickstart"
+::mp::mvn package
+::mcp::mvn clean package
+::mg::mvn archetype:generate
 
 ; Text
-:*:;me::Dmitry Surin
+:*:clh::curl localhost:
+
+; Text
 :*:;@::dmitry.surin@gmail.com
+:*:;me::Dmitry Surin
 
