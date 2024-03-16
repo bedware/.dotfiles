@@ -18,6 +18,7 @@ sethandler <C-P> a:ide
 sethandler <C-Q> n-v:ide i:vim
 sethandler <C-N> n-v:ide
 sethandler <C-M> a:ide
+sethandler <C-B> a:ide
 sethandler <A-D> a:ide
 
 " Remap leader

@@ -54,7 +54,7 @@ feedWindowList() {
         ; Store in appropriate structure
         obj := gatherData(hwnd)
         ; Filter out windows using euristics
-        if (filteredApps(obj) or !onThisMonitor(activeMonitor, obj)) {
+        if (excludedApps(obj) or !onThisMonitor(activeMonitor, obj)) {
             ; filtered.Push(hwnd)
         } else {
             ; OutputDebug % "Window title: " obj.title ", class: " obj.class ", process:" obj.process
@@ -86,7 +86,7 @@ feedWindowList() {
     for i, v in tempArr {
         windowsList.Push(v)
     }
-    ; _showDebugWindow(windowsList)
+    _showDebugWindow(windowsList)
 }
 
 ; Control
@@ -99,6 +99,12 @@ GoToVD(num) {
     selected := proceedAlternateVD(num)
     GoToDesktopNumber(selected - 1) ; indexes in this function start with 0
     feedWindowList()
+
+    global windowsList
+    activeIndex := windowsList[1]
+    if WinExist("ahk_id " + activeIndex) {
+        WinActivate
+    }
 }
 GoToVDIgnoreAlternate(num) {
     if (GetCurrentDesktopNumber() != num) {
@@ -162,7 +168,7 @@ PrevWindow() {
 
 ; Filter
 
-filteredApps(obj) {
+excludedApps(obj) {
     if obj.title == ""
         return true
     if obj.title == "PopupHost"

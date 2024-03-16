@@ -15,15 +15,15 @@ font:
     family: "CaskaydiaCove NFM"
   size: 15
 window:
-#  startup_mode: Maximized
-  decorations: None
+  # startup_mode: Maximized
+  # decorations: None
   opacity: 0.5
   dimensions:
     columns: 1
     lines: 1
   position:
-    x: 0
-    y: 3000
+    x: 3000
+    y: 1000
 selection:
   save_to_clipboard: true
 key_bindings:

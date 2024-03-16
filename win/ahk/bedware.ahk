@@ -16,7 +16,7 @@ ALOCAL := HOME . "\AppData\Local"
 AROAMI := HOME . "\AppData\Roaming"
 SplitPath, A_AhkPath,, AHK_FOLDER
 
-desktops := ["Browsing", "Dev", "Chats", "Office", "Creator", "Studio", "English", "Files", "Other"]
+desktops := ["Browsing", "Dev", "Chats", "Office", "Creator", "Stream", "English", "Files", "Other"]
 apps := {}
 apps["bro"] := { desktop: "Browsing", selector: "^(?!DevTools) ahk_exe chrome.exe", path: "C:\Program Files\Google\Chrome\Application\chrome.exe" }
 apps["dev"] := { desktop: "Browsing", selector: "^DevTools ahk_exe chrome.exe" }
@@ -34,7 +34,7 @@ apps["pod"] := { desktop: "Dev", selector: "ahk_exe Podman Desktop.exe", path: A
 apps["term"] := { desktop: "Dev", selector: "windows ahk_exe alacritty.exe", path: """C:\Program Files\Alacritty\alacritty.exe"" --title windows", postFunction: "makeAnyWindowFullscreen" }
 apps["turm"] := { desktop: "Dev", selector: "ubuntu ahk_exe alacritty.exe", path: """C:\Program Files\Alacritty\alacritty.exe"" --config-file " . HOME . "\.dotfiles\all\alacritty\alacritty-work-profile.yml" .  " --title ubuntu --command wsl -d Ubuntu-22.04 --cd ~", postFunction: "makeAnyWindowFullscreen"}
 apps["adoc"] := { selector: "AutoHotkey Help", path: AHK_FOLDER . "\AutoHotkey.chm" }
-apps["adbg"] := { selector: "ahk_exe dbgview64.exe", path: HOME . "\OneDrive\Soft\DebugView\dbgview64.exe" }
+apps["adbg"] := { selector: "ahk_exe dbgview64.exe", path: "G:\My Drive\Soft\DebugView\dbgview64.exe" }
 apps["aspy"] := { selector: "Window Spy", path: AHK_FOLDER . "\WindowSpy.ahk" }
 apps["quake"] := { selector: "ahk_exe WindowsTerminal.exe", path: "wt.exe -w _quake" }
 
@@ -55,17 +55,17 @@ apps["book"] := { desktop: "Office", selector: "ahk_exe calibre.exe", path: "C:\
 
 apps["tra"] := { desktop: "English", path: "C:\Program Files (x86)\ABBYY Lingvo x6\Lingvo.exe" }
 apps["trd"] := { desktop: "English", selector: "DeepL Translate ahk_exe msedge.exe", path: "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe --app=https://www.deepl.com/translator#ru/en/", postFunction: "makeAnyWindowMaximized" }
-apps["try"] := { desktop: "English", selector: "Yandex Translate.* ahk_exe msedge.exe", path: "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe --app=https://translate.yandex.com/en/" , postFunction: "makeAnyWindowMaximized" }
+apps["try"] := { desktop: "English", selector: "Yandex Translate.* ahk_exe msedge.exe", path: "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe --app=https://translate.yandex.com/en/" }
 
 apps["cmd"] := { desktop: "Files", selector: "ahk_exe TOTALCMD64.EXE", path: "C:\Program Files\totalcmd\TOTALCMD64.EXE" }
 apps["pdf"] := { desktop: "Files", selector: "ahk_exe SumatraPDF.exe", path: ALOCAL . "\SumatraPDF\SumatraPDF.exe" }
 
-apps["obs"] := { desktop: "Studio", selector: "ahk_exe obs64.exe", path: "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\OBS Studio\OBS Studio (64bit).lnk" }
-apps["music"] := { desktop: "Studio", selector: "ahk_exe msedge.exe", path: "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe --app=https://music.yandex.ru", postFunction: "makeAnyWindowMaximized" }
-apps["carnac"] := { selector: "ahk_exe Carnac.exe", path: ALOCAL . "\carnac\Carnac.exe" }
+apps["obs"] := { desktop: "Stream", selector: "ahk_exe obs64.exe", path: "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\OBS Stream\OBS Stream (64bit).lnk" }
+apps["keys"] := { selector: "ahk_exe Carnac.exe", path: ALOCAL . "\carnac\Carnac.exe" }
 
 apps["task"] := { desktop: "Other", selector: "ahk_class TaskManagerWindow", path: "Taskmgr.exe", postFunction: "makeAnyWindowMaximized" }
-apps["duet"] := { desktop: "Other", selector: "ahk_exe duet.exe", path: "C:\Program Files\Kairos\Duet Display\duet.exe" }
+apps["mus"] := { desktop: "Other", selector: "ahk_exe YandexMusic.exe", path: "C:\Users\dmitr\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\YandexMusic.lnk", postFunction: "makeAnyWindowMaximized" }
+apps["duet"] := { selector: "ahk_exe duet.exe", path: "C:\Program Files\Kairos\Duet Display\duet.exe" }
 
 ; functions
 apps[" pd"] := { postFunction: "defaultProfile" }

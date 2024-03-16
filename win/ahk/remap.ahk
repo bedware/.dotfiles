@@ -1,15 +1,27 @@
 isNeedToCancel := false
 *~RButton::
-    isNeedToCancel := true
-return
 *~MButton::
-    isNeedToCancel := true
-return
 *~LButton::
-    isNeedToCancel := true
+    if (GetKeyState("Capslock", "P")) {
+        isNeedToCancel := true
+    }
 return
-*~WheelDown::return
-*~WheelUp::return
+*WheelDown::
+    if (GetKeyState("RButton", "P")) {
+        Send {RButton Up}
+        Send +{WheelDown}
+    } else {
+        Send {WheelDown}
+    }
+return 
+*WheelUp::
+    if (GetKeyState("RButton", "P")) {
+        Send {RButton Up}
+        Send +{WheelUp}
+    } else {
+        Send {WheelUp}
+    }
+return 
 RButton & LButton::GoToAlternateVD()
 LButton & RButton::Func("doTranslation").Call()
 
@@ -128,8 +140,8 @@ return
             }
             if (!isNeedToCancel) {
                 Send {Esc}
-                isNeedToCancel := false
             }
+            isNeedToCancel := false
         }
     return
 
@@ -221,6 +233,11 @@ return
         Send ^+a
         Sleep 50
         Send {Enter}
+    return
+    !g::
+        Send {F6}{F6}
+        Sleep 250
+        Send {AppsKey}aa{Enter}
     return
 #if
 #if WinActive("ahk_exe TOTALCMD64.EXE")
