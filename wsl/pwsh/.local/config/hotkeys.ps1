@@ -33,14 +33,17 @@ Set-PSReadLineKeyHandler -ViMode Command -Key V -ScriptBlock {
 
 # General moves
 
-Set-PSReadLineKeyHandlerBothModes -Chord Alt+h -ScriptBlock {
+Set-PSReadLineKeyHandlerBothModes -Chord Ctrl+h -ScriptBlock {
     RunExactCommand('cd')
 }
-Set-PSReadLineKeyHandlerBothModes -Chord Alt+u -ScriptBlock {
+Set-PSReadLineKeyHandlerBothModes -Chord Ctrl+u -ScriptBlock {
     RunExactCommand('Set-LocationToParentAndList')
 }
 Set-PSReadLineKeyHandler -Chord Ctrl+w -ScriptBlock {
     [Microsoft.PowerShell.PSConsoleReadLine]::BackwardDeleteWord()
+}
+Set-PSReadLineKeyHandler -Chord Ctrl+u -ScriptBlock {
+    [Microsoft.PowerShell.PSConsoleReadLine]::DeleteLine()
 }
 
 # Fzf
