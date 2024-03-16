@@ -1,5 +1,4 @@
 function Set-PSReadLineKeyHandlerBothModes($Chord, $ScriptBlock) {
-    # Set-PSReadLineKeyHandler -ViMode Command @Args
     Set-PSReadLineKeyHandler -Chord $PSBoundParameters.Chord `
         -ScriptBlock $PSBoundParameters.ScriptBlock
     if ((Get-PSReadLineOption).EditMode -eq "Vi") {
@@ -37,7 +36,13 @@ Set-PSReadLineKeyHandlerBothModes -Chord Alt+h -ScriptBlock {
     RunExactCommand('cd')
 }
 Set-PSReadLineKeyHandlerBothModes -Chord Ctrl+k -ScriptBlock {
-    RunExactCommand('Get-ChildItemCompact')
+    RunExactCommand('Clear-Host && Get-ChildItem -Force | Format-Table -AutoSize')
+}
+Set-PSReadLineKeyHandlerBothModes -Chord Alt+k -ScriptBlock {
+    RunExactCommand('Clear-Host && Get-ChildItem | Format-Table -AutoSize')
+}
+Set-PSReadLineKeyHandlerBothModes -Chord Alt+p -ScriptBlock {
+    RunExactCommand('Get-Location | Set-Clipboard')
 }
 Set-PSReadLineKeyHandlerBothModes -Chord Alt+u -ScriptBlock {
     RunExactCommand('Set-LocationToParentAndList')
@@ -52,8 +57,7 @@ Set-PSReadLineKeyHandler -Chord Ctrl+u -ScriptBlock {
 # Fzf
 Import-Module PSFzf
 
-$fzfExclude = @('.git', 'AppData', '.npm', '.oh-my-zsh', '.tmp', '.cache',
-                '.jdks', '.gradle', '.java', '.lemminx')
+$fzfExclude = @('.git', '.npm')
 $fzfParam = "--path-separator '/' --hidden --strip-cwd-prefix " + `
 @($fzfExclude | ForEach-Object {"--exclude '$_'"}) -join " "
 
@@ -66,17 +70,14 @@ Set-PSReadLineKeyHandlerBothModes -Chord Ctrl+r -ScriptBlock {
     [Microsoft.PowerShell.PSConsoleReadLine]::InvokePrompt()
 }
 
-$dirCommand = "fd --type d --follow $fzfParam"
 Set-PSReadLineKeyHandlerBothModes -Chord Ctrl+g -ScriptBlock {
-    Invoke-Expression $dirCommand | Invoke-Fzf | ForEach-Object { 
-        [Microsoft.PowerShell.PSConsoleReadLine]::Insert("Set-LocationAndList $_")
-        [Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
+    Invoke-Expression "fd --type d --follow --no-ignore $fzfParam" | Invoke-Fzf | ForEach-Object { 
+        RunExactCommand("Set-Location $_ | Clear-Host && Get-ChildItem -Force | Format-Table -AutoSize")
     }
 }
-Set-PSReadLineKeyHandler -ViMode Command -Key g -ScriptBlock {
-    Invoke-Expression $dirCommand | Invoke-Fzf | ForEach-Object { 
-        [Microsoft.PowerShell.PSConsoleReadLine]::Insert("Set-LocationAndList $_")
-        [Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
+Set-PSReadLineKeyHandlerBothModes -Chord Alt+g -ScriptBlock {
+    Invoke-Expression "fd --type d --follow $fzfParam" | Invoke-Fzf | ForEach-Object { 
+        RunExactCommand("Set-Location $_ | Clear-Host && Get-ChildItem -Force | Format-Table -AutoSize")
     }
 }
 

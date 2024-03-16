@@ -1,17 +1,9 @@
-function Copy-PathToClipboard {
-    Get-Location | Set-Clipboard
-}
-
 function Set-LocationToParentAndList {
-    Set-Location .. && Get-ChildItemCompact
+    Set-LocationAndList("..")
 }
 
 function Set-LocationAndList([string]$Path = "~") {
-    Set-Location $Path && Get-ChildItemCompact
-}
-
-function Get-ChildItemCompact([string]$Path = ".") {
-    Get-ChildItem -Force $Path | Format-Table -AutoSize
+    Set-Location $Path && Get-ChildItem -Force | Format-Table -AutoSize
 }
 
 function Edit-AndComeBack([string]$TempPath = ".") {

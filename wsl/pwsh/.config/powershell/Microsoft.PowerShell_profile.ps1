@@ -45,10 +45,10 @@ New-Alias -Name .a -Value 'cd $env:DOTFILES/win/ahk'
 New-Alias -Name .ae -Value 'Edit-AndComeBack("$env:DOTFILES/win/ahk")'
 New-Alias -Name .n -Value 'cd $env:DOTFILES/wsl/nvim/.config/nvim'
 New-Alias -Name .ne -Value 'Edit-AndComeBack("$env:DOTFILES/wsl/nvim/.config/nvim")'
-New-Alias -Name .p -Value Copy-PathToClipboard
 New-Alias -Name .pe -Value 'vi $profile' 
 Remove-Alias cd; New-Alias -Name cd -Value 'Set-LocationAndList'
-New-Alias -Name l -Value 'Get-ChildItemCompact'
+New-Alias -Name l -Value 'Get-ChildItem -Force'
+New-Alias -Name '|c' -Value '| Format-Table -AutoSize'
 New-Alias -Name rmr -Value "Remove-Item -Force -Recurse"
 New-BlankAlias -Name e -Value '$env:'
 New-IgnoredAlias -Name vi -Value 'nvim'

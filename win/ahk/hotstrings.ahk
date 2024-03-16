@@ -9,7 +9,7 @@
 ::g.::git commit
 :*:g.m::git commit -m ""{Left}
 :*:g.a::git commit --amend --no-edit
-:*:gdif::git diff --color | less -R
+::gdif::git diff --color | less -R
 ::gdifs::git diff --staged --color | less -R
 ::glf::git log --follow --patch
 ::glo::git log -n10 --oneline

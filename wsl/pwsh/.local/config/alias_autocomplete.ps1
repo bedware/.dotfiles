@@ -1,18 +1,23 @@
 $global:BlankAliases = @()
-$global:IgnoredAliases = @(
-    "*", "?", "%",
-    "cat", "clear", "compare", "copy",
-    "diff",
-    "echo", "erase", "group",
-    "history",
-    "kill",
-    "ls",
-    "man", "measure", "mount", "move", "ps",
-    "r", "rm", "select",
-    "set", "sleep", "sort", "start",
-    "type",
-    "where", "write"
+$global:IgnoredAliases = @()
+
+$ResetAliases = @(
+    # "*", "?", "%",
+    # "cat", "clear", "compare", "copy",
+    # "?",
+    "diff"
+    # "echo", "erase", "group",
+    # "history",
+    # "kill",
+    # "ls",
+    # "man", "measure", "mount", "move",
+    # "ps",
+    # "r", "rm",
+    # "select", "set", "sleep", "sort", "start",
+    # "type",
+    # "where", "write"
 )
+$ResetAliases | ForEach-Object { Remove-Alias -Force $_ }
 
 function New-BlankAlias {
     param($Name, $Value)
@@ -61,7 +66,7 @@ function GetLastWordBeforeCursor([ref]$wordBeforeCursorStartIndex = $null) {
 
 function GetAliasByWord($wordBeforeCursor) {
     if (-not [string]::IsNullOrEmpty($wordBeforeCursor) -and (Get-Alias).Name -Contains $wordBeforeCursor) {
-        return Get-Alias -Name $wordBeforeCursor
+        return Get-Alias -Name $wordBeforeCursor | Select-Object -First 1
     }
     return $null
 }
