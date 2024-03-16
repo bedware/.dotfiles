@@ -52,8 +52,9 @@ Set-PSReadLineKeyHandler -Chord Ctrl+u -ScriptBlock {
 # Fzf
 Import-Module PSFzf
 
-$fzfExclude = @('.git', 'AppData', '.npm', '.oh-my-zsh', '.tmp', '.cache',
-                '.jdks', '.gradle', '.java', '.lemminx')
+# $fzfExclude = @('.git', 'AppData', '.npm', '.oh-my-zsh', '.tmp', '.cache',
+#                 '.jdks', '.gradle', '.java', '.lemminx')
+$fzfExclude = @('.git', '.npm')
 $fzfParam = "--path-separator '/' --hidden --strip-cwd-prefix " + `
 @($fzfExclude | ForEach-Object {"--exclude '$_'"}) -join " "
 
@@ -66,15 +67,14 @@ Set-PSReadLineKeyHandlerBothModes -Chord Ctrl+r -ScriptBlock {
     [Microsoft.PowerShell.PSConsoleReadLine]::InvokePrompt()
 }
 
-$dirCommand = "fd --type d --follow $fzfParam"
 Set-PSReadLineKeyHandlerBothModes -Chord Ctrl+g -ScriptBlock {
-    Invoke-Expression $dirCommand | Invoke-Fzf | ForEach-Object { 
+    Invoke-Expression "fd --type d --follow --no-ignore $fzfParam" | Invoke-Fzf | ForEach-Object { 
         [Microsoft.PowerShell.PSConsoleReadLine]::Insert("Set-LocationAndList $_")
         [Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
     }
 }
-Set-PSReadLineKeyHandler -ViMode Command -Key g -ScriptBlock {
-    Invoke-Expression $dirCommand | Invoke-Fzf | ForEach-Object { 
+Set-PSReadLineKeyHandlerBothModes -Chord Alt+g -ScriptBlock {
+    Invoke-Expression "fd --type d --follow $fzfParam" | Invoke-Fzf | ForEach-Object { 
         [Microsoft.PowerShell.PSConsoleReadLine]::Insert("Set-LocationAndList $_")
         [Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
     }
