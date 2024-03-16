@@ -1,5 +1,7 @@
 [Console]::InputEncoding = [Console]::OutputEncoding = [System.Text.UTF8Encoding]::new()
 
+Write-Host "Profile reading started"
+
 # Environment variables {{{1
 
 $env:DOTFILES = $env:HOME.ToString().Replace("\", "/") + "/.dotfiles"
@@ -10,35 +12,17 @@ $env:JAVA_HOME = "$env:HOME/.sdkman/candidates/java/current/"
 $env:OPENAI_API_KEY = Get-Content "$env:HOME/.ssh/openai"
 $env:SDKMAN_DIR = "$env:HOME/.sdkman"
 
-# Platform-dependent stuff {{{1
-
-if ($IsLinux) {
-    $env:PATH_SEPARATOR = ":"
-    if ($PSVersionTable.OS -match "WSL") {
-        # Remove windows stuff from linux. Great lookup booster.
-        $env:PATH = $env:PATH | tr ":" "\n" | grep -v -e /mnt -e "^$" | tr "\n" ":"
-    }
-    . "$env:DOTFILES/wsl/pwsh/.local/config/borrowed.ps1"
-} elseif ($IsWindows) {
-    $env:PATH_SEPARATOR = ";"
-    . "$env:DOTFILES/win/pwsh/config/user_functions.ps1"
-    $env:PATH += "$env:PATH_SEPARATOR$env:DOTFILES/win/pwsh/bin/"
-} else {
-    throw "OS is not detected. Separator is not determined!"
-}
-
 # Path {{{1
 
-$env:PATH += "$env:PATH_SEPARATOR$env:DOTFILES/wsl/pwsh/.local/bin/"
-$env:PATH += "$env:PATH_SEPARATOR$env:BUN_INSTALL/bin"
-$env:PATH += "$env:PATH_SEPARATOR$env:JAVA_HOME/bin"
-$env:PATH += "$env:PATH_SEPARATOR$env:HOME/.local/bin"
+$env:PATH += [IO.Path]::PathSeparator + "$env:DOTFILES/wsl/pwsh/.local/bin/"
+$env:PATH += [IO.Path]::PathSeparator + "$env:BUN_INSTALL/bin"
+$env:PATH += [IO.Path]::PathSeparator + "$env:JAVA_HOME/bin"
+$env:PATH += [IO.Path]::PathSeparator + "$env:HOME/.local/bin"
 if (Test-Path $env:SDKMAN_DIR) {
     Get-ChildItem "$env:SDKMAN_DIR/candidates" | ForEach-Object { 
-        $env:PATH += "$env:PATH_SEPARATOR$env:SDKMAN_DIR/candidates/$($_.Name)/current/bin"
+        $env:PATH += [IO.Path]::PathSeparator + "$env:SDKMAN_DIR/candidates/$($_.Name)/current/bin"
     }
 }
-$env:PATH = ($env:PATH).Replace("$env:PATH_SEPARATOR$env:PATH_SEPARATOR", "$env:PATH_SEPARATOR")
 
 # Imports & Init {{{1
 
@@ -68,5 +52,36 @@ New-Alias -Name l -Value 'Get-ChildItemCompact'
 New-Alias -Name rmr -Value "Remove-Item -Force -Recurse"
 New-BlankAlias -Name e -Value '$env:'
 New-IgnoredAlias -Name vi -Value 'nvim'
-New-IgnoredAlias -Name docker -Value 'podman' 
+New-Alias -Name docker -Value 'podman' 
+
+# Other {{{1
+
+# cleaning the PATH
+$env:PATH = ($env:PATH).Replace("//", "/")
+$env:PATH = ($env:PATH).Replace([IO.Path]::PathSeparator + [IO.Path]::PathSeparator, [IO.Path]::PathSeparator)
+
+# Platform-dependent stuff
+if ($IsLinux) {
+    # argc-completions
+    # Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
+    $env:ARGC_COMPLETIONS_ROOT = '/home/bedware/argc-completions'    
+    $env:ARGC_COMPLETIONS_PATH = "$env:ARGC_COMPLETIONS_ROOT/completions"    
+    $env:PATH += [IO.Path]::PathSeparator + "$env:ARGC_COMPLETIONS_ROOT/bin"
+    # To add completions for only the specified command, modify next line e.g. $argc_scripts = @("cargo", "git")
+    $argc_scripts = ((Get-ChildItem -File ($env:ARGC_COMPLETIONS_ROOT + '/completions')) | ForEach-Object { $_.Name -replace '\.sh$' })
+    argc --argc-completions powershell $argc_scripts | Out-String | Invoke-Expression
+
+    # Remove windows stuff from linux. Great lookup booster.
+    . "$env:DOTFILES/wsl/pwsh/.local/config/borrowed.ps1"
+    # $env:PATH = ($env:PATH | tr ':' '\n' | grep -v -e /mnt -e "^$" | unique | sort | tr "\n" ":")
+    $env:PATH = ($env:PATH -split [IO.Path]::PathSeparator | Where-Object { $_ -notlike "/mnt*" } | Sort-Object | Get-Unique) -join [IO.Path]::PathSeparator
+
+    Write-Host "PATH:"
+    $env:PATH -replace [IO.Path]::PathSeparator, "`n"
+} elseif ($IsWindows) {
+    . "$env:DOTFILES/win/pwsh/config/user_functions.ps1"
+    $env:PATH += [IO.Path]::PathSeparator + "$env:DOTFILES/win/pwsh/bin/"
+}
+
+Write-Host "Profile has been read"
 

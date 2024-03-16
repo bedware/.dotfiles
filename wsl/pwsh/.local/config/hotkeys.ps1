@@ -27,7 +27,7 @@ Set-PSReadLineKeyHandler -ViMode Command -Key Enter -ScriptBlock {
     AliasExtention -Mode "Enter"
     [Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
 }
-Set-PSReadLineKeyHandler -ViMode Command -Key . -ScriptBlock {
+Set-PSReadLineKeyHandler -ViMode Command -Chord Shift+v -ScriptBlock {
     RunExactCommand('vi .')
 }
 

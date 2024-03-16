@@ -28,8 +28,8 @@ require("dapui").setup({
 -- end
 
 require('dap').listeners.after.event_initialized["dapui_config"] = function() require("dapui").open() end
-require('dap').listeners.before.event_terminated["dapui_config"] = function() require("dapui").close() end
-require('dap').listeners.before.event_exited["dapui_config"] = function() require("dapui").close() end
+-- require('dap').listeners.before.event_terminated["dapui_config"] = function() require("dapui").close() end
+-- require('dap').listeners.before.event_exited["dapui_config"] = function() require("dapui").close() end
 
 -- SHOW {{{1
 vim.keymap.set('n', '<leader>,', function()

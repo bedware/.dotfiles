@@ -28,8 +28,6 @@ vim.keymap.set("n", "<C-h>", function() ui.nav_file(1) end)
 vim.keymap.set("n", "<C-j>", function() ui.nav_file(2) end)
 vim.keymap.set("n", "<C-k>", function() ui.nav_file(3) end)
 vim.keymap.set("n", "<C-l>", function() ui.nav_file(4) end)
-vim.keymap.set("n", "<C-F5>", function() ui.nav_file(5) end)
-vim.keymap.set("n", "<C-F6>", function() ui.nav_file(6) end)
 -- Set to
 vim.keymap.set("n", "<leader><C-h>", function() set_current_at(1) end)
 vim.keymap.set("n", "<leader><C-j>", function() set_current_at(2) end)
@@ -41,6 +39,8 @@ vim.keymap.set("n", "<A-C-j>", function() require('bedware.utils').feedkeys('`Jz
 vim.keymap.set("n", "<A-C-k>", function() require('bedware.utils').feedkeys('`Kzz', 'n') end)
 vim.keymap.set("n", "<A-C-l>", function() require('bedware.utils').feedkeys('`Lzz', 'n') end)
 -- I'm in doubt
+-- vim.keymap.set("n", "<C-F5>", function() ui.nav_file(5) end)
+-- vim.keymap.set("n", "<C-F6>", function() ui.nav_file(6) end)
 -- vim.keymap.set("n", "<leader><C-F5>", function() set_current_at(5) end)
 -- vim.keymap.set("n", "<leader><C-F6>", function() set_current_at(6) end)
 -- vim.keymap.set("n", "<A-C-F5>", function() require('bedware.utils').feedkeys('`H', 'n') end)
