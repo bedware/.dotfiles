@@ -63,7 +63,7 @@ $env:PATH = ($env:PATH).Replace([IO.Path]::PathSeparator + [IO.Path]::PathSepara
 # Platform-dependent stuff
 if ($IsLinux) {
     # argc-completions
-    # Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
+    Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
     $env:ARGC_COMPLETIONS_ROOT = '/home/bedware/argc-completions'    
     $env:ARGC_COMPLETIONS_PATH = "$env:ARGC_COMPLETIONS_ROOT/completions"    
     $env:PATH += [IO.Path]::PathSeparator + "$env:ARGC_COMPLETIONS_ROOT/bin"
