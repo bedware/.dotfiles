@@ -47,12 +47,12 @@ New-Alias -Name .n -Value 'cd $env:DOTFILES/wsl/nvim/.config/nvim'
 New-Alias -Name .ne -Value 'Edit-AndComeBack("$env:DOTFILES/wsl/nvim/.config/nvim")'
 New-Alias -Name .pe -Value 'vi $profile' 
 Remove-Alias cd; New-Alias -Name cd -Value 'Set-LocationAndList'
+New-Alias -Name rmr -Value "Remove-Item -Force -Recurse"
 New-Alias -Name l -Value 'Get-ChildItem -Force'
 New-Alias -Name '|c' -Value '| Format-Table -AutoSize'
-New-Alias -Name rmr -Value "Remove-Item -Force -Recurse"
+New-Alias -Name '|w' -Value '| Select-Object -ExpandProperty Path | ForEach-Object { nvim $_ }'
 New-BlankAlias -Name e -Value '$env:'
-New-IgnoredAlias -Name vi -Value 'nvim'
-New-Alias -Name docker -Value 'podman' 
+# New-IgnoredAlias -Name vi -Value 'nvim'
 
 # Other {{{1
 
