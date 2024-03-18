@@ -52,7 +52,7 @@ New-Alias -Name l -Value 'Get-ChildItem -Force'
 New-Alias -Name '|c' -Value '| Format-Table -AutoSize'
 New-Alias -Name '|w' -Value '| Select-Object -ExpandProperty Path | ForEach-Object { nvim $_ }'
 New-BlankAlias -Name e -Value '$env:'
-# New-IgnoredAlias -Name vi -Value 'nvim'
+New-IgnoredAlias -Name vi -Value 'nvim'
 
 # Other {{{1
 

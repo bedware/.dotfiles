@@ -154,11 +154,11 @@ return
 #if 
 
 #if !raceMode && GetKeyState("Space", "P")
-    *Tab::
-        Send {LAlt DownR}
-        KeyWait, Tab
-        Send {LAlt Up}
+    Tab Up::
+        Send {Alt down}{Tab}
+        Send {Alt up}
     return
+
     ; Copy & Paste
     y::Send ^{Insert}
     p::Send +{Insert}
@@ -214,6 +214,13 @@ return
     *]::PgDn
     *,::Home
     *.::End
+
+    ; For browser
+    f::
+        Send ^l ; Search in history
+        Sleep 50
+        Send @{Down} ; Search in history
+    return
 #if
 
 #if WinActive("ahk_exe explorer.exe")
@@ -224,14 +231,12 @@ return
     or WinActive("ahk_exe msedge.exe")
     or WinActive("ahk_exe firefox.exe")
     ^g::Send ^+{a} ; Search in tabs popup
-    ^k::Send ^+{p}
-    !h::Send ^l@history{Space} ; Search in history
-    !b::Send ^l@bookmarks{Space} ; Search in Bookmarks 
+    ^s::Send ^+{p}
     ^i::Send !{Right} ; Navigation history forward 
     ^o::Send !{Left} ; Navigation history backward
     ^6::
         Send ^+a
-        Sleep 50
+        Sleep 150
         Send {Enter}
     return
     !g::
@@ -264,21 +269,15 @@ return
 #if
 
 #InputLevel 0
+
 ; Win-hotkeys
-#j::NextWindow()
-; #f::NextWindow()
-#k::PrevWindow()
-; #b::PrevWindow()
-; #^t:: ; Toggle taskbar
-;     toggleTaskbar(-1)
-;     PlayErrorSound()
-; return
-#^t:: ; Show active windows on all virtual desktops (VD)
+
+; Show active window on all virtual desktops (VD)
+#^t:: 
     WinGet, activeHwnd, ID, A
     PinWindow(activeHwnd)
     PlayErrorSound()
 return
-
 ; Close
 #w::Send ^{w}
 ; Quit
@@ -291,7 +290,6 @@ return
 #4::GoToVD(4)
 #5::GoToVD(5)
 #6::GoToAlternateVD()
-#=::GoToAlternateVD()
 #7::GoToVD(7)
 #8::GoToVD(8)
 #9::GoToVD(9)
@@ -302,7 +300,6 @@ return
 #+3::MoveActiveWinAndGoToVD(3)
 #+4::MoveActiveWinAndGoToVD(4)
 #+5::MoveActiveWinAndGoToVD(5)
-; #+6
 #+7::MoveActiveWinAndGoToVD(7)
 #+8::MoveActiveWinAndGoToVD(8)
 #+9::MoveActiveWinAndGoToVD(9)

@@ -6,7 +6,7 @@ RunAlfred(apps) {
     length := "5" ; chars
 
     ; Wait for user input
-    Input, userInput, T%timeout% L%length%, {%endKey%}, % getShortuctsByComa(apps)
+    Input, userInput, T%timeout% L%length% C, {%endKey%}, % getShortuctsByComa(apps)
     if (ErrorLevel = "Max")
     {
         showAlfredError("You entered '" userInput "', which is the maximum length '" length "' of the text.")
@@ -112,12 +112,22 @@ getShortuctsByComa(apps) {
     }
     return SubStr(shortcutsByComa, 1, -1)
 }
+_getIfContains(arr, inp) {
+    result := false
+    for key, value in arr {
+        if (key == inp) {
+            result := value
+            break
+        }
+    }
+    return result
+}
 
 executeInput(apps, userInput) {
     global desktops
-    if (IsObject(apps[userInput . ""])) { ; Otherwise, a match was found.
+    app := _getIfContains(apps, userInput . "")
+    if (app) {
         showAlfredRunning(userInput)
-        app := apps[userInput . ""]
         if (app.selector != "") {
             if (app.desktop != "") {
                 OutputDebug % "executed inside"

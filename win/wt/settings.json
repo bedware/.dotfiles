@@ -7,13 +7,12 @@
             "command": "openNewTabDropdown",
             "keys": "menu"
         },
-        {
-            "command": 
-            {
-                "action": "sendInput",
-                "input": "cd ..\r"
+        { 
+          "command": {
+              "action": "sendInput",
+              "input": "\u0017"
             },
-            "keys": "alt+u"
+            "keys": "ctrl+backspace"
         },
         {
             "command": 
@@ -52,8 +51,8 @@
             "keys": "alt+minus"
         },
         {
-            "command": "toggleFocusMode",
-            "keys": "alt+f"
+            "command": "commandPalette",
+            "keys": "ctrl+s"
         },
         {
             "command": 
