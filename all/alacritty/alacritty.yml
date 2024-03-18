@@ -13,7 +13,7 @@ font:
     family: "CaskaydiaCove NFM"
   bold_italic:
     family: "CaskaydiaCove NFM"
-  size: 15
+  size: 12
 window:
   # startup_mode: Maximized
   # decorations: None

@@ -25,7 +25,7 @@ apps["aspy"] := { selector: "Window Spy", path: AHK_FOLDER . "\WindowSpy.ahk" }
 apps["book"] := { desktop: "Office", selector: "ahk_exe calibre.exe", path: "C:\Program Files\Calibre2\calibre.exe" }
 apps["cal"] := { desktop: "Office", selector: "ahk_exe Notion Calendar.exe", path: "C:\Users\dmitr\AppData\Local\Programs\cron-web\Notion Calendar.exe", postFunction: "makeAnyWindowMaximized" }
 apps["cmd"] := { desktop: "Files", selector: "ahk_exe TOTALCMD64.EXE", path: "C:\Program Files\totalcmd\TOTALCMD64.EXE" }
-apps["db"] := { desktop: "Dev", selector: "ahk_exe datagrip64.exe", path: AROAMI . "\Microsoft\Windows\Start Menu\Programs\JetBrains Toolbox\DataGrip Release.lnk" }
+apps["db"] := { desktop: "Dev", selector: "ahk_exe datagrip64.exe", path: "C:\Program Files\JetBrains\DataGrip 2019.1.4\bin\datagrip64.exe" }
 apps["dev"] := { desktop: "Browsing", selector: "^DevTools ahk_exe chrome.exe" }
 apps["disc"] := { desktop: "Chats", selector: "ahk_exe Discord.exe", path: AROAMI . "\Microsoft\Windows\Start Menu\Programs\Discord Inc\Discord.lnk" }
 apps["draw"] := { desktop: "Creator", selector: "Excalidraw ahk_exe msedge.exe", path: AROAMI . "\Microsoft\Windows\Start Menu\Programs\Excalidraw.lnk" }
@@ -81,7 +81,6 @@ apps["0"] := { postFunction: "GoToVD", postFunctionParam: 6 }
 #Include %A_ScriptDir%/utils.ahk
 #Include %A_ScriptDir%/alfred.ahk
 #Include %A_ScriptDir%/chrome.ahk
-#Include %A_ScriptDir%/dependencies/toggle_taskbar.ahk
 #Include %A_ScriptDir%/dependencies/virtual_desktop.ahk
 #Include %A_ScriptDir%/moving_around.ahk
 #Include %A_ScriptDir%/user_functions.ahk

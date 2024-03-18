@@ -180,7 +180,7 @@ nnoremap <leader>tb :action tasks.open.in.browser<CR>
 nnoremap <leader>q :action QuickImplementations<CR>
 nnoremap <leader>sa :action GotoAction<CR>
 "nnoremap <leader>sc :action EditorContextInfo<CR>
-nnoremap <leader>sbj :action ByteCodeViewer<CR>
+nnoremap <leader>sbc :action ByteCodeViewer<CR>
 nnoremap <leader>sbk :action ActivateKotlinBytecodeToolWindow<CR>
 nnoremap <leader>sil :action SelectIn<CR>
 nnoremap <leader>sip :action SelectInProjectView<CR>
@@ -225,7 +225,7 @@ nnoremap <C-j> :action GotoHarpoon2<CR>
 nnoremap <C-k> :action GotoHarpoon3<CR>
 nnoremap <C-l> :action GotoHarpoon4<CR>
 nnoremap <C-;> :action GotoHarpoon5<CR>
-nnoremap <A-a> :action AddToHarpoon<CR>:echo "File added"<CR><CR>
+nnoremap <A-a> :action AddToHarpoon<CR>:echo "File added"<CR>
 nnoremap <leader><C-h> :action SetHarpoon1<CR>
 nnoremap <leader><C-j> :action SetHarpoon2<CR>
 nnoremap <leader><C-k> :action SetHarpoon3<CR>
