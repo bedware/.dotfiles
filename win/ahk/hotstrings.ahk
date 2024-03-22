@@ -13,9 +13,8 @@
 ::gdifs::git diff --staged --color | less -R
 ::glf::git log --follow --patch
 ::glo::git log -n10 --oneline
-::g>::git push
-::g<::git pull
-::g<r::git pull --rebase
+:*:gpul::git pull
+:*:gpus::git push
 ::gpsup::git push --set-upstream origin $(git branch --show-current)
 ::gsm::git submodule
 ::gst::git status
@@ -27,8 +26,8 @@
 ::dpa::podman ps -a
 ::dps::podman ps
 ::drm::podman container rm -f
-::dstart::podman container start
-::dstop::podman container stop
+:*:dsta::podman container start
+:*:dsto::podman container stop
 ::dv::podman volume
 ::dvl::podman volume list
 
@@ -47,8 +46,9 @@
 ::mcp::mvn clean package
 ::mg::mvn archetype:generate
 
-; Text
+; Utils
 :*:clh::curl localhost:
+::wu::wget localhost:7777 --quiet --tries 20 --waitretry 1 --retry-connrefused -O /dev/null
 
 ; Text
 :*:;@::dmitry.surin@gmail.com

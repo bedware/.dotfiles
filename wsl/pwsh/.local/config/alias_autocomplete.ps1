@@ -2,20 +2,19 @@ $global:BlankAliases = @()
 $global:IgnoredAliases = @()
 
 $ResetAliases = @(
-    # "*", "?", "%",
-    # "cat", "clear", "compare", "copy",
-    # "?",
-    "diff"
-    # "echo", "erase", "group",
-    # "history",
-    # "kill",
+    "*", "?", "%",
+    "cat", "clear", "compare", "copy",
+    "diff",
+    "echo", "erase", "group",
+    "history",
+    "kill",
     # "ls",
-    # "man", "measure", "mount", "move",
-    # "ps",
+    "man", "measure", "mount", "move",
+    "ps",
     # "r", "rm",
-    # "select", "set", "sleep", "sort", "start",
-    # "type",
-    # "where", "write"
+    "select", "set", "sleep", "sort", "start",
+    "type",
+    "where", "write"
 )
 $ResetAliases | ForEach-Object { 
     if ($null -ne (Get-Alias | Where-Object Name -Contains $_)) {

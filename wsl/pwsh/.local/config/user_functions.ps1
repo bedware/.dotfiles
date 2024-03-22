@@ -23,3 +23,14 @@ function Deduplicate-HistoryOnExit {
     Write-Host "History will be cleared on exit"
 }
 
+function Save-Thought() {
+    $filePath = "$HOME/thoughts.store"
+    $todayDate = Get-Date -Format "yyyy.MM.dd"
+    $todayDateTime = Get-Date -Format "yyyy.MM.dd HH:mm:ss"
+    
+    if (!(Select-String -Path $filePath -Pattern $todayDate)) {
+        Add-Content -Path $filePath -Value $todayDate
+    }
+    Add-Content -Path $filePath -Value "$todayDateTime $args"
+}
+
