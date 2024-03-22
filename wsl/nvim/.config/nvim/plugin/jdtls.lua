@@ -1,6 +1,43 @@
 local java_cmds = vim.api.nvim_create_augroup('java_cmds', { clear = true })
 local cache_vars = {}
 
+-- Work related :TODO move to another work-related place
+local function is_work_related(bufnr)
+    -- return false
+    return string.match(vim.api.nvim_buf_get_name(bufnr), "^/home/bedware/work/nadex")
+end
+local function work_related_configuration(dap_setup, bufnr)
+    if is_work_related(bufnr) then
+        dap_setup["config_overrides"] = {
+            vmArgs = "-Dspring.config.location=/home/bedware/work/nadex/ru.nadeks.aria.ganz/app-ganz-dima.properties"
+        }
+    else
+        print("File path is not related to work")
+    end
+end
+
+local function work_related_reload()
+    if is_work_related(vim.api.nvim_get_current_buf()) then
+        vim.cmd.w()
+
+        require('dap').restart()
+
+        local job_id = vim.fn.jobstart({'pwsh', '-NoProfile', '-c', '/mnt/c/Users/dmitr/work/nadex/reload.ps1'}, {
+            on_exit = function(job_id, exit_code, event)
+                print("Tests are reloaded")
+            end
+        })
+
+        if job_id <= 0 then
+            print("Failed to start the job")
+        end
+    end
+end
+
+vim.api.nvim_create_user_command('W', work_related_reload, { nargs = '?' })
+
+-- Work related END
+
 -- Configs {{{1
 
 local features = {
@@ -36,11 +73,7 @@ local function jdtls_on_attach(client, bufnr)
             hotcodereplace = 'auto',
         }
 
-        -- Work related :TODO move to another work-related place 
-        dap_setup["config_overrides"] = {
-            vmArgs = "-Dspring.config.location=/home/bedware/work/nadex/ru.nadeks.aria.ganz/app-ganz-dima.properties"
-        }
-        -- Work related END
+        work_related_configuration(dap_setup, bufnr)
 
         require('jdtls').setup_dap(dap_setup)
         require('jdtls.dap').setup_dap_main_class_configs()

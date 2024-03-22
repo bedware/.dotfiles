@@ -1,3 +1,6 @@
+function wpwsh {
+    & "/mnt/c/Program Files/PowerShell/7/pwsh.exe"
+}
 function Set-LocationToParentAndList {
     Set-LocationAndList("..")
 }
