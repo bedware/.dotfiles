@@ -1,5 +1,5 @@
 function wpwsh {
-    & "/mnt/c/Program Files/PowerShell/7/pwsh.exe"
+    & "/mnt/c/Program Files/PowerShell/7/pwsh.exe" $args
 }
 function Set-LocationToParentAndList {
     Set-LocationAndList("..")

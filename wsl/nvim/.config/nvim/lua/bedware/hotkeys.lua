@@ -30,6 +30,9 @@ vim.keymap.set("c", "<Down>", "<C-n>")
 vim.keymap.set("x", "il", "g_o_")
 vim.keymap.set("o", "il", ":normal vil<CR>")
 vim.keymap.set("x", "al", "$o0")
+-- Arguments
+vim.keymap.set("x", "iA", "i(") -- this works for viA
+vim.keymap.set("o", "iA", ":normal viA<CR>") -- this works for ciA
 -- Buffer text object
 vim.keymap.set("x", "i%", "GoggV")
 vim.keymap.set("o", "i%", ":normal vi%<CR>")

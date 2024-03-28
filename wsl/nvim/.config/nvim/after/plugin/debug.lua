@@ -83,17 +83,17 @@ vim.keymap.set('v', ',K', function() require('dapui').eval() end, {})
 vim.keymap.set('n', ',K', function() require('dapui').eval() end, {})
 
 -- Group
-local group = vim.api.nvim_create_augroup('bedware_software_group', { clear = false })
+-- local group = vim.api.nvim_create_augroup('bedware_software_group', { clear = false })
 
 -- Auto commands {{{1
-vim.api.nvim_create_autocmd('BufEnter', {
-    group = group,
-    pattern = '*',
-    desc = 'Automatically move cursor to the end on focusing console',
-    callback = function(e)
-        local filetype = vim.api.nvim_get_option_value('filetype', { buf = e.buf })
-        if filetype == 'dapui_console' then
-            require('bedware.utils').feedkeys("<S-g>", "n")
-        end
-    end
-})
+-- vim.api.nvim_create_autocmd('BufWinEnter', {
+--     group = group,
+--     pattern = '*',
+--     desc = 'Automatically move cursor to the end on focusing console',
+--     callback = function(e)
+--         local filetype = vim.api.nvim_get_option_value('filetype', { buf = e.buf })
+--         if filetype == 'dapui_console' then
+--             require('bedware.utils').feedkeys("<S-g>", "n")
+--         end
+--     end
+-- })

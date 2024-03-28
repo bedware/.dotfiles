@@ -48,9 +48,24 @@ telescope.setup({
                 "--exclude", ".git"
             },
         },
+        git_branches = {
+            use_file_path = true,
+        },
+        git_commits = {
+            use_file_path = true,
+        },
         git_files = {
             use_git_root = false,
             recurse_submodules = true
+        },
+        git_bcommits = {
+            use_file_path = true,
+        },
+        git_bcommits_range = {
+            use_file_path = true,
+        },
+        git_status = {
+            use_file_path = true,
         },
         lsp_document_symbols = {
             symbol_width = 75
