@@ -1,4 +1,3 @@
-
 ; Git
 ::ga::git add .
 ::gA::git add --all
@@ -6,9 +5,8 @@
 ::gcb::git checkout -b
 :*:gcm::git checkout master
 :*:gco::git checkout
-::g.::git commit
-:*:g.m::git commit -m ""{Left}
-:*:g.a::git commit --amend --no-edit
+:*:gcm::git commit -m ""{Left}
+:*:gca::git commit --amend --no-edit
 ::gdif::git diff --color | less -R
 ::gdifs::git diff --staged --color | less -R
 ::glf::git log --follow --patch
@@ -49,6 +47,7 @@
 ; Utils
 :*:clh::curl localhost:
 ::wu::wget localhost:7777 --quiet --tries 20 --waitretry 1 --retry-connrefused -O /dev/null
+::compressvideo::ffmpeg -i input.mp4 -vcodec libx265 -crf 28 output.mp4
 
 ; Text
 :*:;@::dmitry.surin@gmail.com

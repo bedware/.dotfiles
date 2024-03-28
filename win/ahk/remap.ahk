@@ -273,6 +273,28 @@ return
 
 ; Win-hotkeys
 
+#h::
+    global apps
+    executeInput(apps, "web")
+return
+
+#j::
+    global apps
+    executeInput(apps, "turm")
+return
+
+#k::
+    global apps
+    executeInput(apps, "db")
+return
+
+#l::
+    global apps
+    RegWrite, REG_DWORD, HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\System, DisableLockWorkstation, 1
+    executeInput(apps, "post")
+    RegWrite, REG_DWORD, HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\System, DisableLockWorkstation, 0
+return
+
 ; Show active window on all virtual desktops (VD)
 #^t:: 
     WinGet, activeHwnd, ID, A
