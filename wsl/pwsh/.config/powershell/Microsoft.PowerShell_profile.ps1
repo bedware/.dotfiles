@@ -15,10 +15,11 @@ $env:SDKMAN_DIR = "$env:HOME/.sdkman"
 
 # Path {{{1
 
-$env:PATH += [IO.Path]::PathSeparator + "$env:DOTFILES/wsl/pwsh/.local/bin/"
+$env:PATH += [IO.Path]::PathSeparator + "$env:DOTFILES/wsl/pwsh/.local/bin"
 $env:PATH += [IO.Path]::PathSeparator + "$env:BUN_INSTALL/bin"
 $env:PATH += [IO.Path]::PathSeparator + "$env:JAVA_HOME/bin"
 $env:PATH += [IO.Path]::PathSeparator + "$env:HOME/.local/bin"
+$env:PATH += [IO.Path]::PathSeparator + "$env:HOME/.iximiuz/labctl/bin"
 if (Test-Path $env:SDKMAN_DIR) {
     Get-ChildItem "$env:SDKMAN_DIR/candidates" | ForEach-Object { 
         $env:PATH += [IO.Path]::PathSeparator + "$env:SDKMAN_DIR/candidates/$($_.Name)/current/bin"
@@ -37,6 +38,9 @@ $global:GitPromptSettings.DefaultPromptSuffix.Text = '> $(OnViModeChange([Micros
 . "$env:DOTFILES/wsl/pwsh/.local/config/hotkeys.ps1"
 . "$env:DOTFILES/wsl/pwsh/.local/config/user_functions.ps1"
 . "$env:DOTFILES/wsl/pwsh/.local/config/nvim-switcher.ps1"
+
+# iximiuz labs
+. "$env:HOME/.iximiuz/labctl/autocompletion.ps1"
 
 # Aliases {{{1
 
