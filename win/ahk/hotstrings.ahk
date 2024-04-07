@@ -2,17 +2,17 @@
 ::ga::git add .
 ::gA::git add --all
 ::gb::git branch -vvv
-::gcb::git checkout -b
-:*:gcm::git checkout master
-:*:gco::git checkout
+::gco::git checkout
+:*:gcob::git checkout -b
+:*:gcom::git checkout master
 :*:gcm::git commit -m ""{Left}
 :*:gca::git commit --amend --no-edit
 ::gdif::git diff --color | less -R
 ::gdifs::git diff --staged --color | less -R
 ::glf::git log --follow --patch
 ::glo::git log -n10 --oneline
-:*:gpul::git pull
-:*:gpus::git push
+:*:gpull::git pull
+:*:gpush::git push
 ::gpsup::git push --set-upstream origin $(git branch --show-current)
 ::gsm::git submodule
 ::gst::git status
@@ -31,7 +31,7 @@
 
 ; Tmux
 :*:;ta::tmux attach
-:*:;ti::tmux-init
+:*:;ts::tmux-sessionizer
 :*:;tk::tmux kill-server
 :*:;tn::tmux new -s
 

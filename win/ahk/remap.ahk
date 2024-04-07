@@ -138,6 +138,9 @@ return
                 WinClose, ahk_exe Lingvo.exe
                 WinClose, ahk_exe DeepL.exe
             }
+            if (WinActive("ahk_exe PowerToys.Peek.UI.exe")) {
+                WinClose, ahk_exe PowerToys.Peek.UI.exe
+            }
             if (!isNeedToCancel) {
                 Send {Esc}
             }
@@ -148,6 +151,10 @@ return
     *Space::
         KeyWait, Space
         if (A_ThisHotkey = "*Space" and A_PriorKey = "Space") {
+            if (WinActive("ahk_exe explorer.exe")) {
+                Send ^{Space}
+                return
+            }
             SendEvent {Blind}{Space}
         }
     return
@@ -169,7 +176,7 @@ return
     q::^q
     w::^w
     ; as
-    a::^a
+    a::^+a
     ; zxcv
     z::^z
     x::^x
@@ -273,25 +280,30 @@ return
 
 ; Win-hotkeys
 
-#h::
+#w::
     global apps
     executeInput(apps, "web")
 return
 
-#j::
+#h::
     global apps
     executeInput(apps, "turm")
 return
 
-#k::
+#j::
     global apps
     executeInput(apps, "db")
+return
+
+#k::
+    global apps
+    executeInput(apps, "post")
 return
 
 #l::
     global apps
     RegWrite, REG_DWORD, HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\System, DisableLockWorkstation, 1
-    executeInput(apps, "post")
+    executeInput(apps, "tt")
     RegWrite, REG_DWORD, HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\System, DisableLockWorkstation, 0
 return
 
@@ -301,8 +313,6 @@ return
     PinWindow(activeHwnd)
     PlayErrorSound()
 return
-; Close
-#w::Send ^{w}
 ; Quit
 #q::Send !{F4}
 
