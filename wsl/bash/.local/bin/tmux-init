@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-tmux kill-server
-# tmux send-keys -t settings:nvim '.ne' Enter
-# tmux new-window -t settings -n .dotfiles -c exec pwsh -Interactive -wd ~/.dotfiles -NoExit -c 'vi .'
-
-tmux new-session -d -s settings -n nvim -c exec pwsh -Interactive -NoExit -wd ~/.dotfiles/wsl/nvim/.config/nvim
-tmux new-window -t settings -n .dotfiles -c exec pwsh -Interactive -NoExit -wd ~/.dotfiles
-tmux-sessionizer $1

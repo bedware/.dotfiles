@@ -55,12 +55,18 @@ if ($args[0] -is [string]) {
     }
     tmux kill-server
 
-    $settingsPath = "~/.dotfiles"
-    tmux new-session -s settings -n .dotfiles -d "pwsh -NoExit -wd $settingsPath -Command vi"
-    tmux new-window -t settings -n nvim -d "pwsh -NoExit -wd $settingsPath/wsl/nvim/.config/nvim -Command vi"
-    tmux new-window -t settings -n windows.dotfiles -d 'wpwsh -NoExit -wd "C:\Users\dmitr\.dotfiles" -Command "vi"'
-    tmux new-window -t settings -n windows.nvim -d 'wpwsh -NoExit -wd "C:\Users\dmitr\.dotfiles/wsl/nvim/.config/nvim" -Command "vi"'
-    tmux new-window -t settings -n windows.~ -d 'wpwsh -NoExit -wd "C:\Users\dmitr\"'
+    $ubuntuHome = "~"
+    $ubuntuSettingsPath = "$ubuntuHome/.dotfiles"
+    $ubuntuName = "settings_ubuntu"
+    tmux new-session -s $ubuntuName -n dotfiles -d "pwsh -NoExit -wd $ubuntuSettingsPath -Command vi"
+    tmux new-window -t $ubuntuName -n nvim -d "pwsh -NoExit -wd $ubuntuSettingsPath/wsl/nvim/.config/nvim -Command vi"
+
+    $windowsHome = "C:\Users\dmitr"
+    $windowsSettingsPath = "$windowsHome/.dotfiles"
+    $windowsName = "settings_windows"
+    tmux new-session -s $windowsName -n dotfiles -d "wpwsh -NoExit -wd $windowsSettingsPath -Command vi"
+    tmux new-window -t $windowsName -n nvim -d "wpwsh -NoExit -wd $windowsSettingsPath/wsl/nvim/.config/nvim -Command vi"
+    tmux new-window -t $windowsName -n ahk -d "wpwsh -NoExit -wd $windowsSettingsPath/win/ahk -Command vi"
 
     $projectPath = "~/work/nadex"
     tmux new-session -s $company -n code -d "pwsh -NoExit -wd $projectPath -Command vi"

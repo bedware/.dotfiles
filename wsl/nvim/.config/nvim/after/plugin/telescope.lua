@@ -109,4 +109,5 @@ vim.keymap.set('v', '<leader>gh', builtin.git_bcommits_range, {})
 vim.keymap.set('n', '<leader>gs', builtin.git_status, {})
 vim.keymap.set('n', '<leader>grep', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>file', builtin.current_buffer_fuzzy_find, {})
+vim.keymap.set('n', '<leader>/', builtin.current_buffer_fuzzy_find, {})
 

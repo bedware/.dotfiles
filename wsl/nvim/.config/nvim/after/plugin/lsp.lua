@@ -1,5 +1,5 @@
 -- Settings
--- vim.lsp.set_log_level('trace')
+vim.lsp.set_log_level('debug')
 
 -- IMPORTANT: make sure to setup neodev BEFORE lspconfig
 require("neodev").setup({
