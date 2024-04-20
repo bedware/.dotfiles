@@ -36,8 +36,8 @@
 :*:;tn::tmux new -s
 
 ; ShellGpt
-:*:;sm::sgpt @'{Enter}
-:*:;ss::sgpt ''{Left}
+; :*:;sm::sgpt @'{Enter}
+; :*:;ss::sgpt ''{Left}
 
 ; Maven
 ::mp::mvn package
@@ -45,11 +45,14 @@
 ::mg::mvn archetype:generate
 
 ; Utils
-:*:clh::curl localhost:
-::wu::wget localhost:7777 --quiet --tries 20 --waitretry 1 --retry-connrefused -O /dev/null
-::compressvideo::ffmpeg -i input.mp4 -vcodec libx265 -crf 28 output.mp4
+:*:;waituntil::wget localhost:7777 --quiet --tries 20 --waitretry 1 --retry-connrefused -O /dev/null
+:*:;compressvideo::ffmpeg -i input.mp4 -vcodec libx265 -crf 28 output.mp4
 
 ; Text
 :*:;@::dmitry.surin@gmail.com
 :*:;me::Dmitry Surin
+
+; Windows
+:*:;lock::rundll32.exe user32.dll,LockWorkStation
+:*:;env::rundll32.exe sysdm.cpl,EditEnvironmentVariables
 

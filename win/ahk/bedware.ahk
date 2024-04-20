@@ -38,7 +38,7 @@ apps["jmc"] := { desktop: "Dev", selector: "ahk_exe jmc.exe", path: HOME . "\.jd
 apps["jvm"] := { desktop: "Dev", selector: "VisualVM", path: HOME . "\.jdks\visualvm_216\bin\visualvm-my-jdk.lnk" }
 apps["keys"] := { selector: "ahk_exe Carnac.exe", path: ALOCAL . "\carnac\Carnac.exe" }
 apps["lon"] := { selector: "ahk_exe LonelyScreen.exe", path: "g:\My Drive\Soft\LonelyScreen.exe" }
-apps["mail"] := { desktop: "Office", selector: "ahk_exe Spark Desktop.exe", path: ALOCAL . "\Programs\SparkDesktop\Spark Desktop.exe", postFunction: "makeAnyWindowMaximized" }
+apps["mail"] := { desktop: "Office", selector: "ahk_exe Spark Desktop.exe", path: AROAMI . "\Microsoft\Windows\Start Menu\Programs\Spark Desktop.lnk" }
 apps["music"] := { desktop: "Other", selector: "ahk_exe Яндекс Музыка.exe", path: "C:\Users\dmitr\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Яндекс Музыка.lnk", postFunction: "makeAnyWindowMaximized" }
 apps["note"] := { desktop: "Office", selector: "ahk_exe Notion.exe", path: AROAMI . "\Microsoft\Windows\Start Menu\Programs\Notion.lnk", postFunction: "makeAnyWindowMaximized" }
 apps["obs"] := { desktop: "Stream", selector: "ahk_exe obs64.exe", path: "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\OBS Studio\OBS Studio (64bit).lnk" }
@@ -46,7 +46,7 @@ apps["paint"] := { selector: "ahk_exe mspaint.exe", path: "mspaint.exe" }
 apps["pdf"] := { desktop: "Files", selector: "ahk_exe SumatraPDF.exe", path: ALOCAL . "\SumatraPDF\SumatraPDF.exe" }
 apps["pip"] := { selector: "Picture in picture ahk_exe chrome.exe" }
 apps["pod"] := { desktop: "Dev", selector: "ahk_exe Podman Desktop.exe", path: ALOCAL . "\Programs\podman-desktop\Podman Desktop.exe" }
-apps["post"] := { desktop: "Dev", selector: "ahk_exe Postman.exe", path: ALOCAL . "\Postman\Postman.exe" }
+apps["post"] := { desktop: "Dev", selector: "ahk_exe Postman.exe", path: AROAMI . "\Microsoft\Windows\Start Menu\Programs\Postman\Postman.lnk" }
 apps["quake"] := { selector: "ahk_exe WindowsTerminal.exe", path: "wt.exe -w _quake" }
 apps["slack"] := { desktop: "Chats", selector: "ahk_exe slack.exe", path: ALOCAL . "\slack\slack.exe" }
 apps["steam"] := { desktop: "Browsing", selector: "ahk_exe steamwebhelper.exe", path: "C:\Program Files (x86)\Steam\Steam.exe" }
@@ -58,12 +58,25 @@ apps["tra"] := { desktop: "English", path: "C:\Program Files (x86)\ABBYY Lingvo 
 apps["trd"] := { desktop: "English", selector: "DeepL Translate ahk_exe msedge.exe", path: "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe --app=https://www.deepl.com/translator#ru/en/", postFunction: "makeAnyWindowMaximized" }
 apps["try"] := { desktop: "English", selector: "Yandex Translate.* ahk_exe msedge.exe", path: "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe --app=https://translate.yandex.com/en/" }
 apps["tt"] := { desktop: "Dev", selector: "^(?!Developer Tools|Cypress) ahk_exe Cypress.exe" }
-apps["turm"] := { desktop: "Dev", selector: "ubuntu ahk_exe alacritty.exe", path: """C:\Program Files\Alacritty\alacritty.exe"" --config-file " . HOME . "\.dotfiles\all\alacritty\alacritty-work-profile.yml" .  " --title ubuntu --command wsl -d Ubuntu-22.04 --cd ~", postFunction: "makeAnyWindowFullscreen"}
+apps["code"] := { desktop: "Dev", selector: "ubuntu ahk_exe alacritty.exe", path: """C:\Program Files\Alacritty\alacritty.exe"" --config-file " . HOME . "\.dotfiles\all\alacritty\alacritty-work-profile.yml" .  " --title ubuntu --command wsl -d Ubuntu-22.04 --cd ~", postFunction: "makeAnyWindowFullscreen"}
 apps["web"] := { desktop: "Browsing", selector: "^(?!DevTools) ahk_exe chrome.exe", path: AROAMI . "\Microsoft\Windows\Start Menu\Programs\Chrome Apps\Chrome.lnk" }
 
 ; functions
-apps[" pd"] := { postFunction: "defaultProfile" }
-apps[" ps"] := { postFunction: "screencastProfile" }
+; apps[" pd"] := { postFunction: "defaultProfile" }
+; apps[" ps"] := { postFunction: "screencastProfile" }
+
+; trying to implement my OPENNING mode
+apps[".c"] := { postFunction: "openChatGPT" }
+apps[".n"] := { postFunction: "openNotes" }
+apps[".f"] := { postFunction: "openDotfiles" }
+apps[".a"] := { postFunction: "openAHKSettings" }
+apps[".v"] := { postFunction: "openVIMSettings" }
+apps[".t"] := { postFunction: "openTerminal" }
+; different
+apps["sw"] := { postFunction: "startWork" }
+; apps["on"] := { mode: "open", params: ["Notes"] }
+; apps["oa"] := { mode: "open", params: ["AHKSettings"] }
+; apps["of"] := { mode: "open", params: ["Files"] }
 
 ; VD navigation for alfred
 apps["1"] := { postFunction: "GoToVD", postFunctionParam: 1 }
@@ -98,4 +111,3 @@ Init(desktops) ; Must be run before hotkeys & hotstrings
 #Hotstring ? ; Make it work inside a word
 #Hotstring EndChars -()[]{}`n `t
 #Include %A_ScriptDir%/hotstrings.ahk
-

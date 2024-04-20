@@ -4,17 +4,6 @@
     "actions": 
     [
         {
-            "command": "openNewTabDropdown",
-            "keys": "menu"
-        },
-        { 
-          "command": {
-              "action": "sendInput",
-              "input": "\u0017"
-            },
-            "keys": "ctrl+backspace"
-        },
-        {
             "command": 
             {
                 "action": "splitPane",
@@ -23,12 +12,43 @@
             "keys": "alt+\\"
         },
         {
-            "command": "find",
-            "keys": "ctrl+shift+\\"
+            "command": 
+            {
+                "action": "commandPalette"
+            },
+            "keys": "ctrl+s"
+        },
+        {
+            "command": "openNewTabDropdown",
+            "keys": "menu"
+        },
+        {
+            "command": "toggleFocusMode",
+            "keys": "ctrl+f12"
+        },
+        {
+            "command": 
+            {
+                "action": "sendInput",
+                "input": "\u0017"
+            },
+            "keys": "ctrl+backspace"
         },
         {
             "command": "openTabRenamer",
             "keys": "alt+r"
+        },
+        {
+            "command": "find",
+            "keys": "ctrl+shift+\\"
+        },
+        {
+            "command": 
+            {
+                "action": "splitPane",
+                "split": "down"
+            },
+            "keys": "alt+minus"
         },
         {
             "command": "unbound",
@@ -41,18 +61,6 @@
         {
             "command": "unbound",
             "keys": "ctrl+shift+f"
-        },
-        {
-            "command": 
-            {
-                "action": "splitPane",
-                "split": "down"
-            },
-            "keys": "alt+minus"
-        },
-        {
-            "command": "commandPalette",
-            "keys": "ctrl+s"
         },
         {
             "command": 
@@ -117,7 +125,8 @@
                 "hidden": false,
                 "icon": "ms-appx:///ProfileIcons/pwsh.png",
                 "name": "PowerShell",
-                "startingDirectory": "%USERPROFILE%"
+                "startingDirectory": "%USERPROFILE%",
+		"suppressApplicationTitle": true
             },
             {
                 "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
@@ -155,18 +164,6 @@
                 "hidden": false,
                 "name": "podman-machine-default",
                 "source": "Windows.Terminal.Wsl"
-            },
-            {
-                "guid": "{8a40080b-5735-53d9-b1f1-fac1af3b09a8}",
-                "hidden": false,
-                "name": "Developer Command Prompt for VS 2022 [Preview]",
-                "source": "Windows.Terminal.VisualStudio"
-            },
-            {
-                "guid": "{a81ea7af-af5e-58c0-adb5-f92f259673eb}",
-                "hidden": false,
-                "name": "Developer PowerShell for VS 2022 [Preview]",
-                "source": "Windows.Terminal.VisualStudio"
             },
             {
                 "guid": "{e5a83caa-4c73-52b3-ae6b-bc438d721ef9}",

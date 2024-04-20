@@ -73,13 +73,33 @@ return
 
 #`:: ; Quake alive
     if (!ProcessExist("WindowsTerminal.exe")) {
-        Run, wt.exe -w _quake
+        Run, wt.exe -w _quake new-tab --title ChatGPT -- nvim "C:/Users/dmitr" -c ":ChatGPT"
         WinWait, ahk_exe WindowsTerminal.exe,, 5
         WinActivate
+        Sleep 300
+        Send ^{F12}
+        Run, wt --window _quake new-tab --title Notes -d "G:/My Drive/Notes/" -- nvim .
+        Sleep 20
+        Run, wt --window _quake new-tab --title .dotfiles -d "C:/Users/dmitr/.dotfiles/" -- nvim .
+        Sleep 20
+        Run, wt --window _quake new-tab --title AutoHotkey -d "C:/Users/dmitr/.dotfiles/win/ahk/" -- nvim .
+        Sleep 20
+        Run, wt --window _quake new-tab --title Neovim -d "C:/Users/dmitr/.dotfiles/wsl/nvim/.config/nvim/" -- nvim .
+        Sleep 20
+        Run, wt --window _quake new-tab --title Terminal -d "C:/Users/dmitr/"
+        Run, wt --window _quake focus-tab -t 0
     } else {
         Send #``
     }
 return
+
+; check out Get-WinUserLanguageList to find needed code
+; English
+!^e::PostMessage, 0x0050, 0, 0x0000409,, A
+; Russian
+!^r::PostMessage, 0x0050, 0, 0x0000419,, A
+; Georgian
+!^g::PostMessage, 0x0050, 0, 0x0000437,, A
 
 #Enter::
     Run wt
@@ -280,32 +300,32 @@ return
 
 ; Win-hotkeys
 
-#w::
-    global apps
-    executeInput(apps, "web")
-return
-
-#h::
-    global apps
-    executeInput(apps, "turm")
-return
-
-#j::
-    global apps
-    executeInput(apps, "db")
-return
-
-#k::
-    global apps
-    executeInput(apps, "post")
-return
-
-#l::
-    global apps
-    RegWrite, REG_DWORD, HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\System, DisableLockWorkstation, 1
-    executeInput(apps, "tt")
-    RegWrite, REG_DWORD, HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\System, DisableLockWorkstation, 0
-return
+; #w::
+;     global apps
+;     executeInput(apps, "web")
+; return
+;
+; #h::
+;     global apps
+;     executeInput(apps, "turm")
+; return
+;
+; #j::
+;     global apps
+;     executeInput(apps, "db")
+; return
+;
+; #k::
+;     global apps
+;     executeInput(apps, "post")
+; return
+;
+; #l::
+;     global apps
+;     RegWrite, REG_DWORD, HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\System, DisableLockWorkstation, 1
+;     executeInput(apps, "tt")
+;     RegWrite, REG_DWORD, HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\System, DisableLockWorkstation, 0
+; return
 
 ; Show active window on all virtual desktops (VD)
 #^t:: 

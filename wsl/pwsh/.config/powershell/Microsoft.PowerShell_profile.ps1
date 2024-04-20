@@ -41,7 +41,9 @@ $global:GitPromptSettings.DefaultPromptSuffix.Text = '> $(OnViModeChange([Micros
 . "$env:DOTFILES/wsl/pwsh/.local/config/nvim-switcher.ps1"
 
 # iximiuz labs
-. "$env:HOME/.iximiuz/labctl/autocompletion.ps1"
+if (Test-Path "$env:HOME/.iximiuz/labctl/autocompletion.ps1") {
+    . "$env:HOME/.iximiuz/labctl/autocompletion.ps1"
+}
 
 # Aliases {{{1
 
@@ -51,6 +53,7 @@ New-Alias -Name .a -Value 'cd $env:DOTFILES/win/ahk'
 New-Alias -Name .ae -Value 'Edit-AndComeBack("$env:DOTFILES/win/ahk")'
 New-Alias -Name .n -Value 'cd $env:DOTFILES/wsl/nvim/.config/nvim'
 New-Alias -Name .ne -Value 'Edit-AndComeBack("$env:DOTFILES/wsl/nvim/.config/nvim")'
+New-Alias -Name .c -Value 'nvim -c ":ChatGPT"'
 New-Alias -Name .pe -Value 'vi $profile' 
 Remove-Alias cd; New-Alias -Name cd -Value 'Set-LocationAndList'
 New-Alias -Name rmr -Value "Remove-Item -Force -Recurse"

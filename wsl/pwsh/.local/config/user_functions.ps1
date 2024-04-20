@@ -27,7 +27,7 @@ function Deduplicate-HistoryOnExit {
 }
 
 function Save-Thought() {
-    $filePath = "$HOME/thoughts.store"
+    $filePath = "G:/My Drive/Notes/thoughts.store"
     $todayDate = Get-Date -Format "yyyy.MM.dd"
     $todayDateTime = Get-Date -Format "yyyy.MM.dd HH:mm:ss"
     

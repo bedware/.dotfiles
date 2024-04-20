@@ -1,3 +1,27 @@
+; OPEN mode
+openChatGPT() {
+    Run, wt --window _quake focus-tab -t 0
+}
+openNotes() {
+    Run, wt --window _quake focus-tab -t 1
+}
+openDotfiles() {
+    Run, wt --window _quake focus-tab -t 2
+}
+openAHKSettings() {
+    Run, wt --window _quake focus-tab -t 3
+}
+openVIMSettings() {
+    Run, wt --window _quake focus-tab -t 4
+}
+openTerminal() {
+    Run, wt --window _quake focus-tab -t 5
+}
+
+startWork() {
+    Run C:\Users\dmitr\.dotfiles\win\pwsh\bin\work.ps1
+}
+
 makeAnyWindowFullscreen() {
     WinSet, Style, -0xC40000, A
     ; WinMaximize, A
