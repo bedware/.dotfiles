@@ -53,7 +53,7 @@ if ($args[0] -is [string]) {
             exit
         }
     }
-    tmux kill-server
+    # tmux kill-server
 
     $ubuntuHome = "~"
     $ubuntuSettingsPath = "$ubuntuHome/.dotfiles"

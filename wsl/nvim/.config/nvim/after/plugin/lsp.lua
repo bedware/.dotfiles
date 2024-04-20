@@ -14,7 +14,7 @@ local lspconfig = require('lspconfig')
 vim.keymap.set("n", "<leader>ci", ":LspInfo<CR>")
 vim.keymap.set("n", "<leader>cl", ":LspLog<CR>")
 vim.keymap.set("n", "<leader>cc", ":Inspect<CR>")
-vim.keymap.set("n", "<leader>ch", ":hi<CR>")
+
 -- LSP key binding
 lsp_zero.on_attach(function(_, bufnr)
     local opts = { buffer = bufnr, remap = false }

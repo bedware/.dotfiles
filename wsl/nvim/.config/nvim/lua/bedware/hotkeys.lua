@@ -6,6 +6,10 @@ vim.keymap.set("n", "<leader>rr", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left>
 vim.keymap.set("n", "<leader>x", ":!chmod +x %<CR>")
 -- Source curent file
 vim.keymap.set("n", "<leader>s", ":source %<CR>")
+-- Show highliting settings
+vim.keymap.set("n", "<leader>ch", ":hi<CR>")
+-- Copy reference
+vim.keymap.set("n", "<leader>cr", [[:let @+ = expand('%') . ':' . line('.')<CR>:echo "Reference was copied"<CR>]])
 -- Quickfix & Location lists
 vim.keymap.set("n", "<leader>q", ":copen<CR>", { silent = true })
 vim.keymap.set("n", "<leader>l", ":lopen<CR>", { silent = true })

@@ -11,6 +11,7 @@ $env:LESS = "-S +g"
 $env:BUN_INSTALL = "$env:HOME/.bun"
 $env:JAVA_HOME = "$env:HOME/.sdkman/candidates/java/current/"
 $env:OPENAI_API_KEY = Get-Content "$env:HOME/.ssh/openai"
+$env:DC_API_TOKEN = Get-Content "$env:HOME/.ssh/daycaptain"
 $env:SDKMAN_DIR = "$env:HOME/.sdkman"
 
 # Path {{{1
