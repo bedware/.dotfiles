@@ -73,33 +73,34 @@ return
 
 #`:: ; Quake alive
     if (!ProcessExist("WindowsTerminal.exe")) {
-        Run, wt.exe -w _quake new-tab --title ChatGPT -- nvim "C:/Users/dmitr" -c ":ChatGPT"
+        Run, wt.exe -w _quake new-tab --title [G]ChatGPT -- nvim "C:/Users/dmitr" -c ":ChatGPT"
         WinWait, ahk_exe WindowsTerminal.exe,, 5
         WinActivate
         Sleep 300
         Send ^{F12}
-        Run, wt --window _quake new-tab --title Notes -d "G:/My Drive/Notes/" -- nvim .
+        Run, wt --window _quake new-tab --title [T]Thoughts -d "G:/My Drive/Notes/" -- nvim .
         Sleep 20
-        Run, wt --window _quake new-tab --title .dotfiles -d "C:/Users/dmitr/.dotfiles/" -- nvim .
+        Run, wt --window _quake new-tab --title [F].dotfiles -d "C:/Users/dmitr/.dotfiles/" -- nvim .
         Sleep 20
-        Run, wt --window _quake new-tab --title AutoHotkey -d "C:/Users/dmitr/.dotfiles/win/ahk/" -- nvim .
+        Run, wt --window _quake new-tab --title [A]AutoHotkey -d "C:/Users/dmitr/.dotfiles/win/ahk/" -- nvim .
         Sleep 20
-        Run, wt --window _quake new-tab --title Neovim -d "C:/Users/dmitr/.dotfiles/wsl/nvim/.config/nvim/" -- nvim .
+        Run, wt --window _quake new-tab --title [V]Neovim -d "C:/Users/dmitr/.dotfiles/wsl/nvim/.config/nvim/" -- nvim .
         Sleep 20
-        Run, wt --window _quake new-tab --title Terminal -d "C:/Users/dmitr/"
+        Run, wt --window _quake new-tab --title [C]Console -d "C:/Users/dmitr/"
         Run, wt --window _quake focus-tab -t 0
     } else {
         Send #``
     }
 return
 
-; check out Get-WinUserLanguageList to find needed code
-; English
-!^e::PostMessage, 0x0050, 0, 0x0000409,, A
-; Russian
-!^r::PostMessage, 0x0050, 0, 0x0000419,, A
-; Georgian
-!^g::PostMessage, 0x0050, 0, 0x0000437,, A
+\ & g::Run, wt --window _quake focus-tab -t 0
+\ & t::Run, wt --window _quake focus-tab -t 1
+\ & f::Run, wt --window _quake focus-tab -t 2
+\ & a::Run, wt --window _quake focus-tab -t 3
+\ & v::Run, wt --window _quake focus-tab -t 4
+\ & c::Run, wt --window _quake focus-tab -t 5
+*\::\
+
 
 #Enter::
     Run wt
@@ -141,14 +142,14 @@ return
 #if
 
 #if !raceMode
-    ~*RShift::
-        Send {RShift DownR}
-        KeyWait, RShift
-        Send {RShift Up}
-        if (A_PriorKey = "RShift") {
-            Send #{Space}
-        }
-    return 
+    ; ~*RShift::
+    ;     Send {RShift DownR}
+    ;     KeyWait, RShift
+    ;     Send {RShift Up}
+    ;     if (A_PriorKey = "RShift") {
+    ;         Send #{Space}
+    ;     }
+    ; return 
     *CapsLock::
         SendEvent {Ctrl DownR}
         KeyWait, Capslock
@@ -181,6 +182,14 @@ return
 #if 
 
 #if !raceMode && GetKeyState("Space", "P")
+    ; check out Get-WinUserLanguageList to find needed code
+    ; English
+    e Up::PostMessage, 0x0050, 0, 0x0000409,, A
+    ; Russian
+    r Up::PostMessage, 0x0050, 0, 0x0000419,, A
+    ; Georgian
+    g Up::PostMessage, 0x0050, 0, 0x0000437,, A
+
     Tab Up::
         Send {Alt down}{Tab}
         Send {Alt up}

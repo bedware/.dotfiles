@@ -21,11 +21,11 @@
 ::dc::podman container
 ::dcd::podman compose down
 ::dcu::podman compose up -d
-::dpa::podman ps -a
+:*:dpsa::podman ps -a
 ::dps::podman ps
 ::drm::podman container rm -f
-:*:dsta::podman container start
-:*:dsto::podman container stop
+:*:dcstart::podman container start
+:*:dcstop::podman container stop
 ::dv::podman volume
 ::dvl::podman volume list
 
@@ -40,13 +40,17 @@
 ; :*:;ss::sgpt ''{Left}
 
 ; Maven
-::mp::mvn package
+::mpack::mvn package
 ::mcp::mvn clean package
-::mg::mvn archetype:generate
+::mgen::mvn archetype:generate
 
 ; Utils
 :*:;waituntil::wget localhost:7777 --quiet --tries 20 --waitretry 1 --retry-connrefused -O /dev/null
 :*:;compressvideo::ffmpeg -i input.mp4 -vcodec libx265 -crf 28 output.mp4
+
+; SSH
+:*:;sshgen-ed::ssh-keygen -o -a 100 -t ed25519 -f ~/.ssh/id_ed25519 -C "Comment"
+:*:;sshgen-rsa::ssh-keygen -t rsa -b 4096 -C "Comment"
 
 ; Text
 :*:;@::dmitry.surin@gmail.com

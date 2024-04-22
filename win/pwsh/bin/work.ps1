@@ -18,7 +18,7 @@ Invoke-Expression "podman start mysqlpsp"
 
 $scriptBlock = {
     # Your script block code here
-    . "C:\Program Files\Alacritty\alacritty.exe" --config-file "C:\Users\dmitr\.dotfiles\all\alacritty\alacritty-work-profile.yml" --title "ubuntu" --command "wsl" -d "Ubuntu-22.04" --cd "~/.dotfiles" -- "work"
+    . "C:\Program Files\Alacritty\alacritty.exe" --config-file "C:\Users\dmitr\.dotfiles\all\alacritty\alacritty-work-profile.yml" --title "ubuntu" --command "wsl" -d "Ubuntu-22.04" --cd "~/.dotfiles" -- "start-working-session"
     Start-Sleep -Seconds 1
 
     # ahk 'WinWait, ahk_exe alacritty.exe,, 5'
