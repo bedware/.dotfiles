@@ -20,7 +20,6 @@ $env:PATH += [IO.Path]::PathSeparator + "$env:DOTFILES/wsl/pwsh/.local/bin"
 $env:PATH += [IO.Path]::PathSeparator + "$env:BUN_INSTALL/bin"
 $env:PATH += [IO.Path]::PathSeparator + "$env:JAVA_HOME/bin"
 $env:PATH += [IO.Path]::PathSeparator + "$env:HOME/.local/bin"
-$env:PATH += [IO.Path]::PathSeparator + "$env:HOME/.iximiuz/labctl/bin"
 if (Test-Path $env:SDKMAN_DIR) {
     Get-ChildItem "$env:SDKMAN_DIR/candidates" | ForEach-Object { 
         $env:PATH += [IO.Path]::PathSeparator + "$env:SDKMAN_DIR/candidates/$($_.Name)/current/bin"
@@ -35,15 +34,10 @@ $global:GitPromptSettings.DefaultPromptBeforeSuffix.Text = "`n"
 $global:GitPromptSettings.DefaultPromptSuffix.Text = '> $(OnViModeChange([Microsoft.PowerShell.PSConsoleReadLine]::InViCommandMode() ? "Command" : "Insert"))'
 
 . "$env:DOTFILES/wsl/pwsh/.local/config/vimode.ps1"
-. "$env:DOTFILES/wsl/pwsh/.local/config/alias_autocomplete.ps1"
+. "$env:DOTFILES/wsl/pwsh/.local/config/alias-autocomplete.ps1"
 . "$env:DOTFILES/wsl/pwsh/.local/config/hotkeys.ps1"
-. "$env:DOTFILES/wsl/pwsh/.local/config/user_functions.ps1"
+. "$env:DOTFILES/wsl/pwsh/.local/config/user-functions.ps1"
 . "$env:DOTFILES/wsl/pwsh/.local/config/nvim-switcher.ps1"
-
-# iximiuz labs
-if (Test-Path "$env:HOME/.iximiuz/labctl/autocompletion.ps1") {
-    . "$env:HOME/.iximiuz/labctl/autocompletion.ps1"
-}
 
 # Aliases {{{1
 
@@ -71,25 +65,34 @@ $env:PATH = ($env:PATH).Replace([IO.Path]::PathSeparator + [IO.Path]::PathSepara
 
 # Platform-dependent stuff
 if ($IsLinux) {
+    . "$env:DOTFILES/wsl/pwsh/.local/config/borrowed.ps1"
+
     # argc-completions
-    Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
-    $env:ARGC_COMPLETIONS_ROOT = '/home/bedware/argc-completions'    
-    $env:ARGC_COMPLETIONS_PATH = "$env:ARGC_COMPLETIONS_ROOT/completions"    
+    $env:ARGC_COMPLETIONS_ROOT = '/home/bedware/github/argc-completions'    
     $env:PATH += [IO.Path]::PathSeparator + "$env:ARGC_COMPLETIONS_ROOT/bin"
-    # To add completions for only the specified command, modify next line e.g. $argc_scripts = @("cargo", "git")
-    $argc_scripts = ((Get-ChildItem -File ($env:ARGC_COMPLETIONS_ROOT + '/completions')) | ForEach-Object { $_.Name -replace '\.sh$' })
-    argc --argc-completions powershell $argc_scripts | Out-String | Invoke-Expression
+    Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
 
     # Remove windows stuff from linux. Great lookup booster.
-    . "$env:DOTFILES/wsl/pwsh/.local/config/borrowed.ps1"
-    # $env:PATH = ($env:PATH | tr ':' '\n' | grep -v -e /mnt -e "^$" | unique | sort | tr "\n" ":")
     $env:PATH = ($env:PATH -split [IO.Path]::PathSeparator | Where-Object { $_ -notlike "/mnt*" } | Sort-Object | Get-Unique) -join [IO.Path]::PathSeparator
 
     Write-Host "PATH:"
     $env:PATH -replace [IO.Path]::PathSeparator, "`n"
 } elseif ($IsWindows) {
-    . "$env:DOTFILES/win/pwsh/config/user_functions.ps1"
+    . "$env:DOTFILES/win/pwsh/config/user-functions.ps1"
     $env:PATH += [IO.Path]::PathSeparator + "$env:DOTFILES/win/pwsh/bin/"
+}
+
+# iximiuz
+if (Test-Path "$env:HOME/.iximiuz/labctl/autocompletion.ps1") {
+    $env:PATH += [IO.Path]::PathSeparator + "$env:HOME/.config/powershell/autocompletion/labctl/bin"
+    . "$env:HOME/.iximiuz/labctl/autocompletion.ps1"
+}
+
+# My autocompletion override
+# to generate autocomplete file use: argc --argc-completions powershell podman > filename.ps1
+# argc --argc-completions powershell $argc_scripts | Out-String | Invoke-Expression
+if (Test-Path "$env:HOME/.autocompletion/") {
+    Get-Content "$env:HOME/.autocompletion/*" | Out-String | Invoke-Expression
 }
 
 Write-Host "Profile has been read"

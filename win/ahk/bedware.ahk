@@ -94,9 +94,9 @@ apps["0"] := { postFunction: "GoToVD", postFunctionParam: 6 }
 #Include %A_ScriptDir%/utils.ahk
 #Include %A_ScriptDir%/alfred.ahk
 #Include %A_ScriptDir%/chrome.ahk
-#Include %A_ScriptDir%/dependencies/virtual_desktop.ahk
-#Include %A_ScriptDir%/moving_around.ahk
-#Include %A_ScriptDir%/user_functions.ahk
+#Include %A_ScriptDir%/dependencies/virtual-desktop.ahk
+#Include %A_ScriptDir%/moving-around.ahk
+#Include %A_ScriptDir%/user-functions.ahk
 
 Init(desktops) ; Must be run before hotkeys & hotstrings
 

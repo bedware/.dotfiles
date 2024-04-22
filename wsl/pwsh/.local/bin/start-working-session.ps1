@@ -72,7 +72,7 @@ if ($args[0] -is [string]) {
     tmux new-session -s $company -n code -d "pwsh -NoExit -wd $projectPath -Command vi"
     tmux new-window -t $company -n git -d "pwsh -NoExit -wd $projectPath -Command 'git status'"
     tmux new-window -t $company -n db -d "pwsh -NoExit -wd $projectPath -Command 'usql mysql://root:secret@localhost/test1'"
-    tmux new-window -t $company -n live -d "pwsh -NoExit -wd $projectPath -Command 'work live'"
+    tmux new-window -t $company -n live -d "pwsh -NoExit -wd $projectPath -Command 'start-working-session live'"
     tmux new-window -t $company -n other -d "pwsh -NoExit -wd $projectPath -Command htop"
 
     tmux attach

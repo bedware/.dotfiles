@@ -45,6 +45,3 @@ foreach ($link in $links) {
 
 Copy-Item "$env:DOTFILES\win\ahk\runAutoHotkey.ps1" "c:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\"
 
-# CREATE AUTOSTARTUP TASKS
-
-#.\pwsh\autostart_ahk_admin_rights.ps1

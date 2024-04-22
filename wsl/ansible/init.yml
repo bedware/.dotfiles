@@ -17,9 +17,9 @@
         apply:
           tags: "{{ item }}"
       loop:
-        - build_tools
+        - build-tools
         - utils
-        - programming_languages
+        - programming-languages
         - nvim
         - tmux
         - zsh
