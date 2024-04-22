@@ -57,16 +57,9 @@ if ($args[0] -is [string]) {
 
     $ubuntuHome = "~"
     $ubuntuSettingsPath = "$ubuntuHome/.dotfiles"
-    $ubuntuName = "settings_ubuntu"
+    $ubuntuName = "settings"
     tmux new-session -s $ubuntuName -n dotfiles -d "pwsh -NoExit -wd $ubuntuSettingsPath -Command vi"
     tmux new-window -t $ubuntuName -n nvim -d "pwsh -NoExit -wd $ubuntuSettingsPath/wsl/nvim/.config/nvim -Command vi"
-
-    $windowsHome = "C:\Users\dmitr"
-    $windowsSettingsPath = "$windowsHome/.dotfiles"
-    $windowsName = "settings_windows"
-    tmux new-session -s $windowsName -n dotfiles -d "wpwsh -NoExit -wd $windowsSettingsPath -Command vi"
-    tmux new-window -t $windowsName -n nvim -d "wpwsh -NoExit -wd $windowsSettingsPath/wsl/nvim/.config/nvim -Command vi"
-    tmux new-window -t $windowsName -n ahk -d "wpwsh -NoExit -wd $windowsSettingsPath/win/ahk -Command vi"
 
     $projectPath = "~/work/nadex"
     tmux new-session -s $company -n code -d "pwsh -NoExit -wd $projectPath -Command vi"
