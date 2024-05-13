@@ -59,9 +59,10 @@ vim.keymap.set('n', ',fs', function() -- stack
     widgets.centered_float(widgets.frames)
 end)
 
+vim.keymap.set('n', '<leader>d', function() require('dap').repl.toggle() end)
+
 -- vim.keymap.set('n', ',t', function() require'telescope'.extensions.dap.commands{} end, {})
 -- vim.keymap.set('n', ',lf', function() require'telescope'.extensions.dap.frames{} end, {})
--- vim.keymap.set('n', ',r', function() require('dap').repl.toggle() end)
 -- vim.keymap.set('n', ',B',
 --     function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
 

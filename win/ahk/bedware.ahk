@@ -62,7 +62,7 @@ apps["tt"] := { desktop: "Dev", selector: "^(?!Developer Tools|Cypress) ahk_exe 
 apps["web"] := { desktop: "Browsing", selector: "^(?!DevTools) ahk_exe chrome.exe", path: "C:\Users\dmitr\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Chrome Apps\Chrome.lnk" }
 
 ; different
-apps["sw"] := { postFunction: "startWork" }
+apps["work"] := { postFunction: "startWork" }
 
 ; Dependencies
 #Include %A_ScriptDir%/utils.ahk

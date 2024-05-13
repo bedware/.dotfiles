@@ -15,14 +15,21 @@ $env:DC_API_TOKEN = Get-Content "$env:HOME/.ssh/daycaptain"
 $env:SDKMAN_DIR = "$env:HOME/.sdkman"
 
 # Path {{{1
-
-$env:PATH += [IO.Path]::PathSeparator + "$env:DOTFILES/wsl/pwsh/.local/bin"
-$env:PATH += [IO.Path]::PathSeparator + "$env:BUN_INSTALL/bin"
-$env:PATH += [IO.Path]::PathSeparator + "$env:JAVA_HOME/bin"
-$env:PATH += [IO.Path]::PathSeparator + "$env:HOME/.local/bin"
+function safelyAddToPath($path) {
+    if (Test-Path $path) {
+        $env:PATH += [IO.Path]::PathSeparator + $path
+    } else {
+        Write-Out "Warning: path: '$path' doesn't exist. It won't be added to PATH."
+    }
+}
+safelyAddToPath("$env:DOTFILES/wsl/pwsh/.local/bin")
+safelyAddToPath("$env:BUN_INSTALL/bin")
+safelyAddToPath("$env:JAVA_HOME/bin")
+safelyAddToPath("$env:HOME/.local/bin")
+safelyAddToPath("$env:HOME/.cargo/bin")
 if (Test-Path $env:SDKMAN_DIR) {
     Get-ChildItem "$env:SDKMAN_DIR/candidates" | ForEach-Object { 
-        $env:PATH += [IO.Path]::PathSeparator + "$env:SDKMAN_DIR/candidates/$($_.Name)/current/bin"
+        safelyAddToPath("$env:SDKMAN_DIR/candidates/$($_.Name)/current/bin")
     }
 }
 
