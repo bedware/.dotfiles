@@ -22,7 +22,7 @@ apps["adoc"] := { selector: "AutoHotkey Help", path: AHK_FOLDER . "\AutoHotkey.c
 apps["anki"] := { desktop: "Office", selector: "ahk_exe anki.exe", path: "C:\Users\dmitr\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Anki.lnk" }
 apps["aspy"] := { selector: "Window Spy", path: AHK_FOLDER . "\WindowSpy.ahk" }
 apps["book"] := { desktop: "Office", selector: "ahk_exe calibre.exe", path: "C:\Program Files\Calibre2\calibre.exe" }
-apps["cal"] := { desktop: "Office", selector: "DayCaptain ahk_exe msedge.exe", path: "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe --start-maximized --app=https://daycaptain.com" }
+apps["cal"] := { desktop: "Office", selector: "DayCaptain ahk_exe msedge.exe", path: "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe --start-maximized --app=https://daycaptain.com", postFunction: "makeAnyWindowMaximized" }
 apps["cmd"] := { desktop: "Files", selector: "ahk_exe TOTALCMD64.EXE", path: "C:\Program Files\totalcmd\TOTALCMD64.EXE" }
 apps["code"] := { desktop: "Dev", selector: "ubuntu ahk_exe alacritty.exe", path: """C:\Program Files\Alacritty\alacritty.exe"" --config-file " . HOME . "\.dotfiles\all\alacritty\alacritty-work-profile.yml" .  " --title ubuntu --command wsl -d Ubuntu-22.04 --cd ~", postFunction: "makeAnyWindowFullscreen"}
 apps["db"] := { desktop: "Dev", selector: "ahk_exe datagrip64.exe", path: "C:\Program Files\JetBrains\DataGrip 2019.1.4\bin\datagrip64.exe" }
@@ -54,7 +54,7 @@ apps["steam"] := { desktop: "Browsing", selector: "ahk_exe steamwebhelper.exe", 
 apps["task"] := { desktop: "Other", selector: "ahk_class TaskManagerWindow", path: "Taskmgr.exe", postFunction: "makeAnyWindowMaximized" }
 apps["td"] := { desktop: "Dev", selector: "^Developer Tools ahk_exe Cypress.exe" }
 apps["term"] := { desktop: "Dev", selector: "windows ahk_exe alacritty.exe", path: """C:\Program Files\Alacritty\alacritty.exe"" --title windows", postFunction: "makeAnyWindowFullscreen" }
-apps["tg"] := { desktop: "Chats", selector: "ahk_exe Telegram.exe", path: "\Telegram Desktop\Telegram.exe" }
+apps["tg"] := { desktop: "Chats", selector: "ahk_exe Telegram.exe", path: "C:\Users\dmitr\AppData\Roaming\Telegram Desktop\Telegram.exe" }
 apps["tra"] := { desktop: "English", path: "C:\Program Files (x86)\ABBYY Lingvo x6\Lingvo.exe" }
 apps["trd"] := { desktop: "English", selector: "DeepL Translate ahk_exe msedge.exe", path: "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe --start-maximized --app=https://www.deepl.com/translator#ru/en/" }
 apps["try"] := { desktop: "English", selector: "Yandex Translate.* ahk_exe msedge.exe", path: "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe --app=https://translate.yandex.com/en/" }

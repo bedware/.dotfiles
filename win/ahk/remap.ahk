@@ -34,7 +34,8 @@ PgUp::F20
 PgDn::F18
 
 ; Pedal
-F21::Run, "g:\My Drive\Keyboard\Layer 1.png"
++F21::Run, "g:\My Drive\Keyboard\Layer 1.png"
+F21::^+a
 
 ; it is for neovim's harpoon
 ; ^;::^F5

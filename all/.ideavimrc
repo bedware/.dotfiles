@@ -11,13 +11,14 @@ set scrolloff=10
 " IDEA Set Handlers
 sethandler a:vim
 sethandler <S-Enter> v-i:ide
-sethandler <C-C> a:ide
+"sethandler <C-C> a:ide
 sethandler <C-S> n:ide
 sethandler <C-E> a:ide
 sethandler <C-P> a:ide
 sethandler <C-Q> n-v:ide i:vim
 sethandler <C-N> n-v:ide
 sethandler <C-M> a:ide
+sethandler <C-F> a:ide
 sethandler <C-B> a:ide
 sethandler <A-D> a:ide
 
@@ -105,7 +106,7 @@ nnoremap <leader>vu :action Vcs.UpdateProject<CR>
 nnoremap <leader>vs :action Vcs.ShowHistoryForBlock<CR>
 vnoremap <leader>vs :action Vcs.ShowHistoryForBlock<CR>
 nnoremap <leader>vcb :action Git.CompareWithBranch<CR>
-" nnoremap <leader>vcc :action Majera.CodeReview.GitLab.LeaveCommentForLineAction<CR>
+" nnoremap <leader>vcc :action Majera.CodeReviewGitLab.LeaveCommentForLineAction<CR>
 nnoremap <leader>vcs :action Compare.Selected<CR>
 nnoremap <leader>vcr :action Show.Current.Revision<CR>
 nnoremap <leader>vv :action Git.Branches<CR>

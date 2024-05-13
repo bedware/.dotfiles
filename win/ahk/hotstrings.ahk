@@ -40,9 +40,9 @@
 ; :*:;ss::sgpt ''{Left}
 
 ; Maven
-::mpack::mvn package
-::mcp::mvn clean package
-::mgen::mvn archetype:generate
+:*:mpack::mvn package
+:*:mcp::mvn clean package
+:*:mgen::mvn archetype:generate
 
 ; Utils
 :*:;waituntil::wget localhost:7777 --quiet --tries 20 --waitretry 1 --retry-connrefused -O /dev/null

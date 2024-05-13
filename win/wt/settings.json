@@ -4,6 +4,17 @@
     "actions": 
     [
         {
+            "command": "openNewTabDropdown",
+            "keys": "menu"
+        },
+        {
+            "command": 
+            {
+                "action": "commandPalette"
+            },
+            "keys": "ctrl+s"
+        },
+        {
             "command": 
             {
                 "action": "splitPane",
@@ -14,41 +25,22 @@
         {
             "command": 
             {
-                "action": "commandPalette"
-            },
-            "keys": "ctrl+s"
-        },
-        {
-            "command": "openNewTabDropdown",
-            "keys": "menu"
-        },
-        {
-            "command": "toggleFocusMode",
-            "keys": "ctrl+f12"
-        },
-        {
-            "command": 
-            {
                 "action": "sendInput",
                 "input": "\u0017"
             },
             "keys": "ctrl+backspace"
         },
         {
-            "command": "openTabRenamer",
-            "keys": "alt+r"
+            "command": "toggleFocusMode",
+            "keys": "ctrl+f12"
         },
         {
             "command": "find",
             "keys": "ctrl+shift+\\"
         },
         {
-            "command": 
-            {
-                "action": "splitPane",
-                "split": "down"
-            },
-            "keys": "alt+minus"
+            "command": "openTabRenamer",
+            "keys": "alt+r"
         },
         {
             "command": "unbound",
@@ -61,6 +53,14 @@
         {
             "command": "unbound",
             "keys": "ctrl+shift+f"
+        },
+        {
+            "command": 
+            {
+                "action": "splitPane",
+                "split": "down"
+            },
+            "keys": "alt+minus"
         },
         {
             "command": 
@@ -126,7 +126,7 @@
                 "icon": "ms-appx:///ProfileIcons/pwsh.png",
                 "name": "PowerShell",
                 "startingDirectory": "%USERPROFILE%",
-		"suppressApplicationTitle": true
+                "suppressApplicationTitle": true
             },
             {
                 "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
@@ -170,6 +170,18 @@
                 "hidden": false,
                 "name": "Ubuntu 22.04.3 LTS",
                 "source": "CanonicalGroupLimited.Ubuntu22.04LTS_79rhkp1fndgsc"
+            },
+            {
+                "guid": "{87017c85-82a0-5cac-a750-f2a0be8d327c}",
+                "hidden": false,
+                "name": "Developer Command Prompt for VS 2022",
+                "source": "Windows.Terminal.VisualStudio"
+            },
+            {
+                "guid": "{14e889c0-ca86-5bcc-9948-1b0516eae053}",
+                "hidden": false,
+                "name": "Developer PowerShell for VS 2022",
+                "source": "Windows.Terminal.VisualStudio"
             }
         ]
     },

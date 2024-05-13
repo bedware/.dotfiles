@@ -4,7 +4,7 @@ Start-Process -FilePath "C:\Users\dmitr\AppData\Local\Programs\podman-desktop\Po
 Invoke-Expression "podman info"
 
 $counter = 0
-while ($LASTEXITCODE -ne 0 -and $counter -lt 10) {
+while ($LASTEXITCODE -ne 0 -and $counter -lt 30) {
     Invoke-Expression "podman info"
     $counter += 1
     Start-Sleep -Seconds 1
