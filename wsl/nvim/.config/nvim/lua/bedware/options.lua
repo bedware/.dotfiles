@@ -37,7 +37,9 @@ vim.opt.scrolloff = 8
 vim.opt.updatetime = 50
 vim.opt.colorcolumn = "80"
 -- vim.opt.mouse = ''
--- vim.opt.shell = '/bin/bash'
+
+-- Shell dependent things
+vim.opt.shell = '/bin/bash'
 -- vim.opt.shell = '/bin/pwsh'
 -- vim.opt.shellcmdflag = '-NoProfile -c'
 

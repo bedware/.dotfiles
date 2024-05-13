@@ -4,7 +4,7 @@ Start-Process -FilePath "C:\Users\dmitr\AppData\Local\Programs\podman-desktop\Po
 Invoke-Expression "podman info"
 
 $counter = 0
-while ($LASTEXITCODE -ne 0 -and $counter -lt 10) {
+while ($LASTEXITCODE -ne 0 -and $counter -lt 15) {
     Invoke-Expression "podman info"
     $counter += 1
     Start-Sleep -Seconds 1
@@ -18,7 +18,13 @@ Invoke-Expression "podman start mysqlpsp"
 
 $scriptBlock = {
     # Your script block code here
-    . "C:\Program Files\Alacritty\alacritty.exe" --config-file "C:\Users\dmitr\.dotfiles\all\alacritty\alacritty-work-profile.yml" --title "ubuntu" --command "wsl" -d "Ubuntu-22.04" --cd "~/.dotfiles" -- "start-working-session"
+    . "C:\Program Files\Alacritty\alacritty.exe" `
+        --config-file "C:\Users\dmitr\.dotfiles\all\alacritty\alacritty-work-profile.yml" `
+        --title "ubuntu" `
+        --command "wsl" `
+        -d "Ubuntu-22.04" `
+        --cd "~/.dotfiles" `
+        -- "start-working-session"
     Start-Sleep -Seconds 1
 
     # ahk 'WinWait, ahk_exe alacritty.exe,, 5'
