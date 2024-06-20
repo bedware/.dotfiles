@@ -1,25 +1,58 @@
 -- :h dap-configuration
 require("dapui").setup({
-    layouts = { {
-        elements = {},
-        position = "left",
-        size = 40
-      }, {
-        elements = { {
-            id = "console",
-            size = 1.0
-        } },
-        position = "bottom",
-        size = 10
-      } },
-    mappings = {
-      edit = "e",
-      expand = { "<CR>", "<2-LeftMouse>" },
-      open = "o",
-      remove = "d",
-      repl = "r",
-      toggle = "t"
-    }
+  -- layouts = {
+  --   {
+  --     elements = {},
+  --     position = "left",
+  --     size = 40,
+  --   }, {
+  --     elements = {
+  --       {
+  --         id = "scopes",
+  --         size = 0.3,
+  --       },
+  --       {
+  --         id = "console",
+  --         size = 0.7,
+  --       },
+  --     },
+  --     position = "bottom",
+  --     size = 10,
+  --   }
+  -- },
+  layouts = {
+    {
+      -- You can change the order of elements in the sidebar
+      elements = {
+        -- Provide IDs as strings or tables with "id" and "size" keys
+        {
+          id = "scopes",
+          size = 0.25, -- Can be float or integer > 1
+        },
+        { id = "breakpoints", size = 0.25 },
+        { id = "stacks", size = 0.25 },
+        { id = "watches", size = 0.25 },
+      },
+      size = 40,
+      position = "right", -- Can be "left" or "right"
+    },
+    {
+      elements = {
+        -- "repl",
+        "console",
+      },
+      size = 10,
+      position = "bottom", -- Can be "bottom" or "top"
+    },
+  },
+  mappings = {
+    edit = "e",
+    expand = { "<CR>", "<2-LeftMouse>" },
+    open = "o",
+    remove = "d",
+    repl = "r",
+    toggle = "t"
+  }
 })
 
 -- local function open_like_I_said()
@@ -33,15 +66,30 @@ require('dap').listeners.after.event_initialized["dapui_config"] = function() re
 
 -- SHOW {{{1
 vim.keymap.set('n', '<leader>,', function()
-    local windows = require("dapui.windows")
-    for i = 1, #windows.layouts, 1 do
-        if windows.layouts[i]:is_open() then
-            require("dapui").close()
-            return
+    -- local windows = require("dapui.windows")
+    -- for i = 1, #windows.layouts, 1 do
+    --     if windows.layouts[i]:is_open() then
+    --         require("dapui").close()
+    --         return
+    --     end
+    -- end
+    -- require("dapui").open()
+    require("dapui").toggle()
+end, {})
+
+local function goto_win_with_ft(ft)
+    for _, win in pairs(vim.api.nvim_list_wins()) do
+        local filetype = vim.api.nvim_get_option_value('filetype', { buf = vim.api.nvim_win_get_buf(win) })
+        if filetype == ft then
+          vim.fn.win_gotoid(win)
         end
     end
-    require("dapui").open()
-end, {})
+end
+
+vim.keymap.set('n', ',gw', function() goto_win_with_ft('dapui_watches') end, {})
+vim.keymap.set('n', ',gt', function() goto_win_with_ft('dapui_stacks') end, {})
+vim.keymap.set('n', ',gb', function() goto_win_with_ft('dapui_breakpoints') end, {})
+vim.keymap.set('n', ',gs', function() goto_win_with_ft('dapui_scopes') end, {})
 
 vim.keymap.set('n', ',r', function()
     require('telescope').extensions.dap.configurations({})
@@ -84,17 +132,22 @@ vim.keymap.set('v', ',K', function() require('dapui').eval() end, {})
 vim.keymap.set('n', ',K', function() require('dapui').eval() end, {})
 
 -- Group
--- local group = vim.api.nvim_create_augroup('bedware_software_group', { clear = false })
+local group = vim.api.nvim_create_augroup('bedware_software_group', { clear = false })
 
 -- Auto commands {{{1
--- vim.api.nvim_create_autocmd('BufWinEnter', {
---     group = group,
---     pattern = '*',
---     desc = 'Automatically move cursor to the end on focusing console',
---     callback = function(e)
---         local filetype = vim.api.nvim_get_option_value('filetype', { buf = e.buf })
---         if filetype == 'dapui_console' then
---             require('bedware.utils').feedkeys("<S-g>", "n")
---         end
---     end
--- })
+vim.api.nvim_create_autocmd('BufWinEnter', {
+  group = group,
+  pattern = '*',
+  desc = 'TBD',
+  callback = function(e)
+    local filetype = vim.api.nvim_get_option_value('filetype', { buf = e.buf })
+    for _, value in ipairs({ 'dapui_watches', 'dapui_stacks', 'dapui_breakpoints', 'dapui_scopes' }) do
+      if filetype == value then
+        vim.keymap.set('n', '<Esc>', function ()
+          require("dapui").toggle()
+          require("dapui").toggle()
+        end, { buffer = e.buf })
+      end
+    end
+  end
+})

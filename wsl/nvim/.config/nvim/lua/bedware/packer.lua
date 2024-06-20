@@ -59,6 +59,8 @@ return require('packer').startup(function(use)
                 { 'saadparwaiz1/cmp_luasnip' }, -- luasnip source
         }
     })
+    -- SQL
+    use('nanotee/sqls.nvim')
     -- Neovim
     use('folke/neodev.nvim')
     -- Java
