@@ -19,7 +19,7 @@ function safelyAddToPath($path) {
     if (Test-Path $path) {
         $env:PATH += [IO.Path]::PathSeparator + $path
     } else {
-        Write-Out "Warning: path: '$path' doesn't exist. It won't be added to PATH."
+        Write-Warning "Path: '$path' doesn't exist. It won't be added to PATH."
     }
 }
 safelyAddToPath("$env:DOTFILES/wsl/pwsh/.local/bin")
