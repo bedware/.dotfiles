@@ -9,6 +9,17 @@ IndexOf(needle, haystack) {
     return -1
 }
 
+_getIfContains(arr, inp) {
+    result := false
+    for key, value in arr {
+        if (key == inp) {
+            result := value
+            break
+        }
+    }
+    return result
+}
+
 ; Processes
 
 ProcessExist(exeName) {

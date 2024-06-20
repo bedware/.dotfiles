@@ -79,8 +79,6 @@ return
         WinActivate
         Sleep 300
         Send ^{F12}
-        Run, wt --window _quake new-tab --title [T]Thoughts -d "G:/My Drive/Notes/" -- nvim .
-        Sleep 20
         Run, wt --window _quake new-tab --title [F].dotfiles -d "C:/Users/dmitr/.dotfiles/" -- nvim .
         Sleep 20
         Run, wt --window _quake new-tab --title [A]AutoHotkey -d "C:/Users/dmitr/.dotfiles/win/ahk/" -- nvim .
@@ -93,15 +91,6 @@ return
         Send #``
     }
 return
-
-\ & g::Run, wt --window _quake focus-tab -t 0
-\ & t::Run, wt --window _quake focus-tab -t 1
-\ & f::Run, wt --window _quake focus-tab -t 2
-\ & a::Run, wt --window _quake focus-tab -t 3
-\ & v::Run, wt --window _quake focus-tab -t 4
-\ & c::Run, wt --window _quake focus-tab -t 5
-*\::\
-
 
 #Enter::
     Run wt
@@ -123,6 +112,15 @@ raceMode := false
         }
     return 
 #if
+
+; #if !raceMode && GetKeyState("RShift", "P")
+;     RShift up::
+;         global apps
+;         if (A_PriorKey = "RShift") {
+;             GoToAlternateApp(apps)
+;         }
+;     return 
+; #if
 
 *Tab::
     if (A_PriorKey = "LAlt") {
@@ -183,17 +181,13 @@ return
 #if 
 
 #if !raceMode && GetKeyState("Space", "P")
-    ; check out Get-WinUserLanguageList to find needed code
-    ; English
-    e Up::PostMessage, 0x0050, 0, 0x0000409,, A
-    ; Russian
-    r Up::PostMessage, 0x0050, 0, 0x0000419,, A
-    ; Georgian
-    g Up::PostMessage, 0x0050, 0, 0x0000437,, A
-
-    Tab Up::
-        Send {Alt down}{Tab}
-        Send {Alt up}
+    Tab::
+        global apps
+        GoToAlternateApp(apps)
+        ; if (A_PriorKey = "RShift") {
+        ; }
+        ; Send {Alt down}{Tab}
+        ; Send {Alt up}
     return
 
     ; Copy & Paste
@@ -283,18 +277,57 @@ return
         Send {AppsKey}aa{Enter}
     return
 #if
+
+#if WinActive("Excalidraw Plus ahk_exe chrome.exe")
+    *RButton::MButton
+    *MButton::RButton
+    *WheelDown::
+        if (GetKeyState("RButton", "P")) {
+            Send ^{-}
+        } else {
+            Send {WheelDown}
+        }
+    return
+    *WheelUp::
+        if (GetKeyState("RButton", "P")) {
+            Send ^{+}
+        } else {
+            Send {WheelUp}
+        }
+    return
+#if
+
 #if WinActive("ahk_exe TOTALCMD64.EXE")
     !e::Send {Home}{F2} ; Edit path
     !p::Send ^{F12} ; Copy path to selected file
 #if
+
 #if WinActive("ahk_exe Telegram.exe")
-    !j::Send ^+{Down}
-    !k::Send ^+{Up}
+    ^u::Send ^+{Up}
+    ^d::Send ^+{Down}
+    !j::Send !{Down}
+    !k::Send !{Up}
+    ^j::
+        if (GetKeyState("Space", "P")) {
+            Send ^{Down}
+        } else {
+            Send ^+{Down}
+        }
+    return
+    ^k::
+        if (GetKeyState("Space", "P")) {
+            Send ^{Up}
+        } else {
+            Send ^+{Up}
+        }
+    return
 #if
+
 #if WinActive("ahk_exe Notion.exe")
     ^o::^[
     ^i::^]
 #if
+
 #if WinActive("ahk_class TLister ahk_exe TOTALCMD64.EXE")
     j::Down
     k::Up
@@ -305,8 +338,6 @@ return
     g::Send ^{Home}
     +g::Send ^{End}
 #if
-
-#InputLevel 0
 
 ; Win-hotkeys
 
@@ -340,7 +371,9 @@ return
 ; Show active window on all virtual desktops (VD)
 #^t:: 
     WinGet, activeHwnd, ID, A
-    PinWindow(activeHwnd)
+    ; PinWindow(activeHwnd)
+    WS_EX_TOOLWINDOW := 0x00000080
+    WinSet, ExStyle, ^%WS_EX_TOOLWINDOW%, A
     PlayErrorSound()
 return
 ; Quit

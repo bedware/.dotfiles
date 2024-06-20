@@ -1,0 +1,243 @@
+{
+  "desktops": ["Browsing", "Dev", "Chats", "Office", "Creator", "Stream", "English", "Files", "Other"],
+  "apps": {
+    "adbg": {
+        "path": "G:\\My Drive\\Soft\\DebugView\\dbgview64.exe",
+        "selector": "ahk_exe dbgview64.exe",
+        "description": "Open debugger for AHK"
+    },
+    "adoc": {
+        "path": "C:\\Program Files\\AutoHotkey\\AutoHotkey.chm",
+        "selector": "AutoHotkey Help",
+        "description": "Open documentation for AHK"
+    },
+    "anki": {
+        "desktop": "Office",
+        "path": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Anki.lnk",
+        "selector": "ahk_exe anki.exe"
+    },
+    "aspy": {
+        "path": "C:\\Program Files\\AutoHotkey\\WindowSpy.ahk",
+        "selector": "Window Spy"
+    },
+    "book": {
+        "desktop": "Creator",
+        "path": "C:\\Program Files\\Calibre2\\calibre.exe",
+        "selector": "ahk_exe calibre.exe"
+    },
+    "cmd": {
+        "desktop": "Files",
+        "path": "C:\\Program Files\\totalcmd\\TOTALCMD64.EXE",
+        "selector": "ahk_exe TOTALCMD64.EXE"
+    },
+    "db": {
+        "desktop": "Dev",
+        "path": "C:\\Program Files\\JetBrains\\DataGrip 2019.1.4\\bin\\datagrip64.exe",
+        "selector": "ahk_exe datagrip64.exe"
+    },
+    "dev": {
+        "desktop": "Browsing",
+        "selector": "^DevTools ahk_exe chrome.exe"
+    },
+    "disc": {
+        "desktop": "Chats",
+        "path": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Discord Inc\\Discord.lnk",
+        "selector": "ahk_exe Discord.exe"
+    },
+    "draw": {
+        "desktop": "Creator",
+        "path": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Excalidraw.lnk",
+        "selector": "Excalidraw ahk_exe msedge.exe"
+    },
+    "duet": {
+        "path": "C:\\Program Files\\Kairos\\Duet Display\\duet.exe",
+        "selector": "ahk_exe duet.exe"
+    },
+    "figma": {
+        "desktop": "Creator",
+        "path": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Figma.lnk",
+        "selector": "ahk_exe Figma.exe"
+    },
+    "fire": {
+        "desktop": "Browsing",
+        "path": "C:\\Program Files\\Mozilla Firefox\\firefox.exe",
+        "selector": "ahk_exe firefox.exe"
+    },
+    "ge": {
+        "postFunction": "georgian"
+    },
+    "idea": {
+        "desktop": "Dev",
+        "path": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\JetBrains Toolbox\\IntelliJ IDEA Ultimate.lnk",
+        "selector": "ahk_exe idea64.exe"
+    },
+    "jkit": {
+        "desktop": "Dev",
+        "path": "C:\\Program Files\\YourKit Java Profiler 2021.11-b227\\bin\\profiler.exe",
+        "selector": "YourKit"
+    },
+    "jmc": {
+        "desktop": "Dev",
+        "path": "C:\\Users\\dmitr\\.jdks\\jmc-8.3.1_windows-x64\\JDK Mission Control\\jmc.exe",
+        "selector": "ahk_exe jmc.exe"
+    },
+    "jvm": {
+        "desktop": "Dev",
+        "path": "C:\\Users\\dmitr\\.jdks\\visualvm_216\\bin\\visualvm-my-jdk.lnk",
+        "selector": "VisualVM"
+    },
+    "keys": {
+        "path": "C:\\Users\\dmitr\\AppData\\Local\\carnac\\Carnac.exe",
+        "selector": "ahk_exe Carnac.exe"
+    },
+    "lon": {
+        "path": "g:\\My Drive\\Soft\\LonelyScreen.exe",
+        "selector": "ahk_exe LonelyScreen.exe"
+    },
+    "mail": {
+        "desktop": "Office",
+        "path": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Spark Desktop.lnk",
+        "selector": "ahk_exe Spark Desktop.exe"
+    },
+    "music": {
+        "desktop": "Other",
+        "path": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\\u042f\u043d\u0434\u0435\u043a\u0441 \u041c\u0443\u0437\u044b\u043a\u0430.lnk",
+        "postFunction": "makeAnyWindowMaximized",
+        "selector": "ahk_exe \u042f\u043d\u0434\u0435\u043a\u0441 \u041c\u0443\u0437\u044b\u043a\u0430.exe"
+    },
+    "note": {
+        "desktop": "Office",
+        "path": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Notion.lnk",
+        "postFunction": "makeAnyWindowMaximized",
+        "selector": "ahk_exe Notion.exe"
+    },
+    "obs": {
+        "desktop": "Stream",
+        "path": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\OBS Studio\\OBS Studio (64bit).lnk",
+        "selector": "ahk_exe obs64.exe"
+    },
+    "paint": {
+        "path": "mspaint.exe",
+        "selector": "ahk_exe mspaint.exe"
+    },
+    "pdf": {
+        "path": "C:\\Users\\dmitr\\AppData\\Local\\SumatraPDF\\SumatraPDF.exe",
+        "selector": "ahk_exe SumatraPDF.exe"
+    },
+    "pip": {
+        "selector": "Picture in picture ahk_exe chrome.exe"
+    },
+    "pod": {
+        "desktop": "Dev",
+        "path": "C:\\Users\\dmitr\\AppData\\Local\\Programs\\podman-desktop\\Podman Desktop.exe",
+        "selector": "ahk_exe Podman Desktop.exe"
+    },
+    "post": {
+        "desktop": "Dev",
+        "path": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Postman\\Postman.lnk",
+        "selector": "ahk_exe Postman.exe"
+    },
+    "quake": {
+        "path": "wt.exe -w _quake",
+        "selector": "ahk_exe WindowsTerminal.exe"
+    },
+    "ru": {
+        "postFunction": "russian"
+    },
+    "slack": {
+        "desktop": "Chats",
+        "path": "C:\\Users\\dmitr\\AppData\\Local\\slack\\slack.exe",
+        "selector": "ahk_exe slack.exe"
+    },
+    "steam": {
+        "desktop": "Browsing",
+        "path": "C:\\Program Files (x86)\\Steam\\Steam.exe",
+        "selector": "ahk_exe steamwebhelper.exe"
+    },
+    "task": {
+        "desktop": "Other",
+        "path": "Taskmgr.exe",
+        "postFunction": "makeAnyWindowMaximized",
+        "selector": "ahk_class TaskManagerWindow"
+    },
+    "td": {
+        "desktop": "Dev",
+        "selector": "^Developer Tools ahk_exe Cypress.exe"
+    },
+    "term": {
+        "desktop": "Dev",
+        "path": "\"C:\\Program Files\\Alacritty\\alacritty.exe\" --title windows",
+        "postFunction": "makeAnyWindowMaximized",
+        "selector": "windows ahk_exe alacritty.exe"
+    },
+    "tg": {
+        "desktop": "Chats",
+        "path": "C:\\Users\\dmitr\\AppData\\Roaming\\Telegram Desktop\\Telegram.exe",
+        "selector": "ahk_exe Telegram.exe"
+    },
+    "tra": {
+        "desktop": "English",
+        "path": "C:\\Program Files (x86)\\ABBYY Lingvo x6\\Lingvo.exe"
+    },
+    "trd": {
+        "desktop": "English",
+        "path": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe --start-maximized --app=https://www.deepl.com/translator#ru/en/",
+        "selector": "DeepL Translate ahk_exe msedge.exe"
+    },
+    "try": {
+        "desktop": "English",
+        "path": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe --app=https://translate.yandex.com/en/",
+        "selector": "Yandex Translate.* ahk_exe msedge.exe"
+    },
+    "tt": {
+        "desktop": "Dev",
+        "selector": "^(?!Developer Tools|Cypress) ahk_exe Cypress.exe"
+    },
+    "turm": {
+        "desktop": "Dev",
+        "path": "\"C:\\Program Files\\Alacritty\\alacritty.exe\" --config-file C:\\Users\\dmitr\\.dotfiles\\all\\alacritty\\alacritty-work-profile.yml --title ubuntu --command wsl -d Ubuntu-22.04 --cd ~",
+        "postFunction": "makeAnyWindowMaximized",
+        "selector": "ubuntu ahk_exe alacritty.exe"
+    },
+    "vedit": {
+        "desktop": "Creator",
+        "path": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\CapCut\\CapCut.lnk",
+        "selector": "ahk_exe CapCut.exe"
+    },
+    "web": {
+        "desktop": "Browsing",
+        "path": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Chrome Apps\\Chrome.lnk",
+        "selector": "^(?!DevTools) ahk_exe chrome.exe"
+    },
+    "work": {
+        "postFunction": "startWork"
+    },
+    "\u043f\u0443": {
+        "postFunction": "georgian"
+    },
+    "\u0443\u0442": {
+        "postFunction": "english"
+    },
+    "\u10d4\u10dc": {
+        "postFunction": "english"
+    },
+    "\u10e0\u10e3": {
+        "postFunction": "russian"
+    },
+    "gpt": {
+        "postFunction": "open_gpt"
+    },
+    "dot": {
+        "postFunction": "open_dot"
+    },
+    "ahk": {
+        "postFunction": "open_ahk"
+    },
+    "nvim": {
+        "postFunction": "open_nvim"
+    },
+    "pwsh": {
+        "postFunction": "open_pwsh"
+    }
+  }
+}

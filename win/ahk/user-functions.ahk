@@ -1,7 +1,35 @@
 ; OPEN mode
 startWork() {
-    Run C:\Users\dmitr\.dotfiles\win\pwsh\bin\work.ps1
+    Run C:\Users\dmitr\.dotfiles\win\pwsh\bin\spin-up-work-env.ps1
 }
+
+; check out Get-WinUserLanguageList to find needed code
+english() {
+    PostMessage, 0x0050, 0, 0x0000409,, A
+}
+russian() {
+    PostMessage, 0x0050, 0, 0x0000419,, A
+}
+georgian() {
+    PostMessage, 0x0050, 0, 0x0000437,, A
+}
+
+open_gpt() {
+    Run, wt --window _quake focus-tab -t 0
+}
+open_dot() {
+    Run, wt --window _quake focus-tab -t 1
+}
+open_ahk() {
+    Run, wt --window _quake focus-tab -t 2
+}
+open_nvim() {
+    Run, wt --window _quake focus-tab -t 3
+}
+open_pwsh() {
+    Run, wt --window _quake focus-tab -t 4
+}
+
 
 makeAnyWindowFullscreen() {
     WinSet, Style, -0xC40000, A
