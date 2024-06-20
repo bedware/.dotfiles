@@ -65,7 +65,12 @@ return require('packer').startup(function(use)
     use('mfussenegger/nvim-jdtls')
     -------------- Debugging
     use('mfussenegger/nvim-dap')
-    use('rcarriga/nvim-dap-ui')
+    use({
+        'rcarriga/nvim-dap-ui',
+        requires = {
+            'nvim-neotest/nvim-nio'
+        }
+    })
     -------------- Git
     use('tpope/vim-fugitive')
     use('lewis6991/gitsigns.nvim')

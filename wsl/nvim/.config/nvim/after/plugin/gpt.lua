@@ -53,6 +53,7 @@ require("chatgpt").setup({
       max_visible_lines = 20,
     },
     openai_params = {
-      model = "gpt-3.5-turbo",
+      -- model = "gpt-3.5-turbo",
+      model = "gpt-4o",
     }
 })
