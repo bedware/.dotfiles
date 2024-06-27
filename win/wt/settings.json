@@ -4,6 +4,14 @@
     "actions": 
     [
         {
+            "keys": "shift+enter",
+            "command": { "action": "sendInput", "input": "\u001b[13;2u" }
+        },
+        {
+            "keys": "ctrl+enter",
+            "command": { "action": "sendInput", "input": "\u001b[13;5u" }
+        },
+        {
             "command": "openNewTabDropdown",
             "keys": "menu"
         },
@@ -43,12 +51,16 @@
             "keys": "alt+r"
         },
         {
-            "command": "unbound",
+            "command": "toggleFullscreen",
             "keys": "f11"
         },
         {
             "command": "unbound",
             "keys": "ctrl+shift+w"
+        },
+        {
+            "command": "unbound",
+            "keys": "alt+enter"
         },
         {
             "command": "unbound",

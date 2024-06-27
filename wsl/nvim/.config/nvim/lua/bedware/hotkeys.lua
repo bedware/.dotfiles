@@ -23,8 +23,11 @@ vim.keymap.set({ "n", "x" }, "<leader>y", [["+y]])
 vim.keymap.set({ 'n', 'x' }, 'x', '"_x')
 vim.keymap.set("n", [["c]], [[:let @+=@"<CR>:echo "Saved to clipboard now"<CR>]])
 -- Put space not leaving normal mode
-vim.keymap.set("n", "<space>[", "i <Esc>")
-vim.keymap.set("n", "<space>]", "a <Esc>")
+vim.keymap.set("n", "<Space>[", "i <Esc>")
+vim.keymap.set("n", "<Space>]", "a <Esc>")
+-- New line hotkeys
+vim.keymap.set("n", "<Enter>", "o<Esc><Up>")
+vim.keymap.set("n", "<S-Enter>", "O<Esc><Down>")
 -- Command mode by arrows
 vim.keymap.set("c", "<Up>", "<C-p>")
 vim.keymap.set("c", "<Down>", "<C-n>")

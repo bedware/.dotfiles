@@ -13,7 +13,7 @@ font:
     family: "CaskaydiaCove NFM"
   size: 12
 window:
-  startup_mode: Maximized
+  # startup_mode: Maximized
   # decorations: None
   opacity: 0.5
   # dimensions:
@@ -29,8 +29,10 @@ key_bindings:
   - { key: Key6, mods: Control, chars: "\x1e" }
   - { key: Space, mods: Control, chars: "\x00" }
   - { key: Return, mods: Alt, action: ReceiveChar }
+  - { key: Return, mods: Control, chars: "\u001B[13;5u" }
+  - { key: Return, mods: Shift, chars: "\u001B[13;2u" }
+  - { key: F11, action: ToggleFullscreen }
   - { key: H, mods: Control|Alt, chars: "\u001b\u0008" }
   - { key: J, mods: Control|Alt, chars: "\u001b\u000a" }
   - { key: K, mods: Control|Alt, chars: "\u001b\u000b" }
   - { key: L, mods: Control|Alt, chars: "\u001b\u000c" }
-

@@ -30,9 +30,9 @@ Start-Job -ScriptBlock {
 
     Start-Sleep -Seconds 1
     ahk @'
-    WinWait, ahk_exe alacritty.exe,, 5
-    WinSet, Style, -0xC40000, ahk_exe alacritty.exe
-    WinMove, ahk_exe alacritty.exe, , 0, 0, A_ScreenWidth, A_ScreenHeight
+    #Include C:\Users\dmitr\.dotfiles\win\ahk\utils.ahk
+
+    makeAnyWindowCenteredThenMaximized()
 '@
 }
 

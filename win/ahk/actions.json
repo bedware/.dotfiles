@@ -158,8 +158,7 @@
     },
     "task": {
         "desktop": "Other",
-        "path": "Taskmgr.exe",
-        "initFunction": "makeAnyWindowCenteredThenMaximized",
+        "path": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\System Tools\\Task Manager.lnk",
         "selector": "ahk_class TaskManagerWindow"
     },
     "td": {

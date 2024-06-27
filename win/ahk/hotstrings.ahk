@@ -10,7 +10,7 @@
 ::gdif::git diff --color | less -R
 ::gdifs::git diff --staged --color | less -R
 ::glf::git log --follow --patch
-::glo::git log -n10 --oneline
+::glo::git log -n20 --oneline
 :*:gpull::git pull
 :*:gpush::git push
 ::gpsup::git push --set-upstream origin $(git branch --show-current)

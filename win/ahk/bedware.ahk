@@ -38,7 +38,7 @@ InitDesktops(desktops) ; Must be run before hotkeys & hotstrings
 #InputLevel 0
 
 ; Hotstrings
-; #Hotstring ? ; Make it work inside a word
+#Hotstring ? ; Make it work inside a word
 #Hotstring EndChars -()[]{}`n `t
 #Include %A_ScriptDir%/hotstrings.ahk
 
