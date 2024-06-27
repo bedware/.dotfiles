@@ -1,6 +1,10 @@
 {
   "desktops": ["Browsing", "Dev", "Chats", "Office", "Creator", "Stream", "English", "Files", "Other"],
   "apps": {
+    "exp": {
+        "path": "explorer.exe",
+        "selector": "ahk_class CabinetWClass"
+    },
     "adbg": {
         "path": "G:\\My Drive\\Soft\\DebugView\\dbgview64.exe",
         "selector": "ahk_exe dbgview64.exe",
@@ -64,7 +68,7 @@
         "selector": "ahk_exe firefox.exe"
     },
     "ge": {
-        "postFunction": "georgian"
+        "initFunction": "georgian"
     },
     "idea": {
         "desktop": "Dev",
@@ -102,13 +106,11 @@
     "music": {
         "desktop": "Other",
         "path": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\\u042f\u043d\u0434\u0435\u043a\u0441 \u041c\u0443\u0437\u044b\u043a\u0430.lnk",
-        "postFunction": "makeAnyWindowMaximized",
         "selector": "ahk_exe \u042f\u043d\u0434\u0435\u043a\u0441 \u041c\u0443\u0437\u044b\u043a\u0430.exe"
     },
     "note": {
         "desktop": "Office",
         "path": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Notion.lnk",
-        "postFunction": "makeAnyWindowMaximized",
         "selector": "ahk_exe Notion.exe"
     },
     "obs": {
@@ -142,7 +144,7 @@
         "selector": "ahk_exe WindowsTerminal.exe"
     },
     "ru": {
-        "postFunction": "russian"
+        "initFunction": "russian"
     },
     "slack": {
         "desktop": "Chats",
@@ -157,7 +159,7 @@
     "task": {
         "desktop": "Other",
         "path": "Taskmgr.exe",
-        "postFunction": "makeAnyWindowMaximized",
+        "initFunction": "makeAnyWindowCenteredThenMaximized",
         "selector": "ahk_class TaskManagerWindow"
     },
     "td": {
@@ -167,7 +169,7 @@
     "term": {
         "desktop": "Dev",
         "path": "\"C:\\Program Files\\Alacritty\\alacritty.exe\" --title windows",
-        "postFunction": "makeAnyWindowMaximized",
+        "initFunction": "makeAnyWindowMaximized",
         "selector": "windows ahk_exe alacritty.exe"
     },
     "tg": {
@@ -175,19 +177,18 @@
         "path": "C:\\Users\\dmitr\\AppData\\Roaming\\Telegram Desktop\\Telegram.exe",
         "selector": "ahk_exe Telegram.exe"
     },
-    "tra": {
+    "dict": {
         "desktop": "English",
         "path": "C:\\Program Files (x86)\\ABBYY Lingvo x6\\Lingvo.exe"
     },
-    "trd": {
-        "desktop": "English",
-        "path": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe --start-maximized --app=https://www.deepl.com/translator#ru/en/",
-        "selector": "DeepL Translate ahk_exe msedge.exe"
+    "deepl": {
+        "path": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\DeepL.lnk"
     },
-    "try": {
-        "desktop": "English",
-        "path": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe --app=https://translate.yandex.com/en/",
-        "selector": "Yandex Translate.* ahk_exe msedge.exe"
+    "tr": {
+        "initFunction": "deeplTranslateSelected"
+    },
+    "scan": {
+        "initFunction": "deeplTranslateScreen"
     },
     "tt": {
         "desktop": "Dev",
@@ -196,7 +197,7 @@
     "turm": {
         "desktop": "Dev",
         "path": "\"C:\\Program Files\\Alacritty\\alacritty.exe\" --config-file C:\\Users\\dmitr\\.dotfiles\\all\\alacritty\\alacritty-work-profile.yml --title ubuntu --command wsl -d Ubuntu-22.04 --cd ~",
-        "postFunction": "makeAnyWindowMaximized",
+        "initFunction": "makeAnyWindowCenteredThenMaximized",
         "selector": "ubuntu ahk_exe alacritty.exe"
     },
     "vedit": {
@@ -209,35 +210,53 @@
         "path": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Chrome Apps\\Chrome.lnk",
         "selector": "^(?!DevTools) ahk_exe chrome.exe"
     },
+    "gpt": {
+        "path": "C:\\Program Files\\chatgpt-electron\\chatgpt.exe",
+        "selector": "ahk_exe chatgpt.exe",
+        "tray": "C:\\Program Files\\chatgpt-electron\\chatgpt.exe",
+        "initFunction": "open_gpt"
+    },
     "work": {
-        "postFunction": "startWork"
+        "initFunction": "startWork"
+    },
+    "hide": {
+        "initFunction": "HideAppToTray"
+    },
+    "wf": {
+        "initFunction": "makeAnyWindowFullscreenNative"
+    },
+    "full": {
+        "initFunction": "makeAnyWindowFullscreenNative"
+    },
+    "wm": {
+        "initFunction": "makeAnyWindowMaximized"
+    },
+    "max": {
+        "initFunction": "makeAnyWindowMaximized"
     },
     "\u043f\u0443": {
-        "postFunction": "georgian"
+        "initFunction": "georgian"
     },
     "\u0443\u0442": {
-        "postFunction": "english"
+        "initFunction": "english"
     },
     "\u10d4\u10dc": {
-        "postFunction": "english"
+        "initFunction": "english"
     },
     "\u10e0\u10e3": {
-        "postFunction": "russian"
+        "initFunction": "russian"
     },
-    "gpt": {
-        "postFunction": "open_gpt"
+    ".f": {
+        "initFunction": "open_dot"
     },
-    "dot": {
-        "postFunction": "open_dot"
+    ".a": {
+        "initFunction": "open_ahk"
     },
-    "ahk": {
-        "postFunction": "open_ahk"
+    ".n": {
+        "initFunction": "open_nvim"
     },
-    "nvim": {
-        "postFunction": "open_nvim"
-    },
-    "pwsh": {
-        "postFunction": "open_pwsh"
+    ".c": {
+        "initFunction": "open_pwsh"
     }
   }
 }

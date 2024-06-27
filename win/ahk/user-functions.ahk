@@ -14,32 +14,23 @@ georgian() {
     PostMessage, 0x0050, 0, 0x0000437,, A
 }
 
-open_gpt() {
+open_dot() {
     Run, wt --window _quake focus-tab -t 0
 }
-open_dot() {
+open_ahk() {
     Run, wt --window _quake focus-tab -t 1
 }
-open_ahk() {
+open_nvim() {
     Run, wt --window _quake focus-tab -t 2
 }
-open_nvim() {
+open_pwsh() {
     Run, wt --window _quake focus-tab -t 3
 }
-open_pwsh() {
-    Run, wt --window _quake focus-tab -t 4
+deeplTranslateSelected() {
+    Send {F21}
 }
-
-
-makeAnyWindowFullscreen() {
-    WinSet, Style, -0xC40000, A
-    ; WinMaximize, A
-    ; WinMove, A, , 0, 0, 3456, 2166
-    ; WinMove, A, , 0, 0, 2560, 1600
-    WinMove, A, , 0, 0, A_ScreenWidth, A_ScreenHeight
-}
-makeAnyWindowMaximized() {
-    WinMaximize, A
+deeplTranslateScreen() {
+    Send {F22}
 }
 
 doTranslation() {

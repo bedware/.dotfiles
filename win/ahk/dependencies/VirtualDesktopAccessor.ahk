@@ -80,15 +80,6 @@ GoToDesktopNumber(num) {
     DllCall(GoToDesktopNumberProc, "Int", num, "Int")
     return
 }
-; MoveOrGotoDesktopNumber(num) {
-;     ; If user is holding down Mouse left button, move the current window also
-;     if (GetKeyState("LButton")) {
-;         MoveCurrentWindowToDesktopAndGoTo(num)
-;     } else {
-;         GoToDesktopNumber(num)
-;     }
-;     return
-; }
 GetDesktopName(num) {
     global GetDesktopNameProc
     utf8_buffer := ""
@@ -138,20 +129,13 @@ RemoveAllDesktops() {
 ; SetDesktopName(0, "It works! 🐱")
 
 ; How to listen to desktop changes
-DllCall(RegisterPostMessageHookProc, "Ptr", A_ScriptHwnd, "Int", 0x1400 + 30, "Int")
-OnMessage(0x1400 + 30, "OnChangeDesktop")
-OnChangeDesktop(wParam, lParam, msg, hwnd) {
-    Critical, 100
-    OldDesktop := wParam + 1
-    NewDesktop := lParam + 1
-    Name := GetDesktopName(NewDesktop - 1)
-
-    ; proceedAlternateVD(NewDesktop)
-    global altVD
-    altVD := OldDesktop
-    IconByThemeAndDesktopNumber(NewDesktop)
-
-    ; Use Dbgview.exe to checkout the output debug logs
-    OutputDebug % "Desktop changed to " Name " from " OldDesktop " to " NewDesktop
-}
+; DllCall(RegisterPostMessageHookProc, "Ptr", A_ScriptHwnd, "Int", 0x1400 + 30, "Int")
+; OnMessage(0x1400 + 30, "OnChangeDesktop")
+; OnChangeDesktop(wParam, lParam, msg, hwnd) {
+;     Critical, 100
+;     OldDesktop := wParam + 1
+;     NewDesktop := lParam + 1
+;     Name := GetDesktopName(NewDesktop - 1)
+;     OutputDebug % "Desktop changed to " Name " from " OldDesktop " to " NewDesktop
+; }
 
