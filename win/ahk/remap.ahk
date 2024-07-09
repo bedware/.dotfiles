@@ -213,9 +213,7 @@ return
 
     ; Right hand
     Enter::Insert
-    /::
-        Reload
-    return
+    /::Reload
 
     ; Context menu
     m::Send {AppsKey}
@@ -293,6 +291,14 @@ return
         Send {F6}{F6}
         Sleep 250
         Send {AppsKey}aa{Enter}
+    return
+#if
+
+#if WinActive("Workona ahk_exe chrome.exe")
+    *Enter::
+        Send {Enter}
+        Sleep 150
+        WinMaximize, A
     return
 #if
 

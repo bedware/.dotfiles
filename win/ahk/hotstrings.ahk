@@ -3,10 +3,10 @@
 ::gA::git add --all
 ::gb::git branch -vvv
 ::gco::git checkout
-:*:gcob::git checkout -b
-:*:gcom::git checkout master
-:*:gcm::git commit -m ""{Left}
-:*:gca::git commit --amend --no-edit
+::gcob::git checkout -b
+::gcom::git checkout master
+::gcm::git commit -m ""{Left}
+::gca::git commit --amend --no-edit
 ::gdif::git diff --color | less -R
 ::gdifs::git diff --staged --color | less -R
 ::glf::git log --follow --patch
@@ -49,8 +49,8 @@
 :*:;compressvideo::ffmpeg -i input.mp4 -vcodec libx265 -crf 28 output.mp4
 
 ; SSH
-:*:;sshgen-ed::ssh-keygen -o -a 100 -t ed25519 -f ~/.ssh/id_ed25519 -C "Comment"
-:*:;sshgen-rsa::ssh-keygen -t rsa -b 4096 -C "Comment"
+:*:;sshgened::ssh-keygen -o -a 100 -t ed25519 -f ~/.ssh/id_ed25519 -C "Comment"
+:*:;sshgenrsa::ssh-keygen -t rsa -b 4096 -C "Comment"
 
 ; Text
 :*:;@::dmitry.surin@gmail.com
