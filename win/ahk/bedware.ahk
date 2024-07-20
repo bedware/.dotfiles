@@ -20,20 +20,20 @@ desktops := config["desktops"]
 apps := config["apps"]
 
 ; Modules
-#Include %A_ScriptDir%/utils/utils.ahk
-#Include %A_ScriptDir%/tray.ahk
+#Include %A_ScriptDir%/utils/__init__.ahk
 #Include %A_ScriptDir%/alfred.ahk
-#Include %A_ScriptDir%/virtual-desktops.ahk
 #Include %A_ScriptDir%/user-functions.ahk
 
 InitDesktops(desktops) ; Must be run before hotkeys & hotstrings
 
+; Globals for remap
+raceMode := false
+isNeedToCancel := false
+
 ; Use InputLevel so that the script's own hotkeys can be triggered.
 #InputLevel 1
 ; Key remaps
-#Include %A_ScriptDir%/remap.ahk
-#Include %A_ScriptDir%/remap/chrome.ahk
-#Include %A_ScriptDir%/remap/chrome-devtools.ahk
+#Include %A_ScriptDir%/remap/__init__.ahk
 ; Set InputLevel 0 to make hotstrings can be triggered by script events
 #InputLevel 0
 

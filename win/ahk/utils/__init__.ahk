@@ -4,6 +4,8 @@
 #Include %A_ScriptDir%/utils/keys.ahk
 #Include %A_ScriptDir%/utils/sound.ahk
 #Include %A_ScriptDir%/utils/theme.ahk
+#Include %A_ScriptDir%/utils/tray.ahk
+#Include %A_ScriptDir%/utils/virtual-desktops.ahk
 
 ToggleRaceMode() {
     global raceMode

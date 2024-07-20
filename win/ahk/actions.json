@@ -1,4 +1,4 @@
-{
+﻿{
   "desktops": ["Browsing", "Dev", "Chats", "Office", "Creator", "Stream", "English", "Files", "Other"],
   "apps": {
     "exp": {
@@ -67,9 +67,6 @@
         "path": "C:\\Program Files\\Mozilla Firefox\\firefox.exe",
         "selector": "ahk_exe firefox.exe"
     },
-    "ge": {
-        "initFunction": "georgian"
-    },
     "idea": {
         "desktop": "Dev",
         "path": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\JetBrains Toolbox\\IntelliJ IDEA Ultimate.lnk",
@@ -105,8 +102,8 @@
     },
     "music": {
         "desktop": "Other",
-        "path": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\\u042f\u043d\u0434\u0435\u043a\u0441 \u041c\u0443\u0437\u044b\u043a\u0430.lnk",
-        "selector": "ahk_exe \u042f\u043d\u0434\u0435\u043a\u0441 \u041c\u0443\u0437\u044b\u043a\u0430.exe"
+        "path": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Яндекс Музыка.lnk",
+        "selector": "ahk_exe Яндекс Музыка.exe"
     },
     "note": {
         "desktop": "Office",
@@ -142,9 +139,6 @@
     "quake": {
         "path": "wt.exe -w _quake",
         "selector": "ahk_exe WindowsTerminal.exe"
-    },
-    "ru": {
-        "initFunction": "russian"
     },
     "slack": {
         "desktop": "Chats",
@@ -233,16 +227,31 @@
     "max": {
         "initFunction": "makeAnyWindowMaximized"
     },
-    "\u043f\u0443": {
+    "wifi": {
+        "path": "ms-availablenetworks:"
+    },
+    "clock": {
+        "path": "ms-clock:"
+    },
+    "blue": {
+        "path": "ms-settings:bluetooth"
+    },
+    "ge": {
         "initFunction": "georgian"
     },
-    "\u0443\u0442": {
+    "пу": {
+        "initFunction": "georgian"
+    },
+    "ут": {
         "initFunction": "english"
     },
-    "\u10d4\u10dc": {
+    "ენ": {
         "initFunction": "english"
     },
-    "\u10e0\u10e3": {
+    "ru": {
+        "initFunction": "russian"
+    },
+    "რუ": {
         "initFunction": "russian"
     },
     ".f": {

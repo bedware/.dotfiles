@@ -1,6 +1,6 @@
 ; OPEN mode
 startWork() {
-    Run C:\Users\dmitr\.dotfiles\win\pwsh\bin\spin-up-work-env.ps1
+    Run C:\Users\dmitr\.dotfiles\win\pwsh\bin\Start-WorkEnvironment.ps1
 }
 
 ; check out Get-WinUserLanguageList to find needed code

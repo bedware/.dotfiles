@@ -29,15 +29,15 @@ Start-Job -ScriptBlock {
         -- "tmux-work-session.ps1"
 
     Start-Sleep -Seconds 1
-    ahk @'
-    #Include C:\Users\dmitr\.dotfiles\win\ahk\utils.ahk
+    Run-AHK @'
+    #Include C:\Users\dmitr\.dotfiles\win\ahk\utils\windows.ahk
 
     makeAnyWindowCenteredThenMaximized()
 '@
 }
 
 # podman desktop
-ahk 'WinClose, ahk_exe Podman Desktop.exe'
+Run-AHK 'WinClose, ahk_exe Podman Desktop.exe'
 
 Get-Job | Wait-Job
 # $pass = Read-Host -Prompt "Enter to skip" -MaskInput
