@@ -53,6 +53,13 @@ executeInput(apps, userInput) {
                 GoToVD(neededDesktop)
             }
         }
+        
+        if WinActive(app.selector) {
+            if (app.tray != "") {
+                HideAppToTray()
+                return
+            }
+        }
 
         ; Activate window
         if WinExist(app.selector) {

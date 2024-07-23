@@ -13,11 +13,12 @@
 #if
 
 ; ChatGpt
-#g::
+#g::toggle_gpt()
+
+toggle_gpt() {
     global apps
     if (WinActive(apps["gpt"].selector))
         HideAppToTray()
     else
         executeInput(apps, "gpt")
-return
-
+}

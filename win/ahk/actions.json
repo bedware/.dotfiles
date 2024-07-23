@@ -95,6 +95,9 @@
         "path": "g:\\My Drive\\Soft\\LonelyScreen.exe",
         "selector": "ahk_exe LonelyScreen.exe"
     },
+    "keys": {
+        "path": "g:\\My Drive\\Other\\Keyboard\\Layer 1.png"
+    },
     "mail": {
         "desktop": "Office",
         "path": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Spark Desktop.lnk",
@@ -206,8 +209,12 @@
     "gpt": {
         "path": "C:\\Program Files\\chatgpt-electron\\chatgpt.exe",
         "selector": "ahk_exe chatgpt.exe",
-        "tray": "C:\\Program Files\\chatgpt-electron\\chatgpt.exe",
-        "initFunction": "open_gpt"
+        "tray": true
+    },
+    "day": {
+        "path": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+        "selector": "DayCaptain ahk_exe chrome.exe",
+        "tray": true
     },
     "work": {
         "initFunction": "startWork"

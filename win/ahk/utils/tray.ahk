@@ -59,7 +59,9 @@ HideAppToTray(){
 freeHiddenWindows() {
     global appsInTray
     for _, win in appsInTray {
-        RemoveAppFromTray(win.pathToExe)
+        winID := win.winID
+        WinShow, ahk_id %winID%
+        WinActivate, ahk_id %winID%
     }
 }
 OnExit("freeHiddenWindows")

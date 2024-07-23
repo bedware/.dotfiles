@@ -56,8 +56,8 @@ RShift & LShift::ToggleRaceMode()
     RShift up::
         global apps
         if (A_PriorKey = "RShift") {
-            ; GoToAlternateApp(apps)
-            MsgBox, "Context dependent stuff!"
+            GoToAlternateApp(apps)
+            ; MsgBox, "Context dependent stuff!"
         }
     return 
 

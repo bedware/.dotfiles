@@ -45,3 +45,14 @@
     return
 #if
 
+; ChatGpt
+#d::toggle_day()
+
+toggle_day() {
+    global apps
+    if (WinActive(apps["day"].selector))
+        HideAppToTray()
+    else
+        executeInput(apps, "day")
+}
+
