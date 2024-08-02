@@ -18,7 +18,6 @@
 ::gst::git status
 
 ; Docker/Podman
-::dc::podman container
 ::dcd::podman compose down
 ::dcu::podman compose up -d
 :*:dpsa::podman ps -a
@@ -26,7 +25,6 @@
 ::drm::podman container rm -f
 :*:dcstart::podman container start
 :*:dcstop::podman container stop
-::dv::podman volume
 ::dvl::podman volume list
 
 ; Tmux

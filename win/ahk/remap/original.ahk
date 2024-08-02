@@ -1,10 +1,10 @@
+LCtrl::LCtrl ; to enable hook
+
 ; Notebook keys
 Home::F19 ; Start/stop recording
 End::F17 ; Pause/unpause
 PgUp::F20
 PgDn::F18
-
-LCtrl::LCtrl ; to enable hook
 
 
 ; Mouse
@@ -33,15 +33,12 @@ return
         Send {WheelUp}
     }
 return 
-RButton & LButton::GoToAlternateVD()
-LButton & RButton::Func("doTranslation").Call()
 
 
 ; Shifts + RaceMode
 
 
 RShift & Capslock::Send +{Esc}
-
 LShift & RShift::ToggleRaceMode()
 RShift & LShift::ToggleRaceMode()
 
@@ -57,7 +54,6 @@ RShift & LShift::ToggleRaceMode()
         global apps
         if (A_PriorKey = "RShift") {
             GoToAlternateApp(apps)
-            ; MsgBox, "Context dependent stuff!"
         }
     return 
 

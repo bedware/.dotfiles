@@ -26,69 +26,46 @@ open_nvim() {
 open_pwsh() {
     Run, wt --window _quake focus-tab -t 3
 }
+_deeplCheck() {
+    if (!ProcessExist("DeepL.exe")) {
+        Run, "C:\Users\dmitr\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\DeepL.lnk"
+        WinWait, ahk_exe DeepL.exe,, 5
+    }
+}
 deeplTranslateSelected() {
+    _deeplCheck()
     Send {F21}
 }
 deeplTranslateScreen() {
+    _deeplCheck()
     Send {F22}
 }
+deeplTranslateOnTheGo() {
+    _deeplCheck()
+    Send {F23}
+}
 
-doTranslation() {
-    global apps
-    global desktops
-
+inPlaceNeovim() {
+    buffer_before := Trim(Clipboard)
     Send ^{Insert}
-    Sleep, 100
+    Sleep, 50
     buffer := Trim(Clipboard)
-    Clipboard := buffer
-    GoToVDIgnoreAlternate(IndexOf("Translation", desktops))
-
-    if (InStr(buffer, " ")) { ; a sentence
-        selector := apps["trd"].selector
-        if (!WinExist(selector)) {
-            executeInput(apps, "trd")
-            WinWait, %selector%,, 5
-            Sleep, 500
-        }
-        if (WinExist(selector)) {
-            WinActivate
-            Send gi
-            Send ^a
-            Send +{Insert}
-            Sleep, 100
-            WinActivate, %selector%
-        }
-    } else { ; a word
-
-        ; ABBY
-        abby := "ABBYY Lingvo ahk_exe Lingvo.exe"
-        if (!WinExist(abby)) {
-            executeInput(apps, "tra")
-            WinWait, %abby%,, 5
-            Sleep, 500
-            WinActivate, %abby%
-        }
-        if (WinExist(abby)) {
-            WinActivate
-            Send ^a
-            Send +{Insert}
-            Send {Enter}
-        }
-
-        ; Yandex Translate
-        yandex := apps["try"].selector
-        if (!WinExist(yandex)) {
-            executeInput(apps, "try")
-            WinWait, %yandex%,, 5
-            Sleep, 500
-        }
-        if (WinExist(yandex)) {
-            WinActivate
-            Send !d
-            Sleep, 150
-            Send +{Insert}
-        }
+    
+    if (buffer_before == buffer) {
+        Send ^a
+        Send ^{Insert}
+        Sleep, 50
+        buffer := Trim(Clipboard)
     }
+
+    file := "c:\Users\dmitr\AppData\Local\Temp\in_place_editor"
+    FileDelete, %file%
+    FileAppend, %buffer%, %file%, UTF-8
+    RunWait, alacritty --config-file "C:\Users\dmitr\.dotfiles\all\alacritty\alacritty-work-profile.yml" --title "in_place_editor" --command "c:\Program Files\neovim\nvim-win64\bin\nvim.exe" %file%
+
+    FileRead, content, %file%
+    Clipboard := content
+    Send +{Insert}
 }
 
 defaultProfile() {

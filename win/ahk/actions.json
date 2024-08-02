@@ -49,9 +49,8 @@
         "selector": "ahk_exe Discord.exe"
     },
     "draw": {
-        "desktop": "Creator",
-        "path": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Excalidraw.lnk",
-        "selector": "Excalidraw ahk_exe msedge.exe"
+        "path": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Excalidraw+.lnk",
+        "selector": "Excalidraw Plus ahk_exe msedge.exe"
     },
     "duet": {
         "path": "C:\\Program Files\\Kairos\\Duet Display\\duet.exe",
@@ -127,7 +126,7 @@
         "selector": "ahk_exe SumatraPDF.exe"
     },
     "pip": {
-        "selector": "Picture in picture ahk_exe chrome.exe"
+        "selector": "Picture in picture"
     },
     "pod": {
         "desktop": "Dev",
@@ -139,7 +138,7 @@
         "path": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Postman\\Postman.lnk",
         "selector": "ahk_exe Postman.exe"
     },
-    "quake": {
+    "wt": {
         "path": "wt.exe -w _quake",
         "selector": "ahk_exe WindowsTerminal.exe"
     },
@@ -177,14 +176,14 @@
         "desktop": "English",
         "path": "C:\\Program Files (x86)\\ABBYY Lingvo x6\\Lingvo.exe"
     },
-    "deepl": {
-        "path": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\DeepL.lnk"
-    },
     "tr": {
         "initFunction": "deeplTranslateSelected"
     },
     "scan": {
         "initFunction": "deeplTranslateScreen"
+    },
+    "go": {
+        "initFunction": "deeplTranslateOnTheGo"
     },
     "tt": {
         "desktop": "Dev",
@@ -201,10 +200,16 @@
         "path": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\CapCut\\CapCut.lnk",
         "selector": "ahk_exe CapCut.exe"
     },
+    "edit": {
+        "initFunction": "inPlaceNeovim"
+    },
+    "cent": {
+        "initFunction": "makeAnyWindowCenteredThenMaximized"
+    },
     "web": {
         "desktop": "Browsing",
-        "path": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Chrome Apps\\Chrome.lnk",
-        "selector": "^(?!DevTools) ahk_exe chrome.exe"
+        "path": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe --launch-workspace=6faadb32-a5ae-4c25-88bc-360ab6e191e3",
+        "selector": "^(?!DevTools) ahk_class Chrome_WidgetWin_1 ahk_exe msedge.exe"
     },
     "gpt": {
         "path": "C:\\Program Files\\chatgpt-electron\\chatgpt.exe",
@@ -212,8 +217,8 @@
         "tray": true
     },
     "day": {
-        "path": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
-        "selector": "DayCaptain ahk_exe chrome.exe",
+        "path": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe --launch-workspace=114a7d6e-5db3-4df5-af12-0fc62ad94a95",
+        "selector": "Planning ahk_exe msedge.exe",
         "tray": true
     },
     "work": {

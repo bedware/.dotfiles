@@ -1,5 +1,10 @@
+#if WinActive("^DevTools") && GetKeyState("Space", "P")
+    a::Send ^+p
+    f::Send ^p
+#if
+
 on := false
-#if WinActive("^DevTools ahk_exe chrome.exe")
+#if WinActive("^DevTools")
     ; Debug
     `;:: ; Step
         global on
