@@ -5,7 +5,7 @@ appsInTray := []
 AddAppToTray(winTitle, winID, pathToExe) {
     global appsInTray
 
-    unhide := Func("RemoveAppFromTray").Bind(pathToExe)
+    unhide := Func("RemoveAppFromTrayByPath").Bind(pathToExe)
     Menu, Tray, Add, % winTitle, % unhide
     Menu, Tray, Icon, % winTitle, % pathToExe
     appsInTray.Push({winID: winID, pathToExe: pathToExe, winTitle: winTitle, unhide: unhide})
@@ -23,7 +23,7 @@ IsAppInTray(pathToExe) {
 }
 
 ; Function to remove a window from the tray menu
-RemoveAppFromTray(pathToExe) {
+RemoveAppFromTrayByPath(pathToExe) {
     global appsInTray
     for index, win in appsInTray {
         if (win.pathToExe = pathToExe) {
@@ -36,6 +36,23 @@ RemoveAppFromTray(pathToExe) {
             WinActivate, ahk_id %winID%
         }
     }
+}
+
+RemoveAppFromTrayByTitle(title) {
+    global appsInTray
+    for index, win in appsInTray {
+        if (win.winTitle = title) {
+            Menu, Tray, Delete, % win.winTitle
+            appsInTray.RemoveAt(index)
+
+            ; Restore window
+            winID := win.winID
+            WinShow, ahk_id %winID%
+            WinActivate, ahk_id %winID%
+            return true
+        }
+    }
+    return false
 }
 
 HideAppToTray(){

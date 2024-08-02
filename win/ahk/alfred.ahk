@@ -40,7 +40,7 @@ executeInput(apps, userInput) {
     }
 
     if (app.path && IsAppInTray(app.path)) {
-        RemoveAppFromTray(app.path)
+        RemoveAppFromTrayByPath(app.path)
         return
     }
 

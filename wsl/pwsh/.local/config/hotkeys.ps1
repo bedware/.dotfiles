@@ -121,3 +121,11 @@ Set-PSReadLineKeyHandlerBothModes -Chord Alt+g -ScriptBlock {
     }
 }
 
+Set-PSReadLineKeyHandler -ViMode Command -Key Spacebar -ScriptBlock {
+    [Microsoft.PowerShell.PSConsoleReadLine]::Insert("*")
+}
+
+function Set-PSReadLineKeyHandlerBothModes($Chord, $ScriptBlock) {
+    Set-PSReadLineKeyHandler -Chord $PSBoundParameters.Chord `
+        -ScriptBlock $PSBoundParameters.ScriptBlock
+}

@@ -204,7 +204,7 @@
         "initFunction": "inPlaceNeovim"
     },
     "cent": {
-        "initFunction": "makeAnyWindowCenteredThenMaximized"
+        "initFunction": "makeAnyWindowCentered"
     },
     "web": {
         "desktop": "Browsing",

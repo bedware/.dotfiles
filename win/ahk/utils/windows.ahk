@@ -12,21 +12,25 @@ makeAnyWindowMaximized() {
     }
 }
 
+makeAnyWindowCentered() {
+    ; Get the screen dimensions
+    screenWidth := A_ScreenWidth
+    screenHeight := A_ScreenHeight
+    ; Calculate the new window dimensions (60% of screen size)
+    newWidth := screenWidth * 0.6
+    newHeight := screenHeight * 0.6
+    ; Calculate the new window position (centered)
+    newX := (screenWidth - newWidth) / 2
+    newY := (screenHeight - newHeight) / 2
+    ; Move the window to the calculated position and size
+    WinMove, A, , newX, newY, newWidth, newHeight
+}
+
 makeAnyWindowCenteredThenMaximized() {
     WinGet, windowState, MinMax, A
     if (windowState == 1) {  ; 1 means the window is maximized
     } else {
-        ; Get the screen dimensions
-        screenWidth := A_ScreenWidth
-        screenHeight := A_ScreenHeight
-        ; Calculate the new window dimensions (60% of screen size)
-        newWidth := screenWidth * 0.6
-        newHeight := screenHeight * 0.6
-        ; Calculate the new window position (centered)
-        newX := (screenWidth - newWidth) / 2
-        newY := (screenHeight - newHeight) / 2
-        ; Move the window to the calculated position and size
-        WinMove, A, , newX, newY, newWidth, newHeight
+        makeAnyWindowCentered()
         ; Maximize the window
         WinMaximize, A
     }
