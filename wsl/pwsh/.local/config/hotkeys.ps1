@@ -21,7 +21,7 @@ function Invoke-FzfPsReadlineHandlerHistory {
 				$fileHist.Add($_,$true)
 				$_
 			}
-		} | Invoke-Fzf -Query "$line" -NoSort -Bind ctrl-r:toggle-sort | ForEach-Object { $result = $_ }
+		} | Invoke-Fzf -Color 16 -Query "$line" -NoSort -Bind ctrl-r:toggle-sort | ForEach-Object { $result = $_ }
 	}
 	finally
 	{
@@ -98,25 +98,25 @@ Set-PSReadLineKeyHandlerBothModes -Chord Ctrl+r -ScriptBlock {
 }
 # Ctrl+f (Filtered folders)
 Set-PSReadLineKeyHandlerBothModes -Chord Ctrl+f -ScriptBlock {
-    Invoke-Expression "fd --type d --follow $fzfParam" | Invoke-Fzf | ForEach-Object { 
+    Invoke-Expression "fd --type d --follow $fzfParam" | Invoke-Fzf -Color 16 | ForEach-Object { 
         RunExactCommand("Set-Location $_ | Clear-Host && Get-ChildItem -Force | Format-Table -AutoSize")
     }
 }
 # Ctrl+g (Global folders)
 Set-PSReadLineKeyHandlerBothModes -Chord Ctrl+g -ScriptBlock {
-    Invoke-Expression "fd --type d --follow --no-ignore $fzfParam" | Invoke-Fzf | ForEach-Object { 
+    Invoke-Expression "fd --type d --follow --no-ignore $fzfParam" | Invoke-Fzf -Color 16 | ForEach-Object { 
         RunExactCommand("Set-Location $_ | Clear-Host && Get-ChildItem -Force | Format-Table -AutoSize")
     }
 }
 # Alt+f (Filtered files)
 Set-PSReadLineKeyHandlerBothModes -Chord Alt+f -ScriptBlock {
-    Invoke-Expression "fd --type f $fzfParam" | Invoke-Fzf | ForEach-Object {
+    Invoke-Expression "fd --type f $fzfParam" | Invoke-Fzf -Color 16 | ForEach-Object {
         [Microsoft.PowerShell.PSConsoleReadLine]::Insert($_)
     }
 }
 # Alt+g (Global files)
 Set-PSReadLineKeyHandlerBothModes -Chord Alt+g -ScriptBlock {
-    Invoke-Expression "fd --type f --no-ignore $fzfParam" | Invoke-Fzf | ForEach-Object {
+    Invoke-Expression "fd --type f --no-ignore $fzfParam" | Invoke-Fzf -Color 16 | ForEach-Object {
         [Microsoft.PowerShell.PSConsoleReadLine]::Insert($_)
     }
 }

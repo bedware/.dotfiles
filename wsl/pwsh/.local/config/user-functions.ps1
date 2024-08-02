@@ -6,7 +6,11 @@ function Set-LocationToParentAndList {
 }
 
 function Set-LocationAndList([string]$Path = "~") {
-    Set-Location $Path && Get-ChildItem -Force | Format-Table -AutoSize
+    if (Test-Path -Path $path -PathType Container) {
+        Set-Location $Path && Get-ChildItem -Force | Format-Table -AutoSize
+    } else {
+        Write-Output "The path is not a directory."
+    }
 }
 
 function Edit-AndComeBack([string]$TempPath = ".") {
