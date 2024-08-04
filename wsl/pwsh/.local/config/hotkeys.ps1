@@ -2,7 +2,7 @@
 # Imports
 
 Import-Module PSFzf
-Add-Type -Path "$env:DOTFILES/wsl/pwsh/.local/config/PSFzf.dll"
+# Add-Type -Path "$env:DOTFILES/wsl/pwsh/.local/config/PSFzf.dll"
 
 # Functions
 

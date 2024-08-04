@@ -1,6 +1,9 @@
 function wpwsh {
     & "/mnt/c/Program Files/PowerShell/7/pwsh.exe" $args
 }
+function upwsh {
+    & "C:\WINDOWS\system32\wsl.exe" -d "Ubuntu-22.04" $args
+}
 function Set-LocationToParentAndList {
     Set-LocationAndList("..")
 }
