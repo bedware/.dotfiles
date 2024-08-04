@@ -1,10 +1,26 @@
-ToggleRaceMode() {
+toggleRaceMode() {
     global raceMode
     raceMode := !raceMode
     if (raceMode) 
         ChangeTrayIcon("race")
     else
         ChangeTrayIcon("desktop", GetCurrentDesktopNumber())
+}
+
+toggle_gpt() {
+    global apps
+    if (WinActive(apps["gpt"].selector))
+        HideAppToTray()
+    else
+        executeInput(apps, "gpt")
+}
+
+toggle_day() {
+    global apps
+    if (WinActive(apps["day"].selector))
+        HideAppToTray()
+    else
+        executeInput(apps, "day")
 }
 
 ; OPEN mode
@@ -52,6 +68,37 @@ deeplTranslateScreen() {
 deeplTranslateOnTheGo() {
     _deeplCheck()
     Send {F23}
+}
+
+inPlaceNeovim() {
+    buffer_before := Trim(Clipboard)
+    Send ^{Insert}
+    Sleep, 50
+    buffer := Trim(Clipboard)
+    
+    if (buffer_before == buffer) {
+        Send ^a
+        Send ^{Insert}
+        Sleep, 50
+        buffer := Trim(Clipboard)
+    }
+
+    textfield := "c:\Users\dmitr\AppData\Local\Temp\in_place_editor_textfield"
+    FileDelete, %textfield%
+    FileAppend, %buffer%, %textfield%, UTF-8
+
+    hwnd_file := "c:\Users\dmitr\AppData\Local\Temp\in_place_editor_hwnd"
+    FileRead, hwnd, %hwnd_file%
+
+    DetectHiddenWindows, On  ; Enable detection of hidden windows
+    WinShow, ahk_id %hwnd%
+    WinActivate, ahk_id %hwnd%
+    if (!WinActive("ahk_id" hwnd)) {
+        createPopUp("in_place_editor", "C:\Users\dmitr\.dotfiles\win\pwsh\bin\Edit-InPlaceWithNeovim.ps1")
+        WinWait, in_place_editor ahk_class Window Class ahk_exe alacritty.exe,, 5
+        WinActivate ; Use the window found by WinWait.
+    }
+    DetectHiddenWindows, Off
 }
 
 defaultProfile() {

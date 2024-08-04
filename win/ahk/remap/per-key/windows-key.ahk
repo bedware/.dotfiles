@@ -19,6 +19,9 @@
     }
 return
 
+; In-place Neovim editor
+#e::inPlaceNeovim()
+
 #Enter::
     Run wt
     WinWait, "Administrator: PowerShell ahk_exe WindowsTerminal.exe",, 3

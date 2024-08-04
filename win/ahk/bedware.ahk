@@ -30,15 +30,15 @@ InitDesktops(desktops) ; Must be run before hotkeys & hotstrings
 raceMode := false
 isNeedToCancel := false
 
+; Popups windows settings
+#Include %A_ScriptDir%/utils/popup.ahk
+
 ; Use InputLevel so that the script's own hotkeys can be triggered.
 #InputLevel 1
 ; Key remaps
 #Include %A_ScriptDir%/remap/__init__.ahk
 ; Set InputLevel 0 to make hotstrings can be triggered by script events
 #InputLevel 0
-
-; Popups windows settings
-#Include %A_ScriptDir%/utils/popup.ahk
 
 ; Hotstrings
 #Hotstring ? ; Make it work inside a word

@@ -1,8 +1,8 @@
 ; Shifts + RaceMode
 
 RShift & Capslock::Send +{Esc}
-LShift & RShift::ToggleRaceMode()
-RShift & LShift::ToggleRaceMode()
+LShift & RShift::toggleRaceMode()
+RShift & LShift::toggleRaceMode()
 
 #if !raceMode
     LShift up::
