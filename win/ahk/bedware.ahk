@@ -37,6 +37,9 @@ isNeedToCancel := false
 ; Set InputLevel 0 to make hotstrings can be triggered by script events
 #InputLevel 0
 
+; Popups windows settings
+#Include %A_ScriptDir%/utils/popup.ahk
+
 ; Hotstrings
 #Hotstring ? ; Make it work inside a word
 #Hotstring EndChars -()[]{}`n `t

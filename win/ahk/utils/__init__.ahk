@@ -7,11 +7,3 @@
 #Include %A_ScriptDir%/utils/tray.ahk
 #Include %A_ScriptDir%/utils/virtual-desktops.ahk
 
-ToggleRaceMode() {
-    global raceMode
-    raceMode := !raceMode
-    if (raceMode) 
-        ChangeTrayIcon("race")
-    else
-        ChangeTrayIcon("desktop", GetCurrentDesktopNumber())
-}

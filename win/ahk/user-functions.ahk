@@ -1,3 +1,12 @@
+ToggleRaceMode() {
+    global raceMode
+    raceMode := !raceMode
+    if (raceMode) 
+        ChangeTrayIcon("race")
+    else
+        ChangeTrayIcon("desktop", GetCurrentDesktopNumber())
+}
+
 ; OPEN mode
 startWork() {
     Run C:\Users\dmitr\.dotfiles\win\pwsh\bin\Start-WorkEnvironment.ps1
@@ -43,29 +52,6 @@ deeplTranslateScreen() {
 deeplTranslateOnTheGo() {
     _deeplCheck()
     Send {F23}
-}
-
-inPlaceNeovim() {
-    buffer_before := Trim(Clipboard)
-    Send ^{Insert}
-    Sleep, 50
-    buffer := Trim(Clipboard)
-    
-    if (buffer_before == buffer) {
-        Send ^a
-        Send ^{Insert}
-        Sleep, 50
-        buffer := Trim(Clipboard)
-    }
-
-    file := "c:\Users\dmitr\AppData\Local\Temp\in_place_editor"
-    FileDelete, %file%
-    FileAppend, %buffer%, %file%, UTF-8
-    RunWait, alacritty --config-file "C:\Users\dmitr\.dotfiles\all\alacritty\alacritty-work-profile.yml" --title "in_place_editor" --command "c:\Program Files\neovim\nvim-win64\bin\nvim.exe" %file%
-
-    FileRead, content, %file%
-    Clipboard := content
-    Send +{Insert}
 }
 
 defaultProfile() {

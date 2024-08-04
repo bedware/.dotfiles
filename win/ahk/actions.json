@@ -195,12 +195,12 @@
         "initFunction": "makeAnyWindowCenteredThenMaximized",
         "selector": "ubuntu ahk_exe alacritty.exe"
     },
-    "vedit": {
+    "video": {
         "desktop": "Creator",
         "path": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\CapCut\\CapCut.lnk",
         "selector": "ahk_exe CapCut.exe"
     },
-    "edit": {
+    "ed": {
         "initFunction": "inPlaceNeovim"
     },
     "cent": {

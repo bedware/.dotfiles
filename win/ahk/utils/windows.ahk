@@ -57,7 +57,6 @@ ForceForegroundWinActivate() {
         if (!FilterApps(obj)) {
             WinActivate, ahk_id %hwnd%
             break
-
         }
     }
 }
