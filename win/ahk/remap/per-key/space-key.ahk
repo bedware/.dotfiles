@@ -1,8 +1,8 @@
 #if !raceMode
     *Space::
         KeyWait, Space
-        if (A_ThisHotkey = "*Space" and A_PriorKey = "Space") {
-            SendEvent {Blind}{Space}
+        if (A_ThisHotkey == "*Space" && A_PriorKey == "Space") {
+            Send {Space}
         }
     return
 #if 
@@ -19,12 +19,18 @@
 
     ; Other Win keys
     r::#r
+    i::#i
+    a::#a
+    p::#p
+    v::#v
+    t::#t
+    `;::#`;
 
     ; Copy & Paste
     y::Send ^{Insert}
     p::Send +{Insert}
 
-    v::^+m ; Select mode (vi-mode) in wt
+    +v::^+m ; Select mode (vi-mode) in wt
     /::Reload
 
     ; Context menu
@@ -32,25 +38,33 @@
     Backspace::Send {Enter}
 
     ; Other
-    `;::NumpadMult
+    +`;::NumpadMult
 
     ; To work as modifiers when Space pressed
     *LShift::LShift
     *LAlt::LAlt
 
-    ; F-keys
-    *1::F1
-    *2::F2
-    *3::F3
-    *4::F4
-    *5::F5
-    *6::F6
-    *7::F7
-    *8::F8
-    *9::F9
-    *0::F10
-    *-::F11
-    *=::F12
+    ; Virtual desktops
+    1::GoToVD(1)
+    2::GoToVD(2)
+    3::GoToVD(3)
+    4::GoToVD(4)
+    5::GoToVD(5)
+    6::GoToAlternateVD()
+    7::GoToVD(7)
+    8::GoToVD(8)
+    9::GoToVD(9)
+    0::GoToVD(6)
+    ; Move
+    +1::MoveActiveWinAndGoToVD(1)
+    +2::MoveActiveWinAndGoToVD(2)
+    +3::MoveActiveWinAndGoToVD(3)
+    +4::MoveActiveWinAndGoToVD(4)
+    +5::MoveActiveWinAndGoToVD(5)
+    +7::MoveActiveWinAndGoToVD(7)
+    +8::MoveActiveWinAndGoToVD(8)
+    +9::MoveActiveWinAndGoToVD(9)
+    +0::MoveActiveWinAndGoToVD(6)
 
     ; Navigation
     *h::Left
@@ -62,3 +76,4 @@
     *,::Home
     *.::End
 #if
+
