@@ -2,41 +2,41 @@
   "desktops": ["Browsing", "Dev", "Chats", "Office", "Creator", "Stream", "English", "Files", "Other"],
   "apps": {
     "exp": {
-        "path": "explorer.exe",
+        "run": "explorer.exe",
         "selector": "ahk_class CabinetWClass"
     },
     "adbg": {
-        "path": "G:\\My Drive\\Soft\\DebugView\\dbgview64.exe",
+        "run": "G:\\My Drive\\Soft\\DebugView\\dbgview64.exe",
         "selector": "ahk_exe dbgview64.exe",
         "description": "Open debugger for AHK"
     },
     "adoc": {
-        "path": "C:\\Program Files\\AutoHotkey\\AutoHotkey.chm",
+        "run": "C:\\Program Files\\AutoHotkey\\AutoHotkey.chm",
         "selector": "AutoHotkey Help",
         "description": "Open documentation for AHK"
     },
     "anki": {
         "desktop": "Office",
-        "path": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Anki.lnk",
+        "run": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Anki.lnk",
         "selector": "ahk_exe anki.exe"
     },
     "aspy": {
-        "path": "C:\\Program Files\\AutoHotkey\\WindowSpy.ahk",
+        "run": "C:\\Program Files\\AutoHotkey\\WindowSpy.ahk",
         "selector": "Window Spy"
     },
     "book": {
         "desktop": "Creator",
-        "path": "C:\\Program Files\\Calibre2\\calibre.exe",
+        "run": "C:\\Program Files\\Calibre2\\calibre.exe",
         "selector": "ahk_exe calibre.exe"
     },
     "cmd": {
         "desktop": "Files",
-        "path": "C:\\Program Files\\totalcmd\\TOTALCMD64.EXE",
+        "run": "C:\\Program Files\\totalcmd\\TOTALCMD64.EXE",
         "selector": "ahk_exe TOTALCMD64.EXE"
     },
     "db": {
         "desktop": "Dev",
-        "path": "C:\\Program Files\\JetBrains\\DataGrip 2019.1.4\\bin\\datagrip64.exe",
+        "run": "C:\\Program Files\\JetBrains\\DataGrip 2019.1.4\\bin\\datagrip64.exe",
         "selector": "ahk_exe datagrip64.exe"
     },
     "dev": {
@@ -45,84 +45,84 @@
     },
     "disc": {
         "desktop": "Chats",
-        "path": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Discord Inc\\Discord.lnk",
+        "run": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Discord Inc\\Discord.lnk",
         "selector": "ahk_exe Discord.exe"
     },
     "draw": {
-        "path": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Excalidraw+.lnk",
+        "run": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Excalidraw+.lnk",
         "selector": "Excalidraw Plus ahk_exe msedge.exe"
     },
     "duet": {
-        "path": "C:\\Program Files\\Kairos\\Duet Display\\duet.exe",
+        "run": "C:\\Program Files\\Kairos\\Duet Display\\duet.exe",
         "selector": "ahk_exe duet.exe"
     },
     "figma": {
         "desktop": "Creator",
-        "path": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Figma.lnk",
+        "run": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Figma.lnk",
         "selector": "ahk_exe Figma.exe"
     },
     "fire": {
         "desktop": "Browsing",
-        "path": "C:\\Program Files\\Mozilla Firefox\\firefox.exe",
+        "run": "C:\\Program Files\\Mozilla Firefox\\firefox.exe",
         "selector": "ahk_exe firefox.exe"
     },
     "idea": {
         "desktop": "Dev",
-        "path": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\JetBrains Toolbox\\IntelliJ IDEA Ultimate.lnk",
+        "run": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\JetBrains Toolbox\\IntelliJ IDEA Ultimate.lnk",
         "selector": "ahk_exe idea64.exe"
     },
     "jkit": {
         "desktop": "Dev",
-        "path": "C:\\Program Files\\YourKit Java Profiler 2021.11-b227\\bin\\profiler.exe",
+        "run": "C:\\Program Files\\YourKit Java Profiler 2021.11-b227\\bin\\profiler.exe",
         "selector": "YourKit"
     },
     "jmc": {
         "desktop": "Dev",
-        "path": "C:\\Users\\dmitr\\.jdks\\jmc-8.3.1_windows-x64\\JDK Mission Control\\jmc.exe",
+        "run": "C:\\Users\\dmitr\\.jdks\\jmc-8.3.1_windows-x64\\JDK Mission Control\\jmc.exe",
         "selector": "ahk_exe jmc.exe"
     },
     "jvm": {
         "desktop": "Dev",
-        "path": "C:\\Users\\dmitr\\.jdks\\visualvm_216\\bin\\visualvm-my-jdk.lnk",
+        "run": "C:\\Users\\dmitr\\.jdks\\visualvm_216\\bin\\visualvm-my-jdk.lnk",
         "selector": "VisualVM"
     },
     "keys": {
-        "path": "C:\\Users\\dmitr\\AppData\\Local\\carnac\\Carnac.exe",
+        "run": "C:\\Users\\dmitr\\AppData\\Local\\carnac\\Carnac.exe",
         "selector": "ahk_exe Carnac.exe"
     },
     "lon": {
-        "path": "g:\\My Drive\\Soft\\LonelyScreen.exe",
+        "run": "g:\\My Drive\\Soft\\LonelyScreen.exe",
         "selector": "ahk_exe LonelyScreen.exe"
     },
     "keys": {
-        "path": "g:\\My Drive\\Other\\Keyboard\\Layer 1.png"
+        "run": "g:\\My Drive\\Other\\Keyboard\\Layer 1.png"
     },
     "mail": {
         "desktop": "Office",
-        "path": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Spark Desktop.lnk",
+        "run": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Spark Desktop.lnk",
         "selector": "ahk_exe Spark Desktop.exe"
     },
     "music": {
         "desktop": "Other",
-        "path": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Яндекс Музыка.lnk",
+        "run": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Яндекс Музыка.lnk",
         "selector": "ahk_exe Яндекс Музыка.exe"
     },
     "note": {
         "desktop": "Office",
-        "path": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Notion.lnk",
+        "run": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Notion.lnk",
         "selector": "ahk_exe Notion.exe"
     },
     "obs": {
         "desktop": "Stream",
-        "path": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\OBS Studio\\OBS Studio (64bit).lnk",
+        "run": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\OBS Studio\\OBS Studio (64bit).lnk",
         "selector": "ahk_exe obs64.exe"
     },
     "paint": {
-        "path": "mspaint.exe",
+        "run": "mspaint.exe",
         "selector": "ahk_exe mspaint.exe"
     },
     "pdf": {
-        "path": "C:\\Users\\dmitr\\AppData\\Local\\SumatraPDF\\SumatraPDF.exe",
+        "run": "C:\\Users\\dmitr\\AppData\\Local\\SumatraPDF\\SumatraPDF.exe",
         "selector": "ahk_exe SumatraPDF.exe"
     },
     "pip": {
@@ -130,31 +130,31 @@
     },
     "pod": {
         "desktop": "Dev",
-        "path": "C:\\Users\\dmitr\\AppData\\Local\\Programs\\podman-desktop\\Podman Desktop.exe",
+        "run": "C:\\Users\\dmitr\\AppData\\Local\\Programs\\podman-desktop\\Podman Desktop.exe",
         "selector": "ahk_exe Podman Desktop.exe"
     },
     "post": {
         "desktop": "Dev",
-        "path": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Postman\\Postman.lnk",
+        "run": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Postman\\Postman.lnk",
         "selector": "ahk_exe Postman.exe"
     },
     "wt": {
-        "path": "wt.exe -w _quake",
+        "run": "wt.exe -w _quake",
         "selector": "ahk_exe WindowsTerminal.exe"
     },
     "slack": {
         "desktop": "Chats",
-        "path": "C:\\Users\\dmitr\\AppData\\Local\\slack\\slack.exe",
+        "run": "C:\\Users\\dmitr\\AppData\\Local\\slack\\slack.exe",
         "selector": "ahk_exe slack.exe"
     },
     "steam": {
         "desktop": "Browsing",
-        "path": "C:\\Program Files (x86)\\Steam\\Steam.exe",
+        "run": "C:\\Program Files (x86)\\Steam\\Steam.exe",
         "selector": "ahk_exe steamwebhelper.exe"
     },
     "task": {
         "desktop": "Other",
-        "path": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\System Tools\\Task Manager.lnk",
+        "run": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\System Tools\\Task Manager.lnk",
         "selector": "ahk_class TaskManagerWindow"
     },
     "td": {
@@ -163,18 +163,19 @@
     },
     "term": {
         "desktop": "Dev",
-        "path": "\"C:\\Program Files\\Alacritty\\alacritty.exe\" --title windows",
+        "run": "C:\\Program Files\\Alacritty\\alacritty.exe",
+        "runArgs": "--title windows",
         "initFunction": "makeAnyWindowMaximized",
         "selector": "windows ahk_exe alacritty.exe"
     },
     "tg": {
         "desktop": "Chats",
-        "path": "C:\\Users\\dmitr\\AppData\\Roaming\\Telegram Desktop\\Telegram.exe",
+        "run": "C:\\Users\\dmitr\\AppData\\Roaming\\Telegram Desktop\\Telegram.exe",
         "selector": "ahk_exe Telegram.exe"
     },
     "dict": {
         "desktop": "English",
-        "path": "C:\\Program Files (x86)\\ABBYY Lingvo x6\\Lingvo.exe"
+        "run": "C:\\Program Files (x86)\\ABBYY Lingvo x6\\Lingvo.exe"
     },
     "tr": {
         "initFunction": "deeplTranslateSelected"
@@ -191,13 +192,14 @@
     },
     "turm": {
         "desktop": "Dev",
-        "path": "\"C:\\Program Files\\Alacritty\\alacritty.exe\" --config-file C:\\Users\\dmitr\\.dotfiles\\all\\alacritty\\alacritty-work-profile.yml --title ubuntu --command wsl -d Ubuntu-22.04 --cd ~",
+        "run": "C:\\Program Files\\Alacritty\\alacritty.exe",
+        "runArgs": "--config-file C:\\Users\\dmitr\\.dotfiles\\all\\alacritty\\alacritty-work-profile.yml --title ubuntu --command wsl -d Ubuntu-22.04 --cd ~",
         "initFunction": "makeAnyWindowCenteredThenMaximized",
         "selector": "ubuntu ahk_exe alacritty.exe"
     },
     "video": {
         "desktop": "Creator",
-        "path": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\CapCut\\CapCut.lnk",
+        "run": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\CapCut\\CapCut.lnk",
         "selector": "ahk_exe CapCut.exe"
     },
     "ed": {
@@ -208,16 +210,18 @@
     },
     "web": {
         "desktop": "Browsing",
-        "path": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe --launch-workspace=6faadb32-a5ae-4c25-88bc-360ab6e191e3",
+        "run": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+        "runArgs": "--launch-workspace=6faadb32-a5ae-4c25-88bc-360ab6e191e3",
         "selector": "^(?!DevTools) ahk_class Chrome_WidgetWin_1 ahk_exe msedge.exe"
     },
     "gpt": {
-        "path": "C:\\Program Files\\chatgpt-electron\\chatgpt.exe",
+        "run": "C:\\Program Files\\chatgpt-electron\\chatgpt.exe",
         "selector": "ahk_exe chatgpt.exe",
         "tray": true
     },
     "day": {
-        "path": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe --launch-workspace=114a7d6e-5db3-4df5-af12-0fc62ad94a95",
+        "run": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+        "runArgs": "--launch-workspace=114a7d6e-5db3-4df5-af12-0fc62ad94a95",
         "selector": "Planning ahk_exe msedge.exe",
         "tray": true
     },
@@ -240,13 +244,13 @@
         "initFunction": "makeAnyWindowMaximized"
     },
     "wifi": {
-        "path": "ms-availablenetworks:"
+        "run": "ms-availablenetworks:"
     },
     "clock": {
-        "path": "ms-clock:"
+        "run": "ms-clock:"
     },
     "blue": {
-        "path": "ms-settings:bluetooth"
+        "run": "ms-settings:bluetooth"
     },
     "ge": {
         "initFunction": "georgian"

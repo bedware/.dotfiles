@@ -39,8 +39,8 @@ executeInput(apps, userInput) {
         return
     }
 
-    if (app.path && IsAppInTray(app.path)) {
-        RemoveAppFromTrayByPath(app.path)
+    if (app.run && IsAppInTray(app.run)) {
+        RemoveAppFromTrayByPath(app.run)
         return
     }
 
@@ -68,8 +68,13 @@ executeInput(apps, userInput) {
         ; If nothing to activate
         else {
 
+            runCmd := app.run
+            if (app.runArgs != "") {
+                runCmd := runCmd . " " . app.runArgs
+            }
+
             ; Try to run
-            Run % app.path
+            Run % runCmd
             WinWait % app.selector,, 10
             if ErrorLevel {
                 PlayErrorSound()
@@ -91,7 +96,7 @@ executeInput(apps, userInput) {
     else {
 
         ; Run
-        path := app.path
+        path := app.run
         Run %path%
 
         ; Call init function
