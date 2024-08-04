@@ -1,7 +1,5 @@
 ; ChatGpt popup
 
-#g::toggle_gpt()
-
 #if WinActive("ahk_exe chatgpt.exe")
     ^s::Send ^+s
     ^n::Send ^+o

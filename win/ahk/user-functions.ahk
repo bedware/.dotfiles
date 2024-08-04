@@ -7,7 +7,7 @@ toggleRaceMode() {
         ChangeTrayIcon("desktop", GetCurrentDesktopNumber())
 }
 
-toggle_gpt() {
+toggleGpt() {
     global apps
     if (WinActive(apps["gpt"].selector))
         HideAppToTray()
@@ -15,12 +15,46 @@ toggle_gpt() {
         executeInput(apps, "gpt")
 }
 
-toggle_day() {
+toggleDay() {
     global apps
     if (WinActive(apps["day"].selector))
         HideAppToTray()
     else
         executeInput(apps, "day")
+}
+
+quakeAlive() {
+    if (!ProcessExist("WindowsTerminal.exe")) {
+        Run, wt.exe -w _quake new-tab --title .dotfiles -d "C:/Users/dmitr/.dotfiles/" -- nvim .
+        WinWait, ahk_exe WindowsTerminal.exe,, 5
+        WinActivate
+        Sleep 300
+        Send ^{F12}
+        Sleep 20
+        Run, wt --window _quake new-tab --title AutoHotkey -d "C:/Users/dmitr/.dotfiles/win/ahk/" -- nvim .
+        Sleep 20
+        Run, wt --window _quake new-tab --title Neovim -d "C:/Users/dmitr/.dotfiles/wsl/nvim/.config/nvim/" -- nvim .
+        Sleep 20
+        Run, wt --window _quake new-tab --title Console -d "C:/Users/dmitr/"
+        Run, wt --window _quake focus-tab -t 3
+    } else {
+        Send #``
+    }
+}
+
+runNewWindowsTerminal() {
+    Run wt
+    WinWait, "Administrator: PowerShell ahk_exe WindowsTerminal.exe",, 3
+}
+
+toggleShowOnAllDesktops() {
+    WS_EX_TOOLWINDOW := 0x00000080
+    WinSet, ExStyle, ^%WS_EX_TOOLWINDOW%, A
+    PlayErrorSound()
+}
+
+closeWindow() {
+    Send !{F4}
 }
 
 ; OPEN mode

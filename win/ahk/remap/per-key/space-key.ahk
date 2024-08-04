@@ -1,5 +1,3 @@
-; Space + RaceMode
-
 #if !raceMode
     *Space::
         KeyWait, Space
@@ -10,17 +8,28 @@
 #if 
 
 #if !raceMode && GetKeyState("Space", "P")
+    ; From Win
+    `::quakeAlive()
+    d::toggleDay()
+    e::inPlaceNeovim()
+    g::toggleGpt()
+    Enter::runNewWindowsTerminal()
+    ^t::toggleShowOnAllDesktops()
+    q::closeWindow()
+
+    ; Other Win keys
+    r::#r
+
     ; Copy & Paste
     y::Send ^{Insert}
     p::Send +{Insert}
-    d::Send +{Del}
 
     v::^+m ; Select mode (vi-mode) in wt
     /::Reload
 
     ; Context menu
     m::Send {AppsKey}
-    '::Send {Enter}
+    Backspace::Send {Enter}
 
     ; Other
     `;::NumpadMult
