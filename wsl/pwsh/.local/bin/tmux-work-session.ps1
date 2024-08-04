@@ -53,21 +53,37 @@ if ($args[0] -is [string]) {
             exit
         }
     }
-    # tmux kill-server
 
-    $ubuntuHome = "~"
-    $ubuntuSettingsPath = "$ubuntuHome/.dotfiles"
+    # running windows
+
+    # session - settings
+    $ubuntuSettingsPath = "~/.dotfiles"
     $ubuntuName = "settings"
-    tmux new-session -s $ubuntuName -n dotfiles -d "pwsh -NoExit -wd $ubuntuSettingsPath -Command vi"
-    tmux new-window -t $ubuntuName -n nvim -d "pwsh -NoExit -wd $ubuntuSettingsPath/wsl/nvim/.config/nvim -Command vi"
+    tmux new-session -s $ubuntuName -n dotfiles -d -c $ubuntuSettingsPath
+    tmux new-window -t $ubuntuName -n nvim -d -c $ubuntuSettingsPath
 
+    # session - nadex
     $projectPath = "~/work/nadex"
-    tmux new-session -s $company -n code -d "pwsh -NoExit -wd $projectPath -Command vi"
-    tmux new-window -t $company -n git -d "pwsh -NoExit -wd $projectPath -Command 'git status'"
-    tmux new-window -t $company -n db -d "pwsh -NoExit -wd $projectPath -Command 'usql mysql://root:secret@localhost/test1'"
-    tmux new-window -t $company -n live -d "pwsh -NoExit -wd $projectPath"
-    # tmux new-window -t $company -n live -d "pwsh -NoExit -wd $projectPath -Command 'start-working-session live'"
-    tmux new-window -t $company -n other -d "pwsh -NoExit -wd $projectPath -Command htop"
+    tmux new-session -s $company -n code -d -c $projectPath
+    tmux new-window -t $company -n git -d -c $projectPath
+    tmux new-window -t $company -n db -d -c $projectPath
+    tmux new-window -t $company -n live -d -c $projectPath
+    tmux new-window -t $company -n other -d -c $projectPath
+
+    Start-Sleep -Milliseconds 5000;
+
+    # sending keys
+    # session - settings
+    tmux send-keys -t $ubuntuName`:dotfiles -- "vi ." C-m
+    tmux send-keys -t $ubuntuName`:nvim -- "vi ." C-m
+
+    # session - nadex
+    $projectPath = "~/work/nadex"
+    tmux send-keys -t $company`:code -- "vi ." C-m
+    tmux send-keys -t $company`:git -- "git status" C-m
+    tmux send-keys -t $company`:db -- "usql mysql://root:secret@localhost/test1" C-m
+    # tmux send-keys -t $company`:live -- "start-working-session live" C-m
+    tmux send-keys -t $company`:other -- "htop" C-m
 
     tmux attach
 }

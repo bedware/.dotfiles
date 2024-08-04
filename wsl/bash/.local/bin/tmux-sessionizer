@@ -10,7 +10,7 @@ elif [[ $# -eq 2 ]]; then
     session_path="$2"
 else
     mode="path"
-    session_path=$(fd --min-depth 1 --max-depth 2 --type directory . ~/personal ~/work \
+    session_path=$(fd --min-depth 1 --max-depth 2 --type directory . ~/personal ~/work ~/github \
                  | grep -v -e .cache -e .git -e _logs \
                  | fzf)
     session_name=$(basename "$session_path" | tr . _)
@@ -23,15 +23,15 @@ echo -e $info
 
 if ! tmux has-session -t "$session_name" 2> /dev/null; then
     # tmux new-session -s "$session_name" -n initial -d "pwsh -NoExit -wd $session_path -Command pwd"
-    # tmux new-session -s "$session_name" -n initial -d "pwsh -NoExit -wd $session_path"
-    tmux new-session -s "$session_name" -n initial -c "$session_path"
+    tmux new-session -s "$session_name" -n initial -c "$session_path" -d
 fi
 
 if [[ -v TMUX ]]; then
     tmux switch-client -t "$session_name"
-    tmux display "$info I'm inside tmux session. Switching session."
+    # tmux display "$info I'm inside tmux session. Switching session."
+    # tmux run-shell "tmux display '$info I'm inside tmux session. Switching session.' &"
 else
     tmux attach -t "$session_name"
-    tmux display "$info Tmux is not running. Attaching to session."
+    # tmux display "$info Tmux is not running. Attaching to session."
 fi
 
