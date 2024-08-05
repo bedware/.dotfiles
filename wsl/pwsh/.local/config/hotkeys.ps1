@@ -1,7 +1,6 @@
 # Imports
 
 Import-Module PSFzf
-# Add-Type -Path "$env:DOTFILES/wsl/pwsh/.local/config/PSFzf.dll"
 
 # Functions
 
@@ -96,26 +95,23 @@ Set-PSReadLineKeyHandlerBothModes -Chord Ctrl+r -ScriptBlock {
     [Microsoft.PowerShell.PSConsoleReadLine]::InvokePrompt()
 }
 
-Set-PSReadLineKeyHandlerBothModes -Chord Ctrl+g -ScriptBlock {
-    Invoke-Expression "fd --type f $fzfParam" | Invoke-Fzf -Color $color | ForEach-Object {
-        [Microsoft.PowerShell.PSConsoleReadLine]::Insert($_)
-    }
-}
-
 $color = 'dark'
 $keyBindings = @{
     "ff" = {
         Invoke-Expression "fd --type f $fzfParam" | Invoke-Fzf -Color $color | ForEach-Object {
+            [Microsoft.PowerShell.PSConsoleReadLine]::Insert(" ")
             [Microsoft.PowerShell.PSConsoleReadLine]::Insert($_)
         }
     }
     "fig" = {
         Invoke-Expression "git ls-files" | Invoke-Fzf -Color $color | ForEach-Object {
+            [Microsoft.PowerShell.PSConsoleReadLine]::Insert(" ")
             [Microsoft.PowerShell.PSConsoleReadLine]::Insert($_)
         }
     }
     "gff" = {
         Invoke-Expression "fd --type f --no-ignore $fzfParam" | Invoke-Fzf -Color $color | ForEach-Object {
+            [Microsoft.PowerShell.PSConsoleReadLine]::Insert(" ")
             [Microsoft.PowerShell.PSConsoleReadLine]::Insert($_)
         }
     }
@@ -151,7 +147,6 @@ Set-PSReadLineKeyHandler -ViMode Command -Key Spacebar -ScriptBlock {
             break
         }
         if ($keyBindings.ContainsKey($userInput)) {
-            [Microsoft.PowerShell.PSConsoleReadLine]::Insert(" ")
             &$keyBindings[$userInput]
             break
         }
