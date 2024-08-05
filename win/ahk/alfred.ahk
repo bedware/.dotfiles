@@ -1,31 +1,26 @@
 RunAlfred(apps) {
-    showAlfred()
+    _RunBase(apps, "runAlfredFunc", "LShift")
+}
+runAlfredFunc(apps, userInput) {
+    showAlfredRunning()
+    executeInput(apps, userInput)
+    proceedLast2Apps(userInput)
+}
 
-    endKey := "LShift"
-    timeout := "8" ; seconds
-    length := "5" ; chars
-
-    ; Wait for user input
-    Input, userInput, T%timeout% L%length% C, {%endKey%}, % getShortuctsByComa(apps)
-    if (ErrorLevel = "Max") {
-        showAlfredError("You entered '" userInput "' and have reached maximum length (" length ") of the text.")
-    } else if (ErrorLevel = "Timeout") {
-        showAlfredError("You have reached the timeout of " timeout " seconds.")
-    } else if InStr(ErrorLevel, "EndKey:") {
-        KeyWait, %endKey%
-    } else {
-        showAlfredRunning()
-        executeInput(apps, userInput)
-        proceedLast2Apps(userInput)
-    }
-    hideAlfred()
+RunContext(commands) {
+    _RunBase(commands, "runContextFunc", "RShift")
+}
+runContextFunc(commands, userInput) {
+    showAlfredRunning()
+    keys := commands[userInput]
+    Send %keys%
 }
 
 getShortuctsByComa(apps) {
     ; e.g. "term,slack,tg"
     shortcutsByComa := ""
-    for index, app in apps {
-        shortcutsByComa := shortcutsByComa . index . ","
+    for key, app in apps {
+        shortcutsByComa := shortcutsByComa . key . ","
     }
     return SubStr(shortcutsByComa, 1, -1)
 }
@@ -150,3 +145,26 @@ showAlfredError(errorText) {
     Sleep 2000
 }
 
+_RunBase(commands, funcName, endKey) {
+    if (commands.Count() = 0) {
+        return
+    }
+
+    showAlfred()
+
+    timeout := "8" ; seconds
+    length := "5" ; chars
+
+    ; Wait for user input
+    Input, userInput, T%timeout% L%length% C, {%endKey%}, % getShortuctsByComa(commands)
+    if (ErrorLevel = "Max") {
+        showAlfredError("You entered '" userInput "' and have reached maximum length (" length ") of the text.")
+    } else if (ErrorLevel = "Timeout") {
+        showAlfredError("You have reached the timeout of " timeout " seconds.")
+    } else if InStr(ErrorLevel, "EndKey:") {
+        KeyWait, %endKey%
+    } else {
+        retval := Func(funcName).Call(commands, userInput)
+    }
+    hideAlfred()
+}

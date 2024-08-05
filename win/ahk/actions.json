@@ -165,7 +165,7 @@
         "desktop": "Dev",
         "run": "C:\\Program Files\\Alacritty\\alacritty.exe",
         "runArgs": "--title windows",
-        "initFunction": "makeAnyWindowMaximized",
+        "initFunction": "makeAnyWindowCenteredThenMaximized",
         "selector": "windows ahk_exe alacritty.exe"
     },
     "tg": {
