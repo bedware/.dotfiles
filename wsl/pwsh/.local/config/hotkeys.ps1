@@ -1,4 +1,3 @@
-
 # Imports
 
 Import-Module PSFzf
@@ -96,33 +95,71 @@ Set-PSReadLineKeyHandlerBothModes -Chord Ctrl+r -ScriptBlock {
     Invoke-FzfPsReadlineHandlerHistory
     [Microsoft.PowerShell.PSConsoleReadLine]::InvokePrompt()
 }
-# Ctrl+f (Filtered folders)
-Set-PSReadLineKeyHandlerBothModes -Chord Ctrl+f -ScriptBlock {
-    Invoke-Expression "fd --type d --follow $fzfParam" | Invoke-Fzf -Color 16 | ForEach-Object { 
-        RunExactCommand("Set-Location $_ | Clear-Host && Get-ChildItem -Force | Format-Table -AutoSize")
-    }
-}
-# Ctrl+g (Global folders)
+
 Set-PSReadLineKeyHandlerBothModes -Chord Ctrl+g -ScriptBlock {
-    Invoke-Expression "fd --type d --follow --no-ignore $fzfParam" | Invoke-Fzf -Color 16 | ForEach-Object { 
-        RunExactCommand("Set-Location $_ | Clear-Host && Get-ChildItem -Force | Format-Table -AutoSize")
-    }
-}
-# Alt+f (Filtered files)
-Set-PSReadLineKeyHandlerBothModes -Chord Alt+f -ScriptBlock {
-    Invoke-Expression "fd --type f $fzfParam" | Invoke-Fzf -Color 16 | ForEach-Object {
-        [Microsoft.PowerShell.PSConsoleReadLine]::Insert($_)
-    }
-}
-# Alt+g (Global files)
-Set-PSReadLineKeyHandlerBothModes -Chord Alt+g -ScriptBlock {
-    Invoke-Expression "fd --type f --no-ignore $fzfParam" | Invoke-Fzf -Color 16 | ForEach-Object {
+    Invoke-Expression "fd --type f $fzfParam" | Invoke-Fzf -Color $color | ForEach-Object {
         [Microsoft.PowerShell.PSConsoleReadLine]::Insert($_)
     }
 }
 
+$color = 'dark'
+$keyBindings = @{
+    "ff" = {
+        Invoke-Expression "fd --type f $fzfParam" | Invoke-Fzf -Color $color | ForEach-Object {
+            [Microsoft.PowerShell.PSConsoleReadLine]::Insert($_)
+        }
+    }
+    "fig" = {
+        Invoke-Expression "git ls-files" | Invoke-Fzf -Color $color | ForEach-Object {
+            [Microsoft.PowerShell.PSConsoleReadLine]::Insert($_)
+        }
+    }
+    "gff" = {
+        Invoke-Expression "fd --type f --no-ignore $fzfParam" | Invoke-Fzf -Color $color | ForEach-Object {
+            [Microsoft.PowerShell.PSConsoleReadLine]::Insert($_)
+        }
+    }
+    "fd" = {
+        Invoke-Expression "fd --type d --follow $fzfParam" | Invoke-Fzf -Color $color | ForEach-Object { 
+            RunExactCommand("Set-Location $_ | Clear-Host && Get-ChildItem -Force | Format-Table -AutoSize")
+        }
+    }
+    "gfd" = {
+        Invoke-Expression "fd --type d --follow --no-ignore $fzfParam" | Invoke-Fzf -Color $color | ForEach-Object { 
+            RunExactCommand("Set-Location $_ | Clear-Host && Get-ChildItem -Force | Format-Table -AutoSize")
+        }
+    }
+}
+
 Set-PSReadLineKeyHandler -ViMode Command -Key Spacebar -ScriptBlock {
-    [Microsoft.PowerShell.PSConsoleReadLine]::Insert("*")
+    Write-Host -NoNewLine "`e[4 q"
+
+    $userInput = ""
+    for ($i = 0; $i -lt 5; $i++) {
+        $key = [System.Console]::ReadKey($true)  # ReadKey(true) suppresses the display of the key
+        $userInput += $key.KeyChar
+
+        if ($key.Key -eq 'Escape') {
+            Write-Error "Key chord cancelled."
+            [System.Media.SystemSounds]::Hand.Play()
+            break
+        }
+
+        if ($key.Key -eq [System.ConsoleKey]::C -and $key.Modifiers -eq [System.ConsoleModifiers]::Control) {
+            Write-Error "Key chord cancelled."
+            [System.Media.SystemSounds]::Hand.Play()
+            break
+        }
+        if ($keyBindings.ContainsKey($userInput)) {
+            [Microsoft.PowerShell.PSConsoleReadLine]::Insert(" ")
+            &$keyBindings[$userInput]
+            break
+        }
+    }
+    Write-Host -NoNewLine "`e[2 q"
+    if (-not $keyBindings.ContainsKey($userInput)) {
+        [System.Media.SystemSounds]::Hand.Play()
+    }
 }
 
 function Set-PSReadLineKeyHandlerBothModes($Chord, $ScriptBlock) {
