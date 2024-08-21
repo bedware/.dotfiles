@@ -10,7 +10,7 @@ elif [[ $# -eq 2 ]]; then
     session_path="$2"
 else
     mode="path"
-    session_path=$(fd --min-depth 1 --max-depth 2 --type directory . ~/personal ~/work ~/github \
+    session_path=$(fd --min-depth 1 --max-depth 3 --type directory . ~/software/ \
                  | grep -v -e .cache -e .git -e _logs \
                  | fzf)
     session_name=$(basename "$session_path" | tr . _)

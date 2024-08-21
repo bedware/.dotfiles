@@ -104,13 +104,13 @@ $keyBindings = @{
         }
     }
     "fig" = {
-        Invoke-Expression "git ls-files" | Invoke-Fzf -Color $color | ForEach-Object {
+        Invoke-Expression "git ls-files" | Invoke-Fzf -Color $color -NoSort | ForEach-Object {
             [Microsoft.PowerShell.PSConsoleReadLine]::Insert(" ")
             [Microsoft.PowerShell.PSConsoleReadLine]::Insert($_)
         }
     }
     "gff" = {
-        Invoke-Expression "fd --type f --no-ignore $fzfParam" | Invoke-Fzf -Color $color | ForEach-Object {
+        Invoke-Expression "fd --type f --no-ignore $fzfParam" | Invoke-Fzf -Color $color -NoSort | ForEach-Object {
             [Microsoft.PowerShell.PSConsoleReadLine]::Insert(" ")
             [Microsoft.PowerShell.PSConsoleReadLine]::Insert($_)
         }
