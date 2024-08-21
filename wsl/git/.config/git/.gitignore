@@ -10,12 +10,19 @@ app-ganz-dima.properties
 *.so
 *.pyc
 
+# LSP
+.settings/
+.classpath
+.project
+.factorypath
+target/
+
 # Editing tools and IDEs
-.idea
+.idea/
 packer_compiled.lua
 
 # Logs and databases
-# *.log
+*.log
 # *.sql
 *.sqlite
 
