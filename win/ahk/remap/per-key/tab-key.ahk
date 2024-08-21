@@ -1,4 +1,3 @@
-; Tab
 *Tab::
     if (A_PriorKey = "LAlt") {
         SendEvent {Blind}{Tab}
@@ -12,15 +11,6 @@
 return
 
 #if GetKeyState("Tab", "P")
-    ; F-keys
-    *6::F6
-    *7::F7
-    *8::F8
-    *9::F9
-    *0::F10
-    *-::F11
-    *=::F12
-
     ; Languages (this one for one-hand interacting)
     e::english()
     r::russian()
@@ -29,6 +19,7 @@ return
     LWin::#z ; Windows layout popup
     j::Send ^+{Tab} ; Next tab
     k::Send ^{Tab} ; Prev tab
+    \::toggleRaceMode()
 #if
 
 ; Opposite Tab
@@ -39,13 +30,7 @@ return
     }
 return
 #if GetKeyState("\", "P")
-    ; F-keys
-    *1::F1
-    *2::F2
-    *3::F3
-    *4::F4
-    *5::F5
-
+    Tab::toggleRaceMode()
     ; Languages
     e::english()
     r::russian()

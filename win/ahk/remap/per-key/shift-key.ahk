@@ -1,27 +1,32 @@
 ; Shifts + RaceMode
 
 RShift & Capslock::Send +{Esc}
-LShift & RShift::toggleRaceMode()
-RShift & LShift::toggleRaceMode()
+LShift & RShift::ToggleCaps()
+RShift & LShift::ToggleCaps()
 
 #if !raceMode
-    LShift up::
+    LShift Up::
         global apps
         if (A_PriorKey = "LShift") {
             RunAlfred(apps)
         }
+        Send {LShift Up}
     return 
 
-    RShift up::
+    RShift Up::
         if (A_PriorKey = "RShift") {
             commands := {}
             if (WinActive("ahk_exe TOTALCMD64.EXE")) {
-                commands["rm"] := "{F8}"
+                commands["re"] := "{F2}"
+                commands["q"] := "{F3}"
+                commands["e"] := "{F4}"
                 commands["cp"] := "{F5}"
                 commands["mv"] := "{F6}"
                 commands["mk"] := "{F7}"
+                commands["rm"] := "{F8}"
             }
             RunContext(commands)
         }
+        Send {RShift Up}
     return 
 #if 

@@ -40,8 +40,7 @@
         "selector": "ahk_exe datagrip64.exe"
     },
     "dev": {
-        "desktop": "Browsing",
-        "selector": "^DevTools ahk_exe chrome.exe"
+        "selector": "^DevTools ahk_exe msedge.exe"
     },
     "disc": {
         "desktop": "Chats",

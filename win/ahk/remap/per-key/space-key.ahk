@@ -2,12 +2,17 @@
     *Space::
         KeyWait, Space
         if (A_ThisHotkey == "*Space" && A_PriorKey == "Space") {
-            Send {Space}
+            SendEvent {Blind}{Space}
+            ; Send {Space}
         }
     return
 #if 
 
 #if !raceMode && GetKeyState("Space", "P")
+    Tab::
+        global apps
+        GoToAlternateApp(apps)
+    return
     ; From Win
     `::quakeAlive()
     d::toggleDay()

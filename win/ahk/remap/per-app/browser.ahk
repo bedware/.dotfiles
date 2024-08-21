@@ -15,14 +15,22 @@
 ; Workspace switcher popup
 
 #if WinActive("ahk_exe msedge.exe")
-    Space & s::
+    ~s::
+        if (GetKeyState("Space", "P")) {
+            createPopUp("select workspace", "C:\Users\dmitr\.dotfiles\win\pwsh\bin\Switch-BrowserWorkspace.ps1", false)
+        }
+    return
     #s::
         createPopUp("select workspace", "C:\Users\dmitr\.dotfiles\win\pwsh\bin\Switch-BrowserWorkspace.ps1", false)
     return
 #if
 
 #if WinActive("select workspace ahk_class Window Class ahk_exe alacritty.exe")
-    Space & s::
+    ~s::
+        if (GetKeyState("Space", "P")) {
+            HideAppToTray()
+        }
+    return
     #s::
     ~*Enter::
         HideAppToTray()

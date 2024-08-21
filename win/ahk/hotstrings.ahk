@@ -5,7 +5,7 @@
 ::gco::git checkout
 ::gcob::git checkout -b
 ::gcom::git checkout master
-::gcm::git commit -m ""{Left}
+::gcm::git commit -m
 ::gca::git commit --amend --no-edit
 ::gdif::git diff --color | less -R
 ::gdifs::git diff --staged --color | less -R

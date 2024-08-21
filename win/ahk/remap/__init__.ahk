@@ -8,6 +8,7 @@ PgDn::F18
 
 #Include %A_ScriptDir%/remap/per-key/mouse-key.ahk
 #Include %A_ScriptDir%/remap/per-key/shift-key.ahk
+#Include %A_ScriptDir%/remap/per-key/alt-key.ahk
 #Include %A_ScriptDir%/remap/per-key/capslock-key.ahk
 #Include %A_ScriptDir%/remap/per-key/space-key.ahk
 #Include %A_ScriptDir%/remap/per-key/tab-key.ahk

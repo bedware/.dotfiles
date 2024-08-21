@@ -1,18 +1,16 @@
 RunAlfred(apps) {
-    _RunBase(apps, "runAlfredFunc", "LShift")
+    _RunBase(apps, "runAlfredFunc", "LShift", "show")
 }
 runAlfredFunc(apps, userInput) {
-    showAlfredRunning()
     executeInput(apps, userInput)
     proceedLast2Apps(userInput)
 }
 
 RunContext(commands) {
-    _RunBase(commands, "runContextFunc", "RShift")
+    _RunBase(commands, "runContextFunc", "RShift", "show-alternate")
 }
 runContextFunc(commands, userInput) {
-    showAlfredRunning()
-    keys := commands[userInput]
+    keys := commands[userInput ""]
     Send %keys%
 }
 
@@ -27,19 +25,13 @@ getShortuctsByComa(apps) {
 
 executeInput(apps, userInput) {
     global desktops
-    app := GetIfContains(apps, userInput . "")
+    app := GetIfContains(apps, userInput "")
 
     if (!app) {
         MsgBox % "App doesn't exist for input" userInput
         return
     }
 
-    if (app.run && IsAppInTray(app.run)) {
-        RemoveAppFromTrayByPath(app.run)
-        return
-    }
-
-    ; there is a selector for the app
     if (app.selector != "") {
         ; Go to needed desktop
         if (app.desktop != "") { ; app specifies a virtual desktop to work on
@@ -62,6 +54,10 @@ executeInput(apps, userInput) {
         }
         ; If nothing to activate
         else {
+            if (app.run && IsAppInTray(app.run)) {
+                RemoveAppFromTrayByPath(app.run)
+                return
+            }
 
             runCmd := app.run
             if (app.runArgs != "") {
@@ -89,6 +85,10 @@ executeInput(apps, userInput) {
     }
     ; there is no selector for the app
     else {
+        if (app.run && IsAppInTray(app.run)) {
+            RemoveAppFromTrayByPath(app.run)
+            return
+        }
 
         ; Run
         path := app.run
@@ -129,8 +129,8 @@ proceedLast2Apps(userInput) {
     }
 }
 
-showAlfred() {
-    ChangeTrayIcon("show")
+showAlfred(icon := "show") {
+    ChangeTrayIcon(icon)
 }
 hideAlfred() {
     ChangeTrayIcon("desktop", GetCurrentDesktopNumber())
@@ -145,12 +145,12 @@ showAlfredError(errorText) {
     Sleep 2000
 }
 
-_RunBase(commands, funcName, endKey) {
+_RunBase(commands, funcName, endKey, icon) {
     if (commands.Count() = 0) {
         return
     }
 
-    showAlfred()
+    showAlfred(icon)
 
     timeout := "8" ; seconds
     length := "5" ; chars
@@ -164,6 +164,7 @@ _RunBase(commands, funcName, endKey) {
     } else if InStr(ErrorLevel, "EndKey:") {
         KeyWait, %endKey%
     } else {
+        showAlfredRunning()
         retval := Func(funcName).Call(commands, userInput)
     }
     hideAlfred()

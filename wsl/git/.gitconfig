@@ -10,9 +10,7 @@
 [color "diff"]
 	meta = bold yellow
 [safe]
-	directory = C:/Users/dmitr/work
-	directory = C:/Users/dmitr/personal
-	directory = C:/Users/dmitr/GitHub
+	directory = C:/Users/dmitr/software
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f

@@ -15,6 +15,8 @@ ChangeTrayIcon(mode, number := 0) {
         Menu, Tray, Icon, shell32.dll, 28 ; [X]
     } else if (mode = "show") {
         Menu, Tray, Icon, shell32.dll, 298 ; ->
+    } else if (mode = "show-alternate") {
+        Menu, Tray, Icon, shell32.dll, 138 ; >
     } else if (mode = "running") {
         Menu, Tray, Icon, shell32.dll, 239 ; (%)
     } else if (mode = "error") {

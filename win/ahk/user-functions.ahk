@@ -105,16 +105,18 @@ deeplTranslateOnTheGo() {
 }
 
 inPlaceNeovim() {
-    buffer_before := Trim(Clipboard)
+    Clipboard := ""
+
     Send ^{Insert}
     Sleep, 50
-    buffer := Trim(Clipboard)
+    buffer:= Clipboard
     
-    if (buffer_before == buffer) {
+    if (buffer = "") {
         Send ^a
+        Sleep, 50
         Send ^{Insert}
         Sleep, 50
-        buffer := Trim(Clipboard)
+        buffer := Clipboard
     }
 
     textfield := "c:\Users\dmitr\AppData\Local\Temp\in_place_editor_textfield"

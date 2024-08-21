@@ -117,12 +117,12 @@ $keyBindings = @{
     }
     "fd" = {
         Invoke-Expression "fd --type d --follow $fzfParam" | Invoke-Fzf -Color $color | ForEach-Object { 
-            RunExactCommand("Set-Location $_ | Clear-Host && Get-ChildItem -Force | Format-Table -AutoSize")
+            RunExactCommand("Set-Location '$_' | Clear-Host && Get-ChildItem -Force | Format-Table -AutoSize")
         }
     }
     "gfd" = {
         Invoke-Expression "fd --type d --follow --no-ignore $fzfParam" | Invoke-Fzf -Color $color | ForEach-Object { 
-            RunExactCommand("Set-Location $_ | Clear-Host && Get-ChildItem -Force | Format-Table -AutoSize")
+            RunExactCommand("Set-Location '$_' | Clear-Host && Get-ChildItem -Force | Format-Table -AutoSize")
         }
     }
 }
