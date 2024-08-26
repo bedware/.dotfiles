@@ -124,7 +124,16 @@ $keyBindings = @{
     }
 }
 
+function _play_sound {
+    if ($IsWindows) {
+        [System.Media.SystemSounds]::Hand.Play()
+    } else {
+        Write-Host "`a"
+    }
+}
+
 Set-PSReadLineKeyHandler -ViMode Command -Key Spacebar -ScriptBlock {
+    # Change cursor to _
     Write-Host -NoNewLine "`e[4 q"
 
     $userInput = ""
@@ -132,25 +141,32 @@ Set-PSReadLineKeyHandler -ViMode Command -Key Spacebar -ScriptBlock {
         $key = [System.Console]::ReadKey($true)  # ReadKey(true) suppresses the display of the key
         $userInput += $key.KeyChar
 
+        # Esc
         if ($key.Key -eq 'Escape') {
             Write-Error "Key chord cancelled."
-            [System.Media.SystemSounds]::Hand.Play()
+            _play_sound
             break
         }
 
+        # Ctrl-C
         if ($key.Key -eq [System.ConsoleKey]::C -and $key.Modifiers -eq [System.ConsoleModifiers]::Control) {
             Write-Error "Key chord cancelled."
-            [System.Media.SystemSounds]::Hand.Play()
+            _play_sound
             break
         }
+
+        # Other
         if ($keyBindings.ContainsKey($userInput)) {
             &$keyBindings[$userInput]
             break
         }
     }
+
+    # Revert cursor to []
     Write-Host -NoNewLine "`e[2 q"
+
     if (-not $keyBindings.ContainsKey($userInput)) {
-        [System.Media.SystemSounds]::Hand.Play()
+        _play_sound
     }
 }
 
