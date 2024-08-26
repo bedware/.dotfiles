@@ -9,6 +9,12 @@ table.insert(vimgrep_arguments, "--hidden")
 -- I don't want to search in the `.git` directory.
 -- table.insert(vimgrep_arguments, "--glob")
 -- table.insert(vimgrep_arguments, "!**/.git/*")
+--
+local FD_FIND_FILE_COMMAND = vim.fn.getenv("FD_FIND_FILE_COMMAND")
+local find_command = vim.split(FD_FIND_FILE_COMMAND, " ")
+
+local FD_GLOBAL_FIND_FILE_COMMAND = vim.fn.getenv("FD_GLOBAL_FIND_FILE_COMMAND")
+local global_find_command = vim.split(FD_GLOBAL_FIND_FILE_COMMAND, " ")
 
 telescope.setup({
     defaults = {
@@ -38,14 +44,7 @@ telescope.setup({
     },
     pickers = {
         find_files = {
-            find_command = {
-                "fd",
-                "--hidden",
-                "--follow",
-                "--strip-cwd-prefix",
-                "--type", "file",
-                "--exclude", ".git"
-            },
+            find_command = find_command
         },
         git_branches = {
             use_file_path = true,
@@ -91,19 +90,7 @@ require("telescope").load_extension("ui-select")
 require('telescope').load_extension('fzf')
 
 local builtin = require('telescope.builtin')
-local find_files_globally = function()
-  builtin.find_files({
-    find_command = {
-          "fd",
-          "--type", "f",
-          "--strip-cwd-prefix",
-          "--exclude", ".git",
-          "--hidden",
-          "--no-ignore",
-          "--follow",
-    }
-  })
-end
+
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fc', builtin.autocommands, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
@@ -122,7 +109,11 @@ vim.keymap.set('n', '<leader>grep', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>file', builtin.current_buffer_fuzzy_find, {})
 vim.keymap.set('n', '<leader>/', builtin.current_buffer_fuzzy_find, {})
 
-vim.keymap.set('n', '<leader>gff', find_files_globally, {})
+vim.keymap.set('n', '<leader>gff', function ()
+  builtin.find_files({
+    find_command = global_find_command
+  })
+end, {})
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fig', builtin.git_files, {})
 

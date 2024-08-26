@@ -1,18 +1,18 @@
 [core]
-	excludesfile = ~/.config/git/.gitignore
+    excludesfile = ~/.config/git/.gitignore
     editor = nvim
-	autocrlf = false
+    autocrlf = false
 [include]
-	path = ~/.config/git/.gitconfig
+    path = ~/.config/git/.gitconfig
 [user]
-	email = dmitry.surin@gmail.com
-	name = Dmitry Surin
+    email = dmitry.surin@gmail.com
+    name = Dmitry Surin
 [color "diff"]
-	meta = bold yellow
+    meta = bold yellow
 [safe]
-	directory = C:/Users/dmitr/software
+    directory = C:/Users/dmitr/software
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true

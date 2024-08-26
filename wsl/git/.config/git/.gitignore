@@ -17,6 +17,9 @@ app-ganz-dima.properties
 .factorypath
 target/
 
+# Node
+node_modules/
+
 # Editing tools and IDEs
 .idea/
 packer_compiled.lua

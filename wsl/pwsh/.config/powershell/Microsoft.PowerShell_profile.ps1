@@ -15,6 +15,15 @@ $env:DC_API_TOKEN = Get-Content "$env:HOME/.ssh/daycaptain"
 $env:SDKMAN_DIR = "$env:HOME/.sdkman"
 $env:TERM = "xterm-256color"
 
+# FZF (uses fd)
+$fdExcludeDirs = @('.git', '.npm')
+$fdDefaultOptions = "--path-separator / --strip-cwd-prefix --follow " + @($fdExcludeDirs | ForEach-Object {"--exclude $_"}) -join " "
+$env:FD_FIND_FILE_COMMAND = "fd --type f --ignore-file $env:HOME\.config\git\.gitignore $fdDefaultOptions"
+$env:FD_GLOBAL_FIND_FILE_COMMAND = "fd --type f --no-ignore --hidden $fdDefaultOptions"
+$env:FD_FIND_DIRECTORY_COMMAND = "fd --type d --ignore-file $env:HOME\.config\git\.gitignore $fdDefaultOptions"
+$env:FD_GLOBAL_FIND_DIRECTORY_COMMAND = "fd --type d --no-ignore --hidden $fdDefaultOptions"
+$env:FILES_IN_GIT_COMMAND = "git ls-files"
+
 # Path {{{1
 function safelyAddToPath($path) {
     if (Test-Path $path) {

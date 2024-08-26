@@ -5,29 +5,29 @@ Import-Module PSFzf
 # Functions
 
 function Invoke-FzfPsReadlineHandlerHistory {
-	$result = $null
-	try {
-		$line = $null
-		$cursor = $null
-		[Microsoft.PowerShell.PSConsoleReadline]::GetBufferState([ref]$line, [ref]$cursor)
+    $result = $null
+    try {
+        $line = $null
+        $cursor = $null
+        [Microsoft.PowerShell.PSConsoleReadline]::GetBufferState([ref]$line, [ref]$cursor)
 
-		$reader = New-Object PSFzf.IO.ReverseLineReader -ArgumentList $((Get-PSReadlineOption).HistorySavePath)
+        $reader = New-Object PSFzf.IO.ReverseLineReader -ArgumentList $((Get-PSReadlineOption).HistorySavePath)
 
-		$fileHist = @{}
-		$reader.GetEnumerator() | ForEach-Object {
-			if (-not $fileHist.ContainsKey($_)) {
-				$fileHist.Add($_,$true)
-				$_
-			}
-		} | Invoke-Fzf -Color 16 -Query "$line" -NoSort -Bind ctrl-r:toggle-sort | ForEach-Object { $result = $_ }
-	}
-	finally
-	{
-		$reader.Dispose()
-	}
-	if (-not [string]::IsNullOrEmpty($result)) {
-		[Microsoft.PowerShell.PSConsoleReadLine]::Replace(0,$line.Length,$result)
-	}
+        $fileHist = @{}
+        $reader.GetEnumerator() | ForEach-Object {
+            if (-not $fileHist.ContainsKey($_)) {
+                $fileHist.Add($_,$true)
+                $_
+            }
+        } | Invoke-Fzf -Color 16 -Query "$line" -NoSort -Bind ctrl-r:toggle-sort | ForEach-Object { $result = $_ }
+    }
+    finally
+    {
+        $reader.Dispose()
+    }
+    if (-not [string]::IsNullOrEmpty($result)) {
+        [Microsoft.PowerShell.PSConsoleReadLine]::Replace(0,$line.Length,$result)
+    }
 }
 
 function Set-PSReadLineKeyHandlerBothModes($Chord, $ScriptBlock) {
@@ -83,9 +83,6 @@ Set-PSReadLineKeyHandler -Chord Ctrl+u -ScriptBlock {
     [Microsoft.PowerShell.PSConsoleReadLine]::DeleteLine()
 }
 
-$fzfExclude = @('.git', '.npm')
-$fzfParam = "--path-separator '/' --hidden --strip-cwd-prefix " + `
-@($fzfExclude | ForEach-Object {"--exclude '$_'"}) -join " "
 Set-PSReadLineKeyHandlerBothModes -Chord Ctrl+p -ScriptBlock {
     Invoke-FuzzyKillProcess
     [Microsoft.PowerShell.PSConsoleReadLine]::InvokePrompt()
@@ -98,30 +95,30 @@ Set-PSReadLineKeyHandlerBothModes -Chord Ctrl+r -ScriptBlock {
 $color = 'dark'
 $keyBindings = @{
     "ff" = {
-        Invoke-Expression "fd --type f $fzfParam" | Invoke-Fzf -Color $color | ForEach-Object {
+        Invoke-Expression $env:FD_FIND_FILE_COMMAND  | Invoke-Fzf -Color $color | ForEach-Object {
             [Microsoft.PowerShell.PSConsoleReadLine]::Insert(" ")
             [Microsoft.PowerShell.PSConsoleReadLine]::Insert($_)
         }
     }
     "fig" = {
-        Invoke-Expression "git ls-files" | Invoke-Fzf -Color $color -NoSort | ForEach-Object {
+        Invoke-Expression $env:FILES_IN_GIT_COMMAND | Invoke-Fzf -Color $color -NoSort | ForEach-Object {
             [Microsoft.PowerShell.PSConsoleReadLine]::Insert(" ")
             [Microsoft.PowerShell.PSConsoleReadLine]::Insert($_)
         }
     }
     "gff" = {
-        Invoke-Expression "fd --type f --no-ignore $fzfParam" | Invoke-Fzf -Color $color -NoSort | ForEach-Object {
+        Invoke-Expression $env:FD_GLOBAL_FIND_FILE_COMMAND | Invoke-Fzf -Color $color -NoSort | ForEach-Object {
             [Microsoft.PowerShell.PSConsoleReadLine]::Insert(" ")
             [Microsoft.PowerShell.PSConsoleReadLine]::Insert($_)
         }
     }
     "fd" = {
-        Invoke-Expression "fd --type d --follow $fzfParam" | Invoke-Fzf -Color $color | ForEach-Object { 
+        Invoke-Expression $env:FD_FIND_DIRECTORY_COMMAND | Invoke-Fzf -Color $color | ForEach-Object {
             RunExactCommand("Set-Location '$_' | Clear-Host && Get-ChildItem -Force | Format-Table -AutoSize")
         }
     }
     "gfd" = {
-        Invoke-Expression "fd --type d --follow --no-ignore $fzfParam" | Invoke-Fzf -Color $color | ForEach-Object { 
+        Invoke-Expression $env:FD_GLOBAL_FIND_DIRECTORY_COMMAND| Invoke-Fzf -Color $color | ForEach-Object {
             RunExactCommand("Set-Location '$_' | Clear-Host && Get-ChildItem -Force | Format-Table -AutoSize")
         }
     }
