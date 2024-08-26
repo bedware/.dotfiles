@@ -25,7 +25,9 @@
 ::drm::podman container rm -f
 :*:dcstart::podman container start
 :*:dcstop::podman container stop
-::dvl::podman volume list
+::dvl::podman volume ls
+::dnl::podman network ls
+::dnc::podman network create --subnet=192.168.42.0/24 network_name
 
 ; Tmux
 :*:;ta::tmux attach
@@ -45,6 +47,7 @@
 ; Utils
 :*:;waituntil::wget localhost:7777 --quiet --tries 20 --waitretry 1 --retry-connrefused -O /dev/null
 :*:;compressvideo::ffmpeg -i input.mp4 -vcodec libx265 -crf 28 output.mp4
+::ul::unzip -l
 
 ; SSH
 :*:;sshgened::ssh-keygen -o -a 100 -t ed25519 -f ~/.ssh/id_ed25519 -C "Comment"
@@ -53,6 +56,7 @@
 ; Text
 :*:;@::dmitry.surin@gmail.com
 :*:;me::Dmitry Surin
+:*:;rdp::dDBI3isESvoP
 
 ; Windows
 :*:;lock::rundll32.exe user32.dll,LockWorkStation

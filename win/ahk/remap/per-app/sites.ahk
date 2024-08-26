@@ -1,4 +1,4 @@
-#if WinActive("Workona ahk_exe chrome.exe")
+#if ScopeIs("Workona ahk_exe chrome.exe")
     *Enter::
         Send {Enter}
         Sleep 150
@@ -6,7 +6,7 @@
     return
 #if
 
-#if WinActive("Excalidraw Plus ahk_exe msedge.exe")
+#if ScopeIs("Excalidraw Plus ahk_exe msedge.exe")
     *RButton::MButton
     *MButton::RButton
     *WheelDown::
@@ -25,7 +25,7 @@
     return
 #if
 
-#if WinActive("Excalidraw Plus ahk_exe msedge.exe") && GetKeyState("Space", "P")
+#if ScopeIs("Excalidraw Plus ahk_exe msedge.exe") && GetKeyState("Space", "P")
     a::Send ^+p
     f::Send ^p
 #if

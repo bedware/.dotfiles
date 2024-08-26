@@ -1,6 +1,9 @@
-#if !raceMode
+#if HOTKEYS_ON 
     *Space::
+        global HYPER_PRESSED
+        HYPER_PRESSED := true
         KeyWait, Space
+        HYPER_PRESSED := false
         if (A_ThisHotkey == "*Space" && A_PriorKey == "Space") {
             SendEvent {Blind}{Space}
             ; Send {Space}
@@ -8,7 +11,7 @@
     return
 #if 
 
-#if !raceMode && GetKeyState("Space", "P")
+#if HOTKEYS_ON && HYPER_PRESSED
     Tab::
         global apps
         GoToAlternateApp(apps)

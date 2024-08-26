@@ -146,6 +146,12 @@ showAlfredError(errorText) {
 }
 
 _RunBase(commands, funcName, endKey, icon) {
+    global HOTKEYS_ON
+    global CONTEXT_HOTKEYS_ON 
+
+    tmp_hotkeys := HOTKEYS_ON
+    tmp_context := CONTEXT_HOTKEYS_ON 
+
     if (commands.Count() = 0) {
         return
     }
@@ -154,6 +160,10 @@ _RunBase(commands, funcName, endKey, icon) {
 
     timeout := "8" ; seconds
     length := "5" ; chars
+
+
+    HOTKEYS_ON := false
+    CONTEXT_HOTKEYS_ON := false
 
     ; Wait for user input
     Input, userInput, T%timeout% L%length% C, {%endKey%}, % getShortuctsByComa(commands)
@@ -167,5 +177,9 @@ _RunBase(commands, funcName, endKey, icon) {
         showAlfredRunning()
         retval := Func(funcName).Call(commands, userInput)
     }
+
+    HOTKEYS_ON := tmp_hotkeys
+    CONTEXT_HOTKEYS_ON := tmp_context
+
     hideAlfred()
 }

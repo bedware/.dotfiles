@@ -1,6 +1,4 @@
-; ChatGpt popup
-
-#if WinActive("ahk_exe chatgpt.exe")
+#if ScopeIs("ahk_exe chatgpt.exe")
     ^s::Send ^+s
     ^n::Send ^+o
     ^i::Send ^+i

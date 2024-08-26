@@ -1,10 +1,12 @@
-LCtrl::LCtrl ; to enable hook
+#if HOTKEY_ON
+    LCtrl::LCtrl ; to enable hook
 
-; Notebook keys
-Home::F19 ; Start/stop recording
-End::F17 ; Pause/unpause
-PgUp::F20
-PgDn::F18
+    ; Notebook keys
+    Home::F19 ; Start/stop recording
+    End::F17 ; Pause/unpause
+    PgUp::F20
+    PgDn::F18
+#if
 
 #Include %A_ScriptDir%/remap/per-key/mouse-key.ahk
 #Include %A_ScriptDir%/remap/per-key/shift-key.ahk
@@ -21,3 +23,4 @@ PgDn::F18
 #Include %A_ScriptDir%/remap/per-app/browser.ahk
 #Include %A_ScriptDir%/remap/per-app/sites.ahk
 #Include %A_ScriptDir%/remap/per-app/devtools.ahk
+#Include %A_ScriptDir%/remap/per-app/sumatra.ahk

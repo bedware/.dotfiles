@@ -9,7 +9,6 @@
         }
     }
 return
-
 #if GetKeyState("Tab", "P")
     ; Languages (this one for one-hand interacting)
     e::english()

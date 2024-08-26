@@ -1,4 +1,4 @@
-#if WinActive("ahk_exe Telegram.exe")
+#if ScopeIs("ahk_exe Telegram.exe")
     ^u::Send ^+{Up}
     ^d::Send ^+{Down}
     !j::Send !{Down}

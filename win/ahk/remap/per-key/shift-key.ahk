@@ -1,10 +1,8 @@
-; Shifts + RaceMode
+#if HOTKEYS_ON
+    RShift & Capslock::Send +{Esc}
+    LShift & RShift::ToggleCaps()
+    RShift & LShift::ToggleCaps()
 
-RShift & Capslock::Send +{Esc}
-LShift & RShift::ToggleCaps()
-RShift & LShift::ToggleCaps()
-
-#if !raceMode
     LShift Up::
         global apps
         if (A_PriorKey = "LShift") {
@@ -16,7 +14,7 @@ RShift & LShift::ToggleCaps()
     RShift Up::
         if (A_PriorKey = "RShift") {
             commands := {}
-            if (WinActive("ahk_exe TOTALCMD64.EXE")) {
+            if (ScopeIs("ahk_exe TOTALCMD64.EXE")) {
                 commands["re"] := "{F2}"
                 commands["q"] := "{F3}"
                 commands["e"] := "{F4}"

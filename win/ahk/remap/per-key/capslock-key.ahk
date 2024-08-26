@@ -1,6 +1,6 @@
 ; Capslock
 
-#if !raceMode
+#if HOTKEYS_ON
     *CapsLock::
         global isNeedToCancel 
 

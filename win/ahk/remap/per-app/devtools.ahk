@@ -1,10 +1,10 @@
-#if WinActive("^DevTools") && GetKeyState("Space", "P")
+#if ScopeIs("^Dev") && GetKeyState("Space", "P")
     a::Send ^+p
     f::Send ^p
 #if
 
 on := false
-#if WinActive("^DevTools")
+#if ScopeIs("^Dev")
     ; Debug
     `;:: ; Step
         global on

@@ -26,9 +26,12 @@ apps := config["apps"]
 
 InitDesktops(desktops) ; Must be run before hotkeys & hotstrings
 
-; Globals for remap
-raceMode := false
+; Globals
+HOTKEYS_ON := true
+CONTEXT_HOTKEYS_ON := true
+
 isNeedToCancel := false
+HYPER_PRESSED := false
 
 ; Popups windows settings
 #Include %A_ScriptDir%/utils/popup.ahk

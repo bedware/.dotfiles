@@ -1,10 +1,15 @@
+ScopeIs(selector) {
+    global CONTEXT_HOTKEYS_ON 
+    return CONTEXT_HOTKEYS_ON and WinActive(selector)
+}
+
 toggleRaceMode() {
-    global raceMode
-    raceMode := !raceMode
-    if (raceMode) 
-        ChangeTrayIcon("race")
-    else
+    global HOTKEYS_ON
+    HOTKEYS_ON := !HOTKEYS_ON
+    if (HOTKEYS_ON) 
         ChangeTrayIcon("desktop", GetCurrentDesktopNumber())
+    else
+        ChangeTrayIcon("race")
 }
 
 toggleGpt() {
@@ -92,6 +97,7 @@ _deeplCheck() {
     }
 }
 deeplTranslateSelected() {
+    _putSelectionToBuffer()
     _deeplCheck()
     Send {F21}
 }
@@ -105,19 +111,7 @@ deeplTranslateOnTheGo() {
 }
 
 inPlaceNeovim() {
-    Clipboard := ""
-
-    Send ^{Insert}
-    Sleep, 50
-    buffer:= Clipboard
-    
-    if (buffer = "") {
-        Send ^a
-        Sleep, 50
-        Send ^{Insert}
-        Sleep, 50
-        buffer := Clipboard
-    }
+    buffer := _putSelectionToBuffer()
 
     textfield := "c:\Users\dmitr\AppData\Local\Temp\in_place_editor_textfield"
     FileDelete, %textfield%
@@ -135,6 +129,25 @@ inPlaceNeovim() {
         WinActivate ; Use the window found by WinWait.
     }
     DetectHiddenWindows, Off
+}
+
+_putSelectionToBuffer() {
+    Clipboard := ""
+    
+    ; Get currently selected text to buffer
+    Send ^{Insert}
+    Sleep, 50
+    buffer:= Clipboard
+    
+    ; If empty select all (Ctrl+a) to buffer
+    if (buffer = "") {
+        Send ^a
+        Sleep, 50
+        Send ^{Insert}
+        Sleep, 50
+        buffer := Clipboard
+    }
+    return buffer
 }
 
 defaultProfile() {
