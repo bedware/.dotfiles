@@ -35,9 +35,9 @@ if ($args[0] -is [string]) {
             # |          |  gulp watch   |
             # |__________|_______________|
             IdempotentScript "live" {
-                tmux split-window -h -d 'wpwsh -NoExit -wd "C:\Users\dmitr\work\nadex" -Command "npx cypress open"'
-                tmux split-window -t 2 -v -d 'pwsh -NoExit -wd ~/work/nadex/ru.nadeks.aria.backoffice -Command "gulp watch"'
-                tmux split-window -h -d 'wpwsh -NoExit -wd "C:\Users\dmitr\work\nadex/cypress/e2e" -Command "vi first.cy.js"'
+                tmux split-window -h -d 'wpwsh -NoExit -wd "C:\Users\dmitr\software\work\nadeks\cypress-ui-tests" -Command "npx cypress open"'
+                tmux split-window -t 2 -v -d 'pwsh -NoExit -wd ~/software/work/nadeks/ru.nadeks.aria.backoffice -Command "gulp watch"'
+                tmux split-window -h -d 'wpwsh -NoExit -wd "C:\Users\dmitr\software\work\nadeks\cypress-ui-tests" -Command "vi /cypress/e2e/first.cy.js"'
             }
         }
         default {
@@ -54,6 +54,7 @@ if ($args[0] -is [string]) {
         }
     }
 
+    ##############
     # running windows
 
     # session - settings
@@ -63,7 +64,7 @@ if ($args[0] -is [string]) {
     tmux new-window -t $ubuntuName -n nvim -d -c $ubuntuSettingsPath
 
     # session - nadex
-    $projectPath = "~/work/nadex"
+    $projectPath = "~/software/work/nadeks"
     tmux new-session -s $company -n code -d -c $projectPath
     tmux new-window -t $company -n git -d -c $projectPath
     tmux new-window -t $company -n db -d -c $projectPath
@@ -72,13 +73,13 @@ if ($args[0] -is [string]) {
 
     Start-Sleep -Milliseconds 5000;
 
+    ##############
     # sending keys
     # session - settings
     tmux send-keys -t $ubuntuName`:dotfiles -- "vi ." C-m
     tmux send-keys -t $ubuntuName`:nvim -- "vi ." C-m
 
     # session - nadex
-    $projectPath = "~/work/nadex"
     tmux send-keys -t $company`:code -- "vi ." C-m
     tmux send-keys -t $company`:git -- "git status" C-m
     tmux send-keys -t $company`:db -- "usql mysql://root:secret@localhost/test1" C-m

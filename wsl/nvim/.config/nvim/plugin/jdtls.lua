@@ -1,15 +1,16 @@
 local java_cmds = vim.api.nvim_create_augroup('java_cmds', { clear = true })
 local cache_vars = {}
 
+-- ##################
 -- Work related :TODO move to another work-related place
 local function is_work_related(bufnr)
     -- return false
-    return string.match(vim.api.nvim_buf_get_name(bufnr), "^/home/bedware/work/nadex")
+    return string.match(vim.api.nvim_buf_get_name(bufnr), "^/home/bedware/software/work/nadeks")
 end
 local function work_related_configuration(dap_setup, bufnr)
     if is_work_related(bufnr) then
         dap_setup["config_overrides"] = {
-            vmArgs = "-Dspring.config.location=/home/bedware/work/nadex/ru.nadeks.aria.ganz/app-ganz-dima.properties"
+            vmArgs = "-Dspring.config.location=/home/bedware/software/work/nadeks/ru.nadeks.aria.ganz/app-ganz-dima.properties"
         }
     else
         print("File path is not related to work")
@@ -22,7 +23,7 @@ local function work_related_reload()
 
         require('dap').restart()
 
-        local job_id = vim.fn.jobstart({'pwsh', '-NoProfile', '-c', '/mnt/c/Users/dmitr/work/nadex/reload.ps1'}, {
+        local job_id = vim.fn.jobstart({'pwsh', '-NoProfile', '-c', '/mnt/c/Users/dmitr/software/work/nadeks/cypress-ui-tests/reload.ps1'}, {
             on_exit = function(job_id, exit_code, event)
                 print("Tests are reloaded")
             end
@@ -37,6 +38,7 @@ end
 vim.api.nvim_create_user_command('W', work_related_reload, { nargs = '?' })
 
 -- Work related END
+-- ##################
 
 -- Configs {{{1
 
