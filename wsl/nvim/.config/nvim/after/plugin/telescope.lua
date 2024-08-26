@@ -111,7 +111,8 @@ vim.keymap.set('n', '<leader>/', builtin.current_buffer_fuzzy_find, {})
 
 vim.keymap.set('n', '<leader>gff', function ()
   builtin.find_files({
-    find_command = global_find_command
+    find_command = global_find_command,
+    prompt_title = "Global Find Files",
   })
 end, {})
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
