@@ -22,7 +22,7 @@ function Put-VarToEnv($envVarName, $envVarValue) {
             Write-Output "Пользовательская переменная $envVarName уже существует в $regPathUser."
         }
     } elseif ($IsLinux) {
-        $etcEnvPath = "/etc/environment"
+        $etcEnvPath = "/etc/profile.d/custom_env_vars.sh"
 
         if (-not (Select-String -Path $etcEnvPath -Pattern "export $envVarName=")) {
             Add-Content -Path $etcEnvPath -Value "export $envVarName='$envVarValue'"
