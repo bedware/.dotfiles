@@ -33,7 +33,6 @@ $_argc_completer = {
             $description = "$([char]0x1b)[" + $parts[4] + "m" + $parts[2] + "$([char]0x1b)[0m"
         } else {
             $description = "$([char]0x1b)[" + $parts[4] + "m" + $parts[2] + "$([char]0x1b)[33m (" + $parts[3] + ")$([char]0x1b)[0m"
-            # $description = "$([char]0x1b)[" + $parts[4] + "m" + $parts[2] + "$([char]0x1b)[38;5;244m (" + $parts[3] + ")$([char]0x1b)[0m"
         }
         [CompletionResult]::new($value, $description, [CompletionResultType]::ParameterValue, " ")
     }
@@ -41,26 +40,23 @@ $_argc_completer = {
 
 $env:ARGC_COMPLETIONS_ROOT = "$env:HOME/.local/argc-completions"
 Add-SafelyToPath($env:ARGC_COMPLETIONS_ROOT + '/bin')
-
-$completionSources = @("$env:ARGC_COMPLETIONS_ROOT/completions")
 if ($IsLinux) {
-    $completionSources += ("$env:ARGC_COMPLETIONS_ROOT/completions/linux")
+    $env:ARGC_COMPLETIONS_PATH = "$env:ARGC_COMPLETIONS_ROOT/completions/linux"
+} 
+elseif ($IsWindows) {
+    $env:ARGC_COMPLETIONS_PATH = "$env:ARGC_COMPLETIONS_ROOT/completions/windows"
 }
-if ($IsWindows) {
-    $completionSources += ("$env:ARGC_COMPLETIONS_ROOT/completions/windows")
-}
+$env:ARGC_COMPLETIONS_PATH += [IO.Path]::PathSeparator + "$env:ARGC_COMPLETIONS_ROOT/completions"
+
 # To add completions for only the specified command, modify next line e.g. $argc_scripts = @("cargo", "git")
-$argc_scripts = Get-ChildItem -File -Path $completionSources | ForEach-Object { $_.Name -replace '\.sh$' }
+$argc_scripts = Get-ChildItem -File -Path ($env:ARGC_COMPLETIONS_PATH).Split([IO.Path]::PathSeparator) | ForEach-Object { $_.Name -replace '\.sh$' }
 $argc_scripts += "argc"
 
-$argc_scripts |
-    ForEach-Object {
-        Register-ArgumentCompleter -Native -ScriptBlock $_argc_completer -CommandName $_
-    }
+$argc_scripts | ForEach-Object {
+    Register-ArgumentCompleter -Native -ScriptBlock $_argc_completer -CommandName $_
+}
 
 Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
 
 # argc --argc-completions powershell $argc_scripts | Out-String | Invoke-Expression
-
-
 
