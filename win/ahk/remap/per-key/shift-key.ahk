@@ -20,6 +20,8 @@
                 commands["e"] := "{F4}"
                 commands["cp"] := "{F5}"
                 commands["mv"] := "{F6}"
+                commands["md"] := "{F7}"
+                commands["mf"] := "+{F4}"
                 commands["mk"] := "{F7}"
                 commands["rm"] := "{F8}"
             }

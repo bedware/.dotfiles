@@ -64,7 +64,7 @@ closeWindow() {
 
 ; OPEN mode
 startWork() {
-    Run C:\Users\dmitr\.dotfiles\win\pwsh\bin\Start-WorkEnvironment.ps1
+    Run, wt --title Start-WorkEnv -- pwsh -nop -c C:\Users\dmitr\.dotfiles\win\pwsh\bin\Start-WorkEnvironment.ps1
 }
 
 ; check out Get-WinUserLanguageList to find needed code

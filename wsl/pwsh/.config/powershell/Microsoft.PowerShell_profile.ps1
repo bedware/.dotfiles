@@ -15,17 +15,6 @@ $env:DC_API_TOKEN = Get-Content "$env:HOME/.ssh/daycaptain"
 $env:SDKMAN_DIR = "$env:HOME/.sdkman"
 $env:TERM = "xterm-256color"
 
-# Setup Fuzzy Finder
-$FdExcludeDirs = @('.git', '.npm')
-$FdDefaultOptions = "--path-separator / --strip-cwd-prefix --follow --hidden " + @($FdExcludeDirs | ForEach-Object {"--exclude $_"}) -join " "
-$env:FD_FIND_FILE_COMMAND = "fd --type f --ignore-file $env:HOME/.config/git/.gitignore $FdDefaultOptions"
-$env:FD_GLOBAL_FIND_FILE_COMMAND = "fd --type f --no-ignore $FdDefaultOptions"
-
-$env:FD_FIND_DIRECTORY_COMMAND = "fd --type d --ignore-file $env:HOME/.config/git/.gitignore $FdDefaultOptions"
-$env:FD_GLOBAL_FIND_DIRECTORY_COMMAND = "fd --type d --no-ignore $FdDefaultOptions"
-
-$env:FILES_IN_GIT_COMMAND = "git ls-files"
-
 # Path {{{1
 function Add-SafelyToPath($path) {
     if (Test-Path $path) {

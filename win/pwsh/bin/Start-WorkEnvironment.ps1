@@ -1,5 +1,4 @@
-Write-Host "Hello from Windows host"
-
+Write-Host "***Podman Info***"
 Invoke-Expression "podman info"
 
 $counter = 0
@@ -16,28 +15,25 @@ if ($LASTEXITCODE -ne 0) {
     exit
 }
 
+Write-Host "***Starting Work DB***"
 Invoke-Expression "podman start mysqlpsp"
 
-# alacritty
 Start-Job -ScriptBlock {
-    . "C:\Program Files\Alacritty\alacritty.exe" `
-        --config-file "C:\Users\dmitr\.dotfiles\all\alacritty\alacritty-work-profile.yml" `
-        --title "ubuntu" `
-        --command "wsl" `
-        -d "Ubuntu-22.04" `
-        --cd "~/.dotfiles" `
-        -- "Open-TmuxWorkSession"
-
-    Start-Sleep -Seconds 1
-    Run-AHK @'
-    #Include C:\Users\dmitr\.dotfiles\win\ahk\utils\windows.ahk
-
-    makeAnyWindowCenteredThenMaximized()
-'@
+& "C:\Program Files\Alacritty\alacritty.exe" `
+    --config-file "C:\Users\dmitr\.dotfiles\all\alacritty\alacritty-work-profile.yml" `
+    --title "ubuntu" `
+    --command "wsl" `
+    -d "Ubuntu-22.04" `
+    --cd "~/.dotfiles" `
+    -- "Open-TmuxWorkSession"
 }
-
-# podman desktop
-Run-AHK 'WinClose, ahk_exe Podman Desktop.exe'
+. "C:/Users/dmitr/.dotfiles/win/pwsh/bin/Run-AHK.ps1" @'
+#Include C:\Users\dmitr\.dotfiles\win\ahk\utils\windows.ahk
+WinClose, ahk_exe Podman Desktop.exe
+WinWait, ubuntu ahk_class Window Class ahk_exe alacritty.exe,, 5
+WinActivate, ubuntu ahk_class Window Class ahk_exe alacritty.exe
+makeAnyWindowCenteredThenMaximized()
+'@
 
 Get-Job | Wait-Job
-# $pass = Read-Host -Prompt "Enter to skip" -MaskInput
+# $pass = Read-Host -Prompt "Enter to continue" -MaskInput

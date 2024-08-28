@@ -21,6 +21,7 @@ OnChangeDesktop(wParam, lParam, msg, hwnd) {
 
 InitDesktops(desktops) {
     OutputDebug % "Loaded. Admin mode: " A_IsAdmin
+    ; MsgBox % "Loaded. Admin mode: " A_IsAdmin
     desktopCount := GetDesktopCount()
     counter := 1
     for i, v in desktops {
