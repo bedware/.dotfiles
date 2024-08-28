@@ -23,7 +23,7 @@
         - nvim
         - tmux
         - zsh
-        - pwsh
+        # - pwsh
         - dotfiles
       tags: always
 

@@ -4,7 +4,7 @@ Write-Host "Profile reading started"
 
 # Environment variables {{{1
 
-$env:DOTFILES = $env:HOME.ToString().Replace("\", "/") + "/.dotfiles"
+$env:DOTFILES = ($env:HOME).Replace("\", "/") + "/.dotfiles"
 $env:EDITOR = "nvim"
 $env:VISUAL = "$env:EDITOR"
 $env:LESS = "-S +g"
@@ -15,34 +15,38 @@ $env:DC_API_TOKEN = Get-Content "$env:HOME/.ssh/daycaptain"
 $env:SDKMAN_DIR = "$env:HOME/.sdkman"
 $env:TERM = "xterm-256color"
 
-# FZF (uses fd)
-$fdExcludeDirs = @('.git', '.npm')
-$fdDefaultOptions = "--path-separator / --strip-cwd-prefix --follow --hidden " + @($fdExcludeDirs | ForEach-Object {"--exclude $_"}) -join " "
-$env:FD_FIND_FILE_COMMAND = "fd --type f --ignore-file $env:HOME/.config/git/.gitignore $fdDefaultOptions"
-$env:FD_GLOBAL_FIND_FILE_COMMAND = "fd --type f --no-ignore $fdDefaultOptions"
+# Setup Fuzzy Finder
+$FdExcludeDirs = @('.git', '.npm')
+$FdDefaultOptions = "--path-separator / --strip-cwd-prefix --follow --hidden " + @($FdExcludeDirs | ForEach-Object {"--exclude $_"}) -join " "
+$env:FD_FIND_FILE_COMMAND = "fd --type f --ignore-file $env:HOME/.config/git/.gitignore $FdDefaultOptions"
+$env:FD_GLOBAL_FIND_FILE_COMMAND = "fd --type f --no-ignore $FdDefaultOptions"
 
-$env:FD_FIND_DIRECTORY_COMMAND = "fd --type d --ignore-file $env:HOME/.config/git/.gitignore $fdDefaultOptions"
-$env:FD_GLOBAL_FIND_DIRECTORY_COMMAND = "fd --type d --no-ignore $fdDefaultOptions"
+$env:FD_FIND_DIRECTORY_COMMAND = "fd --type d --ignore-file $env:HOME/.config/git/.gitignore $FdDefaultOptions"
+$env:FD_GLOBAL_FIND_DIRECTORY_COMMAND = "fd --type d --no-ignore $FdDefaultOptions"
 
 $env:FILES_IN_GIT_COMMAND = "git ls-files"
 
 # Path {{{1
-function safelyAddToPath($path) {
+function Add-SafelyToPath($path) {
     if (Test-Path $path) {
         $env:PATH += [IO.Path]::PathSeparator + $path
     } else {
         Write-Warning "Path: '$path' doesn't exist. It won't be added to PATH."
     }
 }
-safelyAddToPath("$env:DOTFILES/wsl/pwsh/.local/bin")
-safelyAddToPath("$env:BUN_INSTALL/bin")
-safelyAddToPath("$env:JAVA_HOME/bin")
-safelyAddToPath("$env:HOME/.local/bin")
-safelyAddToPath("$env:HOME/.cargo/bin")
+Add-SafelyToPath("$env:BUN_INSTALL/bin")
+Add-SafelyToPath("$env:JAVA_HOME/bin")
+Add-SafelyToPath("$env:HOME/.local/bin")
+Add-SafelyToPath("$env:HOME/.cargo/bin")
 if (Test-Path $env:SDKMAN_DIR) {
     Get-ChildItem "$env:SDKMAN_DIR/candidates" | ForEach-Object { 
-        safelyAddToPath("$env:SDKMAN_DIR/candidates/$($_.Name)/current/bin")
+        Add-SafelyToPath("$env:SDKMAN_DIR/candidates/$($_.Name)/current/bin")
     }
+}
+# iximiuz
+if (Test-Path "$env:HOME/.iximiuz/labctl/autocompletion.ps1") {
+    Add-SafelyToPath("$env:HOME/.config/powershell/autocompletion/labctl/bin")
+    . "$env:HOME/.iximiuz/labctl/autocompletion.ps1"
 }
 
 # Imports & Init {{{1
@@ -55,8 +59,12 @@ $global:GitPromptSettings.DefaultPromptSuffix.Text = '> $(OnViModeChange([Micros
 . "$env:DOTFILES/wsl/pwsh/.local/config/vimode.ps1"
 . "$env:DOTFILES/wsl/pwsh/.local/config/alias-autocomplete.ps1"
 . "$env:DOTFILES/wsl/pwsh/.local/config/hotkeys.ps1"
+. "$env:DOTFILES/wsl/pwsh/.local/config/argc-completion.ps1"
 . "$env:DOTFILES/wsl/pwsh/.local/config/user-functions.ps1"
 . "$env:DOTFILES/wsl/pwsh/.local/config/nvim-switcher.ps1"
+
+. "$env:DOTFILES/wsl/pwsh/.local/config/script-wrapper.ps1"
+Add-ScriptsFromDir("$env:DOTFILES/wsl/pwsh/.local/bin")
 
 # Aliases {{{1
 
@@ -87,32 +95,15 @@ $env:PATH = ($env:PATH).Replace([IO.Path]::PathSeparator + [IO.Path]::PathSepara
 if ($IsLinux) {
     . "$env:DOTFILES/wsl/pwsh/.local/config/borrowed.ps1"
 
-    # argc-completions
-    $env:ARGC_COMPLETIONS_ROOT = '/home/bedware/github/argc-completions'    
-    $env:PATH += [IO.Path]::PathSeparator + "$env:ARGC_COMPLETIONS_ROOT/bin"
-    Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
-
     # Remove windows stuff from linux. Great lookup booster.
-    $env:PATH = ($env:PATH -split [IO.Path]::PathSeparator | Where-Object { $_ -notlike "/mnt*" } | Sort-Object | Get-Unique) -join [IO.Path]::PathSeparator
+    $env:PATH = ($env:PATH -split [IO.Path]::PathSeparator | `
+        Where-Object { $_ -notlike "/mnt*" } | Sort-Object | Get-Unique) -join [IO.Path]::PathSeparator
 
     Write-Host "PATH:"
-    $env:PATH -replace [IO.Path]::PathSeparator, "`n"
+    Write-Host ($env:PATH).Replace([IO.Path]::PathSeparator, "`n")
 } elseif ($IsWindows) {
     . "$env:DOTFILES/win/pwsh/config/user-functions.ps1"
-    $env:PATH += [IO.Path]::PathSeparator + "$env:DOTFILES/win/pwsh/bin/"
-}
-
-# iximiuz
-if (Test-Path "$env:HOME/.iximiuz/labctl/autocompletion.ps1") {
-    $env:PATH += [IO.Path]::PathSeparator + "$env:HOME/.config/powershell/autocompletion/labctl/bin"
-    . "$env:HOME/.iximiuz/labctl/autocompletion.ps1"
-}
-
-# My autocompletion override
-# to generate autocomplete file use: argc --argc-completions powershell podman > filename.ps1
-# argc --argc-completions powershell $argc_scripts | Out-String | Invoke-Expression
-if (Test-Path "$env:HOME/.autocompletion/") {
-    Get-Content "$env:HOME/.autocompletion/*" | Out-String | Invoke-Expression
+    Add-ScriptsFromDir("$env:DOTFILES/win/pwsh/bin/")
 }
 
 Write-Host "Profile has been read"

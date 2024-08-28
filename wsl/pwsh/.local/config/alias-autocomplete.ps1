@@ -14,7 +14,8 @@ $ResetAliases = @(
     # "r", "rm",
     "select", "set", "sleep", "sort", "start",
     "type",
-    "where", "write"
+    # "where",
+    "write"
 )
 $ResetAliases | ForEach-Object { 
     if ($null -ne (Get-Alias | Where-Object Name -Contains $_)) {
