@@ -22,13 +22,13 @@ function Put-VarToEnv($envVarName, $envVarValue) {
             Write-Output "Пользовательская переменная $envVarName уже существует в $regPathUser."
         }
     } elseif ($IsLinux) {
-        $bashProfilePath = "$HOME/.bashrc"
+        $etcEnvPath = "/etc/environment"
 
-        if (-not (Select-String -Path $bashProfilePath -Pattern "export $envVarName=")) {
-            Add-Content -Path $bashProfilePath -Value "export $envVarName='$envVarValue'"
-            Write-Output "Переменная $envVarName была добавлена в $bashProfilePath с значением $envVarValue."
+        if (-not (Select-String -Path $etcEnvPath -Pattern "export $envVarName=")) {
+            Add-Content -Path $etcEnvPath -Value "export $envVarName='$envVarValue'"
+            Write-Output "Переменная $envVarName была добавлена в $etcEnvPath с значением $envVarValue."
         } else {
-            Write-Output "Переменная $envVarName уже существует в $bashProfilePath."
+            Write-Output "Переменная $envVarName уже существует в $etcEnvPath."
         }
     } else {
         Write-Output "Неизвестная платформа. Скрипт поддерживает только Windows и Linux."
