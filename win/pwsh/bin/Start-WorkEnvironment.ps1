@@ -26,7 +26,7 @@ Start-Job -ScriptBlock {
         --command "wsl" `
         -d "Ubuntu-22.04" `
         --cd "~/.dotfiles" `
-        -- "tmux-work-session.ps1"
+        -- "Open-TmuxWorkSession"
 
     Start-Sleep -Seconds 1
     Run-AHK @'
