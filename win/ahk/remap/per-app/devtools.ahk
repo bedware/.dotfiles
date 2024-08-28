@@ -1,10 +1,10 @@
-#if ScopeIs("^Dev") && GetKeyState("Space", "P")
+#if ScopeIs("^Dev ahk_exe msedge.exe") && HYPER_PRESSED
     a::Send ^+p
     f::Send ^p
 #if
 
 on := false
-#if ScopeIs("^Dev")
+#if ScopeIs("^Dev ahk_exe msedge.exe")
     ; Debug
     `;:: ; Step
         global on

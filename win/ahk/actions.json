@@ -191,6 +191,7 @@
     },
     "turm": {
         "desktop": "Dev",
+        "title": "ubuntu",
         "run": "C:\\Program Files\\Alacritty\\alacritty.exe",
         "runArgs": "--config-file C:\\Users\\dmitr\\.dotfiles\\all\\alacritty\\alacritty-work-profile.yml --title ubuntu --command wsl -d Ubuntu-22.04 --cd ~",
         "initFunction": "makeAnyWindowCenteredThenMaximized",

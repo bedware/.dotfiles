@@ -54,17 +54,24 @@ executeInput(apps, userInput) {
         }
         ; If nothing to activate
         else {
-            if (app.run && IsAppInTray(app.run)) {
+            ; Check in tray
+            if (app.title) {
+                if (IsAppInTrayByTitle(app.title)) {
+                    RemoveAppFromTrayByTitle(app.title)
+                    return
+                }
+            } else
+            if (app.run && IsAppInTrayByPath(app.run)) {
                 RemoveAppFromTrayByPath(app.run)
                 return
             }
 
+            ; Try to run
             runCmd := app.run
-            if (app.runArgs != "") {
+            if (app.runArgs) {
                 runCmd := runCmd . " " . app.runArgs
             }
 
-            ; Try to run
             Run % runCmd
             WinWait % app.selector,, 10
             if ErrorLevel {
@@ -78,14 +85,14 @@ executeInput(apps, userInput) {
             }
 
             ; Call init function
-            if (app.initFunction != "") {
+            if (app.initFunction) {
                 retval := Func(app.initFunction).Call()
             } 
         }
     }
     ; there is no selector for the app
     else {
-        if (app.run && IsAppInTray(app.run)) {
+        if (app.run && IsAppInTrayByPath(app.run)) {
             RemoveAppFromTrayByPath(app.run)
             return
         }

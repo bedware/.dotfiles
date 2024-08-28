@@ -12,10 +12,19 @@ AddAppToTray(winTitle, winID, pathToExe) {
 }
 
 ; Function to check if a window is already in the tray menu
-IsAppInTray(pathToExe) {
+IsAppInTrayByPath(path) {
     global appsInTray
     for _, win in appsInTray {
-        if (win.pathToExe = pathToExe) {
+        if (win.pathToExe = path) {
+            return true
+        }
+    }
+    return false
+}
+IsAppInTrayByTitle(title) {
+    global appsInTray
+    for _, win in appsInTray {
+        if (win.winTitle = title) {
             return true
         }
     }
