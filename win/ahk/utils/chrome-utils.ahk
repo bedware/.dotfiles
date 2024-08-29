@@ -28,6 +28,12 @@ ChromeProfileWinExist(profile) {
     Return False
 }
 
+!a::
+    WinGet, hwnd, ID, A
+    name := Acc_ObjectFromWindow(hwnd).accName
+    MsgBox % name
+return
+
 Chrome_GetProfile(hwnd:=""){
     title := Acc_ObjectFromWindow(hwnd).accName
     RegExMatch(title, "^.+Google Chrome . .*?([^(]+[^)]).?$", match)

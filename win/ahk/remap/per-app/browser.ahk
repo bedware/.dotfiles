@@ -29,12 +29,12 @@
 #if ScopeIs("select workspace ahk_class Window Class ahk_exe alacritty.exe")
     #s::
     ~*Enter::
-        HideAppToTray()
+        HideAppToTray("select workspace")
     return
 #if
 
 #if ScopeIs("select workspace ahk_class Window Class ahk_exe alacritty.exe") && HYPER_PRESSED
     s::
-       HideAppToTray()
+       HideAppToTray("select workspace")
     return
 #if

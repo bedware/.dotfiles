@@ -23,6 +23,8 @@
             Send {WheelUp}
         }
     return
+    !c::+!c
+    !d::+!d
 #if
 
 #if ScopeIs("Excalidraw Plus ahk_exe msedge.exe") && GetKeyState("Space", "P")

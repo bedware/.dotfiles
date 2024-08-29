@@ -215,8 +215,8 @@
         "selector": "^(?!DevTools) ahk_class Chrome_WidgetWin_1 ahk_exe msedge.exe"
     },
     "gpt": {
-        "run": "C:\\Program Files\\chatgpt-electron\\chatgpt.exe",
-        "selector": "ahk_exe chatgpt.exe",
+        "run": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\ChatGPT.lnk",
+        "selector": "^ChatGPT ahk_exe msedge.exe",
         "tray": true
     },
     "day": {

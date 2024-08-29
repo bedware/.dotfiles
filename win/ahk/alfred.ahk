@@ -43,7 +43,7 @@ executeInput(apps, userInput) {
         
         if WinActive(app.selector) {
             if (app.tray != "") {
-                HideAppToTray()
+                HideAppToTray(userInput)
                 return
             }
         }
@@ -52,17 +52,13 @@ executeInput(apps, userInput) {
         if WinExist(app.selector) {
             WinActivate
         }
-        ; If nothing to activate
+        ; If nothing on the screen
         else {
             ; Check in tray
-            if (app.title) {
-                if (IsAppInTrayByTitle(app.title)) {
-                    RemoveAppFromTrayByTitle(app.title)
-                    return
-                }
-            } else
-            if (app.run && IsAppInTrayByPath(app.run)) {
-                RemoveAppFromTrayByPath(app.run)
+            winId := fromStore(userInput)
+            if (IsAppInTrayById(winId)) {
+                ; MsgBox % "Window exist in tray"
+                RemoveAppFromTrayById(winId)
                 return
             }
 
@@ -79,9 +75,11 @@ executeInput(apps, userInput) {
                 return
             }
 
-            ; Activate window
+            ; Activate window after running
             if WinExist(app.selector) {
                 WinActivate
+                WinGet, hwnd, ID, A
+                toStore(userInput, hwnd)
             }
 
             ; Call init function

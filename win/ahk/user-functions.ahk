@@ -15,7 +15,7 @@ toggleRaceMode() {
 toggleGpt() {
     global apps
     if (WinActive(apps["gpt"].selector))
-        HideAppToTray()
+        HideAppToTray("gpt")
     else
         executeInput(apps, "gpt")
 }
@@ -23,7 +23,7 @@ toggleGpt() {
 toggleDay() {
     global apps
     if (WinActive(apps["day"].selector))
-        HideAppToTray()
+        HideAppToTray("day")
     else
         executeInput(apps, "day")
 }

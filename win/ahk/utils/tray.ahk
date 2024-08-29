@@ -2,20 +2,29 @@
 appsInTray := []
 
 ; Function to add a window to the tray menu
-AddAppToTray(winTitle, winID, pathToExe) {
+AddAppToTray(winId, path, winTitle) {
     global appsInTray
 
-    unhide := Func("RemoveAppFromTrayByPath").Bind(pathToExe)
+    unhide := Func("RemoveAppFromTrayByPath").Bind(path)
     Menu, Tray, Add, % winTitle, % unhide
-    Menu, Tray, Icon, % winTitle, % pathToExe
-    appsInTray.Push({winID: winID, pathToExe: pathToExe, winTitle: winTitle, unhide: unhide})
+    Menu, Tray, Icon, % winTitle, % path
+    appsInTray.Push({ winId: winId, path: path, winTitle: winTitle, unhide: unhide })
 }
 
 ; Function to check if a window is already in the tray menu
+IsAppInTrayById(winId) {
+    global appsInTray
+    for _, win in appsInTray {
+        if (win.winId = winId) {
+            return true
+        }
+    }
+    return false
+}
 IsAppInTrayByPath(path) {
     global appsInTray
     for _, win in appsInTray {
-        if (win.pathToExe = path) {
+        if (win.path = path) {
             return true
         }
     }
@@ -31,22 +40,32 @@ IsAppInTrayByTitle(title) {
     return false
 }
 
-; Function to remove a window from the tray menu
-RemoveAppFromTrayByPath(pathToExe) {
+RemoveAppFromTrayById(winId) {
     global appsInTray
     for index, win in appsInTray {
-        if (win.pathToExe = pathToExe) {
+        if (win.winId = winId) {
             Menu, Tray, Delete, % win.winTitle
             appsInTray.RemoveAt(index)
 
-            ; Restore window
-            winID := win.winID
-            WinShow, ahk_id %winID%
-            WinActivate, ahk_id %winID%
+            winId := win.winId
+            WinShow, ahk_id %winId%
+            WinActivate, ahk_id %winId%
         }
     }
 }
+RemoveAppFromTrayByPath(path) {
+    global appsInTray
+    for index, win in appsInTray {
+        if (win.path = path) {
+            Menu, Tray, Delete, % win.winTitle
+            appsInTray.RemoveAt(index)
 
+            winId := win.winId
+            WinShow, ahk_id %winId%
+            WinActivate, ahk_id %winId%
+        }
+    }
+}
 RemoveAppFromTrayByTitle(title) {
     global appsInTray
     for index, win in appsInTray {
@@ -54,29 +73,30 @@ RemoveAppFromTrayByTitle(title) {
             Menu, Tray, Delete, % win.winTitle
             appsInTray.RemoveAt(index)
 
-            ; Restore window
-            winID := win.winID
-            WinShow, ahk_id %winID%
-            WinActivate, ahk_id %winID%
-            return true
+            winId := win.winId
+            WinShow, ahk_id %winId%
+            WinActivate, ahk_id %winId%
         }
     }
-    return false
 }
 
-HideAppToTray(){
+HideAppToTray(appName := false){
     global apps
-    WinGet, WinID, ID, A
-    WinGet, pathToExe, ProcessPath, ahk_id %WinID%
-    WinGetTitle, WinTitle, ahk_id %WinID%
-    WinGet, Style, Style, ahk_id %WinID%
+    WinGet, winId, ID, A
+    WinGet, path, ProcessPath, ahk_id %winId%
+    WinGetTitle, winTitle, ahk_id %winId%
+    WinGet, Style, Style, ahk_id %winId%
 
     if (Style & 0xC00000) { ; If active window has titlebar
-        if (StrLen(WinTitle) > 50) {
-            WinTitle := SubStr(WinTitle, 1, 50) "..."
+        if (StrLen(winTitle) > 50) {
+            winTitle := SubStr(winTitle, 1, 50) "..."
         }
-        AddAppToTray(WinTitle, WinID, pathToExe)
-        WinHide, ahk_id %WinID%
+        AddAppToTray(winId, path, winTitle)
+        WinHide, ahk_id %winId%
+
+        if (appName) {
+            toStore(appName, winId)
+        }
 
         ForceForegroundWinActivate()
     }
@@ -85,9 +105,10 @@ HideAppToTray(){
 freeHiddenWindows() {
     global appsInTray
     for _, win in appsInTray {
-        winID := win.winID
-        WinShow, ahk_id %winID%
-        WinActivate, ahk_id %winID%
+        winId := win.winId
+        WinShow, ahk_id %winId%
+        WinActivate, ahk_id %winId%
+        WinClose, ahk_id %winId%
     }
 }
 OnExit("freeHiddenWindows")
