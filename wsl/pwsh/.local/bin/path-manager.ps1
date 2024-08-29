@@ -9,9 +9,9 @@ param(
     [string]$Path
 )
 if ($IsWindows) {
-    $DEFAULT_APP_DIR = "$HOME/.local/bin"
+    $SYSTEM_APP_DIR = "C:\Windows"
 } elseif ($IsLinux) {
-    $DEFAULT_APP_DIR = "/bin"
+    $SYSTEM_APP_DIR = "/bin"
 }
 $candidates = @{}
 # Java base
@@ -29,13 +29,16 @@ $candidates["labctl"] = "$env:HOME/.local/.iximiuz"
 if ($candidates.ContainsKey($App)) {
 
     $selected = Get-ChildItem $candidates[$App] | Select-Object -ExpandProperty Name | Invoke-Fzf
+    $target = $candidates[$App]
+    if ($IsWindows) {
+        $App = "$App.exe"
+    }
 
     switch ($Mode) {
         "default" {
-            $link = "$DEFAULT_APP_DIR/$App"
+            $link = "$SYSTEM_APP_DIR/$App"
             Write-Host $link
 
-            $target = $candidates[$App]
             $target = "$target/$selected/bin/$App"
             Write-Host $target
 
@@ -46,7 +49,6 @@ if ($candidates.ContainsKey($App)) {
             }
         }
         "shell" {
-            $target = $candidates[$App]
             $target = "$target/$selected/bin"
             Write-Host $target
 

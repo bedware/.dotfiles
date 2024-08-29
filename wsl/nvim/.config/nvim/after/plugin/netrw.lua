@@ -64,6 +64,7 @@ vim.api.nvim_create_autocmd('FileType', {
             vim.api.nvim_buf_set_keymap(e.buf, 'n', '<Esc>', '<C-w>z', {noremap = true})
             -- Command
             -- vim.keymap.set('n', 'c', function() vim.cmd('normal mx') end, { buffer = e.buf, silent = true, nowait = true })
+            vim.keymap.set('n', 'q', function() vim.api.nvim_win_close(0, false) end, { buffer = e.buf, nowait = true })
 
             -- Toggle dotfiles
             vim.keymap.set('n', '.', 'gh', { buffer = e.buf, remap = true })
