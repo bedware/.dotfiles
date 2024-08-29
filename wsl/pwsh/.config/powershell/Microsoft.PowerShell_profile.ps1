@@ -4,7 +4,7 @@ Write-Host "Profile reading started"
 
 # Environment variables {{{1
 
-$env:DOTFILES = ($env:HOME).Replace("\", "/") + "/.dotfiles"
+$env:DOTFILES = "$env:HOME/.dotfiles"
 $env:EDITOR = "nvim"
 $env:VISUAL = "$env:EDITOR"
 $env:BUN_INSTALL = "$env:HOME/.bun"
@@ -15,17 +15,16 @@ $env:SDKMAN_DIR = "$env:HOME/.sdkman"
 $env:TERM = "xterm-256color"
 
 # Path {{{1
-function Add-SafelyToPath($path) {
+function Add-ToPathSafely($path) {
     if (Test-Path $path) {
         $env:PATH += [IO.Path]::PathSeparator + $path
     } else {
         Write-Warning "Path: '$path' doesn't exist. It won't be added to PATH."
     }
 }
-Add-SafelyToPath("$env:BUN_INSTALL/bin")
-Add-SafelyToPath("$env:JAVA_HOME/bin")
-Add-SafelyToPath("$env:HOME/.local/bin")
-Add-SafelyToPath("$env:HOME/.cargo/bin")
+Add-ToPathSafely("$env:BUN_INSTALL/bin")
+Add-ToPathSafely("$env:HOME/.local/bin")
+Add-ToPathSafely("$env:HOME/.cargo/bin")
 
 # Imports & Init {{{1
 

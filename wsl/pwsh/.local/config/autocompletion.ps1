@@ -39,7 +39,7 @@ $_argc_completer = {
 }
 
 $env:ARGC_COMPLETIONS_ROOT = "$env:HOME/.local/argc-completions"
-Add-SafelyToPath($env:ARGC_COMPLETIONS_ROOT + '/bin')
+Add-ToPathSafely($env:ARGC_COMPLETIONS_ROOT + '/bin')
 if ($IsLinux) {
     $env:ARGC_COMPLETIONS_PATH = "$env:ARGC_COMPLETIONS_ROOT/completions/linux"
 } 

@@ -8,11 +8,13 @@ param(
 
     [string]$Path
 )
+
 if ($IsWindows) {
     $SYSTEM_APP_DIR = "C:\Windows"
 } elseif ($IsLinux) {
     $SYSTEM_APP_DIR = "/bin"
 }
+
 $candidates = @{}
 # Java base
 $candidates["java"] = "$env:HOME/.sdkman/candidates/java"
@@ -70,3 +72,4 @@ function Test-CommandInPath($command){
     }
 }
 # Test-CommandInPath("java")
+#

@@ -37,3 +37,10 @@ function Clear-HistoryEntriesOnExit {
     Write-Host "History will be cleared on exit"
 }
 
+function Edit-LastError {
+    $stack = $error | Select-Object -ExpandProperty ScriptStackTrace | Out-String | ForEach-Object { $_ -split "`n" }
+    $stack[0] -match ".*, (.+): line (\d+)"
+    $line = $matches[2]
+    $file = $matches[1]
+    vi +$line +"normal! zz" $file
+}
