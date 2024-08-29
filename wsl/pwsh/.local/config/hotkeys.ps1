@@ -76,6 +76,9 @@ Set-PSReadLineKeyHandlerBothModes -Chord Alt+p -ScriptBlock {
 Set-PSReadLineKeyHandlerBothModes -Chord Alt+u -ScriptBlock {
     RunExactCommand('Set-LocationToParentAndList')
 }
+Set-PSReadLineKeyHandlerBothModes -Chord Alt+U -ScriptBlock {
+    &$keyBindings["fu"]
+}
 Set-PSReadLineKeyHandler -Chord Ctrl+w -ScriptBlock {
     [Microsoft.PowerShell.PSConsoleReadLine]::BackwardDeleteWord()
 }
@@ -117,11 +120,35 @@ $keyBindings = @{
             RunExactCommand("Set-Location '$_' | Clear-Host && Get-ChildItem -Force | Format-Table -AutoSize")
         }
     }
+    "fu" = {
+        $counter = 1
+        Set-LocationToUpperDir | ForEach-Object {
+            "$_`:$counter"
+            $counter++
+        } | Invoke-Fzf -Color $color | ForEach-Object {
+            $_.Substring(0, $_.IndexOf(":"))
+        } | ForEach-Object {
+            RunExactCommand("Set-Location '$_' | Clear-Host && Get-ChildItem -Force | Format-Table -AutoSize")
+        }
+    }
     "gfd" = {
         Invoke-Expression $env:FD_GLOBAL_FIND_DIRECTORY_COMMAND| Invoke-Fzf -Color $color | ForEach-Object {
             RunExactCommand("Set-Location '$_' | Clear-Host && Get-ChildItem -Force | Format-Table -AutoSize")
         }
     }
+}
+
+function Set-LocationToUpperDir {
+    $results = @()
+    $remainder = (Get-Location).ToString()
+    while ($remainder.Contains([System.IO.Path]::DirectorySeparatorChar)) {
+        $aboveIndex = $remainder.LastIndexOf([System.IO.Path]::DirectorySeparatorChar)
+        $upperDir = $remainder.Substring(0, $aboveIndex)
+        $results += $upperDir
+        $remainder = $upperDir
+    }
+    $results[$results.Length - 1] = [System.IO.Path]::DirectorySeparatorChar
+    return $results
 }
 
 function _play_sound {
@@ -143,14 +170,14 @@ Set-PSReadLineKeyHandler -ViMode Command -Key Spacebar -ScriptBlock {
 
         # Esc
         if ($key.Key -eq 'Escape') {
-            Write-Error "Key chord cancelled."
+            Write-Error "Key chord cancelled (Esc)."
             _play_sound
             break
         }
 
         # Ctrl-C
         if ($key.Key -eq [System.ConsoleKey]::C -and $key.Modifiers -eq [System.ConsoleModifiers]::Control) {
-            Write-Error "Key chord cancelled."
+            Write-Error "Key chord cancelled (Ctrl + C)."
             _play_sound
             break
         }
