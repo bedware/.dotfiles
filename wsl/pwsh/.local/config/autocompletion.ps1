@@ -57,6 +57,8 @@ $argc_scripts | ForEach-Object {
 }
 
 Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
-
 # argc --argc-completions powershell $argc_scripts | Out-String | Invoke-Expression
+
+# Others
+. "$env:HOME/.local/.iximiuz/labctl/autocompletion.ps1"
 

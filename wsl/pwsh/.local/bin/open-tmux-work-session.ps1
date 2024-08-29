@@ -82,7 +82,8 @@ if ($args[0] -is [string]) {
     # session - nadex
     tmux send-keys -t $company`:code -- "vi ." C-m
     tmux send-keys -t $company`:git -- "git status" C-m
-    tmux send-keys -t $company`:db -- "usql mysql://root:secret@localhost/test1" C-m
+    tmux send-keys -t $company`:db -- '$env:LESS = "-S +g"; usql mysql://root:secret@localhost/test1' C-m
+
     # tmux send-keys -t $company`:live -- "start-working-session live" C-m
     tmux send-keys -t $company`:other -- "htop" C-m
 

@@ -7,9 +7,8 @@ Write-Host "Profile reading started"
 $env:DOTFILES = ($env:HOME).Replace("\", "/") + "/.dotfiles"
 $env:EDITOR = "nvim"
 $env:VISUAL = "$env:EDITOR"
-$env:LESS = "-S +g"
 $env:BUN_INSTALL = "$env:HOME/.bun"
-$env:JAVA_HOME = "$env:HOME/.sdkman/candidates/java/current/"
+$env:JAVA_HOME = Get-Command java | Select-Object -ExpandProperty Path | Get-Item | Select-Object -ExpandProperty Target | Split-Path -Parent | Split-Path -Parent
 $env:OPENAI_API_KEY = Get-Content "$env:HOME/.ssh/openai"
 $env:DC_API_TOKEN = Get-Content "$env:HOME/.ssh/daycaptain"
 $env:SDKMAN_DIR = "$env:HOME/.sdkman"
@@ -27,16 +26,6 @@ Add-SafelyToPath("$env:BUN_INSTALL/bin")
 Add-SafelyToPath("$env:JAVA_HOME/bin")
 Add-SafelyToPath("$env:HOME/.local/bin")
 Add-SafelyToPath("$env:HOME/.cargo/bin")
-if (Test-Path $env:SDKMAN_DIR) {
-    Get-ChildItem "$env:SDKMAN_DIR/candidates" | ForEach-Object { 
-        Add-SafelyToPath("$env:SDKMAN_DIR/candidates/$($_.Name)/current/bin")
-    }
-}
-# iximiuz
-if (Test-Path "$env:HOME/.iximiuz/labctl/autocompletion.ps1") {
-    Add-SafelyToPath("$env:HOME/.config/powershell/autocompletion/labctl/bin")
-    . "$env:HOME/.iximiuz/labctl/autocompletion.ps1"
-}
 
 # Imports & Init {{{1
 
@@ -48,7 +37,7 @@ $global:GitPromptSettings.DefaultPromptSuffix.Text = '> $(OnViModeChange([Micros
 . "$env:DOTFILES/wsl/pwsh/.local/config/vimode.ps1"
 . "$env:DOTFILES/wsl/pwsh/.local/config/alias-autocomplete.ps1"
 . "$env:DOTFILES/wsl/pwsh/.local/config/hotkeys.ps1"
-. "$env:DOTFILES/wsl/pwsh/.local/config/argc-completion.ps1"
+. "$env:DOTFILES/wsl/pwsh/.local/config/autocompletion.ps1"
 . "$env:DOTFILES/wsl/pwsh/.local/config/user-functions.ps1"
 . "$env:DOTFILES/wsl/pwsh/.local/config/nvim-switcher.ps1"
 
