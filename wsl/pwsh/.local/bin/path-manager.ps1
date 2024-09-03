@@ -6,7 +6,7 @@ param(
     [ValidateSet("default", "shell")]
     [string]$Mode,
 
-    [string]$Path
+    [string]$AppVersion
 )
 
 if ($IsWindows) {
@@ -29,9 +29,20 @@ $candidates["springboot"] = "$env:HOME/.sdkman/candidates/springboot"
 $candidates["labctl"] = "$env:HOME/.local/.iximiuz"
 
 if ($candidates.ContainsKey($App)) {
+    if ($AppVersion) {
+        Write-Host "Path argument is not empty"
+        if (Test-Path ($candidates[$App] + "/$AppVersion")) {
+            $selected = $AppVersion
+        } else {
+            Write-Warning "Candidate passed as an argument ($AppVersion) doesnt exist!"
+            return
+        }
+    } else {
+        $selected = Get-ChildItem $candidates[$App] | Select-Object -ExpandProperty Name | Invoke-Fzf
+    }
 
-    $selected = Get-ChildItem $candidates[$App] | Select-Object -ExpandProperty Name | Invoke-Fzf
     $target = $candidates[$App]
+
     if ($IsWindows) {
         $App = "$App.exe"
     }
