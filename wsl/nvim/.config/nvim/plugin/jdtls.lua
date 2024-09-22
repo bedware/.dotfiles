@@ -79,6 +79,17 @@ local function jdtls_on_attach(client, bufnr)
 
         require('jdtls').setup_dap(dap_setup)
         require('jdtls.dap').setup_dap_main_class_configs()
+
+        require('dap').configurations.java = {
+            {
+                type = 'java',
+                request = 'attach',
+                name = 'Attach to localhost (127.0.0.1:5005)',
+                hostName = '127.0.0.1',
+                port = 5005
+            }
+        }
+
         vim.keymap.set('n', ',tf', function() -- test class
             local windows = require("dapui.windows")
             for i = 1, #windows.layouts, 1 do
