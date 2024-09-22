@@ -1,0 +1,602 @@
+[
+  {
+    "id": 1,
+    "page": "xxi",
+    "tip": "Care About Your Craft",
+    "tip_description": "Why spend your life developing software unless you care about doing it well?"
+  },
+  {
+    "id": 2,
+    "page": "xxi",
+    "tip": "Think! About Your Work",
+    "tip_description": "Turn off the autopilot and take control. Constantly critique and appraise your work."
+  },
+  {
+    "id": 3,
+    "page": "2",
+    "tip": "You Have Agency",
+    "tip_description": "It’s your life. Grab hold of it and make it what you want."
+  },
+  {
+    "id": 4,
+    "page": "4",
+    "tip": "Provide Options, Don’t Make Lame Excuses",
+    "tip_description": "Instead of excuses, provide options. Don’t say it can’t be done; explain what can be done."
+  },
+  {
+    "id": 5,
+    "page": "7",
+    "tip": "Don’t Live with Broken Windows",
+    "tip_description": "Fix bad designs, wrong decisions, and poor code when you see them."
+  },
+  {
+    "id": 6,
+    "page": "9",
+    "tip": "Be a Catalyst for Change",
+    "tip_description": "You can’t force change on people. Instead, show them how the future might be and help them participate in creating it."
+  },
+  {
+    "id": 7,
+    "page": "10",
+    "tip": "Remember the Big Picture",
+    "tip_description": "Don’t get so engrossed in the details that you forget to check what’s happening around you."
+  },
+  {
+    "id": 8,
+    "page": "12",
+    "tip": "Make Quality a Requirements Issue",
+    "tip_description": "Involve your users in determining the project’s real quality requirements."
+  },
+  {
+    "id": 9,
+    "page": "15",
+    "tip": "Invest Regularly in Your Knowledge Portfolio",
+    "tip_description": "Make learning a habit."
+  },
+  {
+    "id": 10,
+    "page": "17",
+    "tip": "Critically Analyze What You Read and Hear",
+    "tip_description": "Don’t be swayed by vendors, media hype, or dogma. Analyze information in terms of you and your project."
+  },
+  {
+    "id": 11,
+    "page": "20",
+    "tip": "English is Just Another Programming Language",
+    "tip_description": "Treat English as Just Another Programming Language. Write documents as you would write code: honor the DRY principle, ETC, automation, and so on."
+  },
+  {
+    "id": 12,
+    "page": "22",
+    "tip": "It’s Both What You Say and the Way You Say It",
+    "tip_description": "There’s no point in having great ideas if you don’t communicate them effectively."
+  },
+  {
+    "id": 13,
+    "page": "23",
+    "tip": "Build Documentation In, Don’t Bolt It On",
+    "tip_description": "Documentation created separately from code is less likely to be correct and up to date."
+  },
+  {
+    "id": 14,
+    "page": "28",
+    "tip": "Good Design Is Easier to Change Than Bad Design",
+    "tip_description": "A thing is well designed if it adapts to the people who use it. For code, that means it must adapt by changing."
+  },
+  {
+    "id": 15,
+    "page": "31",
+    "tip": "DRY—Don't Repeat Yourself",
+    "tip_description": "Every piece of knowledge must have a single, unambiguous, authoritative representation within a system."
+  },
+  {
+    "id": 16,
+    "page": "38",
+    "tip": "Make It Easy to Reuse",
+    "tip_description": "If it’s easy to reuse, people will. Create an environment that supports reuse."
+  },
+  {
+    "id": 17,
+    "page": "40",
+    "tip": "Eliminate Effects Between Unrelated Things",
+    "tip_description": "Design components that are self-contained, independent, and have a single, well-defined purpose."
+  },
+  {
+    "id": 18,
+    "page": "48",
+    "tip": "There Are No Final Decisions",
+    "tip_description": "No decision is cast in stone. Instead, consider each as being written in the sand at the beach, and plan for change."
+  },
+  {
+    "id": 19,
+    "page": "49",
+    "tip": "Forgo Following Fads",
+    "tip_description": "Neal Ford says, “Yesterday’s Best Practice Becomes Tomorrow’s Antipattern.” Choose architectures based on fundamentals, not fashion."
+  },
+  {
+    "id": 20,
+    "page": "51",
+    "tip": "Use Tracer Bullets to Find the Target",
+    "tip_description": "Tracer bullets let you home in on your target by trying things and seeing how close they land."
+  },
+  {
+    "id": 21,
+    "page": "57",
+    "tip": "Prototype to Learn",
+    "tip_description": "Prototyping is a learning experience. Its value lies not in the code you produce, but in the lessons you learn."
+  },
+  {
+    "id": 22,
+    "page": "60",
+    "tip": "Program Close to the Problem Domain",
+    "tip_description": "Design and code in the language of the problem domain."
+  },
+  {
+    "id": 23,
+    "page": "66",
+    "tip": "Estimate to Avoid Surprises",
+    "tip_description": "Estimate before you start. You’ll spot potential problems up front."
+  },
+  {
+    "id": 24,
+    "page": "70",
+    "tip": "Iterate the Schedule with the Code",
+    "tip_description": "Use experience you gain as you implement to refine the project time scales."
+  },
+  {
+    "id": 25,
+    "page": "75",
+    "tip": "Keep Knowledge in Plain Text",
+    "tip_description": "Plain text won’t become obsolete. It helps leverage your work and simplifies debugging and testing."
+  },
+  {
+    "id": 26,
+    "page": "79",
+    "tip": "Use the Power of Command Shells",
+    "tip_description": "Use the shell when graphical user interfaces don’t cut it."
+  },
+  {
+    "id": 27,
+    "page": "81",
+    "tip": "Achieve Editor Fluency",
+    "tip_description": "An editor is your most important tool. Know how to make it do what you need, quickly and accurately."
+  },
+  {
+    "id": 28,
+    "page": "85",
+    "tip": "Always Use Version Control",
+    "tip_description": "Version control is a time machine for your work; you can go back."
+  },
+  {
+    "id": 29,
+    "page": "89",
+    "tip": "Fix the Problem, Not the Blame",
+    "tip_description": "It doesn’t really matter whether the bug is your fault or someone else’s—it is still your problem, and it still needs to be fixed."
+  },
+  {
+    "id": 30,
+    "page": "89",
+    "tip": "Don’t Panic",
+    "tip_description": "This is true for galactic hitchhikers and for developers."
+  },
+  {
+    "id": 31,
+    "page": "91",
+    "tip": "Failing Test Before Fixing Code",
+    "tip_description": "Create a focussed test that reveals the bug before you try fixing it."
+  },
+  {
+    "id": 32,
+    "page": "92",
+    "tip": "Read the Damn Error Message",
+    "tip_description": "Most exceptions tell both what failed and where it failed. If you’re lucky you might even get parameter values."
+  },
+  {
+    "id": 33,
+    "page": "95",
+    "tip": "“select” Isn't Broken",
+    "tip_description": "It is rare to find a bug in the OS or the compiler, or even a third-party product or library. The bug is most likely in the application."
+  },
+  {
+    "id": 34,
+    "page": "96",
+    "tip": "Don’t Assume It—Prove It",
+    "tip_description": "Prove your assumptions in the actual environment—with real data and boundary conditions."
+  },
+  {
+    "id": 35,
+    "page": "98",
+    "tip": "Learn a Text Manipulation Language",
+    "tip_description": "You spend a large part of each day working with text. Why not have the computer do some of it for you?"
+  },
+  {
+    "id": 36,
+    "page": "102",
+    "tip": "You Can’t Write Perfect Software",
+    "tip_description": "Software can’t be perfect. Protect your code and users from the inevitable errors."
+  },
+  {
+    "id": 37,
+    "page": "107",
+    "tip": "Design with Contracts",
+    "tip_description": "Use contracts to document and verify that code does no more and no less than it claims to do."
+  },
+  {
+    "id": 38,
+    "page": "113",
+    "tip": "Crash Early",
+    "tip_description": "A dead program normally does a lot less damage than a crippled one."
+  },
+  {
+    "id": 39,
+    "page": "115",
+    "tip": "Use Assertions to Prevent the Impossible",
+    "tip_description": "If it can’t happen, use assertions to ensure that it won’t. Assertions validate your assumptions. Use them to protect your code from an uncertain world."
+  },
+  {
+    "id": 40,
+    "page": "118",
+    "tip": "Finish What You Start",
+    "tip_description": "Where possible, the function or object that allocates a resource should be responsible for deallocating it."
+  },
+  {
+    "id": 41,
+    "page": "121",
+    "tip": "Act Locally",
+    "tip_description": "Keep the scope of mutable variables and open resources short and easily visible."
+  },
+  {
+    "id": 42,
+    "page": "126",
+    "tip": "Take Small Steps—Always",
+    "tip_description": "Small steps always; check the feedback; and adjust before proceeding."
+  },
+  {
+    "id": 43,
+    "page": "127",
+    "tip": "Avoid Fortune-Telling",
+    "tip_description": "Only look ahead as far as you can see."
+  },
+  {
+    "id": 44,
+    "page": "131",
+    "tip": "Decoupled Code Is Easier to Change",
+    "tip_description": "Coupling ties things together, so that it’s harder to change just one thing."
+  },
+  {
+    "id": 45,
+    "page": "132",
+    "tip": "Tell, Don’t Ask",
+    "tip_description": "Don’t get values from an object, transform them, and then stick them back. Make the object do the work."
+  },
+  {
+    "id": 46,
+    "page": "134",
+    "tip": "Don’t Chain Method Calls",
+    "tip_description": "Try not to have more than one dot when you access something."
+  },
+  {
+    "id": 47,
+    "page": "136",
+    "tip": "Avoid Global Data",
+    "tip_description": "It’s like adding an extra parameter to every method."
+  },
+  {
+    "id": 48,
+    "page": "136",
+    "tip": "If It’s Important Enough To Be Global, Wrap It in an API",
+    "tip_description": "…but only if you really, really want it to be global."
+  },
+  {
+    "id": 49,
+    "page": "149",
+    "tip": "Programming Is About Code, But Programs Are About Data",
+    "tip_description": "All programs transform data, converting an input into an output. Start designing using transformations."
+  },
+  {
+    "id": 50,
+    "page": "153",
+    "tip": "Don’t Hoard State; Pass It Around",
+    "tip_description": "Don’t hang on to data within a function or module. Take one down and pass it around."
+  },
+  {
+    "id": 51,
+    "page": "161",
+    "tip": "Don't Pay Inheritance Tax",
+    "tip_description": "Consider alternatives that better fit your needs, such as interfaces, delegation, or mixins"
+  },
+  {
+    "id": 52,
+    "page": "162",
+    "tip": "Prefer Interfaces to Express Polymorphism",
+    "tip_description": "Interfaces make polymorphism explicit without the coupling introduced by inheritance."
+  },
+  {
+    "id": 53,
+    "page": "163",
+    "tip": "Delegate to Services: Has-A Trumps Is-A",
+    "tip_description": "Don’t inherit from services: contain them."
+  },
+  {
+    "id": 54,
+    "page": "165",
+    "tip": "Use Mixins to Share Functionality",
+    "tip_description": "Mixins add functionality to classes without the inheritance tax. Combine with interfaces for painless polymorphism."
+  },
+  {
+    "id": 55,
+    "page": "166",
+    "tip": "Parameterize Your App Using External Configuration",
+    "tip_description": "When code relies on values that may change after the application has gone live, keep those values external to the app. When you application will run in different environments, and potentially for different customers, keep the environment and customer specific values outside the app."
+  },
+  {
+    "id": 56,
+    "page": "171",
+    "tip": "Analyze Workflow to Improve Concurrency",
+    "tip_description": "Exploit concurrency in your user’s workflow."
+  },
+  {
+    "id": 57,
+    "page": "174",
+    "tip": "Shared State Is Incorrect State",
+    "tip_description": "Shared state opens a large can of worms that can often only be fixed by rebooting."
+  },
+  {
+    "id": 58,
+    "page": "180",
+    "tip": "Random Failures Are Often Concurrency Issues",
+    "tip_description": "Variations in timing and context can expose concurrency bugs, but in inconsistent and irreproducible ways."
+  },
+  {
+    "id": 59,
+    "page": "182",
+    "tip": "Use Actors For Concurrency Without Shared State",
+    "tip_description": "Use Actors to manage concurrent state without explicit synchronization."
+  },
+  {
+    "id": 60,
+    "page": "189",
+    "tip": "Use Blackboards to Coordinate Workflow",
+    "tip_description": "Use blackboards to coordinate disparate facts and agents, while maintaining independence and isolation among participants."
+  },
+  {
+    "id": 61,
+    "page": "194",
+    "tip": "Listen to Your Inner Lizard",
+    "tip_description": "When it feels like your code is pushing back, it’s really your subconscious trying to tell you something’s wrong."
+  },
+  {
+    "id": 62,
+    "page": "200",
+    "tip": "Don’t Program by Coincidence",
+    "tip_description": "Rely only on reliable things. Beware of accidental complexity, and don’t confuse a happy coincidence with a purposeful plan."
+  },
+  {
+    "id": 63,
+    "page": "207",
+    "tip": "Estimate the Order of Your Algorithms",
+    "tip_description": "Get a feel for how long things are likely to take before you write code."
+  },
+  {
+    "id": 64,
+    "page": "208",
+    "tip": "Test Your Estimates",
+    "tip_description": "Mathematical analysis of algorithms doesn’t tell you everything. Try timing your code in its target environment."
+  },
+  {
+    "id": 65,
+    "page": "212",
+    "tip": "Refactor Early, Refactor Often",
+    "tip_description": "Just as you might weed and rearrange a garden, rewrite, rework, and re-architect code when it needs it. Fix the root of the problem."
+  },
+  {
+    "id": 66,
+    "page": "214",
+    "tip": "Testing Is Not About Finding Bugs",
+    "tip_description": "A test is a perspective into your code, and gives you feedback about its design, api, and coupling."
+  },
+  {
+    "id": 67,
+    "page": "216",
+    "tip": "A Test Is the First User of Your Code",
+    "tip_description": "Use its feedback to guide what you do."
+  },
+  {
+    "id": 68,
+    "page": "218",
+    "tip": "Build End-To-End, Not Top-Down or Bottom Up",
+    "tip_description": "Build small pieces of end-to-end functionality, learning about the problem as you go."
+  },
+  {
+    "id": 69,
+    "page": "221",
+    "tip": "Design to Test",
+    "tip_description": "Start thinking about testing before you write a line of code."
+  },
+  {
+    "id": 70,
+    "page": "223",
+    "tip": "Test Your Software, or Your Users Will",
+    "tip_description": "Test ruthlessly. Don’t make your users find bugs for you."
+  },
+  {
+    "id": 71,
+    "page": "224",
+    "tip": "Use Property-Based Tests to Validate Your Assumptions",
+    "tip_description": "Property-based tests will try things you never thought to try, and exercise your code in ways is wasn’t meant to be used."
+  },
+  {
+    "id": 72,
+    "page": "234",
+    "tip": "Keep It Simple and Minimize Attack Surfaces",
+    "tip_description": "Complex code creates a breeding ground for bugs and opportunities for attackers to exploit."
+  },
+  {
+    "id": 73,
+    "page": "235",
+    "tip": "Apply Security Patches Quickly",
+    "tip_description": "Attackers deploy exploits as quick as they can, you have to be quicker."
+  },
+  {
+    "id": 74,
+    "page": "242",
+    "tip": "Name Well; Rename When Needed",
+    "tip_description": "Name to express your intent to readers, and rename as soon as that intent shifts."
+  },
+  {
+    "id": 75,
+    "page": "244",
+    "tip": "No One Knows Exactly What They Want",
+    "tip_description": "They might know a general direction, but they won’t know the twists and turns."
+  },
+  {
+    "id": 76,
+    "page": "245",
+    "tip": "Programmers Help People Understand What They Want",
+    "tip_description": "Software development is an act of co-creation between users and programmers."
+  },
+  {
+    "id": 77,
+    "page": "246",
+    "tip": "Requirements Are Learned in a Feedback Loop",
+    "tip_description": "Understanding requirements requires exploration and feedback, so the consequences of decisions can be used to refine the initial ideas."
+  },
+  {
+    "id": 78,
+    "page": "247",
+    "tip": "Work with a User to Think Like a User",
+    "tip_description": "It’s the best way to gain insight into how the system will really be used."
+  },
+  {
+    "id": 79,
+    "page": "248",
+    "tip": "Policy Is Metadata",
+    "tip_description": "Don’t hardcode policy into a system; instead express it as metadata used by the system."
+  },
+  {
+    "id": 80,
+    "page": "251",
+    "tip": "Use a Project Glossary",
+    "tip_description": "Create and maintain a single source of all the specific terms and vocabulary for a project."
+  },
+  {
+    "id": 81,
+    "page": "254",
+    "tip": "Don’t Think Outside the Box—Find the Box",
+    "tip_description": "When faced with an impossible problem, identify the real constraints. Ask yourself: “Does it have to be done this way? Does it have to be done at all?”"
+  },
+  {
+    "id": 82,
+    "page": "259",
+    "tip": "Don't Go into the Code Alone",
+    "tip_description": "Programming can be difficult and demanding. Take a friend with you."
+  },
+  {
+    "id": 83,
+    "page": "259",
+    "tip": "Agile Is Not a Noun; Agile Is How You Do Things",
+    "tip_description": "Agile is an adjective: it’s how you do something."
+  },
+  {
+    "id": 84,
+    "page": "264",
+    "tip": "Maintain Small Stable Teams",
+    "tip_description": "Teams should be small and stable, where everyone trusts each other and depends on each other."
+  },
+  {
+    "id": 85,
+    "page": "266",
+    "tip": "Schedule It to Make It Happen",
+    "tip_description": "If you don’t schedule it, it’s not going to happen. Schedule reflection, experimentation, learning and skills improvement."
+  },
+  {
+    "id": 86,
+    "page": "268",
+    "tip": "Organize Fully Functional Teams",
+    "tip_description": "Organize Around Functionality, Not Job Functions. Don’t separate UI/UX designers from coders, frontend from backend, testers from data modelers, design from deployment. Build teams so you can build code end-to-end, incrementally and iteratively."
+  },
+  {
+    "id": 87,
+    "page": "271",
+    "tip": "Do What Works, Not What’s Fashionable",
+    "tip_description": "Don’t adopt a development method or technique just because other companies are doing it. Adopt what works for your team, in your context."
+  },
+  {
+    "id": 88,
+    "page": "273",
+    "tip": "Deliver When Users Need It",
+    "tip_description": "Don’t wait weeks or months to deliver just because your process demands it."
+  },
+  {
+    "id": 89,
+    "page": "274",
+    "tip": "Use Version Control to Drive Builds, Tests, and Releases",
+    "tip_description": "Use commits or pushes to trigger builds, tests, releases. Use a version control tag to deploy to production."
+  },
+  {
+    "id": 90,
+    "page": "275",
+    "tip": "Test Early, Test Often, Test Automatically",
+    "tip_description": "Tests that run with every build are much more effective than test plans that sit on a shelf."
+  },
+  {
+    "id": 91,
+    "page": "275",
+    "tip": "Coding Ain’t Done ’Til All the Tests Run",
+    "tip_description": "’Nuff said."
+  },
+  {
+    "id": 92,
+    "page": "277",
+    "tip": "Use Saboteurs to Test Your Testing",
+    "tip_description": "Introduce bugs on purpose in a separate copy of the source to verify that testing will catch them."
+  },
+  {
+    "id": 93,
+    "page": "278",
+    "tip": "Test State Coverage, Not Code Coverage",
+    "tip_description": "Identify and test significant program states. Testing just lines of code isn’t enough."
+  },
+  {
+    "id": 94,
+    "page": "278",
+    "tip": "Find Bugs Once",
+    "tip_description": "Once a human tester finds a bug, it should be the last time a human tester finds that bug. Automatic tests should check for it from then on."
+  },
+  {
+    "id": 95,
+    "page": "279",
+    "tip": "Don't Use Manual Procedures",
+    "tip_description": "A computer will execute the same instructions, in the same order, time after time."
+  },
+  {
+    "id": 96,
+    "page": "281",
+    "tip": "Delight Users, Don’t Just Deliver Code",
+    "tip_description": "Develop solutions that produce business value for your users and delight them every day."
+  },
+  {
+    "id": 97,
+    "page": "282",
+    "tip": "Sign Your Work",
+    "tip_description": "Artisans of an earlier age were proud to sign their work. You should be, too."
+  },
+  {
+    "id": 98,
+    "page": "286",
+    "tip": "First, Do No Harm",
+    "tip_description": "Failure is inevitable. Make sure no one will suffer because of it."
+  },
+  {
+    "id": 99,
+    "page": "287",
+    "tip": "Don’t Enable Scumbags",
+    "tip_description": "Because you risk becoming one, too."
+  },
+  {
+    "id": 100,
+    "page": "287",
+    "tip": "It’s Your Life. Share it. Celebrate it. Build it. AND HAVE FUN!",
+    "tip_description": "Enjoy this amazing life we have, and do great things."
+  }
+]

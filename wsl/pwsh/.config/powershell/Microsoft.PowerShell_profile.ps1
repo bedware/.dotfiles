@@ -84,4 +84,5 @@ if ($IsLinux) {
 }
 
 Write-Host "Profile has been read"
+Get-Content "$env:DOTFILES/all/pragmatic-programmer-tips.json" | ConvertFrom-Json | Get-Random | ForEach-Object { Write-Host "`nTip #$($_.id): $($_.tip)`n$($_.tip_description)`n" }
 
