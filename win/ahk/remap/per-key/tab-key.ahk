@@ -9,6 +9,12 @@
         }
     }
 return
+
+#if ScopeIs("ahk_exe datagrip64.exe") and GetKeyState("Tab", "P")
+    j::Send !{Left}
+    k::Send !{Right}
+#if
+
 #if GetKeyState("Tab", "P")
     ; Languages (this one for one-hand interacting)
     e::english()

@@ -50,8 +50,10 @@ RemoveAppFromTrayById(winId) {
             winId := win.winId
             WinShow, ahk_id %winId%
             WinActivate, ahk_id %winId%
+            return true
         }
     }
+    return false
 }
 RemoveAppFromTrayByPath(path) {
     global appsInTray
@@ -63,8 +65,10 @@ RemoveAppFromTrayByPath(path) {
             winId := win.winId
             WinShow, ahk_id %winId%
             WinActivate, ahk_id %winId%
+            return true
         }
     }
+    return false
 }
 RemoveAppFromTrayByTitle(title) {
     global appsInTray
@@ -76,8 +80,10 @@ RemoveAppFromTrayByTitle(title) {
             winId := win.winId
             WinShow, ahk_id %winId%
             WinActivate, ahk_id %winId%
+            return true
         }
     }
+    return false
 }
 
 HideAppToTray(appName := false){

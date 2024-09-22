@@ -1,3 +1,4 @@
+. "C:/Users/dmitr/.dotfiles/win/pwsh/bin/Run-AHK.ps1"
 $jsonFilePath = "C:\Users\dmitr\AppData\Local\Microsoft\Edge\User Data\Default\Workspaces\WorkspacesCache"
 while ($true) {
     $jsonContent = Get-Content -Path $jsonFilePath -Raw | ConvertFrom-Json
@@ -22,6 +23,16 @@ while ($true) {
             $workspaceID = $workspace.id
             # Write-Host "Launching Microsoft Edge for workspace ID: $workspaceID"
             Start-Process -FilePath "msedge.exe" -ArgumentList "--launch-workspace=$workspaceID"
+
+            ahk @"
+WinWait, $selectedWorkspaceName ahk_exe msedge.exe,, 5
+;MsgBox % "$selectedWorkspaceName ahk_exe msedge.exe"
+if (WinExist("$selectedWorkspaceName ahk_exe msedge.exe")) {
+    WinActivate
+    ;MsgBox % "Activated: $selectedWorkspaceName"
+}
+"@
+            break;
         }
     }
 }

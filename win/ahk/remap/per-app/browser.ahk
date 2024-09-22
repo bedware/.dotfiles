@@ -15,14 +15,10 @@
 ; Workspace switcher popup
 
 #if ScopeIs("ahk_exe msedge.exe")
-    #s::
-        createPopUp("select workspace", "C:\Users\dmitr\.dotfiles\win\pwsh\bin\Switch-BrowserWorkspace.ps1", false)
-    return
+    #s::createPopUp("select workspace", "C:\Users\dmitr\.dotfiles\win\pwsh\bin\Switch-BrowserWorkspace.ps1", false)
 #if
 #if ScopeIs("ahk_exe msedge.exe") && HYPER_PRESSED
-    s::
-        createPopUp("select workspace", "C:\Users\dmitr\.dotfiles\win\pwsh\bin\Switch-BrowserWorkspace.ps1", false)
-    return
+    s::createPopUp("select workspace", "C:\Users\dmitr\.dotfiles\win\pwsh\bin\Switch-BrowserWorkspace.ps1", false)
 #if
 
 

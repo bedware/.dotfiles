@@ -1,11 +1,3 @@
-#if ScopeIs("Workona ahk_exe chrome.exe")
-    *Enter::
-        Send {Enter}
-        Sleep 150
-        WinMaximize, A
-    return
-#if
-
 #if ScopeIs("Excalidraw Plus ahk_exe msedge.exe")
     *RButton::MButton
     *MButton::RButton
