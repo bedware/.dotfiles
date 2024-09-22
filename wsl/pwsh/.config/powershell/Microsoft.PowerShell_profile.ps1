@@ -57,8 +57,12 @@ Remove-Alias cd; New-Alias -Name cd -Value 'Set-LocationAndList'
 New-Alias -Name rmr -Value "Remove-Item -Force -Recurse"
 New-Alias -Name l -Value 'Get-ChildItem -Force'
 New-Alias -Name ll -Value 'Get-ChildItem -Force | Format-Table -AutoSize'
-New-Alias -Name '|l' -Value '| Format-Table -AutoSize'
+New-Alias -Name '|l' -Value '| less'
+New-Alias -Name '|a' -Value '| Format-Table -AutoSize'
 New-Alias -Name '|w' -Value '| Select-Object -ExpandProperty Path | ForEach-Object { nvim $_ }'
+New-Alias -Name '|e' -Value '| Select-Object -ExpandProperty Path'
+New-Alias -Name '|p' -Value '| Select-Object -Property *'
+New-Alias -Name '|f' -Value '| ForEach-Object { $_ }'
 New-BlankAlias -Name e -Value '$env:'
 New-IgnoredAlias -Name vi -Value 'nvim'
 

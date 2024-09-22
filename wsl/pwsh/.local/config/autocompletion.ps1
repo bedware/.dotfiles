@@ -60,7 +60,7 @@ Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
 # argc --argc-completions powershell $argc_scripts | Out-String | Invoke-Expression
 
 # Others
-if (Test-Path "$env:HOME/.local/.iximiuz/labctl/autocompletion.ps1") {
-    . "$env:HOME/.local/.iximiuz/labctl/autocompletion.ps1"
+if (Get-Command labctl -ErrorAction SilentlyContinue) {
+    labctl completion powershell | Out-String | Invoke-Expression
 }
 
