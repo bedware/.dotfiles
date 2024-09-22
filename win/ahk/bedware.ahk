@@ -14,10 +14,12 @@ SetTitleMatchMode, RegEx ; Write selectors using regexp
 #Include %A_ScriptDir%/dependencies/VirtualDesktopAccessor.ahk
 
 ; Read config
-FileRead, tmp, %A_ScriptDir%/actions.json
-config := JSON.Load(tmp)
-desktops := config["desktops"]
-apps := config["apps"]
+FileRead, tmp, %A_ScriptDir%/config/desktops.json
+desktops := JSON.Load(tmp)
+FileRead, tmp, %A_ScriptDir%/config/actions.json
+apps := JSON.Load(tmp)
+FileRead, tmp, %A_ScriptDir%/config/context_commands.json
+commands := JSON.Load(tmp)
 
 ; Modules
 #Include %A_ScriptDir%/utils/__init__.ahk

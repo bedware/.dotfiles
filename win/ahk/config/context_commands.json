@@ -1,0 +1,19 @@
+﻿{
+    "Total Commander": {
+        "selector": "ahk_exe TOTALCMD64.EXE",
+        "commands": {
+            "re": { "keys": "{F2}",  "desc": "Rename" },
+            "q":  { "keys": "{F3}",  "desc": "Quick View" },
+            "v":  { "keys": "{F3}",  "desc": "Quick View" },
+            "e":  { "keys": "{F4}",  "desc": "Edit" },
+            "cp": { "keys": "{F5}",  "desc": "Copy" },
+            "mv": { "keys": "{F6}",  "desc": "Move" },
+            "md": { "keys": "{F7}",  "desc": "Make dir" },
+            "mf": { "keys": "+{F4}", "desc": "Make file" },
+            "mk": { "keys": "{F7}",  "desc": "Make dir" },
+            "rm": { "keys": "{F8}",  "desc": "Remove" },
+            "1":  { "keys": "!{F1}", "desc": "Select left drive" },
+            "2":  { "keys": "!{F2}", "desc": "Select right drive" }
+        }
+    }
+}

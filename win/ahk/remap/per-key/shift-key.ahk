@@ -12,20 +12,14 @@
     return 
 
     RShift Up::
+        global commands
         if (A_PriorKey = "RShift") {
-            commands := {}
-            if (ScopeIs("ahk_exe TOTALCMD64.EXE")) {
-                commands["re"] := "{F2}"
-                commands["q"] := "{F3}"
-                commands["e"] := "{F4}"
-                commands["cp"] := "{F5}"
-                commands["mv"] := "{F6}"
-                commands["md"] := "{F7}"
-                commands["mf"] := "+{F4}"
-                commands["mk"] := "{F7}"
-                commands["rm"] := "{F8}"
+            for key, command in commands {
+                if (ScopeIs(command.selector)) {
+                    RunContext(command.commands)
+                    break
+                }
             }
-            RunContext(commands)
         }
         Send {RShift Up}
     return 

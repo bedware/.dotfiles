@@ -10,7 +10,8 @@ RunContext(commands) {
     _RunBase(commands, "runContextFunc", "RShift", "show-alternate")
 }
 runContextFunc(commands, userInput) {
-    keys := commands[userInput ""]
+    command := commands[userInput]
+    keys := command.keys
     Send %keys%
 }
 

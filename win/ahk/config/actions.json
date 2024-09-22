@@ -1,6 +1,4 @@
 ﻿{
-  "desktops": ["Browsing", "Dev", "Chats", "Office", "Creator", "Stream", "English", "Files", "Other"],
-  "apps": {
     "exp": {
         "run": "explorer.exe",
         "selector": "ahk_class CabinetWClass"
@@ -8,12 +6,12 @@
     "adbg": {
         "run": "G:\\My Drive\\Soft\\DebugView\\dbgview64.exe",
         "selector": "ahk_exe dbgview64.exe",
-        "description": "Open debugger for AHK"
+        "desc": "Open debugger for AHK"
     },
     "adoc": {
         "run": "C:\\Program Files\\AutoHotkey\\AutoHotkey.chm",
         "selector": "AutoHotkey Help",
-        "description": "Open documentation for AHK"
+        "desc": "Open documentation for AHK"
     },
     "anki": {
         "desktop": "Office",
@@ -156,6 +154,10 @@
         "run": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\System Tools\\Task Manager.lnk",
         "selector": "ahk_class TaskManagerWindow"
     },
+    "ton": {
+        "run": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Ton APPS UK Limited\\Tonkeeper.lnk",
+        "selector": "ahk_exe Tonkeeper.exe"
+    },
     "td": {
         "desktop": "Dev",
         "selector": "^Developer Tools ahk_exe Cypress.exe"
@@ -282,5 +284,4 @@
     ".c": {
         "initFunction": "open_pwsh"
     }
-  }
 }
