@@ -78,6 +78,9 @@ class PathManager {
             }
         } else {
             $selected = Get-ChildItem $this.candidates[$App] | Select-Object -ExpandProperty Name | Invoke-Fzf
+            if (!$selected) {
+                throw("Candidate wasn't selected in fzf")
+            }
         }
         return $selected
     }
