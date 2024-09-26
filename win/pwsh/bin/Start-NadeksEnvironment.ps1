@@ -1,4 +1,4 @@
-Write-Host "***Podman Info***"
+Write-Host "Nadeks"
 Invoke-Expression "podman info"
 
 $counter = 0
@@ -15,7 +15,6 @@ if ($LASTEXITCODE -ne 0) {
     exit
 }
 
-Write-Host "***Starting Work DB***"
 Invoke-Expression "podman start mysqlpsp"
 
 Start-Job -ScriptBlock {
@@ -25,7 +24,7 @@ Start-Job -ScriptBlock {
     --command "wsl" `
     -d "Ubuntu-22.04" `
     --cd "~/.dotfiles" `
-    -- "Open-TmuxWorkSession"
+    -- "Open-TmuxWorkSession nadeks"
 }
 . "C:/Users/dmitr/.dotfiles/win/pwsh/bin/Run-AHK.ps1" @'
 #Include C:\Users\dmitr\.dotfiles\win\ahk\utils\windows.ahk

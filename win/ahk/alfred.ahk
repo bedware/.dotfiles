@@ -164,9 +164,8 @@ _RunBase(commands, funcName, endKey, icon) {
 
     showAlfred(icon)
 
-    timeout := "8" ; seconds
-    length := "5" ; chars
-
+    timeout := "6" ; seconds
+    length := "6" ; chars
 
     HOTKEYS_ON := false
     CONTEXT_HOTKEYS_ON := false

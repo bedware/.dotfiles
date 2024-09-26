@@ -62,9 +62,12 @@ closeWindow() {
     Send !{F4}
 }
 
-; OPEN mode
-startWork() {
-    Run, wt --title Start-WorkEnv -- pwsh -nop -c C:\Users\dmitr\.dotfiles\win\pwsh\bin\Start-WorkEnvironment.ps1
+; Work-related
+startNadeksEnv() {
+    Run, wt --title Start-NadeksEnvironment -- pwsh -nop -c C:\Users\dmitr\.dotfiles\win\pwsh\bin\Start-NadeksEnvironment.ps1
+}
+startAlfaEnv() {
+    Run, wt --title Start-AlfaEnvironment -- pwsh -nop -c C:\Users\dmitr\.dotfiles\win\pwsh\bin\Start-AlfaEnvironment.ps1
 }
 
 ; check out Get-WinUserLanguageList to find needed code

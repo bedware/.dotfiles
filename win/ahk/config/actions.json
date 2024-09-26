@@ -223,8 +223,11 @@
         "selector": "Planning ahk_exe msedge.exe",
         "tray": true
     },
-    "work": {
-        "initFunction": "startWork"
+    "nadeks": {
+        "initFunction": "startNadeksEnv"
+    },
+    "alfa": {
+        "initFunction": "startAlfaEnv"
     },
     "hide": {
         "initFunction": "HideAppToTray"
