@@ -97,7 +97,7 @@ if ($args[0] -is [string]) {
 
             Start-Sleep -Milliseconds 3000;
 
-            tmux send-keys -t $company`:code -- "cd corp-loyalty-api; vi ." C-m
+            tmux send-keys -t $company`:corp-loyalty-api -- "cd corp-loyalty-api; vi ." C-m
 
             tmux attach
         }

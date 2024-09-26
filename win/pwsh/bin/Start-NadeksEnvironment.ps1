@@ -25,7 +25,7 @@ Start-Job -ScriptBlock {
     -d "Ubuntu-22.04" `
     --cd "~/.dotfiles" `
     -- "Open-TmuxWorkSession nadeks"
-}
+
 . "C:/Users/dmitr/.dotfiles/win/pwsh/bin/Run-AHK.ps1" @'
 #Include C:\Users\dmitr\.dotfiles\win\ahk\utils\windows.ahk
 WinClose, ahk_exe Podman Desktop.exe
@@ -33,6 +33,7 @@ WinWait, ubuntu ahk_class Window Class ahk_exe alacritty.exe,, 5
 WinActivate, ubuntu ahk_class Window Class ahk_exe alacritty.exe
 makeAnyWindowCenteredThenMaximized()
 '@
+}
 
 Get-Job | Wait-Job
 # $pass = Read-Host -Prompt "Enter to continue" -MaskInput
