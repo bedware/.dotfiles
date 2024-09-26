@@ -172,7 +172,9 @@ _RunBase(commands, funcName, endKey, icon) {
     CONTEXT_HOTKEYS_ON := false
 
     ; Wait for user input
+    SetCapsLockState, AlwaysOff
     Input, userInput, T%timeout% L%length% C, {%endKey%}, % getShortuctsByComa(commands)
+    SetCapsLockState, Off
     if (ErrorLevel = "Max") {
         showAlfredError("You entered '" userInput "' and have reached maximum length (" length ") of the text.")
     } else if (ErrorLevel = "Timeout") {

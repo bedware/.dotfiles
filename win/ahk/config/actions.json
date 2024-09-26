@@ -1,8 +1,4 @@
 ﻿{
-    "exp": {
-        "run": "explorer.exe",
-        "selector": "ahk_class CabinetWClass"
-    },
     "adbg": {
         "run": "G:\\My Drive\\Soft\\DebugView\\dbgview64.exe",
         "selector": "ahk_exe dbgview64.exe",
