@@ -3,7 +3,7 @@ function Select-TmuxWindowByName([string]$WindowName) {
     tmux select-window -t $windowIndex
 }
 
-function Run-ScriptIdempotently($name, $script) {
+function Start-ScriptIdempotently($name, $script) {
     Select-TmuxWindowByName($name)
 
     $windowIndex = tmux display-message -p "#{window_index}"
@@ -23,7 +23,8 @@ function Run-ScriptIdempotently($name, $script) {
     sleep 2
 }
 
-function Check-AttachOrCreate($name) {
+function Test-AttachOrCreate($name) {
+    Write-Host "Checking: $name"
     tmux list-sessions | ForEach-Object {
         if ($_ -match "^$name") {
             Write-Host "Session exists. Attaching to $_"
@@ -36,40 +37,59 @@ function Check-AttachOrCreate($name) {
 if ($args[0] -is [string]) {
     switch ($args[0]) {
         "settings" {
-            $ubuntuSettingsPath = "~/.dotfiles"
-            $sessionName = "settings"
+            $name = "settings"
+            $path = "~/.dotfiles"
 
-            Check-AttachOrCreate($company)
+            Test-AttachOrCreate($name)
 
-            tmux new-session -s $sessionName -n dotfiles -d -c $ubuntuSettingsPath
-            tmux new-window -t $sessionName -n nvim -d -c $ubuntuSettingsPath
+            tmux new-session -s $name -n dotfiles -d -c $path
+            tmux new-window -t $name -n nvim -d -c "$path/wsl/nvim/.config/nvim".ToString()
 
             Start-Sleep -Milliseconds 3000;
 
-            tmux send-keys -t $sessionName`:dotfiles -- "vi ." C-m
-            tmux send-keys -t $sessionName`:nvim -- "vi ." C-m
+            tmux send-keys -t $name`:dotfiles -- "vi ." C-m
+            tmux send-keys -t $name`:nvim -- "vi ." C-m
+
+            tmux attach
+        }
+        "quarkus" {
+            $name = "quarkus"
+            $path = "~/software/personal/quarkus"
+
+            Test-AttachOrCreate($name)
+
+            tmux new-session -s $name -n root -d -c $path
+            tmux new-window -t $name -n coffee-shop -d -c "$path/example-coffee-shop".ToString()
+            tmux new-window -t $name -n mybang -d -c "$path/mybang".ToString()
+            tmux new-window -t $name -n mybang-old -d -c "$path/mybang-master".ToString()
+
+            Start-Sleep -Milliseconds 3000;
+
+            tmux send-keys -t $name`:coffee-shop -- "vi ." C-m
+            tmux send-keys -t $name`:mybang-old -- "vi ." C-m
+            tmux send-keys -t $name`:mybang -- "vi ." C-m
 
             tmux attach
         }
         "nadeks" {
-            $company = "nadeks"
-            $projectPath = "~/software/work/nadeks"
+            $name = "nadeks"
+            $path = "~/software/work/nadeks"
 
-            Check-AttachOrCreate($company)
+            Test-AttachOrCreate($name)
 
-            tmux new-session -s $company -n code -d -c $projectPath
-            tmux new-window -t $company -n git -d -c $projectPath
-            tmux new-window -t $company -n db -d -c $projectPath
-            tmux new-window -t $company -n live -d -c $projectPath
-            tmux new-window -t $company -n other -d -c $projectPath
+            tmux new-session -s $name -n code -d -c $path
+            tmux new-window -t $name -n git -d -c $path
+            tmux new-window -t $name -n db -d -c $path
+            tmux new-window -t $name -n live -d -c $path
+            tmux new-window -t $name -n other -d -c $path
 
             Start-Sleep -Milliseconds 5000;
 
-            tmux send-keys -t $company`:code -- "vi ." C-m
-            tmux send-keys -t $company`:git -- "git status" C-m
-            tmux send-keys -t $company`:db -- '$env:LESS = "-S +g"; usql mysql://root:secret@localhost/test1' C-m
-            # tmux send-keys -t $company`:live -- "start-working-session live" C-m
-            tmux send-keys -t $company`:other -- "htop" C-m
+            tmux send-keys -t $name`:code -- "vi ." C-m
+            tmux send-keys -t $name`:git -- "git status" C-m
+            tmux send-keys -t $name`:db -- '$env:LESS = "-S +g"; usql mysql://root:secret@localhost/test1' C-m
+            # tmux send-keys -t $name`:live -- "start-working-session live" C-m
+            tmux send-keys -t $name`:other -- "htop" C-m
 
             tmux attach
         }
@@ -81,23 +101,24 @@ if ($args[0] -is [string]) {
             # |          |               |
             # |          |  gulp watch   |
             # |__________|_______________|
-            Run-ScriptIdempotently "live" {
+            Start-ScriptIdempotently "live" {
                 tmux split-window -h -d 'wpwsh -NoExit -wd "C:\Users\dmitr\software\work\nadeks\cypress-ui-tests" -Command "npx cypress open"'
                 tmux split-window -t 2 -v -d 'pwsh -NoExit -wd ~/software/work/nadeks/ru.nadeks.aria.backoffice -Command "gulp watch"'
                 tmux split-window -h -d 'wpwsh -NoExit -wd "C:\Users\dmitr\software\work\nadeks\cypress-ui-tests" -Command "vi /cypress/e2e/first.cy.js"'
             }
         }
         "alfa" {
-            $company = "alfabank"
-            $projectPath = "~/software/work/alfabank"
+            $name = "alfabank"
+            $path = "~/software/work/alfabank"
 
-            Check-AttachOrCreate($company)
+            Test-AttachOrCreate($name)
 
-            tmux new-session -s $company -n corp-loyalty-api -d -c $projectPath
+            tmux new-session -s $name -n root -d -c $path
+            tmux new-window -t $name -n corp-loyalty-api -d -c "$path/corp-loyalty-api"
 
             Start-Sleep -Milliseconds 3000;
 
-            tmux send-keys -t $company`:corp-loyalty-api -- "cd corp-loyalty-api; vi ." C-m
+            tmux send-keys -t $name`:corp-loyalty-api -- "vi ." C-m
 
             tmux attach
         }
