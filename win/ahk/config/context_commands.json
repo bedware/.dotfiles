@@ -15,5 +15,15 @@
             "1":  { "keys": "!{F1}", "desc": "Select left drive" },
             "2":  { "keys": "!{F2}", "desc": "Select right drive" }
         }
+    },
+    "Windows Terminal": {
+        "selector": "ahk_exe WindowsTerminal.exe",
+        "commands": {
+            "d": { "keys": "^!1",  "desc": "Go to .dotfiles" },
+            "f": { "keys": "^!1",  "desc": "Go to .dotfiles" },
+            "a": { "keys": "^!2",  "desc": "Go to AHK" },
+            "n": { "keys": "^!3",  "desc": "Go to Neovim" },
+            "c": { "keys": "^!4",  "desc": "Go to Console" }
+        }
     }
 }

@@ -114,7 +114,7 @@ if ($args[0] -is [string]) {
             Test-AttachOrCreate($name)
 
             tmux new-session -s $name -n root -d -c $path
-            tmux new-window -t $name -n corp-loyalty-api -d -c "$path/corp-loyalty-api"
+            tmux new-window -t $name -n corp-loyalty-api -d -c "$path/nib/corp-loyalty-api".ToString()
 
             Start-Sleep -Milliseconds 3000;
 
