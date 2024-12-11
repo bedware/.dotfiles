@@ -19,6 +19,7 @@
 #Include %A_ScriptDir%/remap/per-app/total-cmd.ahk
 #Include %A_ScriptDir%/remap/per-app/telegram.ahk
 #Include %A_ScriptDir%/remap/per-app/gpt.ahk
+#Include %A_ScriptDir%/remap/per-app/lens.ahk
 #Include %A_ScriptDir%/remap/per-app/browser.ahk
 #Include %A_ScriptDir%/remap/per-app/sites.ahk
 #Include %A_ScriptDir%/remap/per-app/devtools.ahk

@@ -47,7 +47,7 @@
 ; Utils
 :*:;waituntil::wget localhost:7777 --quiet --tries 20 --waitretry 1 --retry-connrefused -O /dev/null
 :*:;compressvideo::ffmpeg -i input.mp4 -vcodec libx265 -crf 28 output.mp4
-::ul::unzip -l
+:*:;ul::unzip -l
 
 ; SSH
 :*:;sshgened::ssh-keygen -o -a 100 -t ed25519 -f ~/.ssh/id_ed25519 -C "Comment"

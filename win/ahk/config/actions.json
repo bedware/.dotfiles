@@ -95,7 +95,7 @@
         "run": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Spark Desktop.lnk",
         "selector": "ahk_exe Spark Desktop.exe"
     },
-    "music": {
+    "mus": {
         "desktop": "Other",
         "run": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Яндекс Музыка.lnk",
         "selector": "ahk_exe Яндекс Музыка.exe"
@@ -141,7 +141,6 @@
         "selector": "ahk_exe slack.exe"
     },
     "steam": {
-        "desktop": "Browsing",
         "run": "C:\\Program Files (x86)\\Steam\\Steam.exe",
         "selector": "ahk_exe steamwebhelper.exe"
     },
@@ -158,36 +157,19 @@
         "desktop": "Dev",
         "selector": "^Developer Tools ahk_exe Cypress.exe"
     },
-    "term": {
+    "lens": {
+        "desktop": "Dev",
+        "run": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Lens.lnk",
+        "selector": "ahk_exe Lens.exe"
+    },
+    "te": {
         "desktop": "Dev",
         "run": "C:\\Program Files\\Alacritty\\alacritty.exe",
         "runArgs": "--title windows",
         "initFunction": "makeAnyWindowCenteredThenMaximized",
         "selector": "windows ahk_exe alacritty.exe"
     },
-    "tg": {
-        "desktop": "Chats",
-        "run": "C:\\Users\\dmitr\\AppData\\Roaming\\Telegram Desktop\\Telegram.exe",
-        "selector": "ahk_exe Telegram.exe"
-    },
-    "dict": {
-        "desktop": "English",
-        "run": "C:\\Program Files (x86)\\ABBYY Lingvo x6\\Lingvo.exe"
-    },
-    "tr": {
-        "initFunction": "deeplTranslateSelected"
-    },
-    "scan": {
-        "initFunction": "deeplTranslateScreen"
-    },
-    "go": {
-        "initFunction": "deeplTranslateOnTheGo"
-    },
-    "tt": {
-        "desktop": "Dev",
-        "selector": "^(?!Developer Tools|Cypress) ahk_exe Cypress.exe"
-    },
-    "turm": {
+    "tu": {
         "desktop": "Dev",
         "title": "ubuntu",
         "run": "C:\\Program Files\\Alacritty\\alacritty.exe",
@@ -195,22 +177,49 @@
         "initFunction": "makeAnyWindowCenteredThenMaximized",
         "selector": "ubuntu ahk_exe alacritty.exe"
     },
+    "tg": {
+        "desktop": "Chats",
+        "run": "C:\\Users\\dmitr\\AppData\\Roaming\\Telegram Desktop\\Telegram.exe",
+        "selector": "ahk_exe Telegram.exe"
+    },
+    "wa": {
+        "desktop": "Chats",
+        "selector": "WhatsApp ahk_class ApplicationFrameWindow ahk_exe ApplicationFrameHost.exe"
+    },
+    "talk": {
+        "desktop": "Chats",
+        "run": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Толк.lnk",
+        "selector": "ahk_exe ktalk.exe"
+    },
+    "rk": {
+        "desktop": "Chats",
+        "run": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Rocket.Chat.lnk",
+        "selector": "ahk_exe Rocket.Chat.exe"
+    },
+    "dict": {
+        "desktop": "English",
+        "run": "C:\\Program Files (x86)\\ABBYY Lingvo x6\\Lingvo.exe"
+    },
+    "tt": {
+        "desktop": "Dev",
+        "selector": "^(?!Developer Tools|Cypress) ahk_exe Cypress.exe"
+    },
     "video": {
         "desktop": "Creator",
         "run": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\CapCut\\CapCut.lnk",
         "selector": "ahk_exe CapCut.exe"
     },
-    "ed": {
-        "initFunction": "inPlaceNeovim"
-    },
-    "cent": {
-        "initFunction": "makeAnyWindowCentered"
-    },
-    "web": {
+    "we": {
         "desktop": "Browsing",
         "run": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
         "runArgs": "--launch-workspace=6faadb32-a5ae-4c25-88bc-360ab6e191e3",
         "selector": "^(?!DevTools) ahk_class Chrome_WidgetWin_1 ahk_exe msedge.exe"
+    },
+    "vdi": {
+        "run": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\VMware Horizon Client.lnk"
+    },
+    "vpn": {
+        "run": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Check Point\\Check Point Endpoint Security VPN.lnk"
     },
     "gpt": {
         "run": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\ChatGPT.lnk",
@@ -231,6 +240,21 @@
     },
     "hide": {
         "initFunction": "HideAppToTray"
+    },
+    "tr": {
+        "initFunction": "deeplTranslateSelected"
+    },
+    "scan": {
+        "initFunction": "deeplTranslateScreen"
+    },
+    "go": {
+        "initFunction": "deeplTranslateOnTheGo"
+    },
+    "ed": {
+        "initFunction": "inPlaceNeovim"
+    },
+    "cent": {
+        "initFunction": "makeAnyWindowCentered"
     },
     "wf": {
         "initFunction": "makeAnyWindowFullscreenNative"
