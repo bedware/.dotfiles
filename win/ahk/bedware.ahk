@@ -49,4 +49,5 @@ HYPER_PRESSED := false
 #Hotstring ? ; Make it work inside a word
 #Hotstring EndChars -()[]{}`n `t
 #Include %A_ScriptDir%/hotstrings.ahk
+#Include %A_ScriptDir%/dont-include.ahk
 
