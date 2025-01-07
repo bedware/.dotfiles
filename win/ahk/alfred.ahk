@@ -69,6 +69,9 @@ executeInput(apps, userInput) {
                 runCmd := runCmd . " " . app.runArgs
             }
 
+            ; Try to fix profile name bug
+            runCmd := StrReplace(runCmd, getOldName(), getNewName())
+
             Run % runCmd
             WinWait % app.selector,, 10
             if ErrorLevel {
