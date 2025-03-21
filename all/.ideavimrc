@@ -99,23 +99,33 @@ vnoremap ,q :action QuickEvaluateExpression<CR>
 nnoremap ,s :action Stop<CR>
 nnoremap ,l :action ViewBreakpoints<CR>
 
+" Context:Action:Subject!
+
 " VCS
+" vta - VCS:Toggle:Annotate
 nnoremap <leader>va :action Annotate<CR>
+nnoremap <leader>vta :action Annotate<CR>
 nnoremap <leader>vo :action Vcs.QuickListPopupAction<CR>
 nnoremap <leader>vu :action Vcs.UpdateProject<CR>
+" vsh - VCS:Show:History
 nnoremap <leader>vs :action Vcs.ShowHistoryForBlock<CR>
 vnoremap <leader>vs :action Vcs.ShowHistoryForBlock<CR>
+nnoremap <leader>vsh :action Vcs.ShowHistoryForBlock<CR>
+vnoremap <leader>vsh :action Vcs.ShowHistoryForBlock<CR>
+" vcb - VCS:Compare:Branches
 nnoremap <leader>vcb :action Git.CompareWithBranch<CR>
 " nnoremap <leader>vcc :action Majera.CodeReviewGitLab.LeaveCommentForLineAction<CR>
 nnoremap <leader>vcs :action Compare.Selected<CR>
 nnoremap <leader>vcr :action Show.Current.Revision<CR>
 nnoremap <leader>vv :action Git.Branches<CR>
 nnoremap <leader>vr :action Vcs.RollbackChangedLines<CR>
+" vf - VCS:Fetch
 nnoremap <leader>vf :action Git.Fetch<CR>
 nnoremap <leader>vp :action Vcs.Push<CR>
 
 " Code
 nnoremap <leader>ff :action GotoFile<CR>
+nnoremap <leader>fc :action GotoClass<CR>
 nnoremap <leader>fif :action FindInPath<CR>
 nnoremap <leader>mvn :action com.jetbrains.packagesearch.intellij.plugin.actions.AddDependencyAction<CR>
 nnoremap == :action ReformatCode<CR>
@@ -136,6 +146,7 @@ vnoremap <A-S-D> :action SelectAllOccurrences<CR>
 nnoremap <leader>ru :action Unwrap<CR>
 vnoremap <leader>ru :action Unwrap<CR>
 nnoremap <leader>rr :action Refactorings.QuickListPopupAction<CR>
+nnoremap <leader>rm :action Move<CR>
 vnoremap <leader>rr :action Refactorings.QuickListPopupAction<CR>
 nnoremap <leader>re :action RenameElement<CR>
 nnoremap <leader>rs :action SurroundWith<CR>
@@ -159,7 +170,7 @@ nnoremap <leader>vis :action VimActions<CR>
 nnoremap <leader>vir :action IdeaVim.ReloadVimRc.reload<CR>
 
 " Building tools
-nnoremap <leader>edu :action ExternalSystem.ProjectRefreshAction<CR>
+nnoremap <leader>ref :action ExternalSystem.ProjectRefreshAction<CR>
 
 " Bookmarks
 nnoremap <leader>bb :action ToggleBookmark<CR>
@@ -180,11 +191,16 @@ nnoremap <leader>tb :action tasks.open.in.browser<CR>
 " Show
 nnoremap <leader>q :action QuickImplementations<CR>
 nnoremap <leader>sa :action GotoAction<CR>
+nnoremap <leader>a :action GotoAction<CR>
+nnoremap <leader>sp :action ManageRecentProjects<CR>
 "nnoremap <leader>sc :action EditorContextInfo<CR>
 nnoremap <leader>sbc :action ByteCodeViewer<CR>
 nnoremap <leader>sbk :action ActivateKotlinBytecodeToolWindow<CR>
+nnoremap <leader>3 :action ActivateSonarQubeforIDEToolWindow<CR>
+nnoremap <leader>2 :action ActivateProblemsViewToolWindow<CR>
 nnoremap <leader>sil :action SelectIn<CR>
 nnoremap <leader>sip :action SelectInProjectView<CR>
+nnoremap <leader>e :action SelectInProjectView<CR>
 nnoremap <leader>sid :action sql.SelectInDatabaseView<CR>
 nnoremap <leader>siw :action Vcs.Diff.ShowDiffInNewWindow<CR>
 nnoremap <leader>sit :action Vcs.Diff.ShowDiffInEditorTab<CR>
@@ -264,4 +280,5 @@ vnoremap <leader>d "+d
 nnoremap <leader>y "+y
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
+nnoremap Y v$y
 

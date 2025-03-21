@@ -72,6 +72,12 @@ executeInput(apps, userInput) {
             ; Try to fix profile name bug
             runCmd := StrReplace(runCmd, getOldName(), getNewName())
 
+            if !FileExist(runCmd)
+            {
+                MsgBox, Not found:`n%runCmd%
+                return
+            }
+
             Run % runCmd
             WinWait % app.selector,, 10
             if ErrorLevel {

@@ -5,12 +5,12 @@ if (-not $IsWindows) {
     Sleep 5
     Exit
 }
-$env:DOTFILES="$env:HOME\.dotfiles"
+$env:DOTFILES="$env:USERPROFILE\.dotfiles"
 
 # Define the list of symlinks
 $links = @(
     @{ # pwsh
-        Path = "$env:HOME\Documents\Powershell\Microsoft.PowerShell_profile.ps1"
+        Path = "$env:USERPROFILE\Documents\Powershell\Microsoft.PowerShell_profile.ps1"
         Target = "$env:DOTFILES\wsl\pwsh\.config\powershell\Microsoft.PowerShell_profile.ps1"
     },
     @{ # neovim
@@ -26,15 +26,15 @@ $links = @(
         Target = "$env:DOTFILES\all\alacritty\alacritty.yml"
     },
     @{ # jetbrains idea vimrc
-        Path = "$env:HOME\.gitconfig"
+        Path = "$env:USERPROFILE\.gitconfig"
         Target = "$env:DOTFILES\wsl\git\.gitconfig"
     },
     @{ # jetbrains idea vimrc
-        Path = "$env:HOME\.config\git\.gitignore"
+        Path = "$env:USERPROFILE\.config\git\.gitignore"
         Target = "$env:DOTFILES\wsl\git\.config\git\.gitignore"
     },
     @{ # jetbrains idea vimrc
-        Path = "$env:HOME\.ideavimrc"
+        Path = "$env:USERPROFILE\.ideavimrc"
         Target = "$env:DOTFILES\all\.ideavimrc"
     }
 )
@@ -42,6 +42,3 @@ $links = @(
 foreach ($link in $links) {
     New-Item -ItemType SymbolicLink -Force -Path $link.Path -Target $link.Target
 }
-
-Copy-Item "$env:DOTFILES\win\ahk\runAutoHotkey.ps1" "c:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\"
-

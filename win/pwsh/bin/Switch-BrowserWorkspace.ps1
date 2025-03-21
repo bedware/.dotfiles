@@ -1,5 +1,5 @@
-. "C:/Users/dmitr/.dotfiles/win/pwsh/bin/Run-AHK.ps1"
-$jsonFilePath = "C:\Users\dmitr\AppData\Local\Microsoft\Edge\User Data\Default\Workspaces\WorkspacesCache"
+. "C:/Users/bedware/.dotfiles/win/pwsh/bin/Run-AHK.ps1"
+$jsonFilePath = "C:\Users\bedware\AppData\Local\Microsoft\Edge\User Data\Default\Workspaces\WorkspacesCache"
 while ($true) {
     $jsonContent = Get-Content -Path $jsonFilePath -Raw | ConvertFrom-Json
 

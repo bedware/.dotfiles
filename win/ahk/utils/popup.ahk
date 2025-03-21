@@ -19,7 +19,6 @@ createPopUp(title, pwshCommand, centered := true, maximized := false) {
             makeAnyWindowCentered()
         if (maximized)
             makeAnyWindowMaximized()
-
     }
 }
 

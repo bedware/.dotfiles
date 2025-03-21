@@ -3,7 +3,9 @@
 Write-Host "Profile reading started"
 
 # Environment variables {{{1
-
+if (-not $env:HOME) {
+    $env:HOME = $env:USERPROFILE
+}
 $env:DOTFILES = "$env:HOME/.dotfiles"
 $env:EDITOR = "nvim"
 $env:VISUAL = "$env:EDITOR"
@@ -36,7 +38,7 @@ $global:GitPromptSettings.DefaultPromptSuffix.Text = '> $(OnViModeChange([Micros
 . "$env:DOTFILES/wsl/pwsh/.local/config/vimode.ps1"
 . "$env:DOTFILES/wsl/pwsh/.local/config/alias-autocomplete.ps1"
 . "$env:DOTFILES/wsl/pwsh/.local/config/hotkeys.ps1"
-. "$env:DOTFILES/wsl/pwsh/.local/config/autocompletion.ps1"
+# . "$env:DOTFILES/wsl/pwsh/.local/config/autocompletion.ps1"
 . "$env:DOTFILES/wsl/pwsh/.local/config/user-functions.ps1"
 . "$env:DOTFILES/wsl/pwsh/.local/config/nvim-switcher.ps1"
 

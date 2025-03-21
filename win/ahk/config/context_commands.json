@@ -25,5 +25,12 @@
             "n": { "keys": "^!3",  "desc": "Go to Neovim" },
             "c": { "keys": "^!4",  "desc": "Go to Console" }
         }
+    },
+    "Intellij Idea": {
+        "selector": "ahk_exe idea64.exe",
+        "commands": {
+            "sa": { "keys": "^!a",  "desc": "Show actions" },
+            "re": { "keys": "+{F6}",  "desc": "Rename" }
+        }
     }
 }
