@@ -20,7 +20,7 @@
         KeyWait, LAlt
         SendEvent {LAlt Up}
         if (A_PriorKey = "LAlt") {
-            createPopUp("select workspace", "C:\Users\bedware\.dotfiles\win\pwsh\bin\Switch-BrowserWorkspace.ps1", false)
+            createPopUp("select workspace", "C:\Users\bedware\.dotfiles\win\pwsh\bin\Switch-BrowserWorkspace.ps1")
         }
     return
 #if

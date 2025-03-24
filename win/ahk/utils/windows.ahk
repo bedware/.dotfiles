@@ -12,7 +12,7 @@ makeAnyWindowMaximized() {
     }
 }
 
-makeAnyWindowCentered() {
+makeAnyWindow66Percents() {
     ; Get the screen dimensions
     screenWidth := A_ScreenWidth
     screenHeight := A_ScreenHeight
@@ -24,6 +24,24 @@ makeAnyWindowCentered() {
     newY := (screenHeight - newHeight) / 2
     ; Move the window to the calculated position and size
     WinMove, A, , newX, newY, newWidth, newHeight
+}
+
+makeAnyWindowCentered() {
+    WinGetPos, X, Y, Width, Height, A
+    ; Calculate the new window position (centered)
+    newX := A_ScreenWidth / 2 - (Width / 2)
+    newY := A_ScreenHeight / 2 - (Height / 2)
+    ; Move the window to the calculated position and size
+    WinMove, A,, newX, newY
+}
+
+makeAnyWindowUpperCentered() {
+    WinGetPos, X, Y, Width, Height, A
+    ; Calculate the new window position (centered)
+    newX := A_ScreenWidth / 2 - (Width / 2)
+    newY := A_ScreenHeight / 2 - Height
+    ; Move the window to the calculated position and size
+    WinMove, A,, newX, newY
 }
 
 makeAnyWindowCenteredThenMaximized() {
