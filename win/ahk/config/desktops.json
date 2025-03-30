@@ -1,11 +1,12 @@
 ﻿[
     "Browsing",
     "Dev",
+    "Testing",
     "Chats",
-    "Office",
-    "Creator",
-    "Stream",
-    "English",
+    "Other",
+    "Switch to previous desktop",
+    "I'm creator",
     "Files",
-    "Other"
+    "None",
+    "OBS"
 ]

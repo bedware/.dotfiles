@@ -10,7 +10,6 @@
         "desc": "Open documentation for AHK"
     },
     "anki": {
-        "desktop": "Office",
         "run": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Anki.lnk",
         "selector": "ahk_exe anki.exe"
     },
@@ -79,10 +78,6 @@
         "run": "C:\\Users\\dmitr\\.jdks\\visualvm_216\\bin\\visualvm-my-jdk.lnk",
         "selector": "VisualVM"
     },
-    "keys": {
-        "run": "C:\\Users\\dmitr\\AppData\\Local\\carnac\\Carnac.exe",
-        "selector": "ahk_exe Carnac.exe"
-    },
     "lon": {
         "run": "g:\\My Drive\\Soft\\LonelyScreen.exe",
         "selector": "ahk_exe LonelyScreen.exe"
@@ -91,7 +86,6 @@
         "run": "g:\\My Drive\\Other\\Keyboard\\Layer 1.png"
     },
     "mail": {
-        "desktop": "Office",
         "run": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Spark Desktop.lnk",
         "selector": "ahk_exe Spark Desktop.exe"
     },
@@ -101,7 +95,6 @@
         "selector": "ahk_exe Яндекс Музыка.exe"
     },
     "note": {
-        "desktop": "Office",
         "run": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Notion.lnk",
         "selector": "ahk_exe Notion.exe"
     },
@@ -127,7 +120,7 @@
         "selector": "ahk_exe Podman Desktop.exe"
     },
     "post": {
-        "desktop": "Dev",
+        "desktop": "Testing",
         "run": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Postman\\Postman.lnk",
         "selector": "ahk_exe Postman.exe"
     },
