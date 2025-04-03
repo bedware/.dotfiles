@@ -1,7 +1,28 @@
 . "C:/Users/bedware/.dotfiles/win/pwsh/bin/Run-AHK.ps1"
-$jsonFilePath = "C:\Users\bedware\AppData\Local\Microsoft\Edge\User Data\Default\Workspaces\WorkspacesCache"
+
+
+$jsonFilePathPersonal = "C:\Users\bedware\AppData\Local\Microsoft\Edge\User Data\Default\Workspaces\WorkspacesCache"
+$jsonFilePathJob = "C:\Users\bedware\AppData\Local\Microsoft\Edge\User Data\Profile 2\Workspaces\WorkspacesCache"
 while ($true) {
-    $jsonContent = Get-Content -Path $jsonFilePath -Raw | ConvertFrom-Json
+
+ahk @"
+WinGet, hwnd, ID, ahk_exe msedge.exe
+FileDelete, C:/temp.file
+WinGetTitle, windowTitle, ahk_id %hwnd%
+FileAppend, %windowTitle%, C:/temp.file, UTF-8
+"@
+    $title = Get-Content C:/temp.file
+    Write-Host $title
+    if ($title -match "- Alfa -") {
+        $jsonContent = Get-Content -Path $jsonFilePathJob -Raw | ConvertFrom-Json
+    } elseif ($title -match "- Personal -") {
+        $jsonContent = Get-Content -Path $jsonFilePathPersonal -Raw | ConvertFrom-Json
+    } else {
+        "Wrong profile!"
+    }
+    exit;
+
+#     $jsonContent = Get-Content -Path $jsonFilePath -Raw | ConvertFrom-Json
 
     $selectedWorkspaceName = ($jsonContent.workspaces | ForEach-Object {
             if ($_.active -eq "true") {
