@@ -30,7 +30,8 @@
         "selector": "ahk_exe idea64.exe",
         "commands": {
             "sa": { "keys": "^!a",  "desc": "Show actions" },
-            "re": { "keys": "+{F6}",  "desc": "Rename" }
+            "re": { "keys": "+{F6}",  "desc": "Rename" },
+            "push": { "keys": "!p",  "desc": "Commit and Push" }
         }
     }
 }
