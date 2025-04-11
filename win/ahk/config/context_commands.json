@@ -29,8 +29,10 @@
     "Intellij Idea": {
         "selector": "ahk_exe idea64.exe",
         "commands": {
-            "sa": { "keys": "^!a",  "desc": "Show actions" },
+            "sa": { "keys": "^+a",  "desc": "Show actions" },
             "re": { "keys": "+{F6}",  "desc": "Rename" },
+            "fr": { "keys": "^+r",  "desc": "Replace in files" },
+            "fi": { "keys": "^+f",  "desc": "Find in files" },
             "push": { "keys": "!p",  "desc": "Commit and Push" }
         }
     }
