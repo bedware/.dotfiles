@@ -33,6 +33,7 @@
     v::#v
     t::#t
     w::#y
+    o::!#o
     `;::#`;
 
     ; Copy & Paste
