@@ -9,12 +9,6 @@
     name = Dmitry Surin
 [color "diff"]
     meta = bold yellow
-[safe]
-	directory = C:/Users/bedware/software/work/alfabank/nib/corp-loyalty-api
-	directory = C:/Users/bedware/software/work/alfabank/abm/abm-openapi-specs
-	directory = C:/Users/bedware/software/work/alfabank/abm/abm-front-loyalty-api
-	directory = C:/Users/bedware/software/work/alfabank/abm/abm-settings
-	directory = C:/Users/bedware/software/work/alfabank/abm/abm-gateway-api
 [filter "lfs"]
     clean = git-lfs clean -- %f
     smudge = git-lfs smudge -- %f

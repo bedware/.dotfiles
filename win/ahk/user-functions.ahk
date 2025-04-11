@@ -31,7 +31,7 @@ toggleDay() {
 quakeAlive() {
     if (!ProcessExist("WindowsTerminal.exe")) {
         path := "C:/Users/dmitr/.dotfiles/"
-        path := StrReplace(path, getOldName(), getNewName())
+        ; path := StrReplace(path, getOldName(), getNewName())
 
         Run, wt.exe -w _quake new-tab --title .dotfiles -d %path% -- nvim .
         WinWait, ahk_exe WindowsTerminal.exe,, 5
@@ -41,17 +41,17 @@ quakeAlive() {
         Sleep 20
 
         path := "C:/Users/dmitr/.dotfiles/win/ahk/"
-        path := StrReplace(path, getOldName(), getNewName())
+        ; path := StrReplace(path, getOldName(), getNewName())
         Run, wt --window _quake new-tab --title AutoHotkey -d %path% -- nvim .
         Sleep 20
 
         path := "C:/Users/dmitr/.dotfiles/wsl/nvim/.config/nvim/"
-        path := StrReplace(path, getOldName(), getNewName())
+        ; path := StrReplace(path, getOldName(), getNewName())
         Run, wt --window _quake new-tab --title Neovim -d %path%
         Sleep 20
 
         path := "C:/Users/dmitr/"
-        path := StrReplace(path, getOldName(), getNewName())
+        ; path := StrReplace(path, getOldName(), getNewName())
         Run, wt --window _quake new-tab --title Console -d %path%
         Run, wt --window _quake focus-tab -t 3
     } else {
@@ -129,12 +129,12 @@ inPlaceNeovim() {
     buffer := _putSelectionToBuffer()
 
     textfield := "c:\Users\dmitr\AppData\Local\Temp\in_place_editor_textfield"
-    textfield := StrReplace(textfield, getOldName(), getNewName())
+    ; textfield := StrReplace(textfield, getOldName(), getNewName())
     FileDelete, %textfield%
     FileAppend, %buffer%, %textfield%, UTF-8
 
     hwnd_file := "c:\Users\dmitr\AppData\Local\Temp\in_place_editor_hwnd"
-    hwnd_file  := StrReplace(hwnd_file , getOldName(), getNewName())
+    ; hwnd_file  := StrReplace(hwnd_file , getOldName(), getNewName())
     FileRead, hwnd, %hwnd_file%
 
     DetectHiddenWindows, On  ; Enable detection of hidden windows
@@ -142,7 +142,7 @@ inPlaceNeovim() {
     WinActivate, ahk_id %hwnd%
     if (!WinActive("ahk_id" hwnd)) {
         path := "C:\Users\dmitr\.dotfiles\win\pwsh\bin\Edit-InPlaceWithNeovim.ps1"
-        path := StrReplace(path, getOldName(), getNewName())
+        ; path := StrReplace(path, getOldName(), getNewName())
         createPopUp("in_place_editor", path)
         WinWait, in_place_editor ahk_class Window Class ahk_exe alacritty.exe,, 5
         WinActivate ; Use the window found by WinWait.

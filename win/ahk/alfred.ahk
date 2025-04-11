@@ -70,7 +70,7 @@ executeInput(apps, userInput) {
             }
 
             ; Try to fix profile name bug
-            runCmd := StrReplace(runCmd, getOldName(), getNewName())
+            ; runCmd := StrReplace(runCmd, getOldName(), getNewName())
 
             if !FileExist(runCmd)
             {
