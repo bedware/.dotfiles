@@ -1,8 +1,7 @@
-# Work related
-app-ganz-dima.properties
-
 # Other
 dont-include.ahk
+.not-for-sharing
+not-for-sharing/
 
 # Compiled source
 *.com

@@ -1,0 +1,3 @@
+[include]
+    path = ~/.config/git/.gitconfig
+    path = ~/.config/git/.not-for-sharing
