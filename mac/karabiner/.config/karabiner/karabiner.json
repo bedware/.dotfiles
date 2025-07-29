@@ -231,6 +231,13 @@
                             },
                             {
                                 "conditions": [ { "input_sources": [{ "language": "apw" }], "type": "input_source_if" } ],
+                                "from": { "key_code": "k", "modifiers": { "optional": ["any"] } },
+                                "to": [{ "shell_command": "open -a 'Толк'" }],
+                                "to_after_key_up": [{ "shell_command": "/opt/homebrew/bin/im-select com.apple.keylayout.US" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [ { "input_sources": [{ "language": "apw" }], "type": "input_source_if" } ],
                                 "from": { "key_code": "m", "modifiers": { "optional": ["any"] } },
                                 "to": [{ "shell_command": "open -a 'Mail'" }],
                                 "to_after_key_up": [{ "shell_command": "/opt/homebrew/bin/im-select com.apple.keylayout.US" }],
