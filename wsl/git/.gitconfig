@@ -1,7 +1,7 @@
 [core]
     excludesfile = ~/.config/git/.gitignore
     editor = nvim
-    autocrlf = false
+	autocrlf = true
 [include]
     path = ~/.config/git/.gitconfig
 [user]
@@ -9,6 +9,13 @@
     name = Dmitry Surin
 [color "diff"]
     meta = bold yellow
+[safe]
+	directory = C:/Users/dmitr/Development/work/alfabank
+	directory = C:/Users/dmitr/Development/work/alfabank/android-open-api-generator
+	directory = C:/Users/dmitr/Development/work/alfabank/android-open-api-generator/abm-openapi-specs-generate
+	directory = C:/Users/dmitr/Development/work/alfabank/android-open-api-generator/abm-openapi-specs-generated
+	directory = C:/Users/dmitr/Development/work/alfabank/abm-middle-thrift-tests
+	directory = C:/Users/dmitr/Development/work/alfabank/abm-settings
 [filter "lfs"]
     clean = git-lfs clean -- %f
     smudge = git-lfs smudge -- %f

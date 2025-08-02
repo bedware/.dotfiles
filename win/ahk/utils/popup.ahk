@@ -21,4 +21,3 @@ createPopUp(title, pwshCommand, centered := true, maximized := false) {
             makeAnyWindowMaximized()
     }
 }
-

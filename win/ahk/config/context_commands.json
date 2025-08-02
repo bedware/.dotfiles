@@ -2,7 +2,7 @@
     "Total Commander": {
         "selector": "ahk_exe TOTALCMD64.EXE",
         "commands": {
-            "re": { "keys": "{F2}",  "desc": "Rename" },
+            "re": { "keys": "+{F6}",  "desc": "Rename" },
             "q":  { "keys": "{F3}",  "desc": "Quick View" },
             "v":  { "keys": "{F3}",  "desc": "Quick View" },
             "e":  { "keys": "{F4}",  "desc": "Edit" },

@@ -1,8 +1,8 @@
-. "C:/Users/bedware/.dotfiles/win/pwsh/bin/Run-AHK.ps1"
+. "C:/Users/dmitr/.dotfiles/win/pwsh/bin/Run-AHK.ps1"
 
 
-$jsonFilePathPersonal = "C:\Users\bedware\AppData\Local\Microsoft\Edge\User Data\Default\Workspaces\WorkspacesCache"
-$jsonFilePathJob = "C:\Users\bedware\AppData\Local\Microsoft\Edge\User Data\Profile 2\Workspaces\WorkspacesCache"
+$jsonFilePathPersonal = "C:\Users\dmitr\AppData\Local\Microsoft\Edge\User Data\Default\Workspaces\WorkspacesCache"
+$jsonFilePathJob = "C:\Users\dmitr\AppData\Local\Microsoft\Edge\User Data\Profile 2\Workspaces\WorkspacesCache"
 while ($true) {
 
 ahk @"
@@ -57,4 +57,3 @@ if (WinExist("$selectedWorkspaceName ahk_exe msedge.exe")) {
         }
     }
 }
-
