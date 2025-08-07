@@ -94,7 +94,7 @@
                                 "type": "basic"
                             },
                             {
-                                "from": { "key_code": "left_shift", "modifiers": { "optional": ["any"] } },
+                                "from": { "key_code": "left_shift" },
                                 "to": [{ "key_code": "left_shift" }],
                                 "to_if_alone": [{ "shell_command": "/opt/homebrew/bin/im-select com.apple.keylayout.Apache" }],
                                 "type": "basic"
@@ -107,7 +107,7 @@
                                 "type": "basic"
                             },
                             {
-                                "from": { "key_code": "right_shift", "modifiers": { "optional": ["any"] } },
+                                "from": { "key_code": "right_shift" },
                                 "to": [{ "key_code": "right_shift" }],
                                 "to_if_alone": [{ "shell_command": "/opt/homebrew/bin/im-select com.apple.keylayout.Apache" }],
                                 "type": "basic"
@@ -243,6 +243,17 @@
                                 "conditions": [ { "name": "tabfn_mode", "type": "variable_if", "value": 1 } ],
                                 "from": { "key_code": "slash", "modifiers": { "optional": ["any"] } },
                                 "to": [{ "shell_command": "/opt/homebrew/bin/terminal-notifier -title 'Config reloaded' -message 'Karabiner config has been reloaded' && launchctl kickstart -k gui/`id -u`/org.pqrs.service.agent.karabiner_console_user_server " }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "TabFN: m to Context menu",
+                        "manipulators": [
+                            {
+                                "conditions": [ { "name": "tabfn_mode", "type": "variable_if", "value": 1 } ],
+                                "from": { "key_code": "m", "modifiers": { "optional": ["any"] } },
+                                "to": [{ "key_code": "f10", "modifiers": ["fn", "shift"] }],
                                 "type": "basic"
                             }
                         ]
