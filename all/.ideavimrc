@@ -265,6 +265,11 @@ nnoremap <leader><leader>P :action ActivateProfilerToolWindow<CR>
 nnoremap <leader><leader>f :action ActivateFindToolWindow<CR>
 nnoremap <leader><leader>y :action ActivateYouTrackToolWindow<CR>
 nnoremap <leader><leader>n :action ActivateNotificationsToolWindow<CR>
+" ADOC
+map <A-1> :action org.asciidoc.intellij.actions.editorlayout.EditorOnlyLayoutChangeAction<CR>
+map <A-2> :action org.asciidoc.intellij.actions.editorlayout.EditorAndPreviewLayoutChangeAction<CR>
+map <A-3> :action org.asciidoc.intellij.actions.editorlayout.PreviewOnlyLayoutChangeAction<CR>
+map <A-w> :action org.asciidoc.intellij.actions.asciidoc.ToggleSoftWrapsAction<CR>
 
 " Swapping lines [Insert mode]
 inoremap <C-j> <Esc>:m +1<CR>gi
