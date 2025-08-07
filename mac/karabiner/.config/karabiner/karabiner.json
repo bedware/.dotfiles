@@ -119,10 +119,7 @@
                         "manipulators": [
                             {
                                 "from": { "key_code": "tab", "modifiers": { "optional": ["any"] } },
-                                "to": [
-                                    { "set_variable": { "name": "tabfn_mode", "value": 1 } },
-                                    { "key_code": "left_option" }
-                                ],
+                                "to": [ { "set_variable": { "name": "tabfn_mode", "value": 1 } } ],
                                 "to_after_key_up": [ { "set_variable": { "name": "tabfn_mode", "value": 0 } } ],
                                 "to_if_alone": [ { "key_code": "tab", "modifiers": ["left_command"] } ],
                                 "type": "basic"
@@ -134,9 +131,10 @@
                         "manipulators": [
                             {
                                 "conditions": [ { "name": "tabfn_mode", "type": "variable_if", "value": 1 } ],
-                                "from": { "key_code": "spacebar" },
+                                "from": { "key_code": "spacebar", "modifiers": { "optional": ["any"] } },
                                 "to": [{ "key_code": "left_shift" }],
-                                "to_if_alone": [{ "key_code": "tab" }],
+                                "to_if_alone": [
+                                    { "key_code": "tab" }],
                                 "type": "basic"
                             }
                         ]
@@ -262,7 +260,7 @@
                                         "type": "frontmost_application_if"
                                     }
                                 ],
-                                "from": { "key_code": "f" },
+                                "from": { "key_code": "f", "modifiers": { "optional": ["any"] } },
                                 "to": [{ "key_code": "f13" }],
                                 "to_after_key_up": [{ "shell_command": "/opt/homebrew/bin/im-select com.apple.keylayout.US" }],
                                 "type": "basic"
@@ -277,7 +275,7 @@
                                         "type": "frontmost_application_if"
                                     }
                                 ],
-                                "from": { "key_code": "f" },
+                                "from": { "key_code": "f", "modifiers": { "optional": ["any"] } },
                                 "to": [{ "shell_command": "open -a 'Terminal'" }],
                                 "to_after_key_up": [{ "shell_command": "/opt/homebrew/bin/im-select com.apple.keylayout.US" }],
                                 "type": "basic"
