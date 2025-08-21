@@ -125,13 +125,22 @@
                         ]
                     },
                     {
+                        "description": "Escape",
+                        "manipulators": [
+                            {
+                                "from": { "key_code": "escape", "modifiers": { "optional": ["any"] } },
+                                "to": [ { "key_code": "tab", "modifiers": ["left_command"] } ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
                         "description": "TabFN: Init",
                         "manipulators": [
                             {
                                 "from": { "key_code": "tab", "modifiers": { "optional": ["any"] } },
-                                "to": [ { "set_variable": { "name": "tabfn_mode", "value": 1 } } ],
+                                "to": [ { "set_variable": { "name": "tabfn_mode", "value": 1 } }, { "key_code": "tab"} ],
                                 "to_after_key_up": [ { "set_variable": { "name": "tabfn_mode", "value": 0 } } ],
-                                "to_if_alone": [ { "key_code": "tab", "modifiers": ["left_command"] } ],
                                 "type": "basic"
                             }
                         ]
