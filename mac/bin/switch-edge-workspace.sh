@@ -196,12 +196,14 @@ select_workspace() {
     # Get workspace list for fzf (same format as PowerShell version)
     local selected_workspace
     selected_workspace=$("$WORKSPACE_SCRIPT" fzf "$cache_path" | \
-        fzf --layout=reverse \
+        fzf --color=16 \
+            --layout=reverse \
             --border=rounded \
             --border-label="Select Workspace" \
             --margin="1,1,0,1" \
             --info=hidden \
-            --prompt="Workspace > ")
+            # --prompt="Workspace > " \
+            )
     
     if [[ -z "$selected_workspace" ]]; then
         print_status "$YELLOW" "No workspace selected. Exiting."
