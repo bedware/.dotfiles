@@ -10,7 +10,7 @@
                                 "from": {
                                     "key_code": "u",
                                     "modifiers": {
-                                        "mandatory": ["fn"],
+                                        "mandatory": ["right_option"],
                                         "optional": ["any"]
                                     }
                                 },
@@ -21,7 +21,7 @@
                                 "from": {
                                     "key_code": "p",
                                     "modifiers": {
-                                        "mandatory": ["fn"],
+                                        "mandatory": ["right_option"],
                                         "optional": ["any"]
                                     }
                                 },
@@ -32,7 +32,7 @@
                                 "from": {
                                     "key_code": "2",
                                     "modifiers": {
-                                        "mandatory": ["fn"],
+                                        "mandatory": ["right_option"],
                                         "optional": ["any"]
                                     }
                                 },
