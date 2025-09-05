@@ -85,9 +85,11 @@ startAlfaEnv() {
 ; check out Get-WinUserLanguageList to find needed code
 english() {
     PostMessage, 0x0050, 0, 0x0000409,, A
+    ; Run, C:\Users\dmitr\Downloads\im-select.exe 1033
 }
 russian() {
     PostMessage, 0x0050, 0, 0x0000419,, A
+    ; Run, C:\Users\dmitr\Downloads\im-select.exe 1049
 }
 georgian() {
     PostMessage, 0x0050, 0, 0x0000437,, A

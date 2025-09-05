@@ -10,7 +10,7 @@ function ahk($script)
     $pipeTMode = [System.IO.Pipes.PipeTransmissionMode]::Message
     $pipeOptions = [System.IO.Pipes.PipeOptions]::None
     
-    $ahkPath = [Environment]::GetFolderPath("ProgramFiles") + "\AutoHotkey\AutoHotkey.exe"
+    $ahkPath = [Environment]::GetFolderPath("ProgramFiles") + "\AutoHotkey\v1.1.37.02\AutoHotkeyU64.exe"
     
     $pipe_ga = new-object System.IO.Pipes.NamedPipeServerStream($pipeName, $pipeDir, $maxNum, $pipeTMode, $pipeOptions)
         

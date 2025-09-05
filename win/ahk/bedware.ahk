@@ -9,6 +9,8 @@ SetWorkingDir %A_ScriptDir% ; Ensures a consistent starting directory
 SendMode Input ; Recommended for new scripts due to its superior speed and reliability
 SetTitleMatchMode, RegEx ; Write selectors using regexp
 
+EnvGet, home, USERPROFILE
+
 ; Dependencies
 #Include %A_ScriptDir%/dependencies/JSON.ahk
 #Include %A_ScriptDir%/dependencies/VirtualDesktopAccessor.ahk
