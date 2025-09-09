@@ -1,4 +1,5 @@
 {
+    "global": { "show_in_menu_bar": false },
     "profiles": [
         {
             "complex_modifications": {
@@ -71,19 +72,6 @@
                         ]
                     },
                     {
-                        "description": "Modifiers: Command",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "left_command",
-                                    "modifiers": { "optional": ["any"] }
-                                },
-                                "to": [{ "key_code": "left_option" }],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
                         "description": "Modifiers: Left_Shift + Right_Shift",
                         "enabled": false,
                         "manipulators": [
@@ -94,7 +82,7 @@
                                 },
                                 "to": [
                                     {
-                                        "key_code": "spacebar",
+                                        "key_code": "spacebarbar",
                                         "modifiers": ["left_command"]
                                     }
                                 ],
@@ -107,7 +95,7 @@
                                 },
                                 "to": [
                                     {
-                                        "key_code": "spacebar",
+                                        "key_code": "spacebarbar",
                                         "modifiers": ["left_command"]
                                     }
                                 ],
@@ -161,17 +149,17 @@
                         ]
                     },
                     {
-                        "description": "TabFN: Init",
+                        "description": "Super: Init",
                         "manipulators": [
                             {
                                 "from": {
-                                    "key_code": "tab",
+                                    "key_code": "spacebar",
                                     "modifiers": { "optional": ["any"] }
                                 },
                                 "to": [
                                     {
                                         "set_variable": {
-                                            "name": "tabfn_mode",
+                                            "name": "super_mode",
                                             "value": 1
                                         }
                                     }
@@ -179,44 +167,23 @@
                                 "to_after_key_up": [
                                     {
                                         "set_variable": {
-                                            "name": "tabfn_mode",
+                                            "name": "super_mode",
                                             "value": 0
                                         }
                                     }
                                 ],
-                                "to_if_alone": [{ "key_code": "tab" }],
+                                "to_if_alone": [{ "key_code": "spacebar" }],
                                 "type": "basic"
                             }
                         ]
                     },
                     {
-                        "description": "TabFN: Space to Shift, Tab on tap",
+                        "description": "Super: '>'|'<'",
                         "manipulators": [
                             {
                                 "conditions": [
                                     {
-                                        "name": "tabfn_mode",
-                                        "type": "variable_if",
-                                        "value": 1
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "spacebar",
-                                    "modifiers": { "optional": ["any"] }
-                                },
-                                "to": [{ "key_code": "left_shift" }],
-                                "to_if_alone": [{ "key_code": "tab" }],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "TabFN: '>'|'<'",
-                        "manipulators": [
-                            {
-                                "conditions": [
-                                    {
-                                        "name": "tabfn_mode",
+                                        "name": "super_mode",
                                         "type": "variable_if",
                                         "value": 1
                                     }
@@ -236,7 +203,7 @@
                             {
                                 "conditions": [
                                     {
-                                        "name": "tabfn_mode",
+                                        "name": "super_mode",
                                         "type": "variable_if",
                                         "value": 1
                                     }
@@ -256,12 +223,12 @@
                         ]
                     },
                     {
-                        "description": "TabFN: Tab+[hjkl] to Left, Down, Up, Right",
+                        "description": "Super: hjkl to Left, Down, Up, Right",
                         "manipulators": [
                             {
                                 "conditions": [
                                     {
-                                        "name": "tabfn_mode",
+                                        "name": "super_mode",
                                         "type": "variable_if",
                                         "value": 1
                                     }
@@ -276,7 +243,7 @@
                             {
                                 "conditions": [
                                     {
-                                        "name": "tabfn_mode",
+                                        "name": "super_mode",
                                         "type": "variable_if",
                                         "value": 1
                                     }
@@ -291,7 +258,7 @@
                             {
                                 "conditions": [
                                     {
-                                        "name": "tabfn_mode",
+                                        "name": "super_mode",
                                         "type": "variable_if",
                                         "value": 1
                                     }
@@ -306,7 +273,7 @@
                             {
                                 "conditions": [
                                     {
-                                        "name": "tabfn_mode",
+                                        "name": "super_mode",
                                         "type": "variable_if",
                                         "value": 1
                                     }
@@ -321,12 +288,12 @@
                         ]
                     },
                     {
-                        "description": "TabFN: Tab+n/p for tabs management",
+                        "description": "Super: n/p for tabs management",
                         "manipulators": [
                             {
                                 "conditions": [
                                     {
-                                        "name": "tabfn_mode",
+                                        "name": "super_mode",
                                         "type": "variable_if",
                                         "value": 1
                                     }
@@ -346,7 +313,7 @@
                             {
                                 "conditions": [
                                     {
-                                        "name": "tabfn_mode",
+                                        "name": "super_mode",
                                         "type": "variable_if",
                                         "value": 1
                                     }
@@ -366,12 +333,12 @@
                         ]
                     },
                     {
-                        "description": "TabFN: Tab+Backtab to Forward Delete",
+                        "description": "Super: Backtab to Forward Delete",
                         "manipulators": [
                             {
                                 "conditions": [
                                     {
-                                        "name": "tabfn_mode",
+                                        "name": "super_mode",
                                         "type": "variable_if",
                                         "value": 1
                                     }
@@ -386,12 +353,12 @@
                         ]
                     },
                     {
-                        "description": "TabFN: Language layouts",
+                        "description": "Super: Language layouts",
                         "manipulators": [
                             {
                                 "conditions": [
                                     {
-                                        "name": "tabfn_mode",
+                                        "name": "super_mode",
                                         "type": "variable_if",
                                         "value": 1
                                     }
@@ -406,7 +373,7 @@
                             {
                                 "conditions": [
                                     {
-                                        "name": "tabfn_mode",
+                                        "name": "super_mode",
                                         "type": "variable_if",
                                         "value": 1
                                     }
@@ -421,7 +388,7 @@
                             {
                                 "conditions": [
                                     {
-                                        "name": "tabfn_mode",
+                                        "name": "super_mode",
                                         "type": "variable_if",
                                         "value": 1
                                     }
@@ -436,12 +403,12 @@
                         ]
                     },
                     {
-                        "description": "TabFN: Reload Karabiner configuration",
+                        "description": "Super: Reload Karabiner configuration",
                         "manipulators": [
                             {
                                 "conditions": [
                                     {
-                                        "name": "tabfn_mode",
+                                        "name": "super_mode",
                                         "type": "variable_if",
                                         "value": 1
                                     }
@@ -456,12 +423,12 @@
                         ]
                     },
                     {
-                        "description": "TabFN: m to Context menu",
+                        "description": "Super: m to Context menu",
                         "manipulators": [
                             {
                                 "conditions": [
                                     {
-                                        "name": "tabfn_mode",
+                                        "name": "super_mode",
                                         "type": "variable_if",
                                         "value": 1
                                     }
@@ -476,20 +443,6 @@
                                         "modifiers": ["fn", "shift"]
                                     }
                                 ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "Space",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "spacebar",
-                                    "modifiers": { "optional": ["any"] }
-                                },
-                                "to": { "key_code": "left_command" },
-                                "to_if_alone": [{ "key_code": "spacebar" }],
                                 "type": "basic"
                             }
                         ]
