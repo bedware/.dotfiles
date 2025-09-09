@@ -1,28 +1,30 @@
-. "C:/Users/bedware/.dotfiles/win/pwsh/bin/Run-AHK.ps1"
+. ([Environment]::GetFolderPath("UserProfile") + "/.dotfiles/win/pwsh/bin/Run-AHK.ps1")
 
 
-$jsonFilePathPersonal = "C:\Users\bedware\AppData\Local\Microsoft\Edge\User Data\Default\Workspaces\WorkspacesCache"
-$jsonFilePathJob = "C:\Users\bedware\AppData\Local\Microsoft\Edge\User Data\Profile 2\Workspaces\WorkspacesCache"
+$jsonFilePathPersonal = ([Environment]::GetFolderPath("UserProfile") + "\AppData\Local\Microsoft\Edge\User Data\Default\Workspaces\WorkspacesCache")
+$secondProfile = ls ([Environment]::GetFolderPath("UserProfile") + "\AppData\Local\Microsoft\Edge\User Data") | Where-Object { $_.Name -match "Profile" } | Select-Object -ExpandProperty Name 
+$jsonFilePathJob = ([Environment]::GetFolderPath("UserProfile") + "\AppData\Local\Microsoft\Edge\User Data\$secondProfile\Workspaces\WorkspacesCache")
+
+$chromeProfileCode = [Environment]::GetFolderPath("UserProfile") + "/.dotfiles/win/ahk/utils/chrome-utils.ahk"
+
 while ($true) {
 
 ahk @"
+#include $chromeProfileCode
 WinGet, hwnd, ID, ahk_exe msedge.exe
-FileDelete, C:/temp.file
-WinGetTitle, windowTitle, ahk_id %hwnd%
-FileAppend, %windowTitle%, C:/temp.file, UTF-8
+FileDelete, C:/temp.txt
+CurrentProfile := Chrome_GetProfile(hwnd)
+FileAppend, %CurrentProfile%, C:/temp.txt, UTF-8
 "@
-    $title = Get-Content C:/temp.file
+    $title = Get-Content C:/temp.txt
     Write-Host $title
-    if ($title -match "- Alfa -") {
+    if ($title -match "Alfa") {
         $jsonContent = Get-Content -Path $jsonFilePathJob -Raw | ConvertFrom-Json
-    } elseif ($title -match "- Personal -") {
+    } elseif ($title -match "Personal") {
         $jsonContent = Get-Content -Path $jsonFilePathPersonal -Raw | ConvertFrom-Json
     } else {
         "Wrong profile!"
     }
-    exit;
-
-#     $jsonContent = Get-Content -Path $jsonFilePath -Raw | ConvertFrom-Json
 
     $selectedWorkspaceName = ($jsonContent.workspaces | ForEach-Object {
             if ($_.active -eq "true") {
