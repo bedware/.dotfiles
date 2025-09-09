@@ -149,6 +149,20 @@
                         ]
                     },
                     {
+                        "description": "Tab: Act as Option Modifier",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "tab",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [ { "key_code": "left_option" } ],
+                                "to_if_alone": [{ "key_code": "tab" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
                         "description": "Super: Init",
                         "manipulators": [
                             {
@@ -173,6 +187,56 @@
                                     }
                                 ],
                                 "to_if_alone": [{ "key_code": "spacebar" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Super: Language layouts",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "super_mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "e",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "shell_command": "/opt/homebrew/bin/im-select com.apple.keylayout.US" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "super_mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "r",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "shell_command": "/opt/homebrew/bin/im-select com.apple.keylayout.RussianWin" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "super_mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "w",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "shell_command": "/opt/homebrew/bin/im-select com.apple.keylayout.Wolastoqey" }],
                                 "type": "basic"
                             }
                         ]
@@ -288,7 +352,7 @@
                         ]
                     },
                     {
-                        "description": "Super: n/p for tabs management",
+                        "description": "Super: jk for prev/next tab",
                         "manipulators": [
                             {
                                 "conditions": [
@@ -348,56 +412,6 @@
                                     "modifiers": { "optional": ["any"] }
                                 },
                                 "to": [{ "key_code": "delete_forward" }],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "Super: Language layouts",
-                        "manipulators": [
-                            {
-                                "conditions": [
-                                    {
-                                        "name": "super_mode",
-                                        "type": "variable_if",
-                                        "value": 1
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "e",
-                                    "modifiers": { "optional": ["any"] }
-                                },
-                                "to": [{ "shell_command": "/opt/homebrew/bin/im-select com.apple.keylayout.US" }],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "name": "super_mode",
-                                        "type": "variable_if",
-                                        "value": 1
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "r",
-                                    "modifiers": { "optional": ["any"] }
-                                },
-                                "to": [{ "shell_command": "/opt/homebrew/bin/im-select com.apple.keylayout.RussianWin" }],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "name": "super_mode",
-                                        "type": "variable_if",
-                                        "value": 1
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "w",
-                                    "modifiers": { "optional": ["any"] }
-                                },
-                                "to": [{ "shell_command": "/opt/homebrew/bin/im-select com.apple.keylayout.Wolastoqey" }],
                                 "type": "basic"
                             }
                         ]
