@@ -12,43 +12,56 @@
 #if 
 
 #if HOTKEYS_ON && HYPER_PRESSED
-    Tab::
-        global apps
-        GoToAlternateApp(apps)
-    return
+    ; Tab::
+    ;     global apps
+    ;     GoToAlternateApp(apps)
+    ; return
     ; From Win
-    `::quakeAlive()
-    d::toggleDay()
-    e::inPlaceNeovim()
-    g::toggleGpt()
-    Enter::runNewWindowsTerminal()
-    ^t::toggleShowOnAllDesktops()
-    q::closeWindow()
+    ; d::toggleDay()
+    ; e::inPlaceNeovim()
+    ; g::toggleGpt()
+    ; g::toggleGpt()
+    ; q::closeWindow()
 
     ; Other Win keys
-    r::#r
-    i::#i
-    a::#a
-    p::#p
-    v::#v
-    t::#t
-    w::#y
-    o::!#o
-    `;::#`;
+    ; i::#i
+    ; a::#a
+    ; p::#p
+    ; v::#v
+    ; t::#t
+    ; o::!#o
+    ; `;::#`;
+    ; +v::^+m ; Select mode (vi-mode) in wt
 
     ; Copy & Paste
-    y::Send ^{Insert}
-    p::Send +{Insert}
+    ; y::Send ^{Insert}
+    ; p::Send +{Insert}
 
-    +v::^+m ; Select mode (vi-mode) in wt
-    /::Reload
 
+    ; Other
+    ; +`;::NumpadMult
+
+
+    ; Navigation
+    *h::Left
+    *j::Down
+    *k::Up
+    *l::Right
+    *[::PgUp
+    *]::PgDn
+    *,::Home
+    *.::End
+
+    ; Other
+    `::quakeAlive()
+    e::english()
+    r::russian()
+    Enter::runNewWindowsTerminal()
+    ^t::toggleShowOnAllDesktops()
     ; Context menu
     m::Send {AppsKey}
     Backspace::Send {Enter}
-
-    ; Other
-    +`;::NumpadMult
+    /::Reload
 
     ; To work as modifiers when Space pressed
     *LShift::LShift
@@ -75,15 +88,5 @@
     +8::MoveActiveWinAndGoToVD(8)
     +9::MoveActiveWinAndGoToVD(9)
     +0::MoveActiveWinAndGoToVD(6)
-
-    ; Navigation
-    *h::Left
-    *j::Down
-    *k::Up
-    *l::Right
-    *[::PgUp
-    *]::PgDn
-    *,::Home
-    *.::End
 #if
 

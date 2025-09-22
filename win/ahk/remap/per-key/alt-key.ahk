@@ -1,5 +1,5 @@
-*RAlt::return
-#if GetKeyState("RAlt", "P")
+; *LAlt::return
+#if GetKeyState("LAlt", "P")
     *1::F1
     *2::F2
     *3::F3
@@ -14,4 +14,8 @@
     *y::F12
     *-::F11
     *=::F12
+
+    ; Copy & Paste
+    *c::Send ^{Insert}
+    *v::Send +{Insert}
 #if
