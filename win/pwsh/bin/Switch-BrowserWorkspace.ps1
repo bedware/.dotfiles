@@ -12,8 +12,8 @@ while ($true) {
 ahk @"
 #include $chromeProfileCode
 WinGet, hwnd, ID, ahk_exe msedge.exe
-FileDelete, C:/temp.txt
 CurrentProfile := Chrome_GetProfile(hwnd)
+FileDelete, C:/temp.txt
 FileAppend, %CurrentProfile%, C:/temp.txt, UTF-8
 "@
     $title = Get-Content C:/temp.txt

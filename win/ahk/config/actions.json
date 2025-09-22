@@ -205,7 +205,6 @@
     "web": {
         "desktop": "Browsing",
         "run": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
-        "runArgs": "--launch-workspace=6faadb32-a5ae-4c25-88bc-360ab6e191e3",
         "selector": "^(?!DevTools) ahk_class Chrome_WidgetWin_1 ahk_exe msedge.exe"
     },
     "vdi": {

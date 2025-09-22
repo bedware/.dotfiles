@@ -14,25 +14,25 @@
 
 ; Workspace switcher popup
 
-#if ScopeIs("ahk_exe msedge.exe")
-    *LAlt::
-        SendEvent {LAlt DownR}
-        KeyWait, LAlt
-        SendEvent {LAlt Up}
-        if (A_PriorKey = "LAlt") {
-            createPopUp("select workspace", home "\.dotfiles\win\pwsh\bin\Switch-BrowserWorkspace.ps1")
-        }
-    return
-#if
+; #if ScopeIs("ahk_exe msedge.exe")
+;     *LAlt::
+;         SendEvent {LAlt DownR}
+;         KeyWait, LAlt
+;         SendEvent {LAlt Up}
+;         if (A_PriorKey = "LAlt") {
+;             createPopUp("select workspace", home "\.dotfiles\win\pwsh\bin\Switch-BrowserWorkspace.ps1")
+;         }
+;     return
+; #if
 
-#if ScopeIs("select workspace ahk_class Window Class ahk_exe alacritty.exe")
-    LAlt::
-        HideAppToTray("select workspace")
-    return
-    ~*Enter::
-        HideAppToTray("select workspace")
-        Sleep 75
-        Send ^l
-        Send {Esc}
-    return
-#if
+; #if ScopeIs("select workspace ahk_class Window Class ahk_exe alacritty.exe")
+;     ; LAlt::
+;     ;     HideAppToTray("select workspace")
+;     ; return
+;     ~*Enter::
+;         HideAppToTray("select workspace")
+;         Sleep 75
+;         Send ^l
+;         Send {Esc}
+;     return
+; #if
