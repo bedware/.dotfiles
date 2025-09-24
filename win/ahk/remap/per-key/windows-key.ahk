@@ -1,10 +1,10 @@
-#`::quakeAlive()
-#d::toggleDay()
+; #`::quakeAlive()
+; #d::toggleDay()
 ; #e::inPlaceNeovim()
-#g::toggleGpt()
+; #g::toggleGpt()
 #Enter::runNewWindowsTerminal()
 #^t::toggleShowOnAllDesktops()
-#q::closeWindow()
+; #q::closeWindow()
 ; #Space::Send {AppsKey}
 
 ;#1::GoToVD(1)

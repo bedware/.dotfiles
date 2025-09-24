@@ -51,6 +51,8 @@
     *]::PgDn
     *,::Home
     *.::End
+    *n::^Tab
+    *p::^+Tab
 
     ; Other
     `::quakeAlive()

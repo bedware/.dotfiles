@@ -18,4 +18,5 @@
     ; Copy & Paste
     *c::Send ^{Insert}
     *v::Send +{Insert}
+    *q::closeWindow()
 #if
