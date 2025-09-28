@@ -29,31 +29,33 @@ toggleDay() {
 }
 
 quakeAlive() {
-    if (!ProcessExist("WindowsTerminal.exe")) {
-        path := "C:/Users/dmitr/.dotfiles/"
-        ; path := StrReplace(path, getOldName(), getNewName())
+    global home
 
+    ; with russian layout it doesn't trigger
+    english()
+
+    if (!ProcessExist("WindowsTerminal.exe")) {
+        path := home "/.dotfiles/"
         Run, wt.exe -w _quake new-tab --title .dotfiles -d %path% -- nvim .
+        Sleep 300
+
+        ; workaround for --unfocus (by default quake window is focused)
         WinWait, ahk_exe WindowsTerminal.exe,, 5
         WinActivate
-        Sleep 300
         Send ^{F12}
-        Sleep 20
 
-        path := "C:/Users/dmitr/.dotfiles/win/ahk/"
-        ; path := StrReplace(path, getOldName(), getNewName())
+        path := home "/.dotfiles/win/ahk/"
         Run, wt --window _quake new-tab --title AutoHotkey -d %path% -- nvim .
         Sleep 20
 
-        path := "C:/Users/dmitr/.dotfiles/wsl/nvim/.config/nvim/"
-        ; path := StrReplace(path, getOldName(), getNewName())
+        path := home "/.dotfiles/wsl/nvim/.config/nvim/"
         Run, wt --window _quake new-tab --title Neovim -d %path%
         Sleep 20
 
-        path := "C:/Users/dmitr/"
-        ; path := StrReplace(path, getOldName(), getNewName())
+        path := home
         Run, wt --window _quake new-tab --title Console -d %path%
-        Run, wt --window _quake focus-tab -t 3
+        ; Sleep 100
+        ; Run, wt --window _quake focus-tab -t 2
     } else {
         Send #``
     }
@@ -62,6 +64,22 @@ quakeAlive() {
 runNewWindowsTerminal() {
     Run wt
     WinWait, "Administrator: PowerShell ahk_exe WindowsTerminal.exe",, 3
+}
+
+runNewAlacrittyTerminal() {
+    global home
+    path := home ; "/.dotfiles/"
+    title := "bedware.software"
+
+    Run, % "C:\Program Files\Alacritty\alacritty.exe" 
+        . " --title """ title """"
+        . " -o window.dimensions.lines=40"
+        . " -o window.dimensions.columns=125"
+        . " --command pwsh -wd """ path """"
+
+    WinWait, %title% ahk_class Window Class ahk_exe alacritty.exe,, 5
+    WinActivate
+    makeAnyWindowCentered()
 }
 
 toggleShowOnAllDesktops() {

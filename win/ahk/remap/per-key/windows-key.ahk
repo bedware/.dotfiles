@@ -2,7 +2,7 @@
 ; #d::toggleDay()
 ; #e::inPlaceNeovim()
 ; #g::toggleGpt()
-#Enter::runNewWindowsTerminal()
+; #Enter::runNewWindowsTerminal()
 #^t::toggleShowOnAllDesktops()
 ; #q::closeWindow()
 ; #Space::Send {AppsKey}

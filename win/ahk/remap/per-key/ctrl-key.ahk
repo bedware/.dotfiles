@@ -21,6 +21,7 @@
             }
             if (!isNeedToCancel) {
                 Send {Esc}
+                english()
             }
             isNeedToCancel := false
         }
