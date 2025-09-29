@@ -123,9 +123,13 @@ nnoremap <leader>vr :action Vcs.RollbackChangedLines<CR>
 nnoremap <leader>vf :action Git.Fetch<CR>
 nnoremap <leader>vp :action Vcs.Push<CR>
 
-" Code
+" GoTo
 nnoremap <leader>ff :action GotoFile<CR>
 nnoremap <leader>fc :action GotoClass<CR>
+nnoremap <leader>fa :action GotoAction<CR>
+nnoremap <leader>fp :action ManageRecentProjects<CR>
+
+" Code
 nnoremap <leader>fif :action FindInPath<CR>
 nnoremap <leader>mvn :action com.jetbrains.packagesearch.intellij.plugin.actions.AddDependencyAction<CR>
 nnoremap == :action ReformatCode<CR>
@@ -190,10 +194,6 @@ nnoremap <leader>tb :action tasks.open.in.browser<CR>
 
 " Show
 nnoremap <leader>q :action QuickImplementations<CR>
-nnoremap <leader>sa :action GotoAction<CR>
-nnoremap <leader>a :action GotoAction<CR>
-nnoremap <leader>sp :action ManageRecentProjects<CR>
-"nnoremap <leader>sc :action EditorContextInfo<CR>
 nnoremap <leader>sbc :action ByteCodeViewer<CR>
 nnoremap <leader>sbk :action ActivateKotlinBytecodeToolWindow<CR>
 nnoremap <leader>3 :action ActivateSonarQubeforIDEToolWindow<CR>

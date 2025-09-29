@@ -1,3 +1,6 @@
 [include]
     path = ~/.config/git/.gitconfig
     path = ~/.config/git/.not-for-sharing
+[user]
+    name = Dmitry Surin
+    email = dmitry.surin@gmail.com

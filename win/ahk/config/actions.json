@@ -58,9 +58,9 @@
         "run": "C:\\Program Files\\Mozilla Firefox\\firefox.exe",
         "selector": "ahk_exe firefox.exe"
     },
-    "idea": {
+    "ide": {
         "desktop": "Dev",
-        "run": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\JetBrains Toolbox\\IntelliJ IDEA Ultimate.lnk",
+        "run": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\JetBrains\\IntelliJ IDEA 2025.1.1.1.lnk",
         "selector": "ahk_exe idea64.exe"
     },
     "jkit": {

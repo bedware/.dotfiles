@@ -11,15 +11,6 @@
 return
 
 #if GetKeyState("Tab", "P")
-    ; Navigation
-    u::PgUp
-    d::PgDn
-
-    ; Languages (this one for one-hand interacting)
-    e::english()
-    r::russian()
-    g::georgian()
-
     ; Tabs management
     j::Send ^+{Tab}
     k::Send ^{Tab}
@@ -27,6 +18,15 @@ return
     ; Terminals
     n::runNewAlacrittyTerminal()
     t::runNewWindowsTerminal()
+
+    ; From Win
+    g::
+        MsgBox "RUN"
+        ; Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\ChatGPT.lnk"
+    return
+
+    ; C:\Users\dmitr\AppData\Local\Microsoft\Edge\User Data\Default\Web Applications
+    ; C:\Users\dmitr\AppData\Local\Microsoft\Edge\User Data\Profile 3\Web Applications
 #if
 
 ; #if ScopeIs("ahk_exe datagrip64.exe") and GetKeyState("Tab", "P")
@@ -43,15 +43,7 @@ return
     }
 return
 #if GetKeyState("\", "P")
-    Tab::toggleRaceMode()
-    ; From Win
-    g::
-        MsgBox "RUN"
-        Run "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\ChatGPT.lnk"
-    return
-
-    ; C:\Users\dmitr\AppData\Local\Microsoft\Edge\User Data\Default\Web Applications
-    ; C:\Users\dmitr\AppData\Local\Microsoft\Edge\User Data\Profile 3\Web Applications
+    Tab::toggleGameMode()
 
     1::open_dot()
     2::open_ahk()

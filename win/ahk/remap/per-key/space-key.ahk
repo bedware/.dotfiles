@@ -23,6 +23,12 @@
     *l::Right
     *,::Home
     *.::End
+    *u::PgUp
+    *d::PgDn
+
+    ; Languages (this one for one-hand interacting)
+    e::english()
+    r::russian()
 
     ; Terminal
     `::quakeAlive()
@@ -31,7 +37,7 @@
     m::Send {AppsKey}
 
     ; Other
-    d::Send {Delete}
+    Backspace::Send {Delete}
     `;::NumpadMult
 
     ; Virtual desktops (VD)

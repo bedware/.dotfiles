@@ -3,7 +3,7 @@ ScopeIs(selector) {
     return CONTEXT_HOTKEYS_ON and WinActive(selector)
 }
 
-toggleRaceMode() {
+toggleGameMode() {
     global HOTKEYS_ON
     HOTKEYS_ON := !HOTKEYS_ON
     if (HOTKEYS_ON) 
