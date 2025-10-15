@@ -128,6 +128,7 @@ nnoremap <leader>ff :action GotoFile<CR>
 nnoremap <leader>fc :action GotoClass<CR>
 nnoremap <leader>fa :action GotoAction<CR>
 nnoremap <leader>fp :action ManageRecentProjects<CR>
+nnoremap <leader>ai :action de.andrena.codingaider.AiderActionGroup<CR>
 
 " Code
 nnoremap <leader>fif :action FindInPath<CR>
