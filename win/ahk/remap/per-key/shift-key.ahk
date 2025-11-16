@@ -1,11 +1,16 @@
 #if HOTKEYS_ON && ScopeIs("ahk_exe msedge.exe")
     RShift Up::
         if (A_PriorKey = "RShift") {
-            if (WinExist("select workspace ahk_class Window Class ahk_exe alacritty.exe")) {
-                WinActivate
-            } else {
-                createPopUp("select workspace", home "\.dotfiles\win\pwsh\bin\Switch-BrowserWorkspace.ps1")
-            }
+            english()
+            Send ^#!w
+        }
+        Send {RShift Up}
+    return
+#if
+#if HOTKEYS_ON && ScopeIs("ahk_exe Microsoft.CmdPal.UI.exe")
+    RShift Up::
+        if (A_PriorKey = "RShift") {
+            Send ^#!{Space}
         }
         Send {RShift Up}
     return
@@ -19,7 +24,9 @@
     LShift Up::
         global apps
         if (A_PriorKey = "LShift") {
-            RunAlfred(apps)
+            ; RunAlfred(apps)
+            english()
+            Send ^#!{Space}
         }
         Send {LShift Up}
     return 

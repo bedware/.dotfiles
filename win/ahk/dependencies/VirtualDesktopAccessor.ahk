@@ -3,7 +3,8 @@
 ; Get hwnd of AutoHotkey window, for listener
 
 ; Path to the DLL, relative to the script
-VDA_PATH := A_ScriptDir . "./dependencies/VirtualDesktopAccessor.dll"
+; VDA_PATH := A_ScriptDir . "./dependencies/VirtualDesktopAccessor.dll"
+VDA_PATH := "C:/Users/" . A_UserName . "/.dotfiles/win/ahk/dependencies/VirtualDesktopAccessor.dll"
 hVirtualDesktopAccessor := DllCall("LoadLibrary", "Str", VDA_PATH, "Ptr")
 
 GetDesktopCountProc := DllCall("GetProcAddress", "Ptr", hVirtualDesktopAccessor, "AStr", "GetDesktopCount", "Ptr")

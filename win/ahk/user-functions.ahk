@@ -58,6 +58,30 @@ quakeAlive() {
         ; Run, wt --window _quake focus-tab -t 2
     } else {
         Send #``
+        WinWait, ahk_exe WindowsTerminal.exe,, 5
+
+        WinTitle := "ahk_exe WindowsTerminal.exe"
+
+        ; try to find existing WT window
+        if WinExist(WinTitle) {
+            if WinActive(WinTitle) {
+                ; get current window pos/size
+                WinGetPos, X, Y, W, H, %WinTitle%
+
+                ; new width = 2/3 of current width
+                NewW := W * 2 / 3
+
+                ; get work area of primary monitor
+                SysGet, WA, MonitorWorkArea
+                ScreenW := WARight - WALeft
+
+                ; center horizontally: only X changes
+                XNew := Round(WALeft + (ScreenW - NewW) / 2)
+
+                ; apply new width and centered X, keep Y & H
+                WinMove, %WinTitle%,, XNew, Y, NewW, H
+            }
+        }
     }
 }
 

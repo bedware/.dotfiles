@@ -1,29 +1,42 @@
-; #`::quakeAlive()
-; #d::toggleDay()
-; #e::inPlaceNeovim()
-; #g::toggleGpt()
-; #Enter::runNewWindowsTerminal()
-#^t::toggleShowOnAllDesktops()
-; #q::closeWindow()
-; #Space::Send {AppsKey}
+#if HOTKEYS_ON
+    ; #`::quakeAlive()
+    ; #d::toggleDay()
+    ; #e::inPlaceNeovim()
+    ; #g::toggleGpt()
+    ; #Enter::runNewWindowsTerminal()
+    #^t::toggleShowOnAllDesktops()
+    ; #q::closeWindow()
+    ; #Space::Send {AppsKey}
+    ; #r::^#!r
 
-;#1::GoToVD(1)
-;#2::GoToVD(2)
-;#3::GoToVD(3)
-;#4::GoToVD(4)
-;#5::GoToVD(5)
-;#6::GoToAlternateVD()
-;#7::GoToVD(7)
-;#8::GoToVD(8)
-;#9::GoToVD(9)
-;#0::GoToVD(6)
+    ;#1::GoToVD(1)
+    ;#2::GoToVD(2)
+    ;#3::GoToVD(3)
+    ;#4::GoToVD(4)
+    ;#5::GoToVD(5)
+    ;#6::GoToAlternateVD()
+    ;#7::GoToVD(7)
+    ;#8::GoToVD(8)
+    ;#9::GoToVD(9)
+    ;#0::GoToVD(6)
 
-;#+1::MoveActiveWinAndGoToVD(1)
-;#+2::MoveActiveWinAndGoToVD(2)
-;#+3::MoveActiveWinAndGoToVD(3)
-;#+4::MoveActiveWinAndGoToVD(4)
-;#+5::MoveActiveWinAndGoToVD(5)
-;#+7::MoveActiveWinAndGoToVD(7)
-;#+8::MoveActiveWinAndGoToVD(8)
-;#+9::MoveActiveWinAndGoToVD(9)
-;#+0::MoveActiveWinAndGoToVD(6)
+    ;#+1::MoveActiveWinAndGoToVD(1)
+    ;#+2::MoveActiveWinAndGoToVD(2)
+    ;#+3::MoveActiveWinAndGoToVD(3)
+    ;#+4::MoveActiveWinAndGoToVD(4)
+    ;#+5::MoveActiveWinAndGoToVD(5)
+    ;#+7::MoveActiveWinAndGoToVD(7)
+    ;#+8::MoveActiveWinAndGoToVD(8)
+    ;#+9::MoveActiveWinAndGoToVD(9)
+    ;#+0::MoveActiveWinAndGoToVD(6)
+
+    *LWin::LWin 
+
+    LWin Up::
+        if (A_PriorKey = "LWin") {
+            return
+        } else {
+            Send {LWin Up}
+        }
+    return 
+#if

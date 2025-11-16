@@ -1,17 +1,25 @@
-*Tab::
-    if (A_PriorKey = "LAlt") {
-        SendEvent {Blind}{Tab}
-        KeyWait, Tab
-    } else {
-        KeyWait, Tab
-        if (A_ThisHotkey = "*Tab" and A_PriorKey = "Tab") {
+#if HOTKEYS_ON 
+    *Tab::
+        if (A_PriorKey = "LAlt") {
             SendEvent {Blind}{Tab}
+            KeyWait, Tab
+        } else {
+            KeyWait, Tab
+            if (A_ThisHotkey = "*Tab" and A_PriorKey = "Tab") {
+                SendEvent {Blind}{Tab}
+            }
         }
-    }
-return
+    return
+#if 
 
-#if GetKeyState("Tab", "P")
+#if HOTKEYS_ON && ScopeIs("ahk_exe Telegram.exe") && GetKeyState("Tab", "P")
     ; Tabs management
+    j::Send ^+{Up}
+    k::Send ^+{Down}
+#if 
+
+#if HOTKEYS_ON && GetKeyState("Tab", "P")
+    ; ; Tabs management
     j::Send ^+{Tab}
     k::Send ^{Tab}
 

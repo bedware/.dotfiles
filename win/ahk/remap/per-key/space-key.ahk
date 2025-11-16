@@ -50,7 +50,7 @@
     7::GoToVD(7)
     8::GoToVD(8)
     9::GoToVD(9)
-    0::GoToVD(6)
+    0::GoToVD(10)
     +1::MoveActiveWinAndGoToVD(1)
     +2::MoveActiveWinAndGoToVD(2)
     +3::MoveActiveWinAndGoToVD(3)
@@ -59,6 +59,6 @@
     +7::MoveActiveWinAndGoToVD(7)
     +8::MoveActiveWinAndGoToVD(8)
     +9::MoveActiveWinAndGoToVD(9)
-    +0::MoveActiveWinAndGoToVD(6)
+    +0::MoveActiveWinAndGoToVD(10)
 #if
 

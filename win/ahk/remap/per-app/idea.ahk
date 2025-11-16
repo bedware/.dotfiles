@@ -10,7 +10,7 @@ ListIdeaWindows() {
     MsgBox % result
 }
 
-!w::ListIdeaWindows()
+; !w::ListIdeaWindows()
 #if ScopeIs("ahk_exe idea64.exe")
     Esc::Send +{Esc}
     ^f::^+f

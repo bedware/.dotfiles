@@ -86,17 +86,19 @@
         "run": "g:\\My Drive\\Other\\Keyboard\\Layer 1.png"
     },
     "mail": {
-        "run": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Spark Desktop.lnk",
-        "selector": "ahk_exe Spark Desktop.exe"
+        "desktop": "Other",
+        "run": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Thunderbird.lnk",
+        "selector": "ahk_exe thunderbird.exe"
     },
     "mus": {
-        "desktop": "Other",
+        "desktop": "I'm creator",
         "run": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Яндекс Музыка.lnk",
         "selector": "ahk_exe Яндекс Музыка.exe"
     },
     "note": {
-        "run": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Notion.lnk",
-        "selector": "ahk_exe Notion.exe"
+        "desktop": "Other",
+        "run": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Obsidian.lnk",
+        "selector": "ahk_exe Obsidian.exe"
     },
     "obs": {
         "desktop": "Stream",
@@ -175,6 +177,11 @@
         "run": "C:\\Users\\dmitr\\AppData\\Roaming\\Telegram Desktop\\Telegram.exe",
         "selector": "ahk_exe Telegram.exe"
     },
+    "tk": {
+        "desktop": "Chats",
+        "run": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Толк.lnk",
+        "selector": "ahk_exe ktalk.exe"
+    },
     "wa": {
         "desktop": "Chats",
         "selector": "WhatsApp ahk_class ApplicationFrameWindow ahk_exe ApplicationFrameHost.exe"
@@ -205,7 +212,10 @@
     "web": {
         "desktop": "Browsing",
         "run": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
-        "selector": "^(?!DevTools) ahk_class Chrome_WidgetWin_1 ahk_exe msedge.exe"
+        "selector": "ahk_exe msedge.exe"
+    },
+    "pt": {
+        "run": "C:\\Users\\dmitr\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\PowerToys (Preview)\\PowerToys (Preview).lnk"
     },
     "vdi": {
         "run": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\VMware Horizon Client.lnk"
