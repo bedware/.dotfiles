@@ -37,6 +37,8 @@
     m::Send {AppsKey}
 
     ; Other
+    *w::^#!f
+    *q::closeWindow()
     Backspace::Send {Delete}
     `;::NumpadMult
 

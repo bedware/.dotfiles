@@ -21,6 +21,7 @@
 #Include %A_ScriptDir%/remap/per-app/telegram.ahk
 #Include %A_ScriptDir%/remap/per-app/gpt.ahk
 #Include %A_ScriptDir%/remap/per-app/idea.ahk
+#Include %A_ScriptDir%/remap/per-app/wt.ahk
 #Include %A_ScriptDir%/remap/per-app/lens.ahk
 #Include %A_ScriptDir%/remap/per-app/browser.ahk
 #Include %A_ScriptDir%/remap/per-app/sites.ahk

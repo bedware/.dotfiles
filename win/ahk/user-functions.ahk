@@ -56,8 +56,7 @@ quakeAlive() {
         Run, wt --window _quake new-tab --title Console -d %path%
         ; Sleep 100
         ; Run, wt --window _quake focus-tab -t 2
-    } else {
-        Send #``
+
         WinWait, ahk_exe WindowsTerminal.exe,, 5
 
         WinTitle := "ahk_exe WindowsTerminal.exe"
@@ -82,6 +81,8 @@ quakeAlive() {
                 WinMove, %WinTitle%,, XNew, Y, NewW, H
             }
         }
+    } else {
+        Send #``
     }
 }
 
