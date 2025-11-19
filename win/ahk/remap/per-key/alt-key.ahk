@@ -14,23 +14,25 @@
     ; *-::F11
     ; *=::F12
 
-    *Tab::return
+    !Tab::return
 
-    6::Send !{Tab}
+    !6::Send {Blind}{LAlt Down}{Tab}{LAlt Up}
+    6::Send {Blind}{LAlt Down}{Tab}{LAlt Up}
     ; *q::closeWindow()
 
     ; Copy & Paste
-    c::Send ^{Insert}
-    v::Send +{Insert}
+    !c::Send ^{Insert}
+    !v::Send +{Insert}
 #if
+
 #if HOTKEYS_ON && GetKeyState("LAlt", "P") && ScopeIs("ahk_exe WindowsTerminal.exe")
-    *1::^!1
-    *2::^!2
-    *3::^!3
-    *4::^!4
-    *5::^!5
-    *6::^!6
-    *7::^!7
-    *8::^!8
-    *9::^!9
+    !1::^!1
+    !2::^!2
+    !3::^!3
+    !4::^!4
+    !5::^!5
+    !6::^!6
+    !7::^!7
+    !8::^!8
+    !9::^!9
 #if
