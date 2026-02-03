@@ -9,6 +9,158 @@ local function getWindowsOnCurrentSpace()
 	return wf:getWindows()
 end
 
+local EDGE_PROFILE_ALIASES = {
+	Default = "Job",
+	["Profile 1"] = "Personal",
+}
+
+local EDGE_BASE_DIR = (os.getenv("HOME") or "")
+	.. "/Library/Application Support/Microsoft Edge"
+
+local function getEdgeProfiles()
+	local profiles = {}
+	for entry in hs.fs.dir(EDGE_BASE_DIR) do
+		if entry ~= "." and entry ~= ".." then
+			local cachePath = EDGE_BASE_DIR
+				.. "/"
+				.. entry
+				.. "/Workspaces/WorkspacesCache"
+			if hs.fs.attributes(cachePath, "mode") then
+				local alias = EDGE_PROFILE_ALIASES[entry]
+				local displayName = alias or entry
+				table.insert(profiles, {
+					name = displayName,
+					rawName = entry,
+					path = cachePath,
+				})
+			end
+		end
+	end
+	return profiles
+end
+
+local function readJsonFile(path)
+	local f = io.open(path, "r")
+	if not f then
+		return nil
+	end
+	local content = f:read("*a")
+	f:close()
+	if not content or content == "" then
+		return nil
+	end
+	local ok, data = pcall(hs.json.decode, content)
+	if not ok then
+		return nil
+	end
+	return data
+end
+
+local function getEdgeWorkspaceChoices()
+	local choices = {}
+	for _, profile in ipairs(getEdgeProfiles()) do
+		local data = readJsonFile(profile.path)
+		if data and data.workspaces then
+			for _, workspace in ipairs(data.workspaces) do
+				local status = nil
+				if workspace.active == true then
+					status = "Active"
+				elseif workspace.accent == true then
+					status = "Accent"
+				end
+
+				local subtitle = profile.name
+				if status then
+					subtitle = subtitle .. " · " .. status
+				end
+				if workspace.menuSubtitle and workspace.menuSubtitle ~= "" then
+					subtitle = subtitle .. " · " .. workspace.menuSubtitle
+				end
+
+				table.insert(choices, {
+					text = workspace.name or "<no name>",
+					subText = subtitle,
+					workspaceId = workspace.id,
+					profileName = profile.name,
+					profileDirectory = profile.rawName,
+				})
+			end
+		end
+	end
+	return choices
+end
+
+local function launchEdgeWorkspace(workspaceId, profileDirectory)
+	if not workspaceId or workspaceId == "" then
+		return
+	end
+
+	local edgeExec = "/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge"
+	local taskArgs = { "--launch-workspace=" .. workspaceId }
+	if profileDirectory and profileDirectory ~= "" then
+		table.insert(taskArgs, "--profile-directory=" .. profileDirectory)
+	end
+
+	if hs.fs.attributes(edgeExec, "mode") then
+		hs.task.new(edgeExec, nil, taskArgs):start()
+	else
+		local openArgs = {
+			"-n",
+			"-a",
+			"Microsoft Edge",
+			"--args",
+			"--launch-workspace=" .. workspaceId,
+		}
+		if profileDirectory and profileDirectory ~= "" then
+			table.insert(openArgs, "--profile-directory=" .. profileDirectory)
+		end
+		hs.task.new("/usr/bin/open", nil, openArgs):start()
+	end
+end
+
+local edgeWorkspaceChooser
+local _edgeChoices = {}
+
+local function showEdgeWorkspaceChooser()
+	local choices = getEdgeWorkspaceChoices()
+	if not choices or #choices == 0 then
+		hs.alert.show("No Edge workspaces found")
+		return
+	end
+
+	_edgeChoices = choices
+
+	if not edgeWorkspaceChooser then
+		edgeWorkspaceChooser = hs.chooser.new(function(choice)
+			if not choice then
+				return
+			end
+			launchEdgeWorkspace(choice.workspaceId, choice.profileDirectory)
+		end)
+		edgeWorkspaceChooser:width(40)
+		edgeWorkspaceChooser:rows(12)
+		edgeWorkspaceChooser:queryChangedCallback(function(q)
+			local filtered = {}
+			local needle = (q or ""):lower()
+
+			for _, item in ipairs(_edgeChoices or {}) do
+				local hay1 = (item.text or ""):lower()
+				local hay2 = (item.subText or ""):lower()
+
+				if needle == "" or hay1:find(needle, 1, true) or hay2:find(needle, 1, true) then
+					table.insert(filtered, item)
+				end
+			end
+
+			edgeWorkspaceChooser:choices(filtered)
+		end)
+	end
+
+	edgeWorkspaceChooser:choices(choices)
+	edgeWorkspaceChooser:query("")
+	edgeWorkspaceChooser:show()
+end
+
 local windowChooser -- forward decl
 local _allChoices = {} -- всегда текущий список окон
 
@@ -117,4 +269,8 @@ hs.openConsole()
 hs.urlevent.bind("toggle", function(eventName, params)
 	showWindowChooser()
 	-- hs.alert.show("mode = " .. (params.mode or "nil"))
+end)
+
+hs.urlevent.bind("edge-workspaces", function()
+	showEdgeWorkspaceChooser()
 end)
