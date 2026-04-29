@@ -54,13 +54,16 @@ nnoremap <A-k> :action MethodUp<CR>
 
 " Navigation (Changes)
 nnoremap g; :action VcsShowNextChangeMarker<CR>
-" nnoremap g; :action NextDiff<CR>
 nnoremap g, :action VcsShowPrevChangeMarker<CR>
-" nnoremap g, :action PreviousDiff<CR>
+
+nnoremap <Up> :action PreviousDiff<CR>
+nnoremap <Down> :action NextDiff<CR>
+" 29.04.2026 Two rules below don't work. IDK why...
+" nnoremap <Left> :action Diff.PrevChange<CR>
+" nnoremap <Right> :action Diff.NextChange<CR>
 
 " Navigation (GO TO ...)
 nnoremap gd :action GotoDeclaration<CR>
-" nnoremap ge `.<CR>
 nnoremap ge :action JumpToLastChange<CR>
 nnoremap gi :action GotoImplementation<CR>
 nnoremap gs :action GotoSuperMethod<CR>
@@ -215,8 +218,9 @@ nnoremap <S-Tab> :action HideActiveWindow<CR>
 nnoremap <A-p> :action PinActiveEditorTab<CR>
 nnoremap <leader>wj :action MoveTabDown<CR>
 nnoremap <leader>wl :action MoveTabRight<CR>
-nnoremap <leader>wsj :action SplitHorizontally<CR>
-nnoremap <leader>wsl :action SplitVertically<CR>
+" Use vim's hotkeys for those actions
+" nnoremap <leader>wsj :action SplitHorizontally<CR>
+" nnoremap <leader>wsl :action SplitVertically<CR>
 nnoremap <leader>wsc :action ChangeSplitOrientation<CR>
 nnoremap <leader>wo :action MoveEditorToOppositeTabGroup<CR>
 nnoremap <leader>wh :action HideAllWindows<CR>
@@ -225,18 +229,19 @@ nnoremap <leader>zz :action ToggleZenMode<CR>
 nnoremap <leader>zp :action TogglePresentationMode<CR>
 nnoremap <leader>zf :action ToggleFullScreen<CR>
 
-" Tabs Close
+
+" Tabs
 nnoremap <A-w> :action CloseContent<CR>
 nnoremap <leader>X :action ReopenClosedTab<CR>
-nnoremap <leader>wca :action CloseAllEditors<CR>
-nnoremap <leader>wco :action CloseAllEditorsButActive<CR>
-nnoremap <leader>wcl :action CloseAllToTheLeft<CR>
-nnoremap <leader>wcr :action CloseAllToTheRight<CR>
-" Tabs
+" Commands below not needed for no tabs mode
+" nnoremap <leader>wca :action CloseAllEditors<CR>
+" nnoremap <leader>wco :action CloseAllEditorsButActive<CR>
+" nnoremap <leader>wcl :action CloseAllToTheLeft<CR>
+" nnoremap <leader>wcr :action CloseAllToTheRight<CR>
 " nnoremap <S-j> :action PreviousTab<CR>
 " nnoremap <S-k> :action NextTab<CR>
-" Window Go
-" nnoremap <leader><leader><leader> :action Switcher<CR>
+
+" Buffers
 nnoremap <A-e> :action ShowHarpoon<CR>
 nnoremap <C-h> :action GotoHarpoon1<CR>
 nnoremap <C-j> :action GotoHarpoon2<CR>
@@ -250,22 +255,23 @@ nnoremap <leader><C-k> :action SetHarpoon3<CR>
 nnoremap <leader><C-l> :action SetHarpoon4<CR>
 nnoremap <leader><C-;> :action SetHarpoon5<CR>
 
-nnoremap <leader><leader>p :action ActivateProjectToolWindow<CR>
-nnoremap <leader><leader>2 :action ActivateProblemsViewToolWindow<CR>
-nnoremap <leader><leader>c :action ActivateCommitToolWindow<CR>
-nnoremap <leader><leader>C :action ActivateVcsChangesToolWindow<CR>
-nnoremap <leader><leader>v :action ActivateVersionControlToolWindow<CR>
+" Tools
+" nnoremap <leader><leader><leader> :action Switcher<CR>
 nnoremap <leader><leader>, :action ActivateDebugToolWindow<CR>
-nnoremap <leader><leader>r :action ActivateRunToolWindow<CR>
-nnoremap <leader><leader>d :action ActivateDatabaseToolWindow<CR>
-nnoremap <leader><leader>D :action ActivateDependenciesToolWindow<CR>
-nnoremap <leader><leader>s :action ActivateServicesToolWindow<CR>
-nnoremap <leader><leader>S :action ActivateStructureToolWindow<CR>
-nnoremap <leader><leader>t :action ActivateTerminalToolWindow<CR>
-nnoremap <leader><leader>P :action ActivateProfilerToolWindow<CR>
+nnoremap <leader><leader>2 :action ActivateProblemsViewToolWindow<CR>
+nnoremap <leader><leader>b :action ActivateDatabaseToolWindow<CR>
+nnoremap <leader><leader>c :action ActivateCommitToolWindow<CR>
+nnoremap <leader><leader>d :action ActivateVcsChangesToolWindow<CR>
 nnoremap <leader><leader>f :action ActivateFindToolWindow<CR>
-nnoremap <leader><leader>y :action ActivateYouTrackToolWindow<CR>
 nnoremap <leader><leader>n :action ActivateNotificationsToolWindow<CR>
+nnoremap <leader><leader>p :action ActivateProjectToolWindow<CR>
+" nnoremap <leader><leader>P :action ActivateProfilerToolWindow<CR>
+nnoremap <leader><leader>r :action ActivateRunToolWindow<CR>
+nnoremap <leader><leader>s :action ActivateStructureToolWindow<CR>
+nnoremap <leader><leader>S :action ActivateServicesToolWindow<CR>
+nnoremap <leader><leader>t :action ActivateTerminalToolWindow<CR>
+nnoremap <leader><leader>v :action ActivateVersionControlToolWindow<CR>
+nnoremap <leader><leader>y :action ActivateYouTrackToolWindow<CR>
 " ADOC
 map <A-1> :action org.asciidoc.intellij.actions.editorlayout.EditorOnlyLayoutChangeAction<CR>
 map <A-2> :action org.asciidoc.intellij.actions.editorlayout.EditorAndPreviewLayoutChangeAction<CR>
@@ -280,11 +286,16 @@ inoremap <C-k> <Esc>:m -2<CR>gi
 " nnoremap <C-j> :action MoveStatementDown<CR>
 " nnoremap <C-k> :action MoveStatementUp<CR>
 
-" System clipboard
+" System clipboard (SC)
+" Copy to SC
 vnoremap <leader>y "+y
-vnoremap <leader>d "+d
 nnoremap <leader>y "+y
+nnoremap Y v$y
+
+" Paste to SC
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
-nnoremap Y v$y
+
+" Cut to SC
+vnoremap <leader>d "+d
 
