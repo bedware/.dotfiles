@@ -1,0 +1,10 @@
+[user]
+    name = Dmitry Surin
+    email = dmitry.surin@gmail.com
+[core]
+    autocrlf = true
+    excludesfile = ~/.dotfiles/.gitignore
+    editor = nvim
+[color "diff"]
+    meta = bold yellow
+

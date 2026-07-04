@@ -1,3 +1,3 @@
 # Description
-This is my dotfiles for Windows + WSL
 
+This is my dotfiles

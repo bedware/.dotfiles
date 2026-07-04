@@ -183,9 +183,6 @@ nmap <leader>ref <Action>(ExternalSystem.ProjectRefreshAction)
 nmap <leader>bb <Action>(ToggleBookmark)
 nmap <leader>bl <Action>(ShowBookmarks)
 
-" Compile
-nmap <leader>cf <Action>(CompileFile)
-
 " Task
 nmap <leader>tn <Action>(tasks.goto)
 nmap <leader>ts <Action>(tasks.switch)
