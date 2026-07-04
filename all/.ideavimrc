@@ -273,7 +273,7 @@ nmap <leader><C-;> <Action>(SetHarpoon5)
 " Continue
 nmap <C-g> <Action>(continue.focusContinueInput)
 vmap <C-g> <Action>(continue.focusContinueInput)
-" AsciiDoc
+" ADOC
 map <A-1> <Action>(org.asciidoc.intellij.actions.editorlayout.EditorOnlyLayoutChangeAction)
 map <A-2> <Action>(org.asciidoc.intellij.actions.editorlayout.EditorAndPreviewLayoutChangeAction)
 map <A-3> <Action>(org.asciidoc.intellij.actions.editorlayout.PreviewOnlyLayoutChangeAction)
