@@ -18,7 +18,7 @@ sethandler <A-C-J> a:ide
 sethandler <C-B> a:ide
 sethandler <C-E> a:ide
 sethandler <C-F> a:ide
-sethandler <C-J> a:ide
+" sethandler <C-J> a:ide
 sethandler <C-M> a:ide
 sethandler <C-N> n-v:ide
 sethandler <C-P> a:ide
@@ -106,8 +106,8 @@ nmap <S-Down> <Action>(VcsShowNextChangeMarker)
 " Navigation Changes (Diff Tool window)
 nmap <Up> <Action>(PreviousDiff)
 nmap <Down> <Action>(NextDiff)
-nmap <Left> <Action>(Diff.NextChange)
-nmap <Right> <Action>(Diff.PrevChange)
+nmap <Right> <Action>(Diff.NextChange)
+nmap <Left> <Action>(Diff.PrevChange)
 " History
 nmap <leader>vsh <Action>(Vcs.ShowHistoryForBlock)
 vmap <leader>vsh <Action>(Vcs.ShowHistoryForBlock)
@@ -223,11 +223,11 @@ nmap <leader>wf <Action>(ToggleFullScreen)
 nmap <leader><leader>p <Action>(ActivateProjectToolWindow)
 nmap <leader><leader>2 <Action>(ActivateProblemsViewToolWindow)
 nmap <leader><leader>c <Action>(ActivateCommitToolWindow)
-nmap <leader><leader>C <Action>(ActivateVcsChangesToolWindow)
+nmap <leader><leader>d <Action>(ActivateVcsChangesToolWindow)
 nmap <leader><leader>v <Action>(ActivateVersionControlToolWindow)
 nmap <leader><leader>, <Action>(ActivateDebugToolWindow)
 nmap <leader><leader>r <Action>(ActivateRunToolWindow)
-nmap <leader><leader>d <Action>(ActivateDatabaseToolWindow)
+nmap <leader><leader>b <Action>(ActivateDatabaseToolWindow)
 nmap <leader><leader>D <Action>(ActivateDependenciesToolWindow)
 nmap <leader><leader>i <Action>(ActivateServicesToolWindow)
 nmap <leader><leader>s <Action>(ActivateStructureToolWindow)
