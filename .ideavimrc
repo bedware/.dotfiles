@@ -10,20 +10,7 @@ set scrolloff=10
 
 " IDEA Set Handlers
 sethandler a:vim
-sethandler <S-Enter> v-i:ide
-sethandler <A-D> a:ide
-sethandler <A-S-D> a:ide
-sethandler <A-S-J> a:ide
-sethandler <A-C-J> a:ide
-sethandler <C-B> a:ide
-sethandler <C-E> a:ide
-sethandler <C-F> a:ide
-" sethandler <C-J> a:ide
-sethandler <C-M> a:ide
-sethandler <C-N> n-v:ide
-sethandler <C-P> a:ide
-sethandler <C-Q> n-v:ide i:vim
-sethandler <C-S> n:ide
+sethandler <C-e> n:ide
 
 " Remap leader
 let mapleader = " "
@@ -35,13 +22,6 @@ Plug 'tpope/vim-commentary'
 Plug 'vim-scripts/argtextobj.vim'
 Plug 'machakann/vim-highlightedyank'
 Plug 'terryma/vim-multiple-cursors'
-
-" Disabling things
-map <Up> <nop>
-map <Down> <nop>
-map <Left> <nop>
-map <Right> <nop>
-map <Space> <nop>
 
 " Line text object
 xnoremap il g_o0
@@ -56,15 +36,12 @@ nmap <A-k> <Action>(MethodUp)
 
 " Navigation (GO TO ...)
 nmap gd <Action>(GotoDeclaration)
-" nnoremap ge `.<CR>
-nmap ge <Action>(JumpToLastChange)
 nmap gi <Action>(GotoImplementation)
 nmap gs <Action>(GotoSuperMethod)
 nmap gt <Action>(GotoTest)
-nmap gr <Action>(GotoTypeDeclaration)
+nmap gtt <Action>(GotoTypeDeclaration)
 nmap gu <Action>(FindUsages)
-nmap gf <Action>(MethodDown)<Action>(MethodUp)
-nmap gh :1<CR><Action>(MethodDown)
+nmap gf <Action>(MethodUp)
 
 " Back/Forward history
 nmap <C-O> <Action>(Back)
@@ -72,10 +49,8 @@ nmap <C-I> <Action>(Forward)
 nmap <C-W>w <Action>(Diff.FocusOppositePane)
 
 " Remap Override & Implement methods
-nmap <A-O> <Action>(OverrideMethods)
-nmap <A-I> <Action>(ImplementMethods)
-imap <A-O> <Action>(OverrideMethods)
-imap <A-I> <Action>(ImplementMethods)
+nmap <leader>mo <Action>(OverrideMethods)
+nmap <leader>mi <Action>(ImplementMethods)
 
 " Run & Debug
 nmap ,v <Action>(ChooseRunConfiguration)
@@ -97,27 +72,24 @@ vmap ,q <Action>(QuickEvaluateExpression)
 nmap ,s <Action>(Stop)
 nmap ,l <Action>(ViewBreakpoints)
 
-" VCS
-nmap <leader>vo <Action>(Vcs.QuickListPopupAction)
-nmap <leader>va <Action>(Annotate)
+" Next/Prev
+nmap [e <Action>(GotoPreviousError)
+nmap ]e <Action>(GotoNextError)
 " Navigation Changes (Main editor window)
-nmap <S-Up> <Action>(VcsShowPrevChangeMarker)
-nmap <S-Down> <Action>(VcsShowNextChangeMarker)
+nmap [c <Action>(VcsShowPrevChangeMarker)
+nmap ]c <Action>(VcsShowNextChangeMarker)
 " Navigation Changes (Diff Tool window)
 nmap <Up> <Action>(PreviousDiff)
 nmap <Down> <Action>(NextDiff)
 nmap <Right> <Action>(Diff.NextChange)
 nmap <Left> <Action>(Diff.PrevChange)
-" History
-nmap <leader>vsh <Action>(Vcs.ShowHistoryForBlock)
-vmap <leader>vsh <Action>(Vcs.ShowHistoryForBlock)
-" Branches
+
+" VCS
+nmap <leader>vo <Action>(Vcs.QuickListPopupAction)
+nmap <leader>va <Action>(Annotate)
+vmap <leader>vh <Action>(Vcs.ShowHistoryForBlock)
 nmap <leader>vcb <Action>(Git.CompareWithBranch)
-nmap <leader>vcs <Action>(Compare.Selected)
-nmap <leader>vcr <Action>(Show.Current.Revision)
 nmap <leader>vv <Action>(Git.Branches)
-nmap <leader>vr <Action>(Vcs.RollbackChangedLines)
-" Actions with remote
 nmap <leader>vu <Action>(Vcs.UpdateProject)
 nmap <leader>vf <Action>(Git.Fetch)
 nmap <leader>vp <Action>(Vcs.Push)
@@ -131,83 +103,63 @@ nmap <leader>fg <Action>(TextSearchAction)
 nmap <leader>ft <Action>(TextSearchAction)
 
 " Code
-nmap <leader>fif <Action>(FindInPath)
-nmap <leader>mvn <Action>(com.jetbrains.packagesearch.intellij.plugin.actions.AddDependencyAction)
 nmap == <Action>(ReformatCode)
 vmap == <Action>(ReformatCode)
-nmap <leader>o <Action>(OptimizeImports)
-nmap <leader>h <Action>(HighlightUsagesInFile)
-vmap <leader>h <Action>(HighlightUsagesInFile)
 nmap <leader>/ <Action>(Find)
 nmap <leader>? <Action>(Replace)
 vmap <leader>? <Action>(Replace)
-" nmap / <Action>(Find)
-" vmap / <Action>(Find)
-nnoremap <leader>[ i <ESC>l
-nnoremap <leader>] a <ESC>h
-vmap <A-S-D> <Action>(SelectAllOccurrences)
 nmap <S-k> <Action>(ParameterInfo)
 nmap <A-p> <Action>(ParameterInfo)
 
 " Refactoring & Introduce
+nmap <leader>rr <Action>(Refactorings.QuickListPopupAction)
+vmap <leader>rr <Action>(Refactorings.QuickListPopupAction)
 nmap <leader>ru <Action>(Unwrap)
 vmap <leader>ru <Action>(Unwrap)
-nmap <leader>rr <Action>(Refactorings.QuickListPopupAction)
-nmap <leader>rm <Action>(Move)
-vmap <leader>rr <Action>(Refactorings.QuickListPopupAction)
-nmap <leader>re <Action>(RenameElement)
 nmap <leader>rs <Action>(SurroundWith)
 vmap <leader>rs <Action>(SurroundWith)
+
+nmap <leader>rm <Action>(Move)
+nmap <leader>re <Action>(RenameElement)
 nmap <leader>rg <Action>(Generate)
-nmap <leader>rcc <Action>(CopyElement)
+nmap <leader>rc <Action>(CopyElement)
 nmap <leader>ri <Action>(Inline)
-nmap <leader>rt <Action>(InsertLiveTemplate)
 
-nmap <leader>iv <Action>(IntroduceVariable)
-vmap <leader>iv <Action>(IntroduceVariable)
-nmap <leader>ic <Action>(IntroduceConstant)
-nmap <leader>if <Action>(IntroduceField)
-nmap <leader>ip <Action>(IntroduceParameter)
-nmap <leader>il <Action>(IntroduceFunctionalParameter)
-nmap <leader>im <Action>(ExtractMethod)
-vmap <leader>im <Action>(ExtractMethod)
+nmap <leader>nt <Action>(InsertLiveTemplate)
+nmap <leader>nv <Action>(IntroduceVariable)
+vmap <leader>nv <Action>(IntroduceVariable)
+nmap <leader>nc <Action>(IntroduceConstant)
+nmap <leader>nf <Action>(IntroduceField)
+nmap <leader>np <Action>(IntroduceParameter)
+nmap <leader>nfp <Action>(IntroduceFunctionalParameter)
+nmap <leader>nm <Action>(ExtractMethod)
+vmap <leader>nm <Action>(ExtractMethod)
+nmap <leader>no <Action>(OptimizeImports)
 
-" External
-nmap <leader>vis <Action>(VimActions)
-nmap <leader>vir <Action>(IdeaVim.ReloadVimRc.reload)
+" Select In
+nmap <leader>ii <Action>(SelectIn)
+nmap <leader>ie <Action>(SelectInProjectView)
+nmap <leader>ic <Action>(SelectInCommitView)
+nmap <leader>is <Action>(SelectInStructureView)
+nmap <leader>id <Action>(sql.SelectInDatabaseView)
 
-" Building tools
-nmap <leader>ref <Action>(ExternalSystem.ProjectRefreshAction)
-
-" Bookmarks
-nmap <leader>bb <Action>(ToggleBookmark)
-nmap <leader>bl <Action>(ShowBookmarks)
-
-" Task
-nmap <leader>tn <Action>(tasks.goto)
-nmap <leader>ts <Action>(tasks.switch)
-nmap <leader>tc <Action>(tasks.close)
-nmap <leader>te <Action>(tasks.edit)
-nmap <leader>tl <Action>(tasks.create.changelist)
-nmap <leader>td <Action>(tasks.show.task.description)
-nmap <leader>tb <Action>(tasks.open.in.browser)
-
-" Show
-nmap <leader>q <Action>(QuickImplementations)
-nmap <leader>sbc <Action>(ByteCodeViewer)
-nmap <leader>sbk <Action>(ActivateKotlinBytecodeToolWindow)
-nmap <leader>3 <Action>(ActivateSonarQubeforIDEToolWindow)
-nmap <leader>2 <Action>(ActivateProblemsViewToolWindow)
-nmap <leader>sil <Action>(SelectIn)
-nmap <leader>c <Action>(SelectInCommitView)
-nmap <leader>sip <Action>(SelectInProjectView)
-nmap <leader>e <Action>(SelectInProjectView)
-nmap <leader>sid <Action>(sql.SelectInDatabaseView)
-nmap <leader>siw <Action>(Vcs.Diff.ShowDiffInNewWindow)
-nmap <leader>sit <Action>(Vcs.Diff.ShowDiffInEditorTab)
-nmap <leader>sd <Action>(ToggleRenderedDocPresentationForAll)
-nmap <leader>sh <Action>(TypeHierarchy)
-nmap <leader>ss <Action>(FileStructurePopup)
+" Open
+nmap <leader>o, <Action>(ActivateDebugToolWindow)
+nmap <leader>ob <Action>(ActivateDatabaseToolWindow)
+nmap <leader>od <Action>(ActivateVcsChangesToolWindow)
+nmap <leader>oc <Action>(ActivateCommitToolWindow)
+nmap <leader>oe <Action>(ActivateProjectToolWindow)
+nmap <leader>ow <Action>(ActivateProblemsViewToolWindow)
+nmap <leader>of <Action>(ActivateFindToolWindow)
+nmap <leader>og <Action>(ActivateGradleToolWindow)
+nmap <leader>oh <Action>(TypeHierarchy)
+nmap <leader>oi <Action>(QuickImplementations)
+nmap <leader>on <Action>(ActivateNotificationsToolWindow)
+nmap <leader>op <Action>(ActivateProfilerToolWindow)
+nmap <leader>or <Action>(ActivateRunToolWindow)
+nmap <leader>os <Action>(ActivateStructureToolWindow)
+nmap <leader>ot <Action>(ActivateTerminalToolWindow)
+nmap <leader>ov <Action>(ActivateVersionControlToolWindow)
 
 " Window
 nmap <Tab> <Action>(JumpToLastWindow)
@@ -215,63 +167,43 @@ nmap <S-Tab> <Action>(HideActiveWindow)
 nmap <leader>wo <Action>(MoveEditorToOppositeTabGroup)
 nmap <leader>wh <Action>(HideAllWindows)
 nmap <leader>wd <Action>(RestoreDefaultLayout)
+nmap <leader>ws <Action>(StoreDefaultLayout)
 nmap <leader>wz <Action>(ToggleZenMode)
 nmap <leader>wp <Action>(TogglePresentationMode)
 nmap <leader>wf <Action>(ToggleFullScreen)
 
-" nmap <leader><leader><leader> <Action>(Switcher)
-nmap <leader><leader>p <Action>(ActivateProjectToolWindow)
-nmap <leader><leader>2 <Action>(ActivateProblemsViewToolWindow)
-nmap <leader><leader>c <Action>(ActivateCommitToolWindow)
-nmap <leader><leader>d <Action>(ActivateVcsChangesToolWindow)
-nmap <leader><leader>v <Action>(ActivateVersionControlToolWindow)
-nmap <leader><leader>, <Action>(ActivateDebugToolWindow)
-nmap <leader><leader>r <Action>(ActivateRunToolWindow)
-nmap <leader><leader>b <Action>(ActivateDatabaseToolWindow)
-nmap <leader><leader>D <Action>(ActivateDependenciesToolWindow)
-nmap <leader><leader>i <Action>(ActivateServicesToolWindow)
-nmap <leader><leader>s <Action>(ActivateStructureToolWindow)
-nmap <leader><leader>t <Action>(ActivateTerminalToolWindow)
-nmap <leader><leader>P <Action>(ActivateProfilerToolWindow)
-nmap <leader><leader>f <Action>(ActivateFindToolWindow)
-nmap <leader><leader>y <Action>(ActivateYouTrackToolWindow)
-nmap <leader><leader>n <Action>(ActivateNotificationsToolWindow)
+" Settings
+nmap <leader>sde <Action>(Vcs.Diff.ShowDiffInEditorTab)
+nmap <leader>sdw <Action>(Vcs.Diff.ShowDiffInNewWindow)
+nmap <leader>sv <Action>(VimActions)
+nmap <C-/> <Action>(OpenIdeaVimRc)
+nmap <leader>ref <Action>(ExternalSystem.ProjectRefreshAction)<Action>(IdeaVim.ReloadVimRc.reload)
 
-" Swapping lines [Insert mode]
-inoremap <C-j> <Esc>:m +1<CR>gi
-inoremap <C-k> <Esc>:m -2<CR>gi
-
-" Swapping statements [Normal mode]
-" nmap <C-j> <Action>(MoveStatementDown)
-" nmap <C-k> <Action>(MoveStatementUp)
-
-" System clipboard
-vnoremap <leader>y "+y
-vnoremap <leader>d "+d
-nnoremap <leader>y "+y
-nnoremap <leader>p "+p
-nnoremap <leader>P "+P
-nnoremap Y v$y
+" Clipboard
+vmap <leader>y "+y
+vmap <leader>d "+d
+nmap <leader>y "+y
+nmap <leader>p "+p
+nmap <leader>P "+P
+nmap Y v$y
 
 " PLUGINS
 " Harpoon
-nmap <A-e> <Action>(ShowHarpoon)
 nmap <C-h> <Action>(GotoHarpoon1)
 nmap <C-j> <Action>(GotoHarpoon2)
 nmap <C-k> <Action>(GotoHarpoon3)
 nmap <C-l> <Action>(GotoHarpoon4)
 nmap <C-;> <Action>(GotoHarpoon5)
-nmap <A-a> <Action>(AddToHarpoon):echo "File added"<CR>
-nmap <leader><C-h> <Action>(SetHarpoon1)
-nmap <leader><C-j> <Action>(SetHarpoon2)
-nmap <leader><C-k> <Action>(SetHarpoon3)
-nmap <leader><C-l> <Action>(SetHarpoon4)
-nmap <leader><C-;> <Action>(SetHarpoon5)
+nmap <leader><C-h> <Action>(SetHarpoon1):echo "C-H Updated"<CR>
+nmap <leader><C-j> <Action>(SetHarpoon2):echo "C-J Updated"<CR>
+nmap <leader><C-k> <Action>(SetHarpoon3):echo "C-K Updated"<CR>
+nmap <leader><C-l> <Action>(SetHarpoon4):echo "C-l Updated"<CR>
+nmap <leader><C-;> <Action>(SetHarpoon5):echo "C-; Updated"<CR>
+nmap <A-e> <Action>(ShowHarpoon)
+nmap <D-e> <Action>(ShowHarpoon)
 " Continue
 nmap <C-g> <Action>(continue.focusContinueInput)
 vmap <C-g> <Action>(continue.focusContinueInput)
 " ADOC
-map <A-1> <Action>(org.asciidoc.intellij.actions.editorlayout.EditorOnlyLayoutChangeAction)
-map <A-2> <Action>(org.asciidoc.intellij.actions.editorlayout.EditorAndPreviewLayoutChangeAction)
-map <A-3> <Action>(org.asciidoc.intellij.actions.editorlayout.PreviewOnlyLayoutChangeAction)
-map <A-w> <Action>(org.asciidoc.intellij.actions.asciidoc.ToggleSoftWrapsAction)
+nmap <A-w> <Action>(org.asciidoc.intellij.actions.asciidoc.ToggleSoftWrapsAction)
+nmap <D-w> <Action>(org.asciidoc.intellij.actions.asciidoc.ToggleSoftWrapsAction)
