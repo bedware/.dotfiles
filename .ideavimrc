@@ -189,18 +189,17 @@ nmap Y v$y
 
 " PLUGINS
 " Harpoon
-nmap <C-h> <Action>(GotoHarpoon1)
-nmap <C-j> <Action>(GotoHarpoon2)
-nmap <C-k> <Action>(GotoHarpoon3)
-nmap <C-l> <Action>(GotoHarpoon4)
-nmap <C-;> <Action>(GotoHarpoon5)
-nmap <leader><C-h> <Action>(SetHarpoon1):echo "C-H Updated"<CR>
-nmap <leader><C-j> <Action>(SetHarpoon2):echo "C-J Updated"<CR>
-nmap <leader><C-k> <Action>(SetHarpoon3):echo "C-K Updated"<CR>
-nmap <leader><C-l> <Action>(SetHarpoon4):echo "C-l Updated"<CR>
-nmap <leader><C-;> <Action>(SetHarpoon5):echo "C-; Updated"<CR>
+nmap <A-h> <Action>(GotoHarpoon1)
+nmap <A-j> <Action>(GotoHarpoon2)
+nmap <A-k> <Action>(GotoHarpoon3)
+nmap <A-l> <Action>(GotoHarpoon4)
+nmap <A-;> <Action>(GotoHarpoon5)
+nmap <leader><A-h> <Action>(SetHarpoon1):echo "A-H Updated"<CR>
+nmap <leader><A-j> <Action>(SetHarpoon2):echo "A-J Updated"<CR>
+nmap <leader><A-k> <Action>(SetHarpoon3):echo "A-K Updated"<CR>
+nmap <leader><A-l> <Action>(SetHarpoon4):echo "A-l Updated"<CR>
+nmap <leader><A-;> <Action>(SetHarpoon5):echo "A-; Updated"<CR>
 nmap <A-e> <Action>(ShowHarpoon)
-nmap <D-e> <Action>(ShowHarpoon)
 " Continue
 nmap <C-g> <Action>(continue.focusContinueInput)
 vmap <C-g> <Action>(continue.focusContinueInput)
