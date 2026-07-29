@@ -11,6 +11,13 @@ set scrolloff=10
 " IDEA Set Handlers
 sethandler a:vim
 sethandler <C-e> n:ide
+sethandler <C-k> n:ide
+
+" ide <C-k><C-j> <Action>(JumpToSource)
+" ide <C-k><C-p> <Action>(ParameterInfo)
+" ide <C-k><C-i> <Action>(QuickDefinition)
+" ide <C-k><C-r> <Action>(QuickTypeDefinition)
+" ide <C-k><C-d> <Action>(QuickJavaDoc)
 
 " Remap leader
 let mapleader = " "
@@ -108,13 +115,6 @@ vmap == <Action>(ReformatCode)
 nmap <leader>/ <Action>(Find)
 nmap <leader>? <Action>(Replace)
 vmap <leader>? <Action>(Replace)
-
-" nmap <S-k> <Action>(ParameterInfo)
-" nmap <leader>oi <Action>(QuickImplementations)
-" nmap <leader>oq <Action>(QuickJavaDoc)
-nmap <C-k><C-p> <Action>(ParameterInfo)
-nmap <C-k><C-i> <Action>(QuickImplementations)
-nmap <C-k><C-d> <Action>(QuickJavaDoc)
 
 " Refactoring
 nmap <leader>rr <Action>(Refactorings.QuickListPopupAction)
