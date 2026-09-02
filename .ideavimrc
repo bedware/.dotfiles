@@ -100,6 +100,9 @@ nmap <leader>vv <Action>(Git.Branches)
 nmap <leader>vu <Action>(Vcs.UpdateProject)
 nmap <leader>vf <Action>(Git.Fetch)
 nmap <leader>vp <Action>(Vcs.Push)
+nmap <leader>vz <Action>(ChangesView.Revert)
+nmap <leader>vr <Action>(Vcs.RollbackChangedLines)
+nmap <leader>vd <Action>(VcsShowCurrentChangeMarker)
 
 " GoTo
 nmap <leader>ff <Action>(GotoFile)
