@@ -1,5 +1,6 @@
 # Sourced from ~/.zshrc (install.sh adds the line). Defines shared + zsh aliases.
 () {
+  setopt localoptions extendedglob
   local dir=${${(%):-%x}:A:h} line name cmd
   while IFS= read -r line || [[ -n $line ]]; do
     [[ $line == [[:space:]]#\#* || $line != *=* ]] && continue

@@ -2,3 +2,4 @@ live-plugins/*.sh text eol=lf
 *.sh text eol=lf
 ghostty/** text eol=lf
 herdr/** text eol=lf
+shell/** text eol=lf
