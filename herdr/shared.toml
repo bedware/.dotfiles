@@ -1,0 +1,23 @@
+# herdr: settings shared by macOS and Windows.
+# TOML has no includes, so the installer writes config.toml = shared.toml + <platform>.toml.
+# A platform file may only add NEW tables (e.g. [terminal]) — never repeat a table from here.
+
+onboarding = false
+
+[theme]
+name = "gruvbox"
+auto_switch = true
+
+[ui.toast]
+delivery = "system"
+
+[keys]
+prefix = "ctrl+f"
+settings = "prefix+comma"
+goto = "prefix+s"
+next_workspace = "ctrl+tab"
+previous_workspace = "ctrl+shift+tab"
+next_tab = "alt+right"
+previous_tab = "alt+left"
+next_agent = "prefix+n"
+previous_agent = "prefix+p"

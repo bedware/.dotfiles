@@ -1,0 +1,15 @@
+# Ghostty: settings shared by macOS and Windows.
+# Included from macos.ghostty / windows.ghostty via `config-file`.
+# Installed by ../install.ps1 (Windows) or ../install.sh (macOS).
+
+theme = light:Gruvbox Light,dark:Gruvbox Dark
+font-family = Ubuntu Mono
+window-save-state = always
+
+# Pass ctrl+tab / ctrl+shift+tab through to herdr (workspace next/prev)
+keybind = ctrl+tab=csi:9;5u
+keybind = ctrl+shift+tab=csi:9;6u
+
+# Pass alt(option)+left/right through to herdr as alt+arrow (tab prev/next)
+keybind = alt+arrow_left=csi:1;3D
+keybind = alt+arrow_right=csi:1;3C

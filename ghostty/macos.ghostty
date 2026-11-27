@@ -1,0 +1,4 @@
+# Ghostty on macOS. Symlinked as
+# ~/Library/Application Support/com.mitchellh.ghostty/config.ghostty.
+# Shell: the login shell (zsh) is Ghostty's default, so nothing to set here.
+config-file = shared.ghostty

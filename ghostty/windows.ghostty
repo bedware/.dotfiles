@@ -1,0 +1,9 @@
+# Ghostty on Windows. Symlinked as %LOCALAPPDATA%\ghostty\config.ghostty.
+config-file = shared.ghostty
+
+command = pwsh.exe
+
+# Windows-style clipboard: Ctrl+V pastes; Ctrl+C copies only when text is selected,
+# otherwise sends ^C (interrupt)
+keybind = ctrl+v=paste_from_clipboard
+keybind = performable:ctrl+c=copy_to_clipboard
