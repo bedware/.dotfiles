@@ -7,6 +7,10 @@ onboarding = false
 [theme]
 # Follow Ghostty's ANSI palette, so light/dark comes from Ghostty's theme.
 name = "terminal"
+# Re-theme when Ghostty reports a light/dark change (both variants follow Ghostty).
+auto_switch = true
+dark_name = "terminal"
+light_name = "terminal"
 
 [ui.toast]
 delivery = "system"
