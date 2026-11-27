@@ -67,6 +67,23 @@ function Install-Generated([string]$Path, [string[]]$Sources) {
     }
 }
 
+# Plain copy for configs the app itself rewrites or resolves paths relative to
+# (OpenCode's cli.json): a symlink would be replaced or point plugins at the repo.
+function Install-Copy([string]$Path, [string]$Source) {
+    $content = (Get-Content -LiteralPath $Source -Raw) -replace "`r`n", "`n"
+    $item = Get-Item -LiteralPath $Path -Force -ErrorAction SilentlyContinue
+    if ($item) {
+        if ($item.LinkType) { Write-Step "unlink  $Path"; if (-not $DryRun) { Remove-Item -LiteralPath $Path -Force } }
+        elseif (((Get-Content -LiteralPath $Path -Raw) -replace "`r`n", "`n") -eq $content) { Write-Step "ok      $Path"; return }
+        else { Backup-Item $Path }
+    }
+    Write-Step "copy    $Path"
+    if (-not $DryRun) {
+        New-Item -ItemType Directory -Force -Path (Split-Path $Path) | Out-Null
+        [IO.File]::WriteAllText($Path, $content)
+    }
+}
+
 Write-Host 'Ghostty'
 $ghosttyDir = Join-Path $env:LOCALAPPDATA 'ghostty'
 Install-Link (Join-Path $ghosttyDir 'config.ghostty') (Join-Path $Repo 'ghostty\windows.ghostty')
@@ -77,7 +94,7 @@ $herdrConfig = Join-Path $env:APPDATA 'herdr\config.toml'
 Install-Generated $herdrConfig @((Join-Path $Repo 'herdr\shared.toml'), (Join-Path $Repo 'herdr\windows.toml'))
 
 Write-Host 'OpenCode'
-Install-Link (Join-Path $HOME '.config\opencode\cli.json') (Join-Path $Repo 'opencode\cli.json')
+Install-Copy (Join-Path $HOME '.config\opencode\cli.json') (Join-Path $Repo 'opencode\cli.json')
 
 Write-Host 'Shell'
 $profilePath = $PROFILE.CurrentUserCurrentHost

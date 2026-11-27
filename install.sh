@@ -65,6 +65,21 @@ install_generated() { # <path> <source>...
   [[ $DRY -eq 1 ]] || printf '%s' "$content" > "$path"
 }
 
+# Plain copy for configs the app itself rewrites or resolves paths relative to
+# (OpenCode's cli.json): a symlink would be written through or point plugins at the repo.
+install_copy() { # <path> <source>
+  local path="$1" src="$2"
+  if [[ -L "$path" ]]; then
+    step "unlink  $path"; run rm "$path"
+  elif [[ -f "$path" ]]; then
+    if cmp -s "$path" "$src"; then step "ok      $path"; return; fi
+    backup "$path"
+  fi
+  step "copy    $path"
+  run mkdir -p "$(dirname "$path")"
+  run cp "$src" "$path"
+}
+
 echo "Fonts"
 if command -v brew >/dev/null; then
   if brew list --cask font-ubuntu-mono >/dev/null 2>&1; then step "ok      font-ubuntu-mono"
@@ -82,7 +97,7 @@ echo "herdr"
 install_generated "$HOME/.config/herdr/config.toml" "$REPO/herdr/shared.toml" "$REPO/herdr/macos.toml"
 
 echo "OpenCode"
-install_link "$HOME/.config/opencode/cli.json" "$REPO/opencode/cli.json"
+install_copy "$HOME/.config/opencode/cli.json" "$REPO/opencode/cli.json"
 
 echo "Shell"
 HOOK='source "$HOME/.dotfiles/shell/init.zsh"  # dotfiles aliases'
