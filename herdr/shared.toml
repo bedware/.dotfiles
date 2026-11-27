@@ -5,8 +5,8 @@
 onboarding = false
 
 [theme]
-name = "gruvbox"
-auto_switch = true
+# Follow Ghostty's ANSI palette, so light/dark comes from Ghostty's theme.
+name = "terminal"
 
 [ui.toast]
 delivery = "system"
