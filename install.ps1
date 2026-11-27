@@ -76,6 +76,9 @@ Write-Host 'herdr'
 $herdrConfig = Join-Path $env:APPDATA 'herdr\config.toml'
 Install-Generated $herdrConfig @((Join-Path $Repo 'herdr\shared.toml'), (Join-Path $Repo 'herdr\windows.toml'))
 
+Write-Host 'OpenCode'
+Install-Link (Join-Path $HOME '.config\opencode\cli.json') (Join-Path $Repo 'opencode\cli.json')
+
 Write-Host 'Shell'
 $profilePath = $PROFILE.CurrentUserCurrentHost
 $hook = '. "$HOME\.dotfiles\shell\init.ps1"  # dotfiles aliases'

@@ -81,6 +81,9 @@ install_link "$GHOSTTY_DIR/shared.ghostty" "$REPO/ghostty/shared.ghostty"
 echo "herdr"
 install_generated "$HOME/.config/herdr/config.toml" "$REPO/herdr/shared.toml" "$REPO/herdr/macos.toml"
 
+echo "OpenCode"
+install_link "$HOME/.config/opencode/cli.json" "$REPO/opencode/cli.json"
+
 echo "Shell"
 HOOK='source "$HOME/.dotfiles/shell/init.zsh"  # dotfiles aliases'
 if [[ -f "$HOME/.zshrc" ]] && grep -qF 'dotfiles/shell/init.zsh' "$HOME/.zshrc"; then

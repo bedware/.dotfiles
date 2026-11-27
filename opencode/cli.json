@@ -1,0 +1,13 @@
+{
+  "$schema": "https://opencode.ai/v2/cli.json",
+  "plugins": [
+    "./herdr-opencode"
+  ],
+  "session": {
+    "sidebar": "auto"
+  },
+  "theme": {
+    "name": "gruvbox",
+    "mode": "system"
+  }
+}
