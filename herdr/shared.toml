@@ -5,10 +5,12 @@
 onboarding = false
 
 [theme]
-name = "gruvbox"
+# Draw herdr's UI with Ghostty's ANSI palette, so it recolors together with
+# Ghostty's Gruvbox Light/Dark switch (herdr's own auto_switch misses the change on Windows).
+name = "terminal"
 auto_switch = true
-dark_name = "gruvbox"
-light_name = "gruvbox-light"
+dark_name = "terminal"
+light_name = "terminal"
 
 [ui.toast]
 delivery = "system"
