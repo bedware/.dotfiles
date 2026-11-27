@@ -3,6 +3,11 @@ config-file = shared.ghostty
 
 command = pwsh.exe
 
+# Paint the title bar with the terminal background instead of the OS caption
+# (which turns accent-blue when "accent color on title bars" is on). Needed
+# explicitly: with a light/dark theme pair, the default `auto` becomes `system`.
+window-theme = ghostty
+
 # Windows-style clipboard: Ctrl+V pastes; Ctrl+C copies only when text is selected,
 # otherwise sends ^C (interrupt)
 keybind = ctrl+v=paste_from_clipboard
