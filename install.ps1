@@ -76,6 +76,19 @@ Write-Host 'herdr'
 $herdrConfig = Join-Path $env:APPDATA 'herdr\config.toml'
 Install-Generated $herdrConfig @((Join-Path $Repo 'herdr\shared.toml'), (Join-Path $Repo 'herdr\windows.toml'))
 
+Write-Host 'Shell'
+$profilePath = $PROFILE.CurrentUserCurrentHost
+$hook = '. "$HOME\.dotfiles\shell\init.ps1"  # dotfiles aliases'
+if ((Test-Path $profilePath) -and (Select-String -LiteralPath $profilePath -SimpleMatch 'dotfiles\shell\init.ps1' -Quiet)) {
+    Write-Step "ok      $profilePath"
+} else {
+    Write-Step "append  $profilePath <- $hook"
+    if (-not $DryRun) {
+        New-Item -ItemType Directory -Force -Path (Split-Path $profilePath) | Out-Null
+        Add-Content -LiteralPath $profilePath -Value "`n$hook"
+    }
+}
+
 $herdr = (Get-Command herdr -ErrorAction SilentlyContinue)?.Source
 if (-not $herdr) { $herdr = Join-Path $env:LOCALAPPDATA 'Programs\Herdr\bin\herdr.exe' }
 if (-not $DryRun -and (Test-Path $herdr)) {

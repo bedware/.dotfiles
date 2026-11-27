@@ -1,0 +1,11 @@
+# Shell aliases shared by zsh (macOS) and PowerShell (Windows).
+#   name = command
+# The command text must run as-is in BOTH shells: use $HOME (not ~),
+# `cd`, `$(...)`. Extra arguments are appended. Shell-specific ones go to
+# aliases.zsh / aliases.ps1. Loaded by init.zsh / init.ps1.
+
+vi  = nvim
+up  = cd ..
+zz  = cd $(fzf --walker=dir,hidden)
+.f  = cd $HOME/.dotfiles
+.fe = nvim $HOME/.dotfiles

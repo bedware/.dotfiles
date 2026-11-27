@@ -81,6 +81,15 @@ install_link "$GHOSTTY_DIR/shared.ghostty" "$REPO/ghostty/shared.ghostty"
 echo "herdr"
 install_generated "$HOME/.config/herdr/config.toml" "$REPO/herdr/shared.toml" "$REPO/herdr/macos.toml"
 
+echo "Shell"
+HOOK='source "$HOME/.dotfiles/shell/init.zsh"  # dotfiles aliases'
+if [[ -f "$HOME/.zshrc" ]] && grep -qF 'dotfiles/shell/init.zsh' "$HOME/.zshrc"; then
+  step "ok      ~/.zshrc"
+else
+  step "append  ~/.zshrc <- $HOOK"
+  [[ $DRY -eq 1 ]] || printf '\n%s\n' "$HOOK" >> "$HOME/.zshrc"
+fi
+
 if [[ $DRY -eq 0 ]] && command -v herdr >/dev/null; then
   herdr config check
   herdr server reload-config 2>/dev/null && step "reloaded running herdr server" || true
