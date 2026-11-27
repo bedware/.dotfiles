@@ -9,3 +9,8 @@ up  = cd ..
 zz  = cd $(fzf --walker=dir,hidden)
 .f  = cd $HOME/.dotfiles
 .fe = nvim $HOME/.dotfiles
+
+# go: jump to the usual places
+g.  = cd $HOME/.dotfiles
+gf  = cd $HOME/Development/Fun
+gw  = cd $HOME/Development/Work

@@ -2,3 +2,7 @@
 # ~/Library/Application Support/com.mitchellh.ghostty/config.ghostty.
 # Shell: the login shell (zsh) is Ghostty's default, so nothing to set here.
 config-file = shared.ghostty
+
+# Ubuntu Mono draws noticeably smaller than the macOS default font (13pt);
+# bump it so text matches the old size on the Retina screen.
+font-size = 16
