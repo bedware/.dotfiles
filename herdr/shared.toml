@@ -7,6 +7,8 @@ onboarding = false
 [theme]
 name = "gruvbox"
 auto_switch = true
+dark_name = "gruvbox"
+light_name = "gruvbox-light"
 
 [ui.toast]
 delivery = "system"
